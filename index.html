@@ -1759,6 +1759,7 @@ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 const F={meal:"lunch",move:"walk",rad:1000,ppl:2,cats:new Set(),areas:new Set(),badges:new Set(),sort:"kim",q:"",open:false,fav:false,unv:false,coll:""};
 let reports=[];const RKEY="kimgun-reports";
 let ratings={}; let selId=null; let db=null, user=null, canRate=false;
+const ADM=()=>document.body.classList.contains("is-admin");
 let ACC={mode:"full",role:"preview",trialUsed:0,credits:0,uid:null,doc:null,day:""};
 
 function distM(p){const R=6371000,toR=Math.PI/180;const dLa=(p.lat-ORIGIN.lat)*toR,dLo=(p.lng-ORIGIN.lng)*toR;
@@ -1854,7 +1855,7 @@ function actions(p,inPanel){
   A("",ic("globe"),"Google 지도",`href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name)}&query_place_id=${p.pid}" target="_blank" rel="noopener"`),
   A("kakao",ic("bowl"),"밥 약속 카톡",`data-act="treat" data-id="${p.id}" aria-label="${esc(p.name)} 밥 사주세요·밥 살게요 카톡 보내기"`),
   A("sub",ic("alert"),"오류 제보",`data-act="report" data-id="${p.id}"`),
-  canRate?A("sub",ic("pencil"),"평가 수정",`data-act="rate" data-id="${p.id}"`):""
+  (canRate&&ADM())?A("sub",ic("pencil"),"평가 수정",`data-act="rate" data-id="${p.id}"`):""
  ].join("");
 }
 let PHOTOS={},assetsCap=null;
@@ -2253,7 +2254,7 @@ function accSaveLocal(s){try{localStorage.setItem(AKEY,JSON.stringify(s));}catch
 async function accSave(extra){const s={trialUsed:ACC.trialUsed,credits:ACC.credits,day:ACC.day,dayMode:ACC.mode,lastAt:Date.now(),...extra};accSaveLocal(s);
  if(db&&ACC.uid){try{await db.doc("usage/"+ACC.uid).set({...(ACC.doc||{}),...s,visits:(ACC.doc&&ACC.doc.visits||0)+(extra&&extra.newDay?1:0),firstAt:(ACC.doc&&ACC.doc.firstAt)||Date.now(),lastFilter:{meal:F.meal,move:F.move,rad:F.rad,dist:[...(F.dist||[])],cats:[...F.cats]}});ACC.doc={...(ACC.doc||{}),...s};}catch(e){}}}
 async function initAccess(){
- let admin=false;try{admin=user?await user.canEdit():false;}catch(e){}if(admLocal())admin=true;
+ let admin=false;try{ACC.editor=user?await user.canEdit():false;}catch(e){}if(admLocal())admin=true;
  if(admin)document.body.classList.add("is-admin");
  if(!window.claude||admin){ACC.mode="full";ACC.role=admin?"admin":"preview";renderAcc();return;}
  try{const me=user?await user.me():null;ACC.uid=me&&me.id||null;}catch(e){}
@@ -2306,14 +2307,15 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-coupon]"))openC
 
 /* ---------- 관리자 모드(암호) ---------- */
 const ADM_H="0feacce67aa5569084d4ce4f38dfdb15efb33b35cadf4728712ca9ad07cbf042";
-function admLocal(){try{return localStorage.getItem("kimgun-adm")===ADM_H;}catch(e){return false;}}
+try{localStorage.removeItem("kimgun-adm");}catch(e){}
+function admLocal(){try{return sessionStorage.getItem("kimgun-adm")===ADM_H;}catch(e){return false;}}
 function admApply(){document.body.classList.add("is-admin");ACC.mode="full";if(ACC.role!=="admin")ACC.role="admin";renderAcc();refresh();loadAdmin();if(typeof renderUpd==="function")renderUpd();$("admLogin").textContent="관리자 모드 끄기";}
-$("admLogin").onclick=()=>{if(admLocal()||document.body.classList.contains("is-admin")&&ACC.role==="admin"&&admLocal()){try{localStorage.removeItem("kimgun-adm");}catch(e){}location.reload();return;}$("admPw").value="";$("admMsg").textContent="";$("admDlg").showModal();setTimeout(()=>$("admPw").focus(),50);};
+$("admLogin").onclick=()=>{if(admLocal()||document.body.classList.contains("is-admin")&&ACC.role==="admin"&&admLocal()){try{sessionStorage.removeItem("kimgun-adm");}catch(e){}location.reload();return;}$("admPw").value="";$("admMsg").textContent="";$("admDlg").showModal();setTimeout(()=>$("admPw").focus(),50);};
 document.addEventListener("click",e=>{if(e.target.closest("[data-close-adm]"))$("admDlg").close();});
 $("admForm").addEventListener("submit",async e=>{e.preventDefault();const v=$("admPw").value;let h="";
  try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v));h=[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");}catch(err){$("admMsg").textContent="이 브라우저에서는 관리자 모드를 쓸 수 없어요.";return;}
  if(h!==ADM_H){$("admMsg").textContent="암호가 맞지 않아요.";$("admPw").select();return;}
- try{localStorage.setItem("kimgun-adm",ADM_H);}catch(err){}$("admDlg").close();admApply();toast("관리자 모드로 전환했어요.");});
+ try{sessionStorage.setItem("kimgun-adm",ADM_H);}catch(err){}$("admDlg").close();admApply();toast("관리자 모드로 전환했어요.");});
 /* ---------- 네이버 목록 교차분석 ---------- */
 const XQ={"건대":"건대입구","세종대":"세종대","어린이대공원":"어린이대공원역","군자":"군자역","구의":"구의역","자양동":"자양동","광장동":"광나루역","성수":"성수역","뚝섬":"서울숲","구리":"구리역","마장·금호":"마장동","면목":"면목동","풍납":"풍납동"};
 $("xArea").innerHTML=Object.keys(XQ).map(a=>`<option value="${a}">${a} 맛집</option>`).join("");
@@ -2373,7 +2375,7 @@ function renderReports(){
  el.innerHTML=reports.slice().sort((a,b)=>(order[a.status]??0)-(order[b.status]??0)||(b.createdAt||0)-(a.createdAt||0)).map(r=>{const s=RST[r.status]||RST.open;const d=r.createdAt?new Date(r.createdAt):null;
   return `<div class="rpi" style="--rc:${s[1]}"><div class="h"><b>${esc(r.place)}</b><span class="chip ex">${esc(r.field)}</span><span class="st">${s[0]}</span></div>
   <p class="bd">${esc(r.body)}</p><span class="mt">${d?`${d.getMonth()+1}월 ${d.getDate()}일 제보`:""}${r.how?" · 확인: "+esc(r.how):""}</span>
-  ${canRate?`<div class="ac"><button class="sm" data-rp="done" data-k="${esc(r._id)}">반영함</button><button class="sm" data-rp="no" data-k="${esc(r._id)}">반영 안 함</button><button class="sm" data-rp="open" data-k="${esc(r._id)}">확인 중</button></div>`:""}</div>`;}).join("");
+  ${(canRate&&ADM())?`<div class="ac"><button class="sm" data-rp="done" data-k="${esc(r._id)}">반영함</button><button class="sm" data-rp="no" data-k="${esc(r._id)}">반영 안 함</button><button class="sm" data-rp="open" data-k="${esc(r._id)}">확인 중</button></div>`:""}</div>`;}).join("");
 }
 $("rpList").addEventListener("click",async e=>{const b=e.target.closest("[data-rp]");if(!b)return;const k=b.dataset.k,st=b.dataset.rp;
  if(db&&!k.startsWith("l")){try{await db.doc("reports/"+k).update({status:st});toast("상태를 바꿨습니다.");}catch(err){toast("상태를 바꿀 권한이 없습니다.");}return;}
