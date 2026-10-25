@@ -815,12 +815,92 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
 .fabs{bottom:calc(80px + env(safe-area-inset-bottom,0px))!important}
 .jump{display:none!important}
 .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
+
+/* 관리자 전용 · 모바일 정보 밀도 */
+.adm-only{display:none!important}
+body.is-admin .adm-only{display:inline-flex!important}
+body.is-admin .asof .upd.adm-only{display:flex!important}
+.asof{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
+.asof .asx{font-size:12.5px;color:var(--muted)}
+@media (max-width:720px){
+ .util{display:none}
+ .hd .wrap{padding-block:6px}
+ .basis{display:none!important}
+ .asof{margin:6px 0 8px;padding:5px 10px;font-size:12px;border-style:solid;border-width:0 0 0 3px;border-color:var(--green);border-radius:0;background:transparent}
+ .asof b{font-size:12.5px}
+ .tabrow{display:none}
+ details.disc{padding:6px 10px;margin-bottom:8px}
+ details.disc>summary{min-height:24px}
+ details.disc>summary b{font-size:13px}
+ details.disc .ds{font-size:11.5px}
+ .accbar{padding:7px 10px;font-size:12.5px;margin-bottom:8px}
+ .accbar .accnote{font-size:11px}
+ .psec{margin-bottom:8px}
+ .psec>summary{padding:9px 12px;min-height:44px;gap:4px 8px}
+ .psec .pt{font-size:16.5px}
+ .psec .ps{font-size:11.5px}
+ .weekly{padding:10px 12px!important}
+ .weekly .em{width:44px!important;height:44px!important}
+ .weekly h3{font-size:17px!important}
+ .quick{padding:8px 10px!important;gap:6px!important}
+ .resbar{margin:2px 0 6px}
+ .item{padding:10px 12px}
+ .item .cover{margin:-10px -12px 2px!important;padding:6px 12px!important}
+ .item .desc{font-size:13.5px;line-height:1.5}
+ .stats{padding:6px 8px;gap:4px 10px}
+ .stats b{font-size:16px}
+}
+
+.psec>summary{display:grid!important;grid-template-columns:auto 1fr auto;align-items:center}
+.psec>summary .ps{grid-column:1/-1;grid-row:2}
+.psec>summary .pa{grid-column:3;grid-row:1}
+@media (max-width:720px){
+ .weekly{grid-template-columns:auto 1fr!important;gap:4px 10px!important}
+ .weekly .row,.weekly .acts{grid-column:1/-1}
+ .weekly p{font-size:12.5px!important;margin:0!important}
+ .qt button{min-height:38px!important;font-size:13px!important;padding:6px!important}
+ .qs input{padding:10px 12px 10px 38px!important;font-size:14px!important}
+}
+.weekly .em{background:transparent!important;border:0!important;overflow:visible}
+.weekly .em svg{width:100%;height:100%}
+@media (max-width:720px){.vizd{display:none}}
+.psec.onmap{margin-bottom:10px}
+#tab-map .psec.onmap .opts{margin:0}
+.admlink{margin-left:auto;font:inherit;font-size:11.5px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;opacity:.7}
+.admlink:hover{opacity:1;color:var(--green)}
+@media (max-width:720px){body.is-admin .util{display:block!important}}
+
+/* 핵심 기능 바 */
+.qbar{margin:0 0 10px}
+.qt.qx{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.qt.qx button{position:relative;display:grid!important;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:0 10px;align-items:center;text-align:left;padding:12px!important;min-height:66px!important;border:1.5px solid var(--qc)!important;border-radius:6px!important;background:color-mix(in srgb,var(--qc) 7%,var(--paper))!important;color:var(--ink)!important;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.05);transition:transform .12s,box-shadow .12s,background .12s}
+.qt.qx button .qi{grid-row:1/3;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--qc);color:#fff}
+.qt.qx button b{font-size:15px!important;font-weight:900;line-height:1.25}
+.qt.qx button small{font-size:12px;color:var(--muted)}
+.qt.qx button small em{font-style:normal;font-family:var(--f-serif);font-weight:900;font-size:16px;color:var(--qc);margin-right:1px}
+.qt.qx button:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.qt.qx button[aria-pressed="true"]{background:var(--qc)!important;color:#fff!important;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.qt.qx button[aria-pressed="true"] .qi{background:#fff;color:var(--qc)}
+.qt.qx button[aria-pressed="true"] small,.qt.qx button[aria-pressed="true"] small em{color:#fff}
+.qt.qx button[aria-pressed="true"]::after{content:"✓ 켜짐";position:absolute;bottom:6px;right:8px;font-size:10.5px;font-weight:800;background:#fff;color:var(--qc);border-radius:2px;padding:0 5px}
+.qt.qx button.rand{background:linear-gradient(135deg,#fff4d6,#ffe39a)!important;border-color:#b07d00!important}
+.qt.qx button:focus-visible{outline:3px solid var(--qc);outline-offset:2px}
+#qbar #pick:not(:empty){margin-top:8px}
+@media (max-width:720px){.qt.qx{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.qt.qx button{padding:9px 8px!important;min-height:58px!important;gap:0 8px}.qt.qx button .qi{width:36px;height:36px}.qt.qx button .qi svg{width:21px;height:21px}.qt.qx button b{font-size:13.5px!important}.qt.qx button small{font-size:11px}}
+
+.asof .accpill{margin-left:auto;font-size:12px;font-weight:800;padding:2px 10px;border-radius:12px;background:var(--green);color:#fff;white-space:nowrap}
+.asof .accpill.m-trial{background:var(--gold)}
+.asof .accpill.m-locked{background:var(--warn)}
+.asof .accpill[hidden]{display:none}
+.adm-block{display:none!important}
+body.is-admin .adm-block{display:block!important}
+.adm-block>h2.sec:first-child::after,.admbox>h2.sec::after{content:"관리자";margin-left:8px;font:800 11px/1 var(--f-body);background:var(--ink);color:#fff;padding:3px 7px;border-radius:2px;vertical-align:middle}
 </style>
 </head>
 <body>
 <div class="util gut"><div class="wrap">
   <span class="ver">건대 생명과학관 기준 · 점심·저녁·디저트·간식 추천</span>
-  <span class="who"><b>맛집김군</b><span id="whoState">혼자 보기</span><button type="button" class="ub" id="updBtn"><span class="dot" aria-hidden="true"></span>새로워진 점</button><button type="button" class="ub" id="reloadBtn" aria-label="페이지 새로고침">↻ 새로고침</button></span>
+  <span class="who"><b>맛집김군</b><span id="whoState">혼자 보기</span><button type="button" class="ub adm-only" id="updBtn"><span class="dot" aria-hidden="true"></span>새로워진 점</button><button type="button" class="ub adm-only" id="reloadBtn" aria-label="페이지 새로고침">↻ 새로고침</button></span>
 </div></div>
 <header class="hd gut"><div class="wrap">
   <a class="mark" href="#find"><img class="ku-g" alt="KU" src="data:image/png;base64,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"><img class="ku-w" alt="KU" src="data:image/png;base64,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"><span class="nm"><b>맛집김군</b><small>KONKUK FOOD GUIDE</small></span></a>
@@ -845,7 +925,7 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
     <div class="bc" style="--c:var(--c-dessert)"><span class="lb">시간대 · 인원</span><span class="tt" id="bMeal">점심</span><span class="dt">인원 <b id="bPpl">1~2명</b></span></div>
     <div class="bc" style="--c:var(--c-snack)"><span class="lb">추천 결과</span><span class="tt" id="bTop">—</span><span class="dt">총 <b id="bCnt">0</b>곳</span></div>
   </div>
-  <p class="asof" role="note"><span aria-hidden="true">📅</span> <b>자료 기준일 2026.10.24(토)</b><span>가게·평점·영업시간 출처 Google 지도 · 총 <span id="asofN"></span>곳 · 영업 상태는 지금 시각 기준</span><span class="upd" id="updState" aria-live="polite"></span></p>
+  <p class="asof" role="note"><b>자료 기준일 2026.10.24(토)</b><span class="asx">Google 지도 기준 · 총 <span id="asofN"></span>곳</span><span class="accpill" id="accPill" hidden></span><span class="upd adm-only" id="updState" aria-live="polite"></span></p>
 
 <main>
 <nav class="tabrow" aria-label="탭"><a href="#find" data-tab="find">맛집 찾기</a><a href="#map" data-tab="map">지도</a><a href="#reserve" data-tab="reserve">사전예약</a><a href="#guide" data-tab="guide">김군 미슐랭</a></nav>
@@ -857,6 +937,15 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
     <div class="row2"><button class="sm" type="button" id="discReport">틀린 정보 제보하기</button><a class="btn" href="#guide" data-tab="guide">제보 현황 보기</a></div></div>
   </details>
   <div class="accbar" id="accBar" aria-live="polite"></div>
+  <div class="qbar" id="qbar">
+    <div class="qt qx" role="group" aria-label="핵심 기능">
+      <button type="button" id="tOpen" aria-pressed="false" style="--qc:#00703e"><span class="qi" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>지금 영업 중</b><small><em id="qnOpen">0</em>곳 열려 있음</small></button>
+      <button type="button" id="tFav" aria-pressed="false" style="--qc:#c0392b"><span class="qi" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span><b>찜한 곳</b><small><em id="qnFav">0</em>곳 찜함</small></button>
+      <button type="button" id="tNew" aria-pressed="false" style="--qc:#2f5fa8"><span class="qi" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4h11l-2 4 2 4H5"/></svg></span><b>안 가본 곳</b><small><em id="qnNew">0</em>곳 남음</small></button>
+      <button type="button" id="tRand" class="rand" style="--qc:#b07d00"><span class="qi" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/><circle cx="15" cy="15" r="1.2" fill="currentColor"/><circle cx="15" cy="9" r="1.2" fill="currentColor"/><circle cx="9" cy="15" r="1.2" fill="currentColor"/></svg></span><b>오늘 뭐 먹지?</b><small>조건 안에서 한 곳 추천</small></button>
+    </div>
+    <div id="pick" aria-live="polite"></div>
+  </div>
   <details class="psec" id="secCond" open>
     <summary><span class="pt">조건 고르기</span><span class="ps" id="condSum"></span><span class="pa" aria-hidden="true"><em class="o">접기</em><em class="c">펼치기</em> ▾</span></summary>
   <div class="opts" role="group" aria-label="검색 조건">
@@ -896,13 +985,6 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
   <section class="quick" aria-label="빠른 찾기">
     <div id="weekly"></div>
     <div class="qs"><input type="search" id="q" placeholder="가게·메뉴 검색 (냉면, 돈카츠…)" aria-label="가게나 메뉴 검색" autocomplete="off"></div>
-    <div class="qt" role="group" aria-label="빠른 조건">
-      <button type="button" id="tOpen" aria-pressed="false">🟢 지금 영업 중</button>
-      <button type="button" id="tFav" aria-pressed="false">♥ 찜한 곳</button>
-      <button type="button" id="tNew" aria-pressed="false">🆕 안 가본 곳</button>
-      <button type="button" id="tRand" class="rand">🎲 오늘 뭐 먹지?</button>
-    </div>
-    <div id="pick" aria-live="polite"></div>
     <div class="recent" id="recent"></div>
     <details class="extras"><summary><span>🗳️ 오늘 점심 투표</span><span>🏆 도장깨기</span><span>💬 카톡 메시지</span><i aria-hidden="true">▾</i></summary>
       <div class="stamp" id="stamp"></div>
@@ -946,7 +1028,7 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
 <!-- ============ 지도 ============ -->
 <section class="tab" id="tab-map" hidden>
   <h2 class="sec">생명과학관 주변 지도</h2>
-  <p class="lead">맛집 찾기에서 고른 조건이 그대로 적용됩니다. 조건에서 벗어난 곳은 흐리게 보입니다. 점을 누르면 상세 정보와 길찾기가 열립니다.</p>
+  <p class="lead">아래 ‘조건 고르기’와 ‘김군 픽 테마’를 바꾸면 지도에 바로 반영됩니다(맛집 찾기 탭과 같은 조건). 조건에서 벗어난 곳은 흐리게 보입니다. 점을 누르면 상세 정보와 길찾기가 열립니다.</p>
   <div class="mapwrap">
     <div class="mapbox">
       <svg id="mapSvg" viewBox="-300 -250 600 500" role="img" aria-label="생명과학관 중심 맛집 지도. 드래그로 이동, 휠이나 두 손가락으로 확대"></svg>
@@ -1024,13 +1106,14 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
    <li><b>2027년 3월</b><span>하남시</span><button type="button" class="sm" data-wish="하남시" aria-pressed="false"><i>알림 받기</i></button></li>
    <li><b>2027년 4월</b><span>남양주시</span><button type="button" class="sm" data-wish="남양주시" aria-pressed="false"><i>알림 받기</i></button></li>
   </ol>
-  <div id="admBox" class="admbox" hidden>
+  <div id="admBox" class="admbox adm-block">
    <h2 class="sec" style="margin-top:28px">운영자 · 이용권 쿠폰 발급</h2>
    <div class="row" style="gap:8px"><button type="button" class="sm pri" data-issue="3">3회권 발급</button><button type="button" class="sm pri" data-issue="5">5회권 발급</button><button type="button" class="sm pri" data-issue="7">7회권 발급</button></div>
    <div class="tw"><table class="admt"><thead><tr><th>코드</th><th>횟수</th><th>발급일</th><th>사용</th><th></th></tr></thead><tbody id="admCoupons"></tbody></table></div>
    <h2 class="sec" style="margin-top:22px">운영자 · 이용자 현황</h2>
    <div class="tw"><table class="admt"><thead><tr><th>이용자</th><th>이용 일수</th><th>체험</th><th>이용권</th><th>마지막 이용</th><th>마지막 조건</th></tr></thead><tbody id="admUsers"></tbody></table></div>
   </div>
+  <div class="adm-block">
   <h2 class="sec" style="margin-top:28px">네이버 목록 교차분석</h2>
   <p class="lead">네이버 지도에서 지역·메뉴로 검색한 가게 이름을 붙여 넣으면, 맛집김군에 이미 있는지 한 번에 대조합니다. 빠진 가게는 바로 ‘추가 요청’을 보낼 수 있어요.</p>
   <div class="xchk">
@@ -1041,6 +1124,7 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
 새로 찾은 가게"></textarea>
     <div class="row" style="gap:6px"><button type="button" class="sm" id="xRun">🔎 대조하기</button><a class="btn" id="xNaver" href="https://map.naver.com/p/search/%EA%B1%B4%EB%8C%80%EC%9E%85%EA%B5%AC%20%EB%A7%9B%EC%A7%91" target="_blank" rel="noopener">네이버 지도 열기</a><select id="xArea" aria-label="네이버에서 검색할 지역"></select></div>
     <div id="xOut" aria-live="polite"></div>
+  </div>
   </div>
   <h2 class="sec" style="margin-top:28px">정보 오류 제보</h2>
   <p class="lead">가게 카드의 ‘정보 오류 제보’로 들어온 내용입니다. 확인 중인 제보가 있는 가게는 카드에 ⚠ 표시가 붙습니다. <span id="rpMode"></span></p>
@@ -1057,7 +1141,8 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
   <p style="font-size:13px;color:var(--muted)">맛집 제보, 함께 갈 사람, 서비스 의견 모두 환영합니다.</p>
   <div class="row"><button type="button" class="sm kakao" data-gift="open">🎁 김군에게 밥 사기</button><button type="button" class="sm" data-gift="copy">ID coolzet 복사</button></div>
 </section></div></div>
-<footer class="gut"><div class="wrap"><span>맛집김군 · 건국대학교 생명과학관 기준</span><span>자료 기준일: 2026년 10월 24일(Google 지도·리뷰). 실제와 다를 수 있으니 방문 전 확인하고, 틀린 점은 제보해 주세요.</span></div></footer>
+<footer class="gut"><div class="wrap"><span>맛집김군 · 건국대학교 생명과학관 기준</span><span>자료 기준일: 2026년 10월 24일(Google 지도·리뷰). 실제와 다를 수 있으니 방문 전 확인하고, 틀린 점은 제보해 주세요.</span><button type="button" class="admlink" id="admLogin">관리자 모드</button></div></footer>
+<dialog id="admDlg" aria-labelledby="admH"><form method="dialog" class="fm" id="admForm" style="grid-template-columns:1fr"><h3 id="admH" style="margin:0;font-size:18px">관리자 모드</h3><label>암호<input type="password" id="admPw" autocomplete="current-password"></label><p id="admMsg" role="status" style="margin:0;font-size:13px;color:var(--warn)"></p><div class="acts2"><button type="submit" class="sm pri">들어가기</button><button type="button" data-close-adm>닫기</button></div></form></dialog>
 
 <dialog id="rateDlg">
   <form method="dialog" class="fm" id="rateForm" style="grid-template-columns:1fr">
@@ -1887,6 +1972,8 @@ function renderQuick(){
  const sel=COLLS.find(c=>c.k===F.coll);$("themeSum").innerHTML=sel?`<b class="on">✓ ${esc(sel.t)}</b> 적용 중`:"한 번 누르면 적용, 다시 누르면 해제";
  const v=PLACES.filter(p=>visits.has(p.id)).length,N=PLACES.length;
  $("stamp").innerHTML=`<span>🏆 도장깨기</span><span class="bar" role="img" aria-label="${N}곳 중 ${v}곳 방문"><i style="width:${v/N*100}%"></i></span><span><b>${v}</b> / ${N}곳 · ♥ <b>${favs.size}</b></span>`;
+ {const so=F.open,sf=F.fav,su=F.unv;F.open=false;F.fav=false;F.unv=false;const base=PLACES.filter(p=>match(p));F.open=so;F.fav=sf;F.unv=su;
+  $("qnOpen").textContent=base.filter(p=>{const s=openState(p).s;return s==="open"||s==="soon";}).length;$("qnFav").textContent=favs.size;$("qnNew").textContent=base.filter(p=>!visits.has(p.id)).length;}
  $("tOpen").setAttribute("aria-pressed",!!F.open);$("tFav").setAttribute("aria-pressed",!!F.fav);$("tNew").setAttribute("aria-pressed",!!F.unv);
  if($("q").value!==(F.q||""))$("q").value=F.q||"";
 }
@@ -1896,7 +1983,7 @@ $("tFav").onclick=()=>{F.fav=!F.fav;refresh();};
 $("tNew").onclick=()=>{F.unv=!F.unv;refresh();};
 $("coll").addEventListener("click",e=>{const b=e.target.closest("[data-coll]");if(!b)return;F.coll=F.coll===b.dataset.coll?"":b.dataset.coll;refresh();});
 $("collMore").onclick=()=>{COLL_ALL=!COLL_ALL;renderQuick();};
-["secCond","secTheme"].forEach(id=>{const d=$(id);try{const v=localStorage.getItem("kimgun-"+id);if(v!==null)d.open=v==="1";}catch(e){}d.addEventListener("toggle",()=>{try{localStorage.setItem("kimgun-"+id,d.open?"1":"0");}catch(e){}});});
+["secCond","secTheme"].forEach(id=>{const d=$(id);try{const v=localStorage.getItem("kimgun-"+id);if(v!==null)d.open=v==="1";else if(matchMedia("(max-width:720px)").matches)d.open=false;}catch(e){}d.addEventListener("toggle",()=>{try{localStorage.setItem("kimgun-"+id,d.open?"1":"0");}catch(e){}});});
 $("tTreat").onclick=()=>{const top=sorted(PLACES.filter(p=>match(p)))[0];openTreat(top||PLACES[0],"ask",false);};
 $("tReset").onclick=()=>{Object.assign(F,{meal:"lunch",move:"walk",rad:1000,ppl:2,sort:"kim",q:"",open:false,fav:false,unv:false,coll:""});F.cats.clear();GKEYS.forEach(k=>F[k].clear());F.dist=new Set(DIST_BASE);
  ["fMeal","fMove","fRad","fPpl","fSort"].forEach(id=>setSeg(id,F[{fMeal:"meal",fMove:"move",fRad:"rad",fPpl:"ppl",fSort:"sort"}[id]]));
@@ -2014,7 +2101,7 @@ window.addEventListener("scroll",()=>{if(tTick)return;tTick=requestAnimationFram
 toTop.onclick=()=>{const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:rm?"auto":"smooth"});document.querySelector("header .mark, .hd a")?.focus({preventScroll:true});};
 /* 하단 주요 섹션 내비 */
 const NAVT={cond:["find","#secCond"],theme:["find","#secTheme"],res:["find",".resbar"],find:["find","#secCond"],top3:["find","#top3"],map:["map","#tab-map"],reserve:["reserve","#tab-reserve"],guide:["guide","#tab-guide"]};
-document.querySelectorAll("[data-nav]").forEach(b=>b.addEventListener("click",()=>{const [tab,sel]=NAVT[b.dataset.nav];history.replaceState(null,"","#"+tab);showTab(tab);
+document.querySelectorAll("[data-nav]").forEach(b=>b.addEventListener("click",()=>{let [tab,sel]=NAVT[b.dataset.nav];if((b.dataset.nav==="cond"||b.dataset.nav==="theme")&&!$("tab-map").hidden)tab="map";history.replaceState(null,"","#"+tab);showTab(tab);
  if(b.dataset.nav==="cond")$("secCond").open=true;if(b.dataset.nav==="theme")$("secTheme").open=true;
  const el=document.querySelector(sel);if(el){const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;const y=el.getBoundingClientRect().top+window.scrollY-12;window.scrollTo({top:Math.max(0,y),behavior:rm?"auto":"smooth"});}
  setTimeout(navActive,450);}));
@@ -2078,7 +2165,7 @@ async function sharePoll(){const tally={};votes.forEach(v=>{tally[v.pid]=(tally[
  if(navigator.share){try{await navigator.share({title:"오늘 점심 투표",text:txt});return;}catch(e){if(e&&e.name==="AbortError")return;}}
  const ok=await copyText(txt);toast(ok?"투표 결과를 복사했어요. 카톡에 붙여 넣으세요.":"복사가 막혀 있어요.");}
 /* ---------- 새로워진 점 · 새로고침 ---------- */
-const UPD=[["🧭","조건 고르기 좌우 분할(왼쪽 시간대·이동·인원 / 오른쪽 메뉴), 하단 고정 메뉴 개편(조건·테마·결과 n곳·지도·예약·미슐랭, PC에서도 표시)",1],["✅","조건 고르기 선택칩 강조: 더 크고 굵은 버튼, 선택 시 초록 채움과 ✓ 표시, 선택 개수 배지"],["🧭","‘조건 고르기’·‘김군 픽 테마’를 맨 위로 옮겨 접기·펼치기, 조건 요약 표시, 테마를 아이콘·색·가게 수가 크게 보이는 카드로 개편"],["🗺️","지도에 관할구역(구·시 경계), 주요 도로 12개, 지하철 2·5·7호선과 역, 한강·중랑천, 공원·대학·터미널·구청·시장 표시, 항목별 켜고 끄기"],["🎟","기본 지역 광진구·성동구·구리시, 무료 체험 3회(광진구·도보)와 3·5·7회 이용권 쿠폰, 이용자 현황(운영자), 지역 확대 예고·알림 신청, 강변·동서울터미널·이튼타워·중곡·면목·교문동 식당 24곳 추가"],["🌳","도로 3개 추가(자양강변길·서울숲길·왕십리로)와 식당 10곳(송림식당·미뻬동·산도스·부이·초리상경·벨라스가든 등)"],["⛰️","도로 6개 추가(구의로·광장로·워커힐로·영화사로·우미내길·아치울길), 지역 ‘아차산’과 상권 ‘아차산 입구 손두부 골목’·‘워커힐’·‘아치울·우미내 마을’ 신설, 식당 20곳 추가"],["🛣️","주요 도로 필터 신설(아차산로·능동로·동일로·군자로·천호대로·광나루로·뚝섬로·자양로·성수일로·성수이로·연무장길·송정길), 군자 먹자골목 상권과 식당 26곳 추가, 지역 ‘송정동’ 신설"],["🛍️","건대 맛의 거리·로데오거리 상권 신설과 식당 11곳(맛찌네·후토·고기굽는놈·우동키노야 등), 양꼬치거리 훠궈·마라 7곳(하이디라오·용가회전훠궈·홍야동 마오차이 등) 추가"],["🏙️","NC이스트폴 입점 식당 5곳 추가(애슐리퀸즈·바르미 스시샤브·깐깐·콘타이·프레퍼스), 메뉴 분류 ‘아시안’ 신설"],["🏬","건대 스타시티 입점 식당 10곳 추가(롯데리아·스타벅스·비엔나227·솔솥·뽕잎사랑·차이홍·오마뎅·경복궁·함포비빔밥·삼동소바)"],["🏬","롯데백화점 건대스타시티점 지하 1층 나폴레옹제과·에이콥베이커리 추가"],["🧺","전통시장 안 세부 식당 7곳(최신족발·뚝도지기 등), 커먼그라운드·스타시티·테크노마트 푸드코트 입점 식당 8곳, 건대 인기 식당 6곳 추가 · 상권 ‘커먼그라운드’·‘강변 테크노마트’ 신설"],["📱","모바일 가로 넘침 방지: 긴 가게 이름 줄바꿈, 카드 내용·버튼을 화면 폭에 맞춤, 기기 글자 확대 대응"],["☕","레스티오(생명과학관 옆 캠퍼스 카페)·보리스 커피·칼레오 커피 추가"],["🏳️","한식·일식·중식에 나라 국기(한국·일본·중국) 이미지, 그 밖의 분류에 대표 메뉴 선 그림(학식 식판, 구내식당, 가성비 밥그릇, 시장, 쇼핑몰, 양식 접시, 커피, 고기) 표시"],["📊","김군 미슐랭 5점 막대 시각화(점수별 색·설명), 카드 머리에 ‘김군 n/5’ 표시, 예약 요청 화면 넘침 수정, 밥사기·맨 위로 아이콘 가운데 정렬"],["⭐","김군 미슐랭 5점 만점으로 변경(기존 평가 자동 변환), 설명 속 가격·웨이팅·대표 메뉴 등 핵심어 형광펜 강조, 검색어 강조, 핵심 수치 상자, 편집자가 올린 가게 사진 표시"],["🧭","전문 맛집 가이드 스타일로 개편: 출발지 타일 삭제·조건 3칸 한 줄, 명조 제목, 선 아이콘, 장식 이모지 제거, No.순위·GOLD/SILVER/BRONZE 표기, 차분한 색"],["📐","모바일 밀도 개선: 상단 메뉴 4개 한 줄, 거리 6개 옵션 한 줄, 시간대·인원 균등 칸, 메뉴 칩 3열 격자, 조건 카드·자료 기준일 여백 축소"],["🚶","거리 재검토: 도보는 실제 걸음 거리(직선×1.3+캠퍼스 출입 150m) 기준으로 거르고 표시, 카드에 걸음·직선 거리 함께, 지도 원도 걸음 거리 기준으로 보정"],["📱","모바일 보정: Top 3 탭 글자 한 줄, 찜·가봤어요 버튼 가운데 정렬, 떠 있는 버튼 크기 축소 · 신주옥미 자양점 추가"],["🍲","신주옥미 아차산점(24시간 순대국, 리뷰상 블루리본)·마장한우소머리국밥(서울풍물시장) 추가"],["🖼️","PC 2단 화면(왼쪽 필터 고정·오른쪽 결과 2열), Top 3 탭(지금 조건/시간대별), 카드 커버(메뉴별 색·대표 메뉴·해시태그·메달), 📷 사진 보기와 인스타 해시태그 링크"],["🎨","결과 우선 화면: 안내·투표·도장깨기·더 많은 필터·메뉴 그래프 접기, 결과로 바로 가기, 12곳씩 더 보기, 🔥 인기·💎 숨은 고수 표시, PC에서 하단 메뉴 숨김"],["🏛️","공공기관·관공서 구내식당(광진구청·성동구청·중랑구립도서관)과 대한상운·한양대 식당 추가, ‘공공기관·관공서’ 장소 유형 신설, 카드의 사전예약 버튼 삭제"],["🎯","필터 0건 재검토: 반경 밖 가게 수(↗) 표시와 모든 필터 자동 반경 확장, 반려견 2곳·원격줄서기 1곳·건대 근처 9곳 추가"],["📍","가게가 적던 지역·상권 보강 24곳: 면목 5, 풍납 5, 잠실 4, 마장·금호 9(마장동 고기 골목·오부이용 등), 건대 스타시티 1"],["🧩","필터 재구성: 지역은 동네만, 상권·거리/장소 유형/평판·인증/편의/결제·할인/가게 유형으로 분리. 데이터가 없는 구분값은 숨기고 안내"],["🏅","미쉐린·블루리본 교차분석: 계월곰탕(빕구르망)·꿉당(빕구르망)·맛돌(미쉐린 추천)·비채나(1스타) 등 9곳 추가, 미쉐린·블루리본 표시 총 8곳"],["📸","MZ·SNS 핫플 교차분석: 12곳 추가(코끼리베이글·5TO7·세디치·도터·ETF베이커리 등), 인기 감성 맛집 33곳에 ‘SNS 핫플’ 표시와 필터·테마"],["📺","방송·OTT 교차분석: 흑백요리사(넷플릭스) 셰프 식당 2곳, 백종원 방송 양꼬치 등 14곳 추가, ‘방송·유튜브·OTT 맛집’ 테마"],["🅿️","주차·반려견·지역화폐(서울사랑상품권·구리사랑카드)·온누리상품권 정보와 필터 추가, 테마 ‘주차 되는 가족 외식’"],["🔎","Google 교차분석: 지역별 인기 검색 결과 50곳과 대조해 빠진 12곳 추가(화기애애·조라멘·라멘트럭·하루·배놈·파스타데이즈·나루떡볶이·진도켄·리타르단도·희릿·돌다리집·잉꼬칼국수)"],["🍻","구의 미가로(고깃집 7곳)·이스트폴(양식·라멘·카페 4곳) 추가, 지역 필터 ‘구의 미가로’·‘이스트폴’ 신설, 구의 카페·국수 5곳"],["🍢","양꼬치거리 9곳(연옥·동북풍미·미친양꼬치·훈춘·송화양꼬치·훠궈·마라샹궈), 지식산업센터·오피스텔·주상복합 표시와 필터, 성수·뚝섬 7곳 추가, 테마 2개"],["🏘️","전통시장·주택가 반경 확장: 노룬산·노유·마장축산물·금남·동원·풍납 도깨비시장 추가(지역 ‘마장·금호·면목·풍납’ 신설), 주택가 동네 맛집 표시와 필터, 테마 2개"],["🧭","지역×메뉴 빈칸 점검 후 43곳 추가: 모든 지역에 카페·디저트, 군자·성수·뚝섬·광장동·자양동 중식, 세종대·어린이대공원·자양동·군자·구리의 한식·일식·양식·고기 보강"],["🛍️","백화점·쇼핑몰·푸드코트 11곳 추가(롯데백화점 건대스타시티·구리, 테크노마트, 성수연방, 이마트 자양점 등), ‘푸드코트·몰’ 메뉴와 테마 2개(백화점·몰·푸드코트, 비 오는 날 실내 한 끼)"],["⏰","매주 월요일 09:00 정기 업데이트 안내, 다음 업데이트 시각 표시, 업데이트 요청 버튼"],["🏪","신규 오픈·프랜차이즈·개인 가게 구분, 자료 기준일 명시"],["🔄","Google 정보 재확인(2026.10.24): 13곳 추가(육회공작소·까뚝·사대분식·공주식당·문가네·계탉닭·고공·자양동등심집·시원식당·가츠몽·손에손잡고·정희·미가담), 학생회관 평점 반영"],["🆕","줄바꿈 개선, 이번 주 김군 픽, 최근 본 가게, 간단히 보기, 오늘 점심 투표"],
+const UPD=[["🔐","김군 미슐랭 탭의 쿠폰 발급·이용자 현황·네이버 목록 교차분석은 관리자 모드에서만 표시",1],["⭐","핵심 기능(지금 영업 중·찜한 곳·안 가본 곳·오늘 뭐 먹지?)을 맨 위 큰 카드로 강조하고 가게 수 표시, 지도 탭에서도 사용"],["🔐","관리자 모드(암호) 추가: 바닥글의 ‘관리자 모드’에서 전환, 이용 제한 해제와 관리자 전용 정보 표시"],["🗺️","지도 탭에서도 조건 고르기·김군 픽 테마를 바로 바꿀 수 있게(맛집 찾기와 같은 조건 공유)"],["📱","‘새로워진 점’과 업데이트 일정은 관리자만 보기, 이용자에게는 자료 기준일만 표시, 모바일 첫 화면 정보 밀도 강화(조건·테마 기본 접힘, 상단 장식 줄 정리)"],["🧭","조건 고르기 좌우 분할(왼쪽 시간대·이동·인원 / 오른쪽 메뉴), 하단 고정 메뉴 개편(조건·테마·결과 n곳·지도·예약·미슐랭, PC에서도 표시)"],["✅","조건 고르기 선택칩 강조: 더 크고 굵은 버튼, 선택 시 초록 채움과 ✓ 표시, 선택 개수 배지"],["🧭","‘조건 고르기’·‘김군 픽 테마’를 맨 위로 옮겨 접기·펼치기, 조건 요약 표시, 테마를 아이콘·색·가게 수가 크게 보이는 카드로 개편"],["🗺️","지도에 관할구역(구·시 경계), 주요 도로 12개, 지하철 2·5·7호선과 역, 한강·중랑천, 공원·대학·터미널·구청·시장 표시, 항목별 켜고 끄기"],["🎟","기본 지역 광진구·성동구·구리시, 무료 체험 3회(광진구·도보)와 3·5·7회 이용권 쿠폰, 이용자 현황(운영자), 지역 확대 예고·알림 신청, 강변·동서울터미널·이튼타워·중곡·면목·교문동 식당 24곳 추가"],["🌳","도로 3개 추가(자양강변길·서울숲길·왕십리로)와 식당 10곳(송림식당·미뻬동·산도스·부이·초리상경·벨라스가든 등)"],["⛰️","도로 6개 추가(구의로·광장로·워커힐로·영화사로·우미내길·아치울길), 지역 ‘아차산’과 상권 ‘아차산 입구 손두부 골목’·‘워커힐’·‘아치울·우미내 마을’ 신설, 식당 20곳 추가"],["🛣️","주요 도로 필터 신설(아차산로·능동로·동일로·군자로·천호대로·광나루로·뚝섬로·자양로·성수일로·성수이로·연무장길·송정길), 군자 먹자골목 상권과 식당 26곳 추가, 지역 ‘송정동’ 신설"],["🛍️","건대 맛의 거리·로데오거리 상권 신설과 식당 11곳(맛찌네·후토·고기굽는놈·우동키노야 등), 양꼬치거리 훠궈·마라 7곳(하이디라오·용가회전훠궈·홍야동 마오차이 등) 추가"],["🏙️","NC이스트폴 입점 식당 5곳 추가(애슐리퀸즈·바르미 스시샤브·깐깐·콘타이·프레퍼스), 메뉴 분류 ‘아시안’ 신설"],["🏬","건대 스타시티 입점 식당 10곳 추가(롯데리아·스타벅스·비엔나227·솔솥·뽕잎사랑·차이홍·오마뎅·경복궁·함포비빔밥·삼동소바)"],["🏬","롯데백화점 건대스타시티점 지하 1층 나폴레옹제과·에이콥베이커리 추가"],["🧺","전통시장 안 세부 식당 7곳(최신족발·뚝도지기 등), 커먼그라운드·스타시티·테크노마트 푸드코트 입점 식당 8곳, 건대 인기 식당 6곳 추가 · 상권 ‘커먼그라운드’·‘강변 테크노마트’ 신설"],["📱","모바일 가로 넘침 방지: 긴 가게 이름 줄바꿈, 카드 내용·버튼을 화면 폭에 맞춤, 기기 글자 확대 대응"],["☕","레스티오(생명과학관 옆 캠퍼스 카페)·보리스 커피·칼레오 커피 추가"],["🏳️","한식·일식·중식에 나라 국기(한국·일본·중국) 이미지, 그 밖의 분류에 대표 메뉴 선 그림(학식 식판, 구내식당, 가성비 밥그릇, 시장, 쇼핑몰, 양식 접시, 커피, 고기) 표시"],["📊","김군 미슐랭 5점 막대 시각화(점수별 색·설명), 카드 머리에 ‘김군 n/5’ 표시, 예약 요청 화면 넘침 수정, 밥사기·맨 위로 아이콘 가운데 정렬"],["⭐","김군 미슐랭 5점 만점으로 변경(기존 평가 자동 변환), 설명 속 가격·웨이팅·대표 메뉴 등 핵심어 형광펜 강조, 검색어 강조, 핵심 수치 상자, 편집자가 올린 가게 사진 표시"],["🧭","전문 맛집 가이드 스타일로 개편: 출발지 타일 삭제·조건 3칸 한 줄, 명조 제목, 선 아이콘, 장식 이모지 제거, No.순위·GOLD/SILVER/BRONZE 표기, 차분한 색"],["📐","모바일 밀도 개선: 상단 메뉴 4개 한 줄, 거리 6개 옵션 한 줄, 시간대·인원 균등 칸, 메뉴 칩 3열 격자, 조건 카드·자료 기준일 여백 축소"],["🚶","거리 재검토: 도보는 실제 걸음 거리(직선×1.3+캠퍼스 출입 150m) 기준으로 거르고 표시, 카드에 걸음·직선 거리 함께, 지도 원도 걸음 거리 기준으로 보정"],["📱","모바일 보정: Top 3 탭 글자 한 줄, 찜·가봤어요 버튼 가운데 정렬, 떠 있는 버튼 크기 축소 · 신주옥미 자양점 추가"],["🍲","신주옥미 아차산점(24시간 순대국, 리뷰상 블루리본)·마장한우소머리국밥(서울풍물시장) 추가"],["🖼️","PC 2단 화면(왼쪽 필터 고정·오른쪽 결과 2열), Top 3 탭(지금 조건/시간대별), 카드 커버(메뉴별 색·대표 메뉴·해시태그·메달), 📷 사진 보기와 인스타 해시태그 링크"],["🎨","결과 우선 화면: 안내·투표·도장깨기·더 많은 필터·메뉴 그래프 접기, 결과로 바로 가기, 12곳씩 더 보기, 🔥 인기·💎 숨은 고수 표시, PC에서 하단 메뉴 숨김"],["🏛️","공공기관·관공서 구내식당(광진구청·성동구청·중랑구립도서관)과 대한상운·한양대 식당 추가, ‘공공기관·관공서’ 장소 유형 신설, 카드의 사전예약 버튼 삭제"],["🎯","필터 0건 재검토: 반경 밖 가게 수(↗) 표시와 모든 필터 자동 반경 확장, 반려견 2곳·원격줄서기 1곳·건대 근처 9곳 추가"],["📍","가게가 적던 지역·상권 보강 24곳: 면목 5, 풍납 5, 잠실 4, 마장·금호 9(마장동 고기 골목·오부이용 등), 건대 스타시티 1"],["🧩","필터 재구성: 지역은 동네만, 상권·거리/장소 유형/평판·인증/편의/결제·할인/가게 유형으로 분리. 데이터가 없는 구분값은 숨기고 안내"],["🏅","미쉐린·블루리본 교차분석: 계월곰탕(빕구르망)·꿉당(빕구르망)·맛돌(미쉐린 추천)·비채나(1스타) 등 9곳 추가, 미쉐린·블루리본 표시 총 8곳"],["📸","MZ·SNS 핫플 교차분석: 12곳 추가(코끼리베이글·5TO7·세디치·도터·ETF베이커리 등), 인기 감성 맛집 33곳에 ‘SNS 핫플’ 표시와 필터·테마"],["📺","방송·OTT 교차분석: 흑백요리사(넷플릭스) 셰프 식당 2곳, 백종원 방송 양꼬치 등 14곳 추가, ‘방송·유튜브·OTT 맛집’ 테마"],["🅿️","주차·반려견·지역화폐(서울사랑상품권·구리사랑카드)·온누리상품권 정보와 필터 추가, 테마 ‘주차 되는 가족 외식’"],["🔎","Google 교차분석: 지역별 인기 검색 결과 50곳과 대조해 빠진 12곳 추가(화기애애·조라멘·라멘트럭·하루·배놈·파스타데이즈·나루떡볶이·진도켄·리타르단도·희릿·돌다리집·잉꼬칼국수)"],["🍻","구의 미가로(고깃집 7곳)·이스트폴(양식·라멘·카페 4곳) 추가, 지역 필터 ‘구의 미가로’·‘이스트폴’ 신설, 구의 카페·국수 5곳"],["🍢","양꼬치거리 9곳(연옥·동북풍미·미친양꼬치·훈춘·송화양꼬치·훠궈·마라샹궈), 지식산업센터·오피스텔·주상복합 표시와 필터, 성수·뚝섬 7곳 추가, 테마 2개"],["🏘️","전통시장·주택가 반경 확장: 노룬산·노유·마장축산물·금남·동원·풍납 도깨비시장 추가(지역 ‘마장·금호·면목·풍납’ 신설), 주택가 동네 맛집 표시와 필터, 테마 2개"],["🧭","지역×메뉴 빈칸 점검 후 43곳 추가: 모든 지역에 카페·디저트, 군자·성수·뚝섬·광장동·자양동 중식, 세종대·어린이대공원·자양동·군자·구리의 한식·일식·양식·고기 보강"],["🛍️","백화점·쇼핑몰·푸드코트 11곳 추가(롯데백화점 건대스타시티·구리, 테크노마트, 성수연방, 이마트 자양점 등), ‘푸드코트·몰’ 메뉴와 테마 2개(백화점·몰·푸드코트, 비 오는 날 실내 한 끼)"],["⏰","매주 월요일 09:00 정기 업데이트 안내, 다음 업데이트 시각 표시, 업데이트 요청 버튼"],["🏪","신규 오픈·프랜차이즈·개인 가게 구분, 자료 기준일 명시"],["🔄","Google 정보 재확인(2026.10.24): 13곳 추가(육회공작소·까뚝·사대분식·공주식당·문가네·계탉닭·고공·자양동등심집·시원식당·가츠몽·손에손잡고·정희·미가담), 학생회관 평점 반영"],["🆕","줄바꿈 개선, 이번 주 김군 픽, 최근 본 가게, 간단히 보기, 오늘 점심 투표"],
  ["🎁","김군에게 밥 사기(카카오톡 ID coolzet), 하단 섹션 메뉴, 맨 위로 버튼"],["♿","메뉴·지역·인증 칩 가게 수 표시, 선택 표시 ✓, 선택한 조건 모음, 키보드 이동"],
  ["💬","카톡 ‘밥 사주세요·밥 살게요’ 한 번에 공유"],["🔍","검색, 실시간 영업 상태, 테마 10개, 찜, 도장깨기, 오늘 뭐 먹지?"],["🗺️","지도 반경별 확대·이동, 메달 마커 Top 3, 시간대별 Top 3"],
  ["🧺","광장동·구리·자양동·아차산로, 전통시장과 시장 안 식당"],["📲","원격줄서기·예약 정보, 테이블링·캐치테이블 검색"],["🏅","백년가게·착한식당·노포 배지, 할인·교직원할인"],
@@ -2086,7 +2173,7 @@ const UPD=[["🧭","조건 고르기 좌우 분할(왼쪽 시간대·이동·인
 $("updBtn").onclick=()=>{$("updList").innerHTML=UPD.map(([e,t,n])=>`<li class="${n?"new":""}"><i aria-hidden="true">${e}</i><span>${esc(t)}</span></li>`).join("");$("updDlg").showModal();requestAnimationFrame(bh);};
 $("reloadBtn").onclick=()=>location.reload();
 $("asofN").textContent=PLACES.length;
-setTimeout(()=>{if(!window.claude)renderAcc();},0);
+setTimeout(()=>{if(!window.claude){renderAcc();if(admLocal())admApply();}},0);
 /* ---------- 정기 업데이트: 매주 월요일 오전 9시(한국 시간) ---------- */
 const DATA_DATE="2026-10-24";
 function nextMon9(after){const d=new Date(after.getTime());// 월 09:00 KST = 월 00:00 UTC
@@ -2094,8 +2181,8 @@ function nextMon9(after){const d=new Date(after.getTime());// 월 09:00 KST = �
 const fmtKST=d=>{const k=new Date(d.getTime()+9*3600e3);return `${k.getUTCMonth()+1}월 ${k.getUTCDate()}일(${"일월화수목금토"[k.getUTCDay()]}) ${String(k.getUTCHours()).padStart(2,"0")}:${String(k.getUTCMinutes()).padStart(2,"0")}`;};
 let updReqN=null;
 function renderUpd(){const base=new Date(DATA_DATE+"T00:00:00Z");const due=nextMon9(base);const now=new Date();const el=$("updState");
- if(now<due){const h=Math.round((due-now)/3600e3);el.className="upd";el.innerHTML=`<span>🔄 정기 업데이트 <b>매주 월요일 09:00</b></span><span>다음 <b>${fmtKST(due)}</b>${h<=48?` (약 ${h}시간 남음)`:""}</span>`;return;}
- const days=Math.floor((now-base)/864e5);el.className="upd stale";
+ if(now<due){const h=Math.round((due-now)/3600e3);el.className="upd adm-only";el.innerHTML=`<span>🔄 정기 업데이트 <b>매주 월요일 09:00</b></span><span>다음 <b>${fmtKST(due)}</b>${h<=48?` (약 ${h}시간 남음)`:""}</span>`;return;}
+ const days=Math.floor((now-base)/864e5);el.className="upd stale adm-only";
  el.innerHTML=`<span>⏳ <b>정기 업데이트 대기 중</b> · ${fmtKST(due)} 예정이었고 자료가 ${days}일 지났어요</span><button type="button" id="updReq">📢 업데이트 요청${updReqN?` · ${updReqN}명`:""}</button>`;
  $("updReq").onclick=reqUpdate;}
 async function reqUpdate(){const wk=DATA_DATE;
@@ -2166,7 +2253,8 @@ function accSaveLocal(s){try{localStorage.setItem(AKEY,JSON.stringify(s));}catch
 async function accSave(extra){const s={trialUsed:ACC.trialUsed,credits:ACC.credits,day:ACC.day,dayMode:ACC.mode,lastAt:Date.now(),...extra};accSaveLocal(s);
  if(db&&ACC.uid){try{await db.doc("usage/"+ACC.uid).set({...(ACC.doc||{}),...s,visits:(ACC.doc&&ACC.doc.visits||0)+(extra&&extra.newDay?1:0),firstAt:(ACC.doc&&ACC.doc.firstAt)||Date.now(),lastFilter:{meal:F.meal,move:F.move,rad:F.rad,dist:[...(F.dist||[])],cats:[...F.cats]}});ACC.doc={...(ACC.doc||{}),...s};}catch(e){}}}
 async function initAccess(){
- let admin=false;try{admin=user?await user.canEdit():false;}catch(e){}
+ let admin=false;try{admin=user?await user.canEdit():false;}catch(e){}if(admLocal())admin=true;
+ if(admin)document.body.classList.add("is-admin");
  if(!window.claude||admin){ACC.mode="full";ACC.role=admin?"admin":"preview";renderAcc();return;}
  try{const me=user?await user.me():null;ACC.uid=me&&me.id||null;}catch(e){}
  let st=accLoadLocal();
@@ -2180,10 +2268,12 @@ async function initAccess(){
  setInterval(()=>{if(todayKST()!==ACC.day)location.reload();},60000);
  window.addEventListener("beforeunload",()=>{accSave({});});
 }
-function renderAcc(){const el=$("accBar");if(!el)return;
+function renderAcc(){const el=$("accBar");if(!el)return;if(ACC.role==="preview"){el.innerHTML="";el.className="accbar";const pl=$("accPill");if(pl)pl.hidden=true;const lock=$("lockCard");if(lock)lock.hidden=true;return;}
  const lbl={full:ACC.role==="admin"?"운영자 · 모든 기능":ACC.role==="preview"?"미리보기 · 모든 기능":"이용권 사용 중 · 모든 지역·차량",trial:"무료 체험 · 광진구·도보만",locked:"이용권 필요"}[ACC.mode];
+ const pill=$("accPill");if(pill){pill.hidden=false;pill.className="accpill m-"+ACC.mode;pill.textContent="오늘: "+lbl;}
  el.className="accbar m-"+ACC.mode;
- el.innerHTML=`<div class="acc1"><b>오늘: ${lbl}</b>${ACC.role==="user"?`<span>무료 체험 ${ACC.trialUsed}/${TRIAL_MAX}회 · 이용권 ${ACC.credits}회 남음</span>`:""}</div>
+ if(ACC.role!=="user"){el.innerHTML="";const lock=$("lockCard");if(lock)lock.hidden=ACC.mode!=="locked";return;}
+ el.innerHTML=`<div class="acc1"><span>무료 체험 ${ACC.trialUsed}/${TRIAL_MAX}회 · 이용권 ${ACC.credits}회 남음</span></div>
   ${ACC.role==="user"?`<div class="acc2"><button type="button" class="sm" data-coupon>🎟 쿠폰 등록</button><button type="button" class="sm" data-gift="open">🎁 밥 사고 이용권 받기</button></div><p class="accnote">이용 1회 = 하루 단위입니다. 이용 기록(사용자 ID·이용 날짜·검색 조건)이 운영자에게 보입니다.</p>`:""}`;
  const lock=$("lockCard");if(lock){lock.hidden=ACC.mode!=="locked";}
  document.querySelectorAll('#fMove button[data-v="car"]').forEach(x=>{x.disabled=ACC.mode==="trial";x.title=ACC.mode==="trial"?"무료 체험은 도보만 가능해요":"";});
@@ -2201,7 +2291,8 @@ $("cpForm").addEventListener("submit",e=>{e.preventDefault();redeem();});
 /* 운영자: 쿠폰 발급 · 이용자 현황 */
 async function issueCoupon(n){if(!db)return toast("함께 보기 링크에서만 발급할 수 있어요.");const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let c="";const r=crypto.getRandomValues(new Uint32Array(8));r.forEach(x=>c+=A[x%A.length]);
  const h=await sha("kimgun:"+c);try{await db.doc("coupons/"+h).set({n,used:false,at:Date.now()});await db.doc("couponsAdmin/"+h).set({code:c,n,at:Date.now()});toast(`${n}회 이용권 쿠폰 ${c} 를 만들었어요.`);loadAdmin();}catch(e){toast("발급하지 못했어요: "+(e&&e.code||"오류"));}}
-async function loadAdmin(){const box=$("admBox");if(!box||!db||ACC.role!=="admin")return;box.hidden=false;
+async function loadAdmin(){const box=$("admBox");if(!box||ACC.role!=="admin")return;
+ if(!db){$("admCoupons").innerHTML=`<tr><td colspan="5">쿠폰 발급·목록은 함께 보기 링크에서 편집자 권한 계정으로 열었을 때 동작해요.</td></tr>`;$("admUsers").innerHTML=`<tr><td colspan="6">이용자 현황은 함께 보기 링크에서 편집자 권한 계정으로 열었을 때 보여요.</td></tr>`;return;}
  try{const cs=await db.collection("couponsAdmin").get();const used={};const cu=await db.collection("coupons").get();cu.docs.forEach(d=>used[d.id]=d.data());
   $("admCoupons").innerHTML=cs.docs.sort((a,b)=>(b.data().at||0)-(a.data().at||0)).map(d=>{const v=d.data(),u=used[d.id]||{};return `<tr><td class="mono">${esc(v.code)}</td><td>${v.n}회</td><td>${new Date(v.at).toLocaleDateString("ko-KR")}</td><td>${u.used?"사용함 · "+new Date(u.usedAt).toLocaleDateString("ko-KR"):"미사용"}</td><td><button class="sm" data-copy="${esc(v.code)}">복사</button></td></tr>`;}).join("")||`<tr><td colspan="5">발급한 쿠폰이 없어요.</td></tr>`;
   const us=await db.collection("usage").get();const ids=us.docs.map(d=>d.id);let names={};
@@ -2212,6 +2303,17 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-coupon]"))openC
  const c=e.target.closest("[data-copy]");if(c){copyText(c.dataset.copy).then(ok=>toast(ok?"쿠폰 코드를 복사했어요.":"복사하지 못했어요."));}
  const i=e.target.closest("[data-issue]");if(i)issueCoupon(+i.dataset.issue);
  const w=e.target.closest("[data-wish]");if(w){const k=w.dataset.wish;const s=new Set(JSON.parse(localStorage.getItem("kimgun-wish")||"[]"));s.has(k)?s.delete(k):s.add(k);localStorage.setItem("kimgun-wish",JSON.stringify([...s]));w.setAttribute("aria-pressed",s.has(k));w.querySelector("i").textContent=s.has(k)?"알림 신청함":"알림 받기";if(db&&ACC.uid){db.doc("usage/"+ACC.uid).update({wish:[...s]}).catch(()=>{});}toast(s.has(k)?`${k} 오픈 소식을 알려 드릴게요.`:`${k} 알림을 껐어요.`);}});
+
+/* ---------- 관리자 모드(암호) ---------- */
+const ADM_H="0feacce67aa5569084d4ce4f38dfdb15efb33b35cadf4728712ca9ad07cbf042";
+function admLocal(){try{return localStorage.getItem("kimgun-adm")===ADM_H;}catch(e){return false;}}
+function admApply(){document.body.classList.add("is-admin");ACC.mode="full";if(ACC.role!=="admin")ACC.role="admin";renderAcc();refresh();loadAdmin();if(typeof renderUpd==="function")renderUpd();$("admLogin").textContent="관리자 모드 끄기";}
+$("admLogin").onclick=()=>{if(admLocal()||document.body.classList.contains("is-admin")&&ACC.role==="admin"&&admLocal()){try{localStorage.removeItem("kimgun-adm");}catch(e){}location.reload();return;}$("admPw").value="";$("admMsg").textContent="";$("admDlg").showModal();setTimeout(()=>$("admPw").focus(),50);};
+document.addEventListener("click",e=>{if(e.target.closest("[data-close-adm]"))$("admDlg").close();});
+$("admForm").addEventListener("submit",async e=>{e.preventDefault();const v=$("admPw").value;let h="";
+ try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v));h=[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");}catch(err){$("admMsg").textContent="이 브라우저에서는 관리자 모드를 쓸 수 없어요.";return;}
+ if(h!==ADM_H){$("admMsg").textContent="암호가 맞지 않아요.";$("admPw").select();return;}
+ try{localStorage.setItem("kimgun-adm",ADM_H);}catch(err){}$("admDlg").close();admApply();toast("관리자 모드로 전환했어요.");});
 /* ---------- 네이버 목록 교차분석 ---------- */
 const XQ={"건대":"건대입구","세종대":"세종대","어린이대공원":"어린이대공원역","군자":"군자역","구의":"구의역","자양동":"자양동","광장동":"광나루역","성수":"성수역","뚝섬":"서울숲","구리":"구리역","마장·금호":"마장동","면목":"면목동","풍납":"풍납동"};
 $("xArea").innerHTML=Object.keys(XQ).map(a=>`<option value="${a}">${a} 맛집</option>`).join("");
@@ -2422,10 +2524,17 @@ function renderPanel(){
 }
 /* ---------- tabs ---------- */
 const TABS={find:["맛집 찾기","생명과학관에서 출발해 걸어서, 차로 갈 수 있는 곳을 시간대·메뉴·인원에 맞춰 골라 드립니다."],map:["지도","생명과학관을 중심으로 반경 안의 가게를 한눈에 보고, 누르면 바로 길찾기를 엽니다."],reserve:["사전예약","팀 식사 예약 요청을 올리고 확정 여부를 함께 관리합니다."],guide:["김군 미슐랭","리뷰 수나 방송보다 다시 갈 만한지를 기준으로 매긴 김군의 자체 평가입니다."]};
+/* 조건 고르기·김군 픽 테마를 지금 탭으로 옮겨 붙이기(지도 탭에서도 사용) */
+let SEC_HOME=null;
+function placeSecs(t){const c=$("secCond"),th=$("secTheme");if(!c||!th)return;
+ if(!SEC_HOME){SEC_HOME=document.createElement("div");SEC_HOME.id="secHome";c.parentNode.insertBefore(SEC_HOME,c);}
+ if(t==="map"){const wrap=document.querySelector("#tab-map .mapwrap");if(wrap&&c.parentNode!==wrap.parentNode){const qb=$("qbar");if(qb)wrap.parentNode.insertBefore(qb,wrap);wrap.parentNode.insertBefore(c,wrap);wrap.parentNode.insertBefore(th,wrap);c.classList.add("onmap");th.classList.add("onmap");}}
+ else if(c.previousElementSibling!==SEC_HOME){const qb=$("qbar");SEC_HOME.after(c);c.after(th);if(qb)SEC_HOME.before(qb);c.classList.remove("onmap");th.classList.remove("onmap");}}
 function showTab(t){if(!TABS[t])t="find";
  document.querySelectorAll("section.tab").forEach(s=>s.hidden=s.id!=="tab-"+t);
  document.querySelectorAll("[data-tab]").forEach(a=>{if(a.dataset.tab===t)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
  $("subTitle").textContent=TABS[t][0];$("subDesc").textContent=TABS[t][1];$("locLast").textContent=TABS[t][0];
+ placeSecs(t);
  if(t==="map")renderMap();
  if(typeof navActive==="function")setTimeout(navActive,30);
  if(typeof bh==="function")requestAnimationFrame(bh);
