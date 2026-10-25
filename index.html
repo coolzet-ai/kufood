@@ -132,7 +132,10 @@ a.btn.go{background:var(--green);border-color:var(--green);color:var(--green-ink
 .sortk .seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));flex:1 1 auto;min-width:0}
 .sortk .seg button{white-space:nowrap;padding:7px 4px;font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .list{display:flex;flex-direction:column;gap:10px}
-.item{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--c,var(--green));border-radius:4px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:8px 18px;min-width:0}
+.item{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--c,var(--green));border-radius:4px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:8px 18px;min-width:0;transition:border-color .18s,box-shadow .18s,background-color .18s,transform .18s}
+@media (hover:hover){.item:hover{border-color:var(--green);border-left-color:var(--green);box-shadow:0 0 0 2px var(--green),0 6px 18px rgba(0,112,62,.16);background:linear-gradient(0deg,rgba(0,112,62,.035),rgba(0,112,62,.035)),var(--paper)}.item:hover .ih h3{color:var(--green)}.item:hover .cover{border-top-color:var(--green)}}
+.item:focus-within{border-color:var(--green);box-shadow:0 0 0 2px var(--green)}
+@media (prefers-reduced-motion:no-preference) and (hover:hover){.item:hover{transform:translateY(-2px)}}
 @media (max-width:720px){.item{grid-template-columns:1fr}}
 .item h3{margin:0;font-size:18px;font-weight:900;letter-spacing:-.02em;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
 .item h3 .cat{font-size:13px;font-weight:500;color:var(--muted)}
@@ -738,6 +741,80 @@ html,body{max-width:100%;overflow-x:hidden}
 .mlayers .lk i{display:inline-block;width:10px;height:4px;border-radius:2px;margin:0 2px 2px 4px;vertical-align:middle}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .mg{fill:#1f3a24}:root:not([data-theme="light"]) .dl{fill:#c6a8db}}
 :root[data-theme="dark"] .mg{fill:#1f3a24}
+
+/* 조건·테마 접기 구조 */
+.fcols{display:block!important}
+@media (min-width:1100px){.fright .list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:760px) and (max-width:1099px){.fright .list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.fright .item{grid-template-columns:1fr}}
+.psec{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--green);border-radius:4px;margin:0 0 12px}
+.psec>summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:12px 14px;cursor:pointer;list-style:none;min-height:48px}
+.psec>summary::-webkit-details-marker{display:none}
+.psec>summary:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
+.psec .pt{font-family:var(--f-serif);font-weight:900;font-size:19px;color:var(--ink)}
+.psec .ps{display:flex;flex-wrap:wrap;gap:4px;font-size:12.5px;color:var(--muted)}
+.psec .ps>span{background:var(--bg);border:1px solid var(--line);border-radius:3px;padding:1px 7px}
+.psec .ps .on,.psec .ps b.on{background:var(--green);border-color:var(--green);color:var(--green-ink);border-radius:3px;padding:1px 7px}
+.psec .pa{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--green);white-space:nowrap}
+.psec .pa em{font-style:normal}
+.psec[open] .pa .c,.psec:not([open]) .pa .o{display:none}
+.psec[open]>summary{border-bottom:1px solid var(--line)}
+.psec .opts{border:0;margin:0;box-shadow:none}
+#secTheme .coll{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:12px 14px 4px;overflow:visible}
+#secTheme .coll button{position:relative;flex:none;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:2px 10px;align-items:center;text-align:left;padding:12px;border:1px solid var(--line);border-left:5px solid var(--tc);border-radius:4px;background:var(--paper);color:var(--ink);cursor:pointer;min-height:68px;transition:box-shadow .15s,border-color .15s,background .15s}
+#secTheme .coll button .ti{grid-row:1/3;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:color-mix(in srgb,var(--tc) 12%,transparent);color:var(--tc)}
+#secTheme .coll button b{font-size:14.5px;font-weight:800;line-height:1.3;word-break:keep-all}
+#secTheme .coll button .tn{font-size:12px;color:var(--muted)}
+#secTheme .coll button .tn em{font-style:normal;font-family:var(--f-serif);font-weight:900;font-size:17px;color:var(--tc);margin-right:1px}
+#secTheme .coll button.zero{opacity:.5}
+#secTheme .coll button:hover{border-color:var(--tc);box-shadow:0 0 0 1px var(--tc)}
+#secTheme .coll button[aria-pressed="true"]{background:var(--tc);border-color:var(--tc);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+#secTheme .coll button[aria-pressed="true"] .ti{background:rgba(255,255,255,.2);color:#fff}
+#secTheme .coll button[aria-pressed="true"] .tn,#secTheme .coll button[aria-pressed="true"] .tn em{color:#fff}
+#secTheme .coll button .tck{position:absolute;bottom:8px;right:8px;font-size:11px;font-weight:800;background:#fff;color:var(--tc);border-radius:2px;padding:1px 6px}
+.collmore{padding:4px 14px 12px;display:flex;justify-content:center}
+@media (max-width:520px){#secTheme .coll{grid-template-columns:repeat(2,minmax(0,1fr))}#secTheme .coll button{padding:10px 8px;gap:2px 8px}#secTheme .coll button .ti{width:34px;height:34px}#secTheme .coll button .ti svg{width:20px;height:20px}#secTheme .coll button b{font-size:13px}}
+
+/* 조건 고르기 선택칩 시인성 */
+.psec .opts .k{font-size:14px!important;font-weight:800;color:var(--ink);margin-top:10px!important}
+.psec .opts .seg{border:1.5px solid var(--green);border-radius:6px;overflow:hidden;gap:0;background:var(--paper)}
+.psec .opts .seg button{font-size:14.5px!important;font-weight:700;padding:11px 4px!important;min-height:44px;color:var(--ink);background:var(--paper);border:0;border-left:1px solid var(--line);transition:background .15s,color .15s}
+.psec .opts .seg button:first-child{border-left:0}
+.psec .opts .seg button:hover{background:var(--green-soft)}
+.psec .opts .seg button[aria-pressed="true"]{background:var(--green);color:#fff;font-weight:900;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
+.psec .opts .seg button[aria-pressed="true"]::before{content:"✓ ";font-weight:900}
+.psec .opts .seg button:disabled{opacity:.4}
+.psec .mchips button{min-height:42px;font-size:14px;font-weight:700;border:1.5px solid var(--line);color:var(--ink);background:var(--paper)}
+.psec .mchips button:hover{border-color:var(--green);background:var(--green-soft)}
+.psec .mchips button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;font-weight:900;box-shadow:0 2px 8px rgba(0,112,62,.3)}
+.psec .mchips button[aria-pressed="true"] .cn{background:rgba(255,255,255,.28);color:#fff}
+.psec .mchips button[data-v=""][aria-pressed="true"]{background:var(--green-soft);color:var(--green);border-color:var(--green);box-shadow:none}
+.psec .mchips button .cn{font-weight:800;color:var(--ink)}
+.psec .fgh .k{font-size:15px!important;font-weight:900}
+.psec .fgs:not(.none){background:var(--green);color:#fff;border-radius:10px;padding:1px 9px;font-weight:800}
+.psec .fgc:not([hidden]){font-weight:800;color:var(--warn);text-decoration:underline}
+@media (max-width:720px){.psec .opts .seg button{font-size:13.5px!important;padding:10px 2px!important}.psec .mchips button{font-size:13px;min-height:40px}}
+@media (max-width:360px){.psec .opts .seg button[aria-pressed="true"]::before{content:""}}
+.psec #fgroups .mchips,.psec #fCat{display:flex;flex-wrap:wrap;gap:6px}
+.psec #fgroups .mchips button,.psec #fCat button{flex:0 0 auto;max-width:100%;padding:4px 12px}
+
+/* 조건 좌우 분할 · 하단 고정 메뉴 */
+@media (min-width:600px){
+ .psec .osplit{display:grid;grid-template-columns:minmax(260px,5fr) 7fr;gap:0 22px;align-items:start}
+ .psec .ocol-r{border-left:1px solid var(--line);padding-left:20px}
+ .psec .ocol-r .fg{margin-top:6px;padding-top:0;border-top:0}
+}
+.psec .ocol{min-width:0;display:flex;flex-direction:column;gap:4px}
+.psec .ocol .row{display:flex;flex-direction:column;align-items:stretch;gap:6px}
+.psec .ocol .seg{display:grid!important;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-columns:none!important;width:100%}
+.bnav{display:block!important}
+body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
+.bnav ul{grid-template-columns:repeat(6,1fr)!important;max-width:820px}
+.bnav button{position:relative;font-size:12px;font-weight:700}
+.bnav .nb{position:absolute;top:6px;left:calc(50% + 6px);min-width:20px;height:18px;padding:0 5px;border-radius:9px;background:var(--green);color:#fff;font-size:11px;font-weight:800;line-height:18px;text-align:center}
+.bnav button[aria-current="true"]{background:var(--green-soft)}
+.fabs{bottom:calc(80px + env(safe-area-inset-bottom,0px))!important}
+.jump{display:none!important}
+.toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
 </style>
 </head>
 <body>
@@ -780,29 +857,10 @@ html,body{max-width:100%;overflow-x:hidden}
     <div class="row2"><button class="sm" type="button" id="discReport">틀린 정보 제보하기</button><a class="btn" href="#guide" data-tab="guide">제보 현황 보기</a></div></div>
   </details>
   <div class="accbar" id="accBar" aria-live="polite"></div>
-  <section class="quick" aria-label="빠른 찾기">
-    <div id="weekly"></div>
-    <div class="qs"><input type="search" id="q" placeholder="가게·메뉴 검색 (냉면, 돈카츠…)" aria-label="가게나 메뉴 검색" autocomplete="off"></div>
-    <div class="qt" role="group" aria-label="빠른 조건">
-      <button type="button" id="tOpen" aria-pressed="false">🟢 지금 영업 중</button>
-      <button type="button" id="tFav" aria-pressed="false">♥ 찜한 곳</button>
-      <button type="button" id="tNew" aria-pressed="false">🆕 안 가본 곳</button>
-      <button type="button" id="tRand" class="rand">🎲 오늘 뭐 먹지?</button>
-    </div>
-    <div id="pick" aria-live="polite"></div>
-    <p class="qh"><b>김군 픽 테마</b><small>한 번 누르면 적용, 다시 누르면 해제</small></p>
-    <div class="coll" id="coll" role="group" aria-label="테마 컬렉션"></div>
-    <div class="recent" id="recent"></div>
-    <details class="extras"><summary><span>🗳️ 오늘 점심 투표</span><span>🏆 도장깨기</span><span>💬 카톡 메시지</span><i aria-hidden="true">▾</i></summary>
-      <div class="stamp" id="stamp"></div>
-      <div class="poll" id="poll" aria-live="polite"></div>
-      <div class="row"><button type="button" class="sm kakao" id="tTreat">💬 날짜·사람 넣어 카톡 메시지 만들기</button></div>
-    </details>
-    <div class="row"><button type="button" class="sm" id="tReset">↺ 조건 모두 초기화</button><button type="button" class="sm pri" id="goRes">🍽 결과로 바로 가기 ↓</button></div>
-  </section>
-  <div class="fcols"><aside class="fleft" aria-label="검색 조건">
-  <h2 class="sec">조건 고르기</h2>
+  <details class="psec" id="secCond" open>
+    <summary><span class="pt">조건 고르기</span><span class="ps" id="condSum"></span><span class="pa" aria-hidden="true"><em class="o">접기</em><em class="c">펼치기</em> ▾</span></summary>
   <div class="opts" role="group" aria-label="검색 조건">
+    <div class="osplit"><div class="ocol ocol-l">
     <span class="k">시간대</span>
     <div class="row"><div class="seg" id="fMeal">
       <button data-v="lunch" aria-pressed="true">점심</button><button data-v="dinner" aria-pressed="false">저녁</button><button data-v="dessert" aria-pressed="false">디저트</button><button data-v="snack" aria-pressed="false">간식</button>
@@ -818,8 +876,10 @@ html,body{max-width:100%;overflow-x:hidden}
     <div class="row"><div class="seg" id="fPpl">
       <button data-v="2" aria-pressed="true">1~2명</button><button data-v="4" aria-pressed="false">3~4명</button><button data-v="8" aria-pressed="false">5~8명</button><button data-v="15" aria-pressed="false">9명 이상</button>
     </div></div>
+    </div><div class="ocol ocol-r">
     <div class="fg" role="group" aria-labelledby="hCat"><div class="fgh"><span class="k" id="hCat">🍽️ 메뉴</span><span class="fgs" id="sCat" aria-live="polite"></span><button type="button" class="fgc" data-clear="cats">선택 해제</button></div>
     <div class="mchips" id="fCat"></div></div>
+    </div></div>
     <details class="adv" id="advF"><summary><span class="at">➕ 더 많은 필터</span><span class="as">지역 · 상권 · 장소 · 평판 · 편의 · 결제 · 가게 유형</span><b id="advN" class="an" hidden></b><i aria-hidden="true">▾</i></summary>
     <div id="fgroups"></div>
     <p class="fgnote" id="fgnote"></p>
@@ -827,7 +887,31 @@ html,body{max-width:100%;overflow-x:hidden}
     </details>
   </div>
 
-  </aside><div class="fright">
+  </details>
+  <details class="psec" id="secTheme" open>
+    <summary><span class="pt">김군 픽 테마</span><span class="ps" id="themeSum">한 번 누르면 적용, 다시 누르면 해제</span><span class="pa" aria-hidden="true"><em class="o">접기</em><em class="c">펼치기</em> ▾</span></summary>
+    <div class="coll" id="coll" role="group" aria-label="김군 픽 테마"></div>
+    <div class="collmore"><button type="button" class="sm" id="collMore" aria-expanded="false">테마 전체 보기</button></div>
+  </details>
+  <section class="quick" aria-label="빠른 찾기">
+    <div id="weekly"></div>
+    <div class="qs"><input type="search" id="q" placeholder="가게·메뉴 검색 (냉면, 돈카츠…)" aria-label="가게나 메뉴 검색" autocomplete="off"></div>
+    <div class="qt" role="group" aria-label="빠른 조건">
+      <button type="button" id="tOpen" aria-pressed="false">🟢 지금 영업 중</button>
+      <button type="button" id="tFav" aria-pressed="false">♥ 찜한 곳</button>
+      <button type="button" id="tNew" aria-pressed="false">🆕 안 가본 곳</button>
+      <button type="button" id="tRand" class="rand">🎲 오늘 뭐 먹지?</button>
+    </div>
+    <div id="pick" aria-live="polite"></div>
+    <div class="recent" id="recent"></div>
+    <details class="extras"><summary><span>🗳️ 오늘 점심 투표</span><span>🏆 도장깨기</span><span>💬 카톡 메시지</span><i aria-hidden="true">▾</i></summary>
+      <div class="stamp" id="stamp"></div>
+      <div class="poll" id="poll" aria-live="polite"></div>
+      <div class="row"><button type="button" class="sm kakao" id="tTreat">💬 날짜·사람 넣어 카톡 메시지 만들기</button></div>
+    </details>
+    <div class="row"><button type="button" class="sm" id="tReset">↺ 조건 모두 초기화</button><button type="button" class="sm pri" id="goRes">🍽 결과로 바로 가기 ↓</button></div>
+  </section>
+  <div class="fcols"><div class="fright">
   <details class="viz vizd"><summary><h3 id="mvH">📊 메뉴별 대표 메뉴</h3><i aria-hidden="true">▾</i></summary><p class="vsub">지금 조건(시간대·거리·인원·지역)에 맞는 가게 수입니다. 줄을 누르면 그 메뉴만 봅니다.</p><div id="menuViz"></div></details>
   <div class="selbar" id="selbar" aria-live="polite"></div>
   <div class="resbar">
@@ -1020,12 +1104,13 @@ html,body{max-width:100%;overflow-x:hidden}
     <div class="acts2 full"><button type="button" class="primary kakao" id="trShare">카톡으로 보내기</button><button type="button" id="trCopy">메시지 복사</button><a class="btn kakao" id="trOpenKakao" href="kakaotalk://launch" target="_blank" rel="noopener" hidden>💬 카카오톡 열기</a><button value="cancel" formnovalidate>닫기</button></div>
   </form>
 </dialog>
-<nav class="bnav" aria-label="주요 섹션 바로가기"><ul>
-  <li><button type="button" data-nav="find"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></i>찾기</button></li>
-  <li><button type="button" data-nav="top3"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 21l5-3 5 3-1.5-7"/></svg></i>Top 3</button></li>
-  <li><button type="button" data-nav="map"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></i>지도</button></li>
-  <li><button type="button" data-nav="reserve"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></i>예약</button></li>
-  <li><button type="button" data-nav="guide"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.4 6.5 20.3l1-6.2L3 9.7l6.2-.9z"/></svg></i>미슐랭</button></li>
+<nav class="bnav" aria-label="하단 고정 메뉴"><ul>
+  <li><button type="button" data-nav="cond"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></i>조건</button></li>
+  <li><button type="button" data-nav="theme"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></i>테마</button></li>
+  <li><button type="button" data-nav="res" class="navres"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></i>결과<b class="nb" id="navN">0</b></button></li>
+  <li><button type="button" data-nav="map"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></i>지도</button></li>
+  <li><button type="button" data-nav="reserve"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></i>예약</button></li>
+  <li><button type="button" data-nav="guide"><i aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.4 6.5 20.3l1-6.2L3 9.7l6.2-.9z"/></svg></i>미슐랭</button></li>
 </ul></nav>
 <button type="button" class="jump" id="jumpRes" hidden>🍽 결과 <b id="jumpN">0</b>곳 보기 ↓</button>
 <div class="fabs">
@@ -1682,8 +1767,7 @@ function actions(p,inPanel){
   A("",ic("menu"),"메뉴판 보기",`data-act="menu" data-id="${p.id}"`),
   A("",ic("camera"),"사진 보기",`href="https://www.google.com/search?tbm=isch&q=${photoQ(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)} 사진 검색"`),
   A("",ic("globe"),"Google 지도",`href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name)}&query_place_id=${p.pid}" target="_blank" rel="noopener"`),
-  A("kakao",ic("bowl"),"밥 사주세요",`data-act="treatAsk" data-id="${p.id}"`),
-  A("kakao",ic("gift"),"밥 살게요",`data-act="treatBuy" data-id="${p.id}"`),
+  A("kakao",ic("bowl"),"밥 약속 카톡",`data-act="treat" data-id="${p.id}" aria-label="${esc(p.name)} 밥 사주세요·밥 살게요 카톡 보내기"`),
   A("sub",ic("alert"),"오류 제보",`data-act="report" data-id="${p.id}"`),
   canRate?A("sub",ic("pencil"),"평가 수정",`data-act="rate" data-id="${p.id}"`):""
  ].join("");
@@ -1708,7 +1792,7 @@ function renderList(){
  $("bTop").textContent=res[0]?res[0].name:"—";
  if(!res.length){$("list").innerHTML=`<div class="empty">조건에 맞는 곳이 없습니다. 검색어·테마를 지우거나 반경을 넓혀 보세요. <button type="button" class="sm" onclick="document.getElementById('tReset').click()">↺ 조건 초기화</button></div>`;return;}
  const sig=JSON.stringify([F.meal,F.move,F.rad,F.ppl,F.sort,F.q,F.open,F.fav,F.unv,F.coll,[...F.cats],GKEYS.map(k=>[...F[k]])]);if(sig!==LSIG){LSIG=sig;LIST_N=PAGE;}LAST=res;
- $("jumpN").textContent=res.length;
+ $("jumpN").textContent=res.length;if($("navN"))$("navN").textContent=res.length;
  $("listMore").innerHTML=res.length>LIST_N?`<button type="button" class="moreb" id="moreBtn">⬇ ${Math.min(PAGE,res.length-LIST_N)}곳 더 보기 <small>(${LIST_N}/${res.length})</small></button>`:(res.length>PAGE?`<p class="mend">모두 ${res.length}곳을 보고 있어요</p>`:"");
  $("list").innerHTML=res.slice(0,LIST_N).map((p,i)=>{const d=distM(p);const note=kimNote(p);const rc=i<3?MEDAL[i]:"var(--ink)";
   const cv=COVER[p.cat]||["#2f6f4f","#7fb38f"];
@@ -1789,9 +1873,18 @@ function quickMatch(p,skipColl){
  if(F.unv&&visits.has(p.id))return false;
  if(F.coll&&!skipColl){const c=COLLS.find(x=>x.k===F.coll);if(c&&!c.f(p))return false;}
  return true;}
+const THC=["#00703e","#b07d00","#2f5fa8","#9b2226","#6a4c93","#1e7a7a","#b45309","#7b2c2c","#3b8a4a","#c2410c"];
+const COLL_N=8;let COLL_ALL=false;
+const THI={honbap:'<circle cx="12" cy="7" r="3.5"/><path d="M5 21a7 7 0 0 1 14 0"/>',cheap:'<circle cx="12" cy="12" r="9"/><path d="M8 9l2 7 2-5 2 5 2-7M7.5 12h9"/>',guest:'<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M10.5 20a5.5 5.5 0 0 1 11 0"/>',hoesik:'<path d="M6 7h9v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M15 10h2a2 2 0 0 1 0 6h-2M6 7c0-2 2-3 4.5-3S15 5 15 7"/>',line:'<path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9"/>',guide:'<circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 21l5-3 5 3-1.5-7"/>',hidden:'<path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l3 16 3-16"/>',old:'<path d="M9 3h6M8 6h8l1 12H7z"/><path d="M12 18v3M7 12h10"/>',date:'<path d="M8 3h8l-1 7a3 3 0 0 1-6 0z"/><path d="M12 13v7M8 21h8"/>',migaro:'<path d="M6 7h9v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M15 10h2a2 2 0 0 1 0 6h-2"/>',sns:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',tv:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 3l4 3 4-3M8 21h8"/>',family:'<circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="12" cy="12" r="2"/><path d="M3 20a4 4 0 0 1 8 0M13 20a4 4 0 0 1 8 0"/>',lamb:'<path d="M4 20L20 4"/><circle cx="9" cy="15" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="15" cy="9" r="2"/>',office:'<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/>',home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/>',market:'<path d="M3 9l2-5h14l2 5"/><path d="M3 9c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3"/><path d="M5 12v8h14v-8"/>',mall:'<path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 0 1 6 0"/>',rain:'<path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 12v7a2 2 0 0 0 4 0"/>',night:'<path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/>'};
+function thIcon(k){return `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${THI[k]||'<circle cx="12" cy="12" r="8"/>'}</svg>`;}
+function condSummary(){const el=$("condSum");if(!el)return;const nF=F.cats.size+GKEYS.reduce((a,k)=>a+(k==="dist"?0:F[k].size),0);
+ el.innerHTML=`<span>${MEALS[F.meal]}</span><span>${F.move==="walk"?"도보":"차량"} ${F.rad>=1000?F.rad/1000+"km":F.rad+"m"}</span><span>${({2:"1~2명",4:"3~4명",8:"5~8명",15:"9명 이상"})[F.ppl]||F.ppl+"명"}</span><span>${F.dist&&F.dist.size?[...F.dist].join("·"):"전체 지역"}</span>${nF?`<span class="on">필터 ${nF}개</span>`:""}`;}
 function renderQuick(){
  const base=PLACES.filter(p=>match(p,false,null,true));
- $("coll").innerHTML=COLLS.map(c=>{const n=base.filter(c.f).length;return `<button type="button" data-coll="${c.k}" aria-pressed="${F.coll===c.k}"><i aria-hidden="true">${c.e}</i><b>${c.t}</b><small>지금 조건 ${n}곳</small></button>`;}).join("");
+ const show=COLLS.filter((c,i)=>COLL_ALL||i<COLL_N||F.coll===c.k);
+ $("coll").innerHTML=show.map((c,i)=>{const n=base.filter(c.f).length;const col=THC[COLLS.indexOf(c)%THC.length];const on=F.coll===c.k;return `<button type="button" data-coll="${c.k}" aria-pressed="${on}" class="${n?"":"zero"}" style="--tc:${col}" aria-label="${esc(c.t)}, 지금 조건 ${n}곳${on?", 선택됨":""}"><span class="ti" aria-hidden="true">${thIcon(c.k)}</span><b>${c.t}</b><span class="tn"><em>${n}</em>곳</span>${on?'<span class="tck" aria-hidden="true">✓ 적용 중</span>':""}</button>`;}).join("");
+ $("collMore").textContent=COLL_ALL?"테마 접기":`테마 전체 보기 (${COLLS.length}개)`;$("collMore").setAttribute("aria-expanded",COLL_ALL);
+ const sel=COLLS.find(c=>c.k===F.coll);$("themeSum").innerHTML=sel?`<b class="on">✓ ${esc(sel.t)}</b> 적용 중`:"한 번 누르면 적용, 다시 누르면 해제";
  const v=PLACES.filter(p=>visits.has(p.id)).length,N=PLACES.length;
  $("stamp").innerHTML=`<span>🏆 도장깨기</span><span class="bar" role="img" aria-label="${N}곳 중 ${v}곳 방문"><i style="width:${v/N*100}%"></i></span><span><b>${v}</b> / ${N}곳 · ♥ <b>${favs.size}</b></span>`;
  $("tOpen").setAttribute("aria-pressed",!!F.open);$("tFav").setAttribute("aria-pressed",!!F.fav);$("tNew").setAttribute("aria-pressed",!!F.unv);
@@ -1802,6 +1895,8 @@ $("tOpen").onclick=()=>{F.open=!F.open;refresh();};
 $("tFav").onclick=()=>{F.fav=!F.fav;refresh();};
 $("tNew").onclick=()=>{F.unv=!F.unv;refresh();};
 $("coll").addEventListener("click",e=>{const b=e.target.closest("[data-coll]");if(!b)return;F.coll=F.coll===b.dataset.coll?"":b.dataset.coll;refresh();});
+$("collMore").onclick=()=>{COLL_ALL=!COLL_ALL;renderQuick();};
+["secCond","secTheme"].forEach(id=>{const d=$(id);try{const v=localStorage.getItem("kimgun-"+id);if(v!==null)d.open=v==="1";}catch(e){}d.addEventListener("toggle",()=>{try{localStorage.setItem("kimgun-"+id,d.open?"1":"0");}catch(e){}});});
 $("tTreat").onclick=()=>{const top=sorted(PLACES.filter(p=>match(p)))[0];openTreat(top||PLACES[0],"ask",false);};
 $("tReset").onclick=()=>{Object.assign(F,{meal:"lunch",move:"walk",rad:1000,ppl:2,sort:"kim",q:"",open:false,fav:false,unv:false,coll:""});F.cats.clear();GKEYS.forEach(k=>F[k].clear());F.dist=new Set(DIST_BASE);
  ["fMeal","fMove","fRad","fPpl","fSort"].forEach(id=>setSeg(id,F[{fMeal:"meal",fMove:"move",fRad:"rad",fPpl:"ppl",fSort:"sort"}[id]]));
@@ -1864,7 +1959,7 @@ function renderChips(){
   if(!its.length)return "";
   return `<div class="fg" role="group" aria-labelledby="h-${g.key}"><div class="fgh"><span class="k" id="h-${g.key}">${g.label}</span><span class="fgs${set.size?"":" none"}" aria-live="polite">${set.size?set.size+"개 선택":"전체"}</span><button type="button" class="fgc" data-clear="${g.key}" ${set.size?"":"hidden"}>선택 해제</button></div>
   <div class="mchips" id="fg-${g.key}">${chipHTML(g.key,"","",!set.size,null)}${its.map(([v,e])=>chipHTML(g.key,v,e,set.has(v),countWith(g.key,v))).join("")}</div></div>`;}).join("");
- {const n=GKEYS.reduce((a,k)=>a+F[k].size,0);$("advN").hidden=!n;$("advN").textContent=n+"개 선택";if(n&&!$("advF").open)$("advF").open=true;}
+ {const n=GKEYS.reduce((a,k)=>a+(k==="dist"?0:F[k].size),0);$("advN").hidden=!n;$("advN").textContent=n+"개 선택";if(n&&!$("advF").open)$("advF").open=true;}
  $("fgnote").innerHTML=hidden.length?`ℹ️ 아직 확인된 가게가 없어 숨긴 구분값: <b>${hidden.map(esc).join(", ")}</b>. 백년가게·착한가격업소·착한식당은 공식 명단, 교직원할인·신규 오픈은 김군 확인이 필요해요. ‘평가 수정’에서 지정하면 자동으로 나타납니다.`:"";
  // 선택 요약 바
  const it=[];F.cats.forEach(v=>it.push(["cats",v,`${CAT_E[v]||""} ${v}`]));
@@ -1872,6 +1967,7 @@ function renderChips(){
  if(F.q)it.push(["q","",`🔍 “${F.q}”`]);if(F.coll)it.push(["coll","",`${(COLLS.find(c=>c.k===F.coll)||{e:""}).e} ${(COLLS.find(c=>c.k===F.coll)||{t:""}).t}`]);
  if(F.open)it.push(["open","","🟢 지금 영업 중"]);if(F.fav)it.push(["fav","","♥ 찜한 곳"]);if(F.unv)it.push(["unv","","🆕 안 가본 곳"]);
  $("selbar").innerHTML=it.length?`<b>선택한 조건</b>`+it.map(([k,v,l])=>`<button type="button" data-rm="${k}" data-v="${esc(v)}" aria-label="${esc(l.trim())} 조건 빼기">${esc(l.trim())}<i aria-hidden="true">✕</i></button>`).join("")+(it.length>1?`<button type="button" class="all" data-rm="all">모두 빼기</button>`:""):"";
+ condSummary();
  if(fk){const box=fk[0]==="cats"?$("fCat"):$("fg-"+fk[0]);const b=box&&[...box.querySelectorAll("button")].find(x=>(x.dataset.v||"")===fk[1]);if(b)b.focus();}
 }
 function autoRadius(label){const save=F.rad;F.rad=1e9;const cand=PLACES.filter(p=>match(p));F.rad=save;
@@ -1917,14 +2013,15 @@ const toTop=$("toTop");let tTick=0;
 window.addEventListener("scroll",()=>{if(tTick)return;tTick=requestAnimationFrame(()=>{tTick=0;toTop.hidden=window.scrollY<500;navActive();});},{passive:true});
 toTop.onclick=()=>{const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:rm?"auto":"smooth"});document.querySelector("header .mark, .hd a")?.focus({preventScroll:true});};
 /* 하단 주요 섹션 내비 */
-const NAVT={find:["find",".quick"],top3:["find","#top3"],map:["map","#tab-map"],reserve:["reserve","#tab-reserve"],guide:["guide","#tab-guide"]};
+const NAVT={cond:["find","#secCond"],theme:["find","#secTheme"],res:["find",".resbar"],find:["find","#secCond"],top3:["find","#top3"],map:["map","#tab-map"],reserve:["reserve","#tab-reserve"],guide:["guide","#tab-guide"]};
 document.querySelectorAll("[data-nav]").forEach(b=>b.addEventListener("click",()=>{const [tab,sel]=NAVT[b.dataset.nav];history.replaceState(null,"","#"+tab);showTab(tab);
+ if(b.dataset.nav==="cond")$("secCond").open=true;if(b.dataset.nav==="theme")$("secTheme").open=true;
  const el=document.querySelector(sel);if(el){const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;const y=el.getBoundingClientRect().top+window.scrollY-12;window.scrollTo({top:Math.max(0,y),behavior:rm?"auto":"smooth"});}
  setTimeout(navActive,450);}));
 function navActive(){const tab=["find","map","reserve","guide"].find(t=>!$("tab-"+t).hidden)||"find";let cur=tab;
- if(tab==="find"){const r=$("top3").getBoundingClientRect();if(r.top<window.innerHeight*0.6&&r.bottom>80)cur="top3";}
+ if(tab==="find"){const H=window.innerHeight*0.45;const rb=document.querySelector(".resbar").getBoundingClientRect(),th=$("secTheme").getBoundingClientRect();cur=rb.top<H?"res":th.top<H?"theme":"cond";}
  document.querySelectorAll("[data-nav]").forEach(b=>{if(b.dataset.nav===cur)b.setAttribute("aria-current","true");else b.removeAttribute("aria-current");});}
-window.addEventListener("hashchange",()=>setTimeout(navActive,50));setTimeout(navActive,300);
+window.addEventListener("hashchange",()=>setTimeout(navActive,50));window.addEventListener("scroll",()=>requestAnimationFrame(navActive),{passive:true});setTimeout(navActive,300);
 
 /* ---------- 줄바꿈: 두 줄일 때 둘째 줄이 더 길게 ---------- */
 const BH_SEL=".subv h1,#subDesc,h2.sec,.lead,.viz>h3,.viz .vsub,.buyme h2,#giftH,.weekly h3,.weekly p,.dcard p,.qh small,.poll h3>span,#updH";
@@ -1981,7 +2078,7 @@ async function sharePoll(){const tally={};votes.forEach(v=>{tally[v.pid]=(tally[
  if(navigator.share){try{await navigator.share({title:"오늘 점심 투표",text:txt});return;}catch(e){if(e&&e.name==="AbortError")return;}}
  const ok=await copyText(txt);toast(ok?"투표 결과를 복사했어요. 카톡에 붙여 넣으세요.":"복사가 막혀 있어요.");}
 /* ---------- 새로워진 점 · 새로고침 ---------- */
-const UPD=[["🗺️","지도에 관할구역(구·시 경계), 주요 도로 12개, 지하철 2·5·7호선과 역, 한강·중랑천, 공원·대학·터미널·구청·시장 표시, 항목별 켜고 끄기",1],["🎟","기본 지역 광진구·성동구·구리시, 무료 체험 3회(광진구·도보)와 3·5·7회 이용권 쿠폰, 이용자 현황(운영자), 지역 확대 예고·알림 신청, 강변·동서울터미널·이튼타워·중곡·면목·교문동 식당 24곳 추가"],["🌳","도로 3개 추가(자양강변길·서울숲길·왕십리로)와 식당 10곳(송림식당·미뻬동·산도스·부이·초리상경·벨라스가든 등)"],["⛰️","도로 6개 추가(구의로·광장로·워커힐로·영화사로·우미내길·아치울길), 지역 ‘아차산’과 상권 ‘아차산 입구 손두부 골목’·‘워커힐’·‘아치울·우미내 마을’ 신설, 식당 20곳 추가"],["🛣️","주요 도로 필터 신설(아차산로·능동로·동일로·군자로·천호대로·광나루로·뚝섬로·자양로·성수일로·성수이로·연무장길·송정길), 군자 먹자골목 상권과 식당 26곳 추가, 지역 ‘송정동’ 신설"],["🛍️","건대 맛의 거리·로데오거리 상권 신설과 식당 11곳(맛찌네·후토·고기굽는놈·우동키노야 등), 양꼬치거리 훠궈·마라 7곳(하이디라오·용가회전훠궈·홍야동 마오차이 등) 추가"],["🏙️","NC이스트폴 입점 식당 5곳 추가(애슐리퀸즈·바르미 스시샤브·깐깐·콘타이·프레퍼스), 메뉴 분류 ‘아시안’ 신설"],["🏬","건대 스타시티 입점 식당 10곳 추가(롯데리아·스타벅스·비엔나227·솔솥·뽕잎사랑·차이홍·오마뎅·경복궁·함포비빔밥·삼동소바)"],["🏬","롯데백화점 건대스타시티점 지하 1층 나폴레옹제과·에이콥베이커리 추가"],["🧺","전통시장 안 세부 식당 7곳(최신족발·뚝도지기 등), 커먼그라운드·스타시티·테크노마트 푸드코트 입점 식당 8곳, 건대 인기 식당 6곳 추가 · 상권 ‘커먼그라운드’·‘강변 테크노마트’ 신설"],["📱","모바일 가로 넘침 방지: 긴 가게 이름 줄바꿈, 카드 내용·버튼을 화면 폭에 맞춤, 기기 글자 확대 대응"],["☕","레스티오(생명과학관 옆 캠퍼스 카페)·보리스 커피·칼레오 커피 추가"],["🏳️","한식·일식·중식에 나라 국기(한국·일본·중국) 이미지, 그 밖의 분류에 대표 메뉴 선 그림(학식 식판, 구내식당, 가성비 밥그릇, 시장, 쇼핑몰, 양식 접시, 커피, 고기) 표시"],["📊","김군 미슐랭 5점 막대 시각화(점수별 색·설명), 카드 머리에 ‘김군 n/5’ 표시, 예약 요청 화면 넘침 수정, 밥사기·맨 위로 아이콘 가운데 정렬"],["⭐","김군 미슐랭 5점 만점으로 변경(기존 평가 자동 변환), 설명 속 가격·웨이팅·대표 메뉴 등 핵심어 형광펜 강조, 검색어 강조, 핵심 수치 상자, 편집자가 올린 가게 사진 표시"],["🧭","전문 맛집 가이드 스타일로 개편: 출발지 타일 삭제·조건 3칸 한 줄, 명조 제목, 선 아이콘, 장식 이모지 제거, No.순위·GOLD/SILVER/BRONZE 표기, 차분한 색"],["📐","모바일 밀도 개선: 상단 메뉴 4개 한 줄, 거리 6개 옵션 한 줄, 시간대·인원 균등 칸, 메뉴 칩 3열 격자, 조건 카드·자료 기준일 여백 축소"],["🚶","거리 재검토: 도보는 실제 걸음 거리(직선×1.3+캠퍼스 출입 150m) 기준으로 거르고 표시, 카드에 걸음·직선 거리 함께, 지도 원도 걸음 거리 기준으로 보정"],["📱","모바일 보정: Top 3 탭 글자 한 줄, 찜·가봤어요 버튼 가운데 정렬, 떠 있는 버튼 크기 축소 · 신주옥미 자양점 추가"],["🍲","신주옥미 아차산점(24시간 순대국, 리뷰상 블루리본)·마장한우소머리국밥(서울풍물시장) 추가"],["🖼️","PC 2단 화면(왼쪽 필터 고정·오른쪽 결과 2열), Top 3 탭(지금 조건/시간대별), 카드 커버(메뉴별 색·대표 메뉴·해시태그·메달), 📷 사진 보기와 인스타 해시태그 링크"],["🎨","결과 우선 화면: 안내·투표·도장깨기·더 많은 필터·메뉴 그래프 접기, 결과로 바로 가기, 12곳씩 더 보기, 🔥 인기·💎 숨은 고수 표시, PC에서 하단 메뉴 숨김"],["🏛️","공공기관·관공서 구내식당(광진구청·성동구청·중랑구립도서관)과 대한상운·한양대 식당 추가, ‘공공기관·관공서’ 장소 유형 신설, 카드의 사전예약 버튼 삭제"],["🎯","필터 0건 재검토: 반경 밖 가게 수(↗) 표시와 모든 필터 자동 반경 확장, 반려견 2곳·원격줄서기 1곳·건대 근처 9곳 추가"],["📍","가게가 적던 지역·상권 보강 24곳: 면목 5, 풍납 5, 잠실 4, 마장·금호 9(마장동 고기 골목·오부이용 등), 건대 스타시티 1"],["🧩","필터 재구성: 지역은 동네만, 상권·거리/장소 유형/평판·인증/편의/결제·할인/가게 유형으로 분리. 데이터가 없는 구분값은 숨기고 안내"],["🏅","미쉐린·블루리본 교차분석: 계월곰탕(빕구르망)·꿉당(빕구르망)·맛돌(미쉐린 추천)·비채나(1스타) 등 9곳 추가, 미쉐린·블루리본 표시 총 8곳"],["📸","MZ·SNS 핫플 교차분석: 12곳 추가(코끼리베이글·5TO7·세디치·도터·ETF베이커리 등), 인기 감성 맛집 33곳에 ‘SNS 핫플’ 표시와 필터·테마"],["📺","방송·OTT 교차분석: 흑백요리사(넷플릭스) 셰프 식당 2곳, 백종원 방송 양꼬치 등 14곳 추가, ‘방송·유튜브·OTT 맛집’ 테마"],["🅿️","주차·반려견·지역화폐(서울사랑상품권·구리사랑카드)·온누리상품권 정보와 필터 추가, 테마 ‘주차 되는 가족 외식’"],["🔎","Google 교차분석: 지역별 인기 검색 결과 50곳과 대조해 빠진 12곳 추가(화기애애·조라멘·라멘트럭·하루·배놈·파스타데이즈·나루떡볶이·진도켄·리타르단도·희릿·돌다리집·잉꼬칼국수)"],["🍻","구의 미가로(고깃집 7곳)·이스트폴(양식·라멘·카페 4곳) 추가, 지역 필터 ‘구의 미가로’·‘이스트폴’ 신설, 구의 카페·국수 5곳"],["🍢","양꼬치거리 9곳(연옥·동북풍미·미친양꼬치·훈춘·송화양꼬치·훠궈·마라샹궈), 지식산업센터·오피스텔·주상복합 표시와 필터, 성수·뚝섬 7곳 추가, 테마 2개"],["🏘️","전통시장·주택가 반경 확장: 노룬산·노유·마장축산물·금남·동원·풍납 도깨비시장 추가(지역 ‘마장·금호·면목·풍납’ 신설), 주택가 동네 맛집 표시와 필터, 테마 2개"],["🧭","지역×메뉴 빈칸 점검 후 43곳 추가: 모든 지역에 카페·디저트, 군자·성수·뚝섬·광장동·자양동 중식, 세종대·어린이대공원·자양동·군자·구리의 한식·일식·양식·고기 보강"],["🛍️","백화점·쇼핑몰·푸드코트 11곳 추가(롯데백화점 건대스타시티·구리, 테크노마트, 성수연방, 이마트 자양점 등), ‘푸드코트·몰’ 메뉴와 테마 2개(백화점·몰·푸드코트, 비 오는 날 실내 한 끼)"],["⏰","매주 월요일 09:00 정기 업데이트 안내, 다음 업데이트 시각 표시, 업데이트 요청 버튼"],["🏪","신규 오픈·프랜차이즈·개인 가게 구분, 자료 기준일 명시"],["🔄","Google 정보 재확인(2026.10.24): 13곳 추가(육회공작소·까뚝·사대분식·공주식당·문가네·계탉닭·고공·자양동등심집·시원식당·가츠몽·손에손잡고·정희·미가담), 학생회관 평점 반영"],["🆕","줄바꿈 개선, 이번 주 김군 픽, 최근 본 가게, 간단히 보기, 오늘 점심 투표"],
+const UPD=[["🧭","조건 고르기 좌우 분할(왼쪽 시간대·이동·인원 / 오른쪽 메뉴), 하단 고정 메뉴 개편(조건·테마·결과 n곳·지도·예약·미슐랭, PC에서도 표시)",1],["✅","조건 고르기 선택칩 강조: 더 크고 굵은 버튼, 선택 시 초록 채움과 ✓ 표시, 선택 개수 배지"],["🧭","‘조건 고르기’·‘김군 픽 테마’를 맨 위로 옮겨 접기·펼치기, 조건 요약 표시, 테마를 아이콘·색·가게 수가 크게 보이는 카드로 개편"],["🗺️","지도에 관할구역(구·시 경계), 주요 도로 12개, 지하철 2·5·7호선과 역, 한강·중랑천, 공원·대학·터미널·구청·시장 표시, 항목별 켜고 끄기"],["🎟","기본 지역 광진구·성동구·구리시, 무료 체험 3회(광진구·도보)와 3·5·7회 이용권 쿠폰, 이용자 현황(운영자), 지역 확대 예고·알림 신청, 강변·동서울터미널·이튼타워·중곡·면목·교문동 식당 24곳 추가"],["🌳","도로 3개 추가(자양강변길·서울숲길·왕십리로)와 식당 10곳(송림식당·미뻬동·산도스·부이·초리상경·벨라스가든 등)"],["⛰️","도로 6개 추가(구의로·광장로·워커힐로·영화사로·우미내길·아치울길), 지역 ‘아차산’과 상권 ‘아차산 입구 손두부 골목’·‘워커힐’·‘아치울·우미내 마을’ 신설, 식당 20곳 추가"],["🛣️","주요 도로 필터 신설(아차산로·능동로·동일로·군자로·천호대로·광나루로·뚝섬로·자양로·성수일로·성수이로·연무장길·송정길), 군자 먹자골목 상권과 식당 26곳 추가, 지역 ‘송정동’ 신설"],["🛍️","건대 맛의 거리·로데오거리 상권 신설과 식당 11곳(맛찌네·후토·고기굽는놈·우동키노야 등), 양꼬치거리 훠궈·마라 7곳(하이디라오·용가회전훠궈·홍야동 마오차이 등) 추가"],["🏙️","NC이스트폴 입점 식당 5곳 추가(애슐리퀸즈·바르미 스시샤브·깐깐·콘타이·프레퍼스), 메뉴 분류 ‘아시안’ 신설"],["🏬","건대 스타시티 입점 식당 10곳 추가(롯데리아·스타벅스·비엔나227·솔솥·뽕잎사랑·차이홍·오마뎅·경복궁·함포비빔밥·삼동소바)"],["🏬","롯데백화점 건대스타시티점 지하 1층 나폴레옹제과·에이콥베이커리 추가"],["🧺","전통시장 안 세부 식당 7곳(최신족발·뚝도지기 등), 커먼그라운드·스타시티·테크노마트 푸드코트 입점 식당 8곳, 건대 인기 식당 6곳 추가 · 상권 ‘커먼그라운드’·‘강변 테크노마트’ 신설"],["📱","모바일 가로 넘침 방지: 긴 가게 이름 줄바꿈, 카드 내용·버튼을 화면 폭에 맞춤, 기기 글자 확대 대응"],["☕","레스티오(생명과학관 옆 캠퍼스 카페)·보리스 커피·칼레오 커피 추가"],["🏳️","한식·일식·중식에 나라 국기(한국·일본·중국) 이미지, 그 밖의 분류에 대표 메뉴 선 그림(학식 식판, 구내식당, 가성비 밥그릇, 시장, 쇼핑몰, 양식 접시, 커피, 고기) 표시"],["📊","김군 미슐랭 5점 막대 시각화(점수별 색·설명), 카드 머리에 ‘김군 n/5’ 표시, 예약 요청 화면 넘침 수정, 밥사기·맨 위로 아이콘 가운데 정렬"],["⭐","김군 미슐랭 5점 만점으로 변경(기존 평가 자동 변환), 설명 속 가격·웨이팅·대표 메뉴 등 핵심어 형광펜 강조, 검색어 강조, 핵심 수치 상자, 편집자가 올린 가게 사진 표시"],["🧭","전문 맛집 가이드 스타일로 개편: 출발지 타일 삭제·조건 3칸 한 줄, 명조 제목, 선 아이콘, 장식 이모지 제거, No.순위·GOLD/SILVER/BRONZE 표기, 차분한 색"],["📐","모바일 밀도 개선: 상단 메뉴 4개 한 줄, 거리 6개 옵션 한 줄, 시간대·인원 균등 칸, 메뉴 칩 3열 격자, 조건 카드·자료 기준일 여백 축소"],["🚶","거리 재검토: 도보는 실제 걸음 거리(직선×1.3+캠퍼스 출입 150m) 기준으로 거르고 표시, 카드에 걸음·직선 거리 함께, 지도 원도 걸음 거리 기준으로 보정"],["📱","모바일 보정: Top 3 탭 글자 한 줄, 찜·가봤어요 버튼 가운데 정렬, 떠 있는 버튼 크기 축소 · 신주옥미 자양점 추가"],["🍲","신주옥미 아차산점(24시간 순대국, 리뷰상 블루리본)·마장한우소머리국밥(서울풍물시장) 추가"],["🖼️","PC 2단 화면(왼쪽 필터 고정·오른쪽 결과 2열), Top 3 탭(지금 조건/시간대별), 카드 커버(메뉴별 색·대표 메뉴·해시태그·메달), 📷 사진 보기와 인스타 해시태그 링크"],["🎨","결과 우선 화면: 안내·투표·도장깨기·더 많은 필터·메뉴 그래프 접기, 결과로 바로 가기, 12곳씩 더 보기, 🔥 인기·💎 숨은 고수 표시, PC에서 하단 메뉴 숨김"],["🏛️","공공기관·관공서 구내식당(광진구청·성동구청·중랑구립도서관)과 대한상운·한양대 식당 추가, ‘공공기관·관공서’ 장소 유형 신설, 카드의 사전예약 버튼 삭제"],["🎯","필터 0건 재검토: 반경 밖 가게 수(↗) 표시와 모든 필터 자동 반경 확장, 반려견 2곳·원격줄서기 1곳·건대 근처 9곳 추가"],["📍","가게가 적던 지역·상권 보강 24곳: 면목 5, 풍납 5, 잠실 4, 마장·금호 9(마장동 고기 골목·오부이용 등), 건대 스타시티 1"],["🧩","필터 재구성: 지역은 동네만, 상권·거리/장소 유형/평판·인증/편의/결제·할인/가게 유형으로 분리. 데이터가 없는 구분값은 숨기고 안내"],["🏅","미쉐린·블루리본 교차분석: 계월곰탕(빕구르망)·꿉당(빕구르망)·맛돌(미쉐린 추천)·비채나(1스타) 등 9곳 추가, 미쉐린·블루리본 표시 총 8곳"],["📸","MZ·SNS 핫플 교차분석: 12곳 추가(코끼리베이글·5TO7·세디치·도터·ETF베이커리 등), 인기 감성 맛집 33곳에 ‘SNS 핫플’ 표시와 필터·테마"],["📺","방송·OTT 교차분석: 흑백요리사(넷플릭스) 셰프 식당 2곳, 백종원 방송 양꼬치 등 14곳 추가, ‘방송·유튜브·OTT 맛집’ 테마"],["🅿️","주차·반려견·지역화폐(서울사랑상품권·구리사랑카드)·온누리상품권 정보와 필터 추가, 테마 ‘주차 되는 가족 외식’"],["🔎","Google 교차분석: 지역별 인기 검색 결과 50곳과 대조해 빠진 12곳 추가(화기애애·조라멘·라멘트럭·하루·배놈·파스타데이즈·나루떡볶이·진도켄·리타르단도·희릿·돌다리집·잉꼬칼국수)"],["🍻","구의 미가로(고깃집 7곳)·이스트폴(양식·라멘·카페 4곳) 추가, 지역 필터 ‘구의 미가로’·‘이스트폴’ 신설, 구의 카페·국수 5곳"],["🍢","양꼬치거리 9곳(연옥·동북풍미·미친양꼬치·훈춘·송화양꼬치·훠궈·마라샹궈), 지식산업센터·오피스텔·주상복합 표시와 필터, 성수·뚝섬 7곳 추가, 테마 2개"],["🏘️","전통시장·주택가 반경 확장: 노룬산·노유·마장축산물·금남·동원·풍납 도깨비시장 추가(지역 ‘마장·금호·면목·풍납’ 신설), 주택가 동네 맛집 표시와 필터, 테마 2개"],["🧭","지역×메뉴 빈칸 점검 후 43곳 추가: 모든 지역에 카페·디저트, 군자·성수·뚝섬·광장동·자양동 중식, 세종대·어린이대공원·자양동·군자·구리의 한식·일식·양식·고기 보강"],["🛍️","백화점·쇼핑몰·푸드코트 11곳 추가(롯데백화점 건대스타시티·구리, 테크노마트, 성수연방, 이마트 자양점 등), ‘푸드코트·몰’ 메뉴와 테마 2개(백화점·몰·푸드코트, 비 오는 날 실내 한 끼)"],["⏰","매주 월요일 09:00 정기 업데이트 안내, 다음 업데이트 시각 표시, 업데이트 요청 버튼"],["🏪","신규 오픈·프랜차이즈·개인 가게 구분, 자료 기준일 명시"],["🔄","Google 정보 재확인(2026.10.24): 13곳 추가(육회공작소·까뚝·사대분식·공주식당·문가네·계탉닭·고공·자양동등심집·시원식당·가츠몽·손에손잡고·정희·미가담), 학생회관 평점 반영"],["🆕","줄바꿈 개선, 이번 주 김군 픽, 최근 본 가게, 간단히 보기, 오늘 점심 투표"],
  ["🎁","김군에게 밥 사기(카카오톡 ID coolzet), 하단 섹션 메뉴, 맨 위로 버튼"],["♿","메뉴·지역·인증 칩 가게 수 표시, 선택 표시 ✓, 선택한 조건 모음, 키보드 이동"],
  ["💬","카톡 ‘밥 사주세요·밥 살게요’ 한 번에 공유"],["🔍","검색, 실시간 영업 상태, 테마 10개, 찜, 도장깨기, 오늘 뭐 먹지?"],["🗺️","지도 반경별 확대·이동, 메달 마커 Top 3, 시간대별 Top 3"],
  ["🧺","광장동·구리·자양동·아차산로, 전통시장과 시장 안 식당"],["📲","원격줄서기·예약 정보, 테이블링·캐치테이블 검색"],["🏅","백년가게·착한식당·노포 배지, 할인·교직원할인"],
@@ -2365,6 +2462,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(
  if(b.dataset.act==="menu")openMenu(p);
  if(b.dataset.act==="treatAsk")openTreat(p,"ask",true);
  if(b.dataset.act==="treatBuy")openTreat(p,"buy",true);
+ if(b.dataset.act==="treat")openTreat(p,"ask",false);
 });
 /* 지도 조작: 드래그 이동, 휠·핀치 확대, 버튼 */
 const mPts=new Map();let mMoved=false,mPinch=null,mRaf=0;
