@@ -1126,6 +1126,63 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 @media(max-width:1080px){.ku-hero{min-height:300px;padding:30px 30px 100px}.ku-hero-search{left:28px;width:min(690px,calc(100% - 56px))}.ku-results .list .item:has(.cphoto){grid-template-columns:135px minmax(0,1fr)}.ku-filter-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ku-scenarios{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:780px){.ku-hero{border-radius:0;min-height:255px;padding:25px 20px 90px;background-position:62% center}.ku-hero h1{font-size:40px}.ku-hero p{font-size:13px}.ku-hero .hero-art{display:none}.ku-hero-search{height:57px;bottom:14px;left:14px;width:calc(100% - 28px)}.ku-hero-search button{height:44px;min-width:72px;font-size:13px}.ku-hero-search .qs input{height:42px!important;font-size:13px}.ku-filter-strip{padding:9px 10px;gap:6px}.ku-filter-strip label{padding:2px 5px}.ku-filter-strip label span{display:none}.ku-scenarios{grid-template-columns:repeat(3,minmax(0,1fr))}.ku-map-preview{display:none}.ku-list-heading h2{font-size:19px}}
 @media(max-width:520px){.ku-hero{min-height:225px;padding:23px 16px 78px}.ku-hero h1{font-size:35px}.ku-hero p{font-size:12px;line-height:1.55}.ku-hero .eyebrow{font-size:10px}.ku-filter-strip{grid-template-columns:repeat(3,minmax(0,1fr))}.ku-filter-strip>button{grid-column:1/-1;min-height:36px}.ku-filter-strip select{font-size:11px;padding:5px 0}.ku-scenarios{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.ku-scenarios button{min-height:77px;padding:6px 3px}.ku-scenarios button>span{width:30px;height:30px}.ku-scenarios button b{font-size:12px}.ku-scenarios button small{font-size:10px}.ku-hero-search button{min-width:65px}.ku-results .list .item .acts{display:none!important}.ku-results .list .item:has(.cphoto){grid-template-columns:100px minmax(0,1fr)}.ku-list-heading a{font-size:11px}.ku-results .list .item .stats{padding:3px}.ku-results .list .item .cover .tgs{display:none!important}}
+
+/* ===== v3: KU 로고 원본 비율 복원 / 히어로 압축 / 칩 크기 정돈 ===== */
+.hd .wrap{min-height:60px!important;padding-block:7px!important}
+.hd .mark{display:inline-flex!important;align-items:center!important;gap:10px!important;min-width:0}
+.hd .mark img.ku-original{display:block!important;flex:0 0 auto!important;width:72px!important;height:auto!important;max-height:41px!important;aspect-ratio:1400 / 777!important;object-fit:contain!important;object-position:center!important;border:0!important;border-radius:0!important;background:#fff!important;transform:none!important;filter:none!important}
+.hd .mark .nm b{font-size:21px!important;line-height:1.15!important;white-space:nowrap}
+.hd .mark .nm small{font-size:9.5px!important;letter-spacing:.025em!important}
+.ku-hero{height:auto!important;min-height:221px!important;padding:19px 30px 81px!important;background-position:center 44%!important}
+.ku-hero .eyebrow{font-size:10.5px!important}
+.ku-hero h1{font-size:clamp(34px,3.5vw,50px)!important;line-height:1.16!important;margin:3px 0 2px!important}
+.ku-hero p{font-size:14px!important;line-height:1.5!important}
+.ku-hero .hero-art{right:36px!important;bottom:72px!important}
+.ku-hero-seal{width:74px!important;height:74px!important;font-size:13px!important}
+.ku-hero-search{height:51px!important;bottom:13px!important;left:30px!important;width:min(760px,calc(100% - 60px))!important;padding:4px!important}
+.ku-hero-search .qs input{height:40px!important;font-size:14px!important;padding-left:40px!important}
+.ku-hero-search .qs::before{left:13px!important}
+.ku-hero-search button{height:41px!important;min-width:91px!important;font-size:14px!important}
+.ku-filter-strip{gap:7px!important;padding:8px 11px!important;margin-bottom:8px!important;box-shadow:none!important}
+.ku-filter-strip label{padding:3px 9px!important;gap:5px!important;min-height:38px!important;border-radius:20px!important}
+.ku-filter-strip label span{font-size:11px!important}
+.ku-filter-strip select{font-size:12px!important;padding:3px 2px!important;min-height:28px!important}
+.ku-filter-strip>button{font-size:12px!important;min-height:38px!important;padding:5px 12px!important}
+.ku-scenarios{gap:7px!important;margin:3px 0 10px!important}
+.ku-scenarios button{min-height:65px!important;padding:8px!important;border-radius:9px!important;grid-template-columns:32px minmax(0,1fr)!important;gap:0 6px!important}
+.ku-scenarios button>span{width:30px!important;height:30px!important;font-size:17px!important}
+.ku-scenarios button b{font-size:12.5px!important}
+.ku-scenarios button small{font-size:10.5px!important}
+@media(max-width:780px){
+ .hd .wrap{min-height:55px!important}
+ .hd .mark img.ku-original{width:55px!important;max-height:32px!important}
+ .hd .mark .nm b{font-size:18px!important}
+ .ku-hero{min-height:188px!important;padding:15px 16px 66px!important;background-position:62% center!important}
+ .ku-hero h1{font-size:34px!important}
+ .ku-hero p{font-size:12px!important}
+ .ku-hero-search{bottom:9px!important;left:11px!important;width:calc(100% - 22px)!important;height:46px!important}
+ .ku-hero-search .qs input{height:37px!important;font-size:12.5px!important}
+ .ku-hero-search button{height:37px!important;min-width:65px!important;font-size:12px!important}
+ .ku-filter-strip{gap:5px!important;padding:7px 8px!important}
+ .ku-filter-strip label{min-height:34px!important;padding:3px 5px!important}
+ .ku-filter-strip select{font-size:11px!important}
+ .ku-scenarios button{min-height:65px!important;padding:6px 4px!important;grid-template-columns:1fr!important;justify-items:center!important;text-align:center!important;gap:3px!important}
+ .ku-scenarios button>span{width:28px!important;height:28px!important;font-size:16px!important}
+ .ku-scenarios button b{font-size:11.5px!important}
+ .ku-scenarios button small{font-size:9.5px!important}
+}
+@media(max-width:420px){
+ .hd .mark img.ku-original{width:49px!important;max-height:29px!important}
+ .hd .mark .nm b{font-size:16px!important}
+ .ku-hero{min-height:170px!important;padding:13px 14px 62px!important}
+ .ku-hero h1{font-size:31px!important}
+ .ku-hero .eyebrow{font-size:9px!important}
+ .ku-hero p{font-size:11px!important}
+ .ku-filter-strip label{overflow:hidden!important;gap:2px!important}
+ .ku-filter-strip select{width:100%!important;font-size:10.5px!important}
+ .ku-scenarios{gap:5px!important}
+ .ku-scenarios button{min-height:61px!important}
+}
 </style>
 </head>
 <body>
