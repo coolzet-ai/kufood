@@ -1192,6 +1192,76 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 .list .item .ku-menu-feature{order:3}.list .item .desc{order:4;height:auto;max-height:calc(1.55em*3);-webkit-line-clamp:3}.list .item .stats{order:5}.list .item .tags{order:6}.list .item .acts{order:7}
 @media (max-width:480px){.ku-menu-feature{grid-template-columns:42px minmax(0,1fr);gap:8px;padding:8px}.ku-menu-icon{width:42px;height:42px;font-size:22px}.ku-menu-view{grid-column:2;justify-self:start;padding:5px 9px}.ku-menu-copy strong{font-size:15px}}
 #rpStatus{font-weight:700;line-height:1.5}#rpDlg .acts2{align-items:center}
+
+/* v5 · reference-matched compact masthead and restaurant presentation */
+.hd .wrap{gap:14px!important;min-height:68px!important}
+.hd-r{gap:8px!important;margin-left:auto}
+.ku-meta-top{display:flex;align-items:center;gap:0;white-space:nowrap;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--paper);font-size:11px;color:var(--muted);line-height:1}
+.ku-meta-top span{padding:7px 9px}.ku-meta-top span+span{border-left:1px solid var(--line)}.ku-meta-top strong{font-weight:800;color:var(--green);margin-left:3px;font-variant-numeric:tabular-nums}
+.asof{margin:0!important;padding:0!important;min-height:0!important;height:0!important;overflow:hidden!important;border:0!important;position:absolute!important;width:1px!important;clip-path:inset(50%);white-space:nowrap}
+.asof .accpill{position:static}
+.ku-hero{border-radius:12px 12px 0 0!important;margin-top:8px!important}
+.ku-filter-strip{border-radius:0 0 12px 12px!important;margin-bottom:12px!important}
+.ku-scenarios{gap:9px!important;margin:6px 0 16px!important}
+.ku-scenarios button{border-radius:12px!important;box-shadow:0 2px 7px rgba(0,50,28,.06)!important;border:1px solid var(--line)!important;transition:transform .16s ease,box-shadow .16s ease!important}
+.ku-scenarios button:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,50,28,.12)!important;border-color:var(--green)!important}
+.ku-scenarios button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.ku-list-heading{padding-top:6px!important}
+.ku-results .list .item{border:1px solid var(--line)!important;border-radius:13px!important;box-shadow:0 2px 12px rgba(0,50,28,.05)!important;overflow:hidden!important}
+.ku-results .list .item:hover{border-color:var(--green)!important;box-shadow:0 5px 18px rgba(0,50,28,.13)!important}
+.ku-results .list .item .cphoto{border-radius:9px!important;overflow:hidden}
+.ku-results .list .item .ku-menu-feature{background:linear-gradient(115deg,#e8f5ed,var(--paper))!important;border:1px solid #d1e9da!important;border-radius:10px!important}
+.ku-menu-copy strong{color:var(--ink);font-weight:900!important}
+.ku-menu-icon{background:#fff!important;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.ku-map-preview{border-radius:13px!important;overflow:hidden}
+@media(min-width:1100px){.ku-scenarios{grid-template-columns:repeat(6,minmax(0,1fr))!important}.ku-scenarios button{min-height:74px!important;padding:10px 8px!important}}
+@media(max-width:900px){.ku-meta-top{font-size:10px}.ku-meta-top span{padding:7px 6px}.mark .nm small{display:none}}
+@media(max-width:600px){.hd .wrap{min-height:54px!important;padding:7px 0!important;gap:7px!important}.ku-meta-top{font-size:9px}.ku-meta-top span{padding:6px 4px}.ku-meta-top strong{margin-left:1px}.hd-r{gap:3px!important}.tm-btn{min-width:29px!important;padding:5px!important}.ku-scenarios{gap:6px!important}.ku-scenarios button{box-shadow:none!important}.ku-results .list .item{border-radius:10px!important}.ku-menu-copy strong{font-size:14px!important}.ku-hero{border-radius:9px 9px 0 0!important}}
+@media(max-width:380px){.ku-meta-top span{padding:5px 3px}.mark .nm b{font-size:14px!important}}
+
+/* ===== v6: 빠른 추천 6개 옵션 칩 한 줄 고정 ===== */
+.ku-scenarios{
+ display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+ gap:7px!important;width:100%;min-width:0;margin:6px 0 12px!important;
+}
+.ku-scenarios button{min-width:0!important;min-height:59px!important;padding:7px 5px!important;
+ display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
+ gap:5px!important;text-align:left!important;white-space:nowrap!important;
+}
+.ku-scenarios button>span{flex:0 0 29px!important;width:29px!important;height:29px!important;
+ font-size:16px!important;grid-row:auto!important}
+.ku-scenarios button b{font-size:clamp(10px,1vw,13px)!important;white-space:nowrap!important;letter-spacing:-.035em}
+.ku-scenarios button small{display:none!important}
+@media(max-width:760px){
+ .ku-scenarios{display:flex!important;grid-template-columns:none!important;overflow-x:auto!important;
+  overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scrollbar-width:thin;
+  padding:2px 1px 8px;gap:6px!important}
+ .ku-scenarios button{flex:0 0 auto!important;min-width:105px!important;min-height:48px!important;
+  padding:5px 8px!important;scroll-snap-align:start;box-shadow:none!important}
+ .ku-scenarios button>span{width:26px!important;height:26px!important;flex-basis:26px!important;font-size:15px!important}
+ .ku-scenarios button b{font-size:12px!important}
+}
+
+/* ===== v7 · 제목 우측 조건 선택, 6개 빠른 추천 가독성 개선 ===== */
+.ku-hero{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(280px,420px)!important;column-gap:22px!important;align-items:start!important;padding-right:30px!important}
+.ku-hero .hero-copy{grid-column:1!important;min-width:0!important}
+.ku-hero-side{position:relative;grid-column:2;grid-row:1;z-index:3;align-self:center;min-width:0;margin:0 0 38px}
+.ku-hero-side .ku-filter-strip{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;padding:12px!important;margin:0!important;background:rgba(255,255,255,.95)!important;box-shadow:0 5px 20px rgba(0,66,42,.09)!important;border:1px solid #d7e5d9!important;border-radius:14px!important}
+.ku-hero-side .ku-filter-strip label{display:flex!important;flex-direction:column!important;gap:3px!important;align-items:stretch!important;min-width:0!important;padding:7px 8px!important;min-height:66px!important;border:1px solid #d7e5d9!important;border-radius:9px!important;background:#f9fcf9!important;font-size:12px!important;color:#164b32!important;font-weight:800!important}
+.ku-hero-side .ku-filter-strip label span{display:inline!important;color:#315b45!important;font-size:11px!important;font-weight:800!important}
+.ku-hero-side .ku-filter-strip select{width:100%!important;min-width:0!important;font-size:12.5px!important;font-weight:800!important;min-height:27px!important;background:transparent!important;color:#153c28!important;border:0!important;padding:2px 1px!important;cursor:pointer}
+.ku-hero-side .ku-filter-strip>button{grid-column:1/-1!important;width:100%!important;min-height:33px!important;padding:5px 10px!important;font-size:12px!important;border:1px solid #c6ddcc!important;border-radius:8px!important;background:#eaf5ec!important;color:#07512e!important}
+.ku-hero .hero-art{display:none!important}
+.ku-hero-search{width:min(760px,calc(100% - 60px))!important}
+.ku-scenarios{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:9px!important;overflow:visible!important;padding-bottom:0!important}
+.ku-scenarios button{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;flex:initial!important;gap:8px!important;min-width:0!important;min-height:64px!important;padding:10px 8px!important;white-space:normal!important;text-align:left!important;border:1.5px solid #cee3d2!important;background:#fff!important;border-radius:11px!important}
+.ku-scenarios button>span{flex:0 0 33px!important;width:33px!important;height:33px!important;font-size:18px!important}
+.ku-scenarios button b{font-size:14px!important;font-weight:900!important;letter-spacing:-.025em!important;white-space:normal!important;word-break:keep-all!important;line-height:1.2!important}
+.ku-scenarios button small{display:none!important}
+.ku-scenarios button:hover{background:#edf8f0!important;border-color:#00703e!important}
+@media(max-width:1050px){.ku-hero{grid-template-columns:minmax(0,1fr) minmax(260px,360px)!important;gap:12px!important}.ku-hero-side{margin-bottom:36px}.ku-scenarios{gap:6px!important}.ku-scenarios button{gap:5px!important;padding:8px 5px!important}.ku-scenarios button b{font-size:12.5px!important}.ku-scenarios button>span{width:29px!important;flex-basis:29px!important;height:29px!important}}
+@media(max-width:780px){.ku-hero{grid-template-columns:minmax(0,1fr) minmax(150px,45%)!important;gap:8px!important;min-height:210px!important;padding:14px 12px 65px!important}.ku-hero-side{margin-bottom:0!important;align-self:start!important}.ku-hero-side .ku-filter-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:4px!important;padding:6px!important}.ku-hero-side .ku-filter-strip label{min-height:44px!important;padding:3px 4px!important}.ku-hero-side .ku-filter-strip label:first-child{grid-column:1/-1}.ku-hero-side .ku-filter-strip label span{font-size:9px!important}.ku-hero-side .ku-filter-strip select{font-size:10px!important;min-height:21px!important}.ku-hero-side .ku-filter-strip>button{min-height:25px!important;font-size:10px!important;padding:3px!important}.ku-hero h1{font-size:clamp(26px,5vw,35px)!important}.ku-hero p{font-size:11px!important}.ku-scenarios{display:flex!important;grid-template-columns:none!important;overflow-x:auto!important;overscroll-behavior-x:contain;scroll-snap-type:x proximity;gap:8px!important;padding-bottom:6px!important;scrollbar-width:thin}.ku-scenarios button{flex:0 0 138px!important;min-width:138px!important;min-height:55px!important;padding:8px 10px!important;scroll-snap-align:start}.ku-scenarios button b{font-size:13.5px!important}.ku-scenarios button>span{width:30px!important;height:30px!important;flex-basis:30px!important}}
+@media(max-width:420px){.ku-hero{grid-template-columns:minmax(0,1fr) minmax(150px,48%)!important;min-height:205px!important}.ku-hero h1{font-size:27px!important}.ku-hero .eyebrow{font-size:8px!important;letter-spacing:0!important}.ku-hero .hero-copy p{max-width:165px!important;font-size:10px!important}.ku-hero-side .ku-filter-strip label{font-size:10px!important}.ku-scenarios button{flex-basis:132px!important;min-width:132px!important}}
 </style>
 </head>
 <body>
@@ -1208,7 +1278,7 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
     <a href="#guide" data-tab="guide">김군 미슐랭</a>
   </nav>
   <div class="hd-r">
-    <span class="bp" title="가게 정보 기준 일자">자료 <b>2026. 10. 24.</b></span><span class="bp" title="기능 업데이트 일자" style="border-left-color:var(--gold)">기능 <b>2026. 10. 26.</b></span>
+    <div class="ku-meta-top" aria-label="정보 갱신 현황"><span title="맛집 자료 기준일">자료 <strong>10.24</strong></span><span title="기능 업데이트 일자">기능 <strong>10.26</strong></span></div>
     <div class="tm-menu">
       <button type="button" class="tm-btn" id="tmBtn" aria-haspopup="dialog" aria-expanded="false" title="Teams로 앵커김군(coolzet@konkuk.ac.kr)에게 채팅"><svg class="tm-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.6 3.7c-.5.4-1.4.1-1.4-.6V16h-.5A2.5 2.5 0 0 1 2 13.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 8.5h8M8 12h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="tm-lb">Teams 채팅</span></button>
       <div class="tm-pop" id="tmPop" hidden role="dialog" aria-label="Teams 채팅 문의">
@@ -1244,13 +1314,13 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 
 <!-- ============ 맛집 찾기 ============ -->
 <section class="tab" id="tab-find">
-<section class="ku-hero" aria-label="맛집김군 소개"><div class="hero-copy"><span class="eyebrow">KONKUK UNIVERSITY · 맛집김군</span><h1>오늘 뭐 먹지<span class="qmark">?</span></h1><p>건국대학교 생명과학관에서 출발해<br>오늘 딱 맞는 맛집을 찾아보세요.</p></div><div class="hero-art" aria-hidden="true"><span class="ku-hero-seal">맛집김군<small>KONKUK FOOD GUIDE</small></span></div><div class="ku-hero-search" id="kuHeroSearch"><div class="ku-search-slot" id="kuSearchSlot"></div><button id="kuHeroSearchBtn" type="button">검색</button></div></section>
+<section class="ku-hero" aria-label="맛집김군 소개"><div class="hero-copy"><span class="eyebrow">KONKUK UNIVERSITY · 맛집김군</span><h1>오늘 뭐 먹지<span class="qmark">?</span></h1><p>건국대학교 생명과학관에서 출발해<br>오늘 딱 맞는 맛집을 찾아보세요.</p></div><div class="ku-hero-side"><div class="ku-filter-strip" aria-label="빠른 조건 설정"><label>☀️ <span>식사 시간</span><select id="kuMeal"><option value="lunch">점심</option><option value="dinner">저녁</option><option value="dessert">디저트</option><option value="snack">간식</option></select></label><label>🚶 <span>이동 범위</span><select id="kuDistance"><option value="500">도보 5~10분</option><option value="1000" selected>도보 10~15분</option><option value="1500">도보 15~20분</option><option value="3000">반경 3km</option></select></label><label>👥 <span>식사 인원</span><select id="kuPeople"><option value="2">1~2명</option><option value="4">3~4명</option><option value="6">5~6명</option><option value="10">7~10명</option></select></label><button type="button" id="kuMoreFilters">⚙ 상세 조건 <span aria-hidden="true">⌄</span></button></div></div><div class="hero-art" aria-hidden="true"><span class="ku-hero-seal">맛집김군<small>KONKUK FOOD GUIDE</small></span></div><div class="ku-hero-search" id="kuHeroSearch"><div class="ku-search-slot" id="kuSearchSlot"></div><button id="kuHeroSearchBtn" type="button">검색</button></div></section>
   <details class="disc"><summary><span class="ic" aria-hidden="true">⚠️</span><b>정보가 실제와 다를 수 있어요</b><span class="ds">2026.10.24 기준 · 방문 전 확인 · 자세히 ▾</span></summary>
     <div><p>가게 정보는 <b class="asofb">2026년 10월 24일(토)</b> 기준 Google 지도와 리뷰를 바탕으로 모았습니다. 영업시간·휴무, 가격, 할인·이벤트, 인증 여부는 수시로 바뀌고 폐업·이전도 바로 반영되지 않습니다. 최대 인원·단체석·예약 방식은 추정값입니다. 방문과 예약 전에 가게에 직접 확인하세요.</p>
     <div class="row2"><button class="sm" type="button" id="discReport">틀린 정보 제보하기</button><a class="btn" href="#guide" data-tab="guide">제보 현황 보기</a></div></div>
   </details>
   <div class="accbar" id="accBar" aria-live="polite"></div>
-<div class="ku-filter-strip" aria-label="빠른 조건 설정"><label>☀️ <span>식사 시간</span><select id="kuMeal"><option value="lunch">점심</option><option value="dinner">저녁</option><option value="dessert">디저트</option><option value="snack">간식</option></select></label><label>🚶 <span>이동 범위</span><select id="kuDistance"><option value="500">도보 5~10분</option><option value="1000" selected>도보 10~15분</option><option value="1500">도보 15~20분</option><option value="3000">반경 3km</option></select></label><label>👥 <span>식사 인원</span><select id="kuPeople"><option value="2">1~2명</option><option value="4">3~4명</option><option value="6">5~6명</option><option value="10">7~10명</option></select></label><button type="button" id="kuMoreFilters">⚙ 상세 조건 <span aria-hidden="true">⌄</span></button></div>
+
   <div class="ku-scenarios" aria-label="빠른 추천"><button type="button" data-scene="lunch"><span>⏱</span><b>30분 점심</b><small>가까운 식사</small></button><button type="button" data-scene="honbap"><span>🍚</span><b>혼밥</b><small>혼자도 편안하게</small></button><button type="button" data-scene="team"><span>👥</span><b>팀 점심</b><small>동료들과 함께</small></button><button type="button" data-scene="guest"><span>👔</span><b>손님 식사</b><small>격식 있는 자리</small></button><button type="button" data-scene="hoesik"><span>🥂</span><b>회식</b><small>여럿이 함께</small></button><button type="button" data-scene="discount"><span>🎟</span><b>교직원 할인</b><small>할인 정보 확인</small></button></div>
   <div class="qbar" id="qbar">
     <div class="qt qx" role="group" aria-label="핵심 기능">
