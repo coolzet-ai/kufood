@@ -1183,6 +1183,15 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
  .ku-scenarios{gap:5px!important}
  .ku-scenarios button{min-height:61px!important}
 }
+
+/* v4: readable signature-dish panel, original menu text only (no fabricated food photos) */
+.ku-menu-feature{order:3;display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 12px;border-radius:12px;background:linear-gradient(120deg,var(--green-soft),var(--paper));border:1px solid var(--line);min-height:78px}
+.ku-menu-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:12px;background:var(--paper);font-size:27px;border:1px solid var(--line)}
+.ku-menu-copy{min-width:0;display:flex;flex-direction:column;line-height:1.4;gap:2px}.ku-menu-copy small{font-size:11px;color:var(--green);font-weight:800}.ku-menu-copy strong{font-size:17px;letter-spacing:-.02em;white-space:normal;overflow-wrap:anywhere}.ku-menu-copy span{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ku-menu-view{border:1px solid var(--green);border-radius:18px;color:var(--green);background:var(--paper);font-size:12px;font-weight:800;padding:7px 10px;white-space:nowrap}
+.list .item .ku-menu-feature{order:3}.list .item .desc{order:4;height:auto;max-height:calc(1.55em*3);-webkit-line-clamp:3}.list .item .stats{order:5}.list .item .tags{order:6}.list .item .acts{order:7}
+@media (max-width:480px){.ku-menu-feature{grid-template-columns:42px minmax(0,1fr);gap:8px;padding:8px}.ku-menu-icon{width:42px;height:42px;font-size:22px}.ku-menu-view{grid-column:2;justify-self:start;padding:5px 9px}.ku-menu-copy strong{font-size:15px}}
+#rpStatus{font-weight:700;line-height:1.5}#rpDlg .acts2{align-items:center}
 </style>
 </head>
 <body>
@@ -1565,13 +1574,13 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 <dialog id="rpDlg" aria-labelledby="rpTitle">
   <form method="dialog" class="fm" id="rpForm" style="grid-template-columns:1fr">
     <h3 style="margin:0;font-size:17px" id="rpTitle">정보 오류 제보</h3>
-    <p style="margin:0;font-size:13px;color:var(--muted)">보낸 제보는 이 페이지를 보는 사람 모두에게 보이고, 김군이 확인해 반영합니다. 개인정보는 적지 마세요.</p>
+    <p style="margin:0;font-size:13px;color:var(--muted)">제보 내용을 운영자에게 전달하거나 이 기기에 임시 보관할 수 있습니다. 공유 서버가 연결되지 않은 경우 자동으로 운영자에게 전달되지는 않습니다. 개인정보는 적지 마세요.</p>
     <label>가게<select id="rpPlace" required></select></label>
     <label>틀린 항목<select id="rpField"><option>영업시간·휴무</option><option>폐업·이전</option><option>위치·주소</option><option>메뉴·가격</option><option>할인·이벤트·교직원할인</option><option>인증·배지(백년가게 등)</option><option>인원·예약 방식</option><option>기타</option></select></label>
     <label>실제 정보<textarea id="rpBody" rows="3" maxlength="300" required placeholder="예: 월요일도 영업하고, 점심은 11시 30분부터입니다."></textarea></label>
     <label>확인한 방법<input type="text" id="rpHow" maxlength="60" placeholder="예: 10/22 직접 방문, 가게 전화"></label>
     <p id="rpStatus" class="status" aria-live="polite" style="margin:0"></p>
-    <div class="acts2"><button class="primary" value="send">제보 보내기</button><button value="cancel" formnovalidate>닫기</button></div>
+    <div class="acts2"><button class="primary" type="submit" value="send" id="rpSubmit">제보 제출</button><button type="button" id="rpMail">메일로 제보</button><button value="cancel" formnovalidate>닫기</button></div>
   </form>
 </dialog>
 <div class="toast" id="toast" hidden></div>
@@ -2456,7 +2465,7 @@ function renderList(){
   const cv=COVER[p.cat]||["#2f6f4f","#7fb38f"];
   return `<article class="item" id="it-${p.id}" style="--c:var(--c-${p.meals[0]})">${PHOTOS[p.id]?`<figure class="cphoto"><img src="/_blob/${PHOTOS[p.id]}" alt="${esc(p.name)} 가게 사진" loading="lazy" onerror="this.parentElement.remove()"></figure>`:""}<div class="cover r${i<3?i+1:0}" style="--g1:${cv[0]}"><span class="cno" aria-hidden="true"><small>No.</small>${i+1}</span><span class="ctx" aria-hidden="true"><b>${esc((p.menu||"").split(",")[0])}</b><small>${esc(p.area)} · ${esc(p.cat)}</small></span><span class="cscore k${kimOf(p)}" title="김군 미슐랭 5점 만점에 ${kimOf(p)}점" aria-hidden="true"><em>김군</em><b>${kimOf(p)}</b><small>/5</small><span class="cbar">${[1,2,3,4,5].map(x=>`<i class="${x<=kimOf(p)?"on":""}"></i>`).join("")}</span></span><div class="tgs"><button type="button" class="tg fav" data-tg="fav" data-id="${p.id}" aria-pressed="${favs.has(p.id)}" aria-label="${esc(p.name)} 관심(찜)" title="관심"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><i>관심</i></button><button type="button" class="tg vis" data-tg="vis" data-id="${p.id}" aria-pressed="${visits.has(p.id)}" aria-label="${esc(p.name)} 방문 도장" title="방문"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2"/><path d="M8 12.3l2.6 2.6L16.2 9.3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="ck"/></svg><i>방문</i></button><button type="button" class="tg rpt" data-act="report" data-id="${p.id}" aria-label="${esc(p.name)} 정보 오류 제보" title="오류 제보"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3.5l9.5 16.5h-19z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.3" stroke-width="2.4" stroke-linecap="round" class="ex"/></svg><i>제보</i></button></div></div>
    <div><header class="ih"><span class="ic" aria-hidden="true" style="--g1:${(COVER[p.cat]||["#2f6f4f"])[0]}">${catImg(p.cat,CAT_FLAG[p.cat]?46:28)}<span class="no" style="--rc:${rc}">${i+1}</span></span><div><h3 class="nmh">${hlq(p.name)}</h3>${linkRow(p)}<div class="meta"><span class="ar">📍 ${esc(p.area)}</span>${(p.tags||[]).map(x=>`<span class="rd">${esc(x)}</span>`).join("")}<span>${esc(p.cat)}</span><span>💰 ${esc(p.price)}</span></div></div></header>
-   <span class="sig">👑 대표 메뉴 ${esc((p.menu||"").split(",")[0])}</span><p class="desc"><span class="dtx">${hl(p.desc)}</span><span class="dhr">🕑 ${esc(p.hours||"방문 전 확인").replace(/ · /g,"\u00a0· ")}</span>${note?`<span class="dnt"><b style="color:var(--gold)">김군 한 줄:</b> ${esc(note)}</span>`:""}</p>
+   <div class="ku-menu-feature"><span class="ku-menu-icon" aria-hidden="true">${CAT_E[p.cat]||"🍽️"}</span><div class="ku-menu-copy"><small>대표 메뉴 · 등록된 정보 기준</small><strong>${esc((p.menu||"대표 메뉴 미확인").split(",")[0])}</strong><span>${esc((p.menu||"").split(",").slice(1,3).join(" · ")||p.cat)}</span></div><button type="button" class="ku-menu-view" data-act="menu" data-id="${p.id}">메뉴 보기 ↗</button></div><span class="sig">👑 대표 메뉴 ${esc((p.menu||"").split(",")[0])}</span><p class="desc"><span class="dtx">${hl(p.desc)}</span><span class="dhr">🕑 ${esc(p.hours||"방문 전 확인").replace(/ · /g,"\u00a0· ")}</span>${note?`<span class="dnt"><b style="color:var(--gold)">김군 한 줄:</b> ${esc(note)}</span>`:""}</p>
    <div class="tags">${badgeRow(p)}</div></div>
    <div class="stats">
     <div><small>${F.move==="walk"?"걸음 거리":"직선 거리"}</small><b class="mono">${F.move==="walk"?"약 "+fmtD(walkRoute(d)):fmtD(d)}</b>${F.move==="walk"?`<small style="display:block;color:var(--muted)">직선 ${fmtD(d)}</small>`:`<small style="display:block;color:var(--muted)">도로 약 ${fmtD(roadKm(d))}</small>`}</div>
@@ -2959,11 +2968,28 @@ function openReport(p){
 }
 $("rpForm").addEventListener("submit",async e=>{
  if(!e.submitter||e.submitter.value!=="send")return;
- const body=$("rpBody").value.trim();if(!body){e.preventDefault();$("rpStatus").textContent="실제 정보를 적어 주세요.";return;}
+ e.preventDefault(); // dialog 제출 시 비동기 저장 전에 창이 닫히는 문제 방지
+ const body=$("rpBody").value.trim();if(!body){$("rpStatus").textContent="실제 정보를 적어 주세요.";$("rpBody").focus();return;}
  const p=PLACES.find(x=>x.id===$("rpPlace").value);
+ if(!p){$("rpStatus").textContent="식당을 선택해 주세요.";return;}
  const r={pid:p.id,place:p.name,field:$("rpField").value,body,how:$("rpHow").value.trim(),status:"open",createdAt:Date.now()};
- if(db){try{await db.collection("reports").add(r);toast("제보를 보냈습니다. 고맙습니다.");return;}catch(err){toast("함께 보기 저장이 막혀 이 브라우저에만 저장합니다.");}}
- r._id="l"+Date.now();reports.unshift(r);saveReportsLocal();renderReports();renderList();toast("제보를 저장했습니다.");
+ const send=$("rpSubmit");send.disabled=true;send.textContent="저장 중…";
+ try{
+   if(db){await db.collection("reports").add(r);$("rpStatus").textContent="공유 서버에 제보가 접수되었습니다.";toast("제보가 접수되었습니다.");$("rpDlg").close();return;}
+ }catch(err){console.warn("Report cloud save failed",err);}
+ r._id="l"+Date.now();reports.unshift(r);saveReportsLocal();renderReports();renderList();
+ $("rpStatus").textContent="이 기기에 임시 저장했습니다. 운영자에게 전달하려면 ‘메일로 제보’를 눌러 주세요.";
+ toast("기기에 저장했습니다. 운영자 전달은 별도로 필요합니다.");
+ send.textContent="임시 저장됨";
+ send.disabled=false;if(send.textContent!=="임시 저장됨")send.textContent="제보 제출";
+});
+$("rpMail").addEventListener("click",()=>{
+ const p=PLACES.find(x=>x.id===$("rpPlace").value);
+ if(!p||!$("rpBody").value.trim()){$("rpStatus").textContent="식당과 실제 정보를 입력해 주세요.";return;}
+ const subj=`[맛집김군 제보] ${p.name} · ${$("rpField").value}`;
+ const body=`식당: ${p.name} (${p.area})\n구분: ${$("rpField").value}\n내용: ${$("rpBody").value.trim()}\n확인 방법: ${$("rpHow").value.trim()||"미기재"}\n\n※ 이 메일은 보내기 버튼을 눌러야 실제 전달됩니다.`;
+ window.location.href=`mailto:coolzet@konkuk.ac.kr?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+ $("rpStatus").textContent="메일 앱에서 보내기를 눌러 제보를 전달해 주세요.";
 });
 function renderReports(){
  const el=$("rpList");if(!el)return;
