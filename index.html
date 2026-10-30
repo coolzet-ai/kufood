@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>맛집김군 (Beta) · 건대 생명과학관 주변</title>
+<title>맛집김군 (Beta) · 건대 생명과학관 주변 · 지역별 식당 보강</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -1262,6 +1262,113 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 @media(max-width:1050px){.ku-hero{grid-template-columns:minmax(0,1fr) minmax(260px,360px)!important;gap:12px!important}.ku-hero-side{margin-bottom:36px}.ku-scenarios{gap:6px!important}.ku-scenarios button{gap:5px!important;padding:8px 5px!important}.ku-scenarios button b{font-size:12.5px!important}.ku-scenarios button>span{width:29px!important;flex-basis:29px!important;height:29px!important}}
 @media(max-width:780px){.ku-hero{grid-template-columns:minmax(0,1fr) minmax(150px,45%)!important;gap:8px!important;min-height:210px!important;padding:14px 12px 65px!important}.ku-hero-side{margin-bottom:0!important;align-self:start!important}.ku-hero-side .ku-filter-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:4px!important;padding:6px!important}.ku-hero-side .ku-filter-strip label{min-height:44px!important;padding:3px 4px!important}.ku-hero-side .ku-filter-strip label:first-child{grid-column:1/-1}.ku-hero-side .ku-filter-strip label span{font-size:9px!important}.ku-hero-side .ku-filter-strip select{font-size:10px!important;min-height:21px!important}.ku-hero-side .ku-filter-strip>button{min-height:25px!important;font-size:10px!important;padding:3px!important}.ku-hero h1{font-size:clamp(26px,5vw,35px)!important}.ku-hero p{font-size:11px!important}.ku-scenarios{display:flex!important;grid-template-columns:none!important;overflow-x:auto!important;overscroll-behavior-x:contain;scroll-snap-type:x proximity;gap:8px!important;padding-bottom:6px!important;scrollbar-width:thin}.ku-scenarios button{flex:0 0 138px!important;min-width:138px!important;min-height:55px!important;padding:8px 10px!important;scroll-snap-align:start}.ku-scenarios button b{font-size:13.5px!important}.ku-scenarios button>span{width:30px!important;height:30px!important;flex-basis:30px!important}}
 @media(max-width:420px){.ku-hero{grid-template-columns:minmax(0,1fr) minmax(150px,48%)!important;min-height:205px!important}.ku-hero h1{font-size:27px!important}.ku-hero .eyebrow{font-size:8px!important;letter-spacing:0!important}.ku-hero .hero-copy p{max-width:165px!important;font-size:10px!important}.ku-hero-side .ku-filter-strip label{font-size:10px!important}.ku-scenarios button{flex-basis:132px!important;min-width:132px!important}}
+
+/* 2026 지역별 검증 기반 신규 후보 */
+.newplaces{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:24px 0 18px;box-shadow:0 5px 22px rgba(0,70,39,.05)}
+.newplaces-head{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap}.newplaces-kicker{font:700 11px var(--f-mono);color:var(--green);letter-spacing:.08em}.newplaces h2{font-size:22px;margin:4px 0 6px;font-weight:900}.newplaces h2 span{font:700 13px var(--f-body);color:var(--green)}.newplaces-head p{font-size:13px;color:var(--muted);margin:0;max-width:750px}.newplaces-toggle{display:flex;gap:5px;flex-wrap:wrap}.newplaces-toggle button{font-size:12px;padding:7px 11px;border-radius:18px;white-space:nowrap}.newplaces-toggle button[aria-pressed=true]{background:var(--green);color:var(--green-ink);border-color:var(--green)}.newplaces-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}.newplace{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);min-width:0}.newplace-top{display:flex;align-items:center;gap:7px}.newplace-tag{font-size:11px;font-weight:800;color:var(--green);background:var(--green-soft);padding:2px 7px;border-radius:8px}.newplace strong{font-size:16px;display:block;margin:7px 0 2px;line-height:1.3}.newplace p{font-size:12px;color:var(--muted);margin:3px 0;overflow-wrap:anywhere}.newplace em{font-style:normal;font-size:12px;font-weight:700;color:var(--ink)}.newplace-links{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.newplace-links a{padding:5px 10px;border-radius:15px;border:1px solid var(--green);color:var(--green);background:var(--paper);font-size:12px;font-weight:700;text-decoration:none}.newplace-links a:hover{background:var(--green-soft)}.newplaces-note{font-size:12px;color:var(--muted);margin:12px 0 0}@media(max-width:950px){.newplaces-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.newplaces{padding:12px;border-radius:10px}.newplaces-grid{grid-template-columns:1fr}.newplaces h2{font-size:18px}}
+
+/* v9: one glance metrics / bigger map detail / collapsed conditions */
+.ku-results .list .item .stats{display:none!important}
+.ku-results .list .item .cover{display:flex!important;flex-wrap:wrap;align-items:center;gap:6px 10px!important;min-height:0!important;padding:8px!important;background:var(--green-soft)!important}
+.ku-results .list .item .cover .cno{flex:0 0 34px}
+.ku-results .list .item .cover .ctx{flex:1 1 130px;min-width:0}
+.ku-results .list .item .cover .cscore{display:none!important}
+.ku-results .list .item .cover .tgs{margin-left:auto}
+.ku-atglance{order:9;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;width:100%;min-width:0}
+.ku-atglance span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 3px;min-width:0;border:1px solid var(--line);border-radius:7px;background:var(--paper);text-align:center}
+.ku-atglance i{font-size:10px;color:var(--muted);font-style:normal;white-space:nowrap}.ku-atglance b{font-size:14px;font-weight:900;color:var(--green);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ku-food-image{position:relative}.ku-food-image .ku-food-label{position:absolute;bottom:6px;left:6px;background:rgba(0,50,29,.82);color:white;border-radius:5px;font-size:10px;padding:2px 7px;font-weight:700;line-height:1.5}
+.ku-food-image.is-example .ku-food-label{background:#7d571b}
+.ku-results .list .item:has(.cphoto){grid-template-columns:190px minmax(0,1fr)!important}
+.ku-results .list .item .cover{grid-column:2;grid-row:1/3}.ku-results .list .item .ih{grid-row:3}.ku-results .list .item .ku-menu-feature{grid-row:4}.ku-results .list .item .desc{grid-row:5}.ku-results .list .item .tags{grid-row:6}.ku-results .list .item .acts{grid-row:7}
+.ku-results .list .item .cphoto{grid-row:1/7!important;min-height:230px!important}
+#mapPanel{min-width:0;border-radius:12px;overflow:hidden}#mapPanel .panel-h{font-size:16px;padding:13px 16px}#mapPanel .panel-b{padding:18px 20px;min-height:300px}#mapPanel .panel-b h3{font-size:22px!important}
+#mapPanel .kv{grid-template-columns:100px minmax(0,1fr);gap:10px 14px;font-size:15px}#mapPanel .kv dt{font-size:13px}#mapPanel .cphoto{height:190px;aspect-ratio:auto}#mapPanel .cphoto img{height:100%;object-fit:cover}
+@media(max-width:1100px){.ku-results .list .item:has(.cphoto){grid-template-columns:140px minmax(0,1fr)!important}.ku-atglance b{font-size:12px}}
+@media(max-width:620px){.ku-results .list .item:has(.cphoto){grid-template-columns:105px minmax(0,1fr)!important;gap:7px!important}.ku-results .list .item .cover{grid-column:1/-1!important;grid-row:1!important}.ku-results .list .item .cphoto{grid-column:1!important;grid-row:2/6!important;min-height:160px!important}.ku-results .list .item .ih{grid-column:2;grid-row:2}.ku-results .list .item .ku-menu-feature{grid-column:2;grid-row:3}.ku-results .list .item .desc{grid-column:2;grid-row:4}.ku-results .list .item .tags{grid-column:2;grid-row:5}.ku-results .list .item .acts{grid-column:1/-1;grid-row:6}.ku-atglance b{font-size:12px}.ku-atglance span{padding:5px 2px}.ku-atglance i{font-size:10px}#mapPanel .panel-b{padding:14px;min-height:230px}#mapPanel .kv{grid-template-columns:76px minmax(0,1fr)}}
+
+/* ===== v10 : 식당명 우선 · 메뉴 중복 제거 · 한눈에 보는 김군 미슐랭 ===== */
+.ku-results .list .item.ku-card{display:grid!important;grid-template-columns:minmax(146px,29%) minmax(0,1fr)!important;grid-template-rows:auto auto;gap:0 16px!important;padding:12px!important;border:1px solid #dbe8de!important;border-radius:16px!important;overflow:visible;box-shadow:0 3px 14px rgba(4,70,35,.065)!important;background:var(--paper)!important;transition:box-shadow .2s,border-color .2s}
+.ku-results .list .item.ku-card:hover{transform:none;box-shadow:0 8px 24px rgba(2,74,43,.15)!important;border-color:#94cbae!important}
+.list .item.ku-card>.ku-card-main{display:flex!important;flex-direction:column!important;gap:9px;min-width:0;max-width:100%;grid-column:2;grid-row:1}
+.ku-results .list .item.ku-card>.cphoto{grid-column:1!important;grid-row:1!important;margin:0!important;min-height:215px!important;height:100%!important;max-height:330px;border-radius:11px;overflow:hidden;align-self:stretch}
+.ku-card>.cphoto img{height:100%;width:100%;object-fit:cover;transition:transform .25s}
+.ku-card:hover>.cphoto img{transform:scale(1.035)}
+.ku-card-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:7px}
+.ku-card-titling{min-width:0;flex:1}
+.ku-card-eyebrow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;color:var(--muted);font-size:11px;font-weight:750;line-height:1.4}
+.ku-rank{font:900 12px var(--f-mono);background:var(--green-soft);color:var(--green);padding:2px 7px;border-radius:5px}
+.ku-results .list .item.ku-card .ku-card-name{font:900 clamp(20px,1.7vw,26px)/1.24 var(--f-body)!important;letter-spacing:-.045em;margin:4px 0 5px!important;text-decoration:none!important;color:var(--ink);overflow-wrap:anywhere;word-break:keep-all;text-wrap:balance}
+.ku-card-address{display:flex;flex-wrap:wrap;gap:4px}.ku-card-address span{font-size:10.5px;color:var(--muted);background:#f3f7f4;padding:2px 6px;border-radius:4px;line-height:1.4}
+.ku-mini-tools{display:flex;gap:4px;flex:none}
+.ku-card .ku-mini-tools .tg{display:grid!important;place-items:center!important;height:34px!important;width:34px!important;padding:0!important;color:var(--green);border-radius:9px!important;border:1px solid var(--line)!important;background:var(--paper)!important;cursor:pointer}
+.ku-card .ku-mini-tools .tg.fav{color:#c24557}.ku-card .ku-mini-tools .tg[aria-pressed=true]{background:#e1f1e8!important;border-color:var(--green)!important;color:var(--green)}.ku-card .ku-mini-tools .tg.fav[aria-pressed=true]{background:#ffebed!important;color:#bf3b51}
+.ku-card-facts{display:grid;grid-template-columns:1fr 1fr 1.2fr;align-items:stretch;gap:5px;min-width:0}
+.ku-fact{border:1px solid #e0e9e1;background:#f8fbf8;border-radius:9px;padding:7px 4px;min-width:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:4px;row-gap:1px;text-align:center;line-height:1.35}
+.ku-fact>i{font-style:normal;font-size:12px;color:#d3a525}.ku-fact>b{font-size:16px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums}.ku-fact>small{display:block;flex-basis:100%;font-size:10px;color:var(--muted);white-space:nowrap}
+.ku-fact-kim{background:#e9f5ec;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:6px;padding:5px}
+.ku-mini-ring{--score:0;--ring:#1d8a4a;width:36px;height:36px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--ring) calc(var(--score)*20%),#d7e5dc 0);display:grid;place-items:center;flex:none}
+.ku-mini-ring::before{content:"";background:var(--paper);width:28px;height:28px;border-radius:50%;grid-column:1;grid-row:1}
+.ku-mini-ring b{position:relative;grid-column:1;grid-row:1;font:900 14px var(--f-body);color:var(--green-deep)}
+.ku-kim-caption{display:flex;flex-direction:column;gap:1px;text-align:left;min-width:0}
+.ku-kim-caption b{font-size:11px;white-space:nowrap;color:var(--green-deep);font-weight:900}.ku-kim-caption small{font-size:9px;color:var(--muted);line-height:1.3}
+.ku-card-menu{display:flex;align-items:center;flex-wrap:wrap;gap:5px 8px;border-radius:9px;padding:8px 10px;background:#edf6ef;border-left:3px solid #178858}
+.ku-card-menu .ku-menu-kicker{font-size:10px;font-weight:800;color:var(--green);white-space:nowrap}
+.ku-card-menu strong{font-size:15px;font-weight:900;color:#164a31;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:anywhere}
+.ku-card-menu small{font-size:10.5px;color:var(--muted);word-break:keep-all;overflow-wrap:anywhere}
+.ku-card-menu .ku-menu-cta{margin-left:auto;font-size:11px;font-weight:800;color:var(--green);border:0;padding:4px 2px;background:transparent;white-space:nowrap}
+.ku-card-summary{color:var(--muted);font-size:12px;line-height:1.5;margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;word-break:keep-all;overflow-wrap:break-word}
+.ku-card .ku-card-tags{display:flex!important;flex-wrap:nowrap;gap:4px;max-height:28px;min-height:0!important;overflow:hidden;align-items:center;order:initial!important}
+.ku-card .ku-card-tags .tag,.ku-card .ku-card-tags .chip{flex:none;white-space:nowrap!important;font-size:10px!important;min-height:21px!important;padding:3px 6px!important}
+.ku-results .list .item.ku-card>.ku-card-bottom{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-wrap:wrap;align-items:center;gap:7px;border-top:1px solid var(--line);padding-top:8px;margin-top:10px}
+.ku-card-bottom>a,.ku-card-bottom>button,.ku-card-bottom>details>summary{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;font-size:12px;font-weight:800;text-decoration:none;border-radius:8px;min-height:34px;cursor:pointer;white-space:nowrap}
+.ku-card-bottom .ku-card-primary{background:var(--green);color:white;border:1px solid var(--green)}
+.ku-card-bottom .ku-card-outline{background:var(--paper);color:var(--green);border:1px solid var(--line)}
+.ku-card-bottom .ku-card-other{margin-left:auto;position:relative}
+.ku-card-bottom .ku-card-other summary{border:1px solid var(--line);color:var(--muted);list-style:none;background:var(--paper)}
+.ku-card-bottom .ku-card-other summary::-webkit-details-marker{display:none}
+.ku-card-bottom .ku-card-other .acts{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;position:absolute;right:0;top:calc(100% + 6px);width:min(370px,calc(100vw - 54px));border:1px solid var(--line);border-radius:10px;padding:10px!important;background:var(--paper);box-shadow:0 8px 22px #123c2730;z-index:10;gap:5px!important}
+.ku-card-bottom .ku-card-other .acts .ab{min-height:48px;font-size:11px}
+.ku-map-preview{box-shadow:0 5px 20px #0d4a2512!important}
+/* 상세 지도에서 식당명을 중심으로 강조 */
+#mapPanel .panel-b>h3,#mpBody .ih h3{font-size:23px!important;font-weight:900!important;letter-spacing:-.04em}
+/* 평가 가이드 */
+.ku-guide-overview{display:grid;grid-template-columns:205px 1fr;gap:18px;padding:20px;background:linear-gradient(125deg,#e1f1e8,#f9fdf9);border:1px solid #d0e7d8;border-radius:15px;margin:16px 0}
+.ku-guide-emblem{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-right:1px solid #c6dccd}
+.ku-guide-emblem-ring{width:90px;height:90px;border:8px solid #b48a24;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#946b0e;background:white;font:900 41px var(--f-body);box-shadow:0 0 0 3px #f2e3bd}
+.ku-guide-emblem-ring small{font-size:15px;align-self:center}
+.ku-guide-emblem>strong{font-size:12px;color:var(--green-deep);letter-spacing:.12em}.ku-guide-emblem>small{color:var(--muted);font-size:11px}
+.ku-guide-about{display:flex;flex-direction:column;justify-content:center;gap:7px}.ku-guide-about>b{font-size:19px;font-weight:900}.ku-guide-about p{font-size:14px;color:var(--ink);margin:0;line-height:1.8}.ku-guide-legend{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}.ku-guide-legend span{padding:4px 8px;background:white;border-radius:7px}.ku-guide-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;background:#b8860b;margin-right:4px}.ku-guide-legend i.ku-legend-auto{background:var(--green)}
+.ku-guide-dashboard{background:var(--paper);border:1px solid var(--line);padding:18px 20px;border-radius:14px;margin-bottom:22px}.ku-guide-dashboard-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.ku-guide-dashboard-head h3{font-size:19px;margin:0}.ku-guide-dashboard-head p{margin:1px 0 0;font-size:12px;color:var(--muted)}.ku-guide-dashboard-head>strong{font-size:24px;color:var(--green)}
+.ku-guide-bars{display:grid;gap:9px;margin-top:16px}.ku-guide-bar-row{display:grid;grid-template-columns:55px minmax(0,1fr) 62px 74px;gap:10px;align-items:center}.ku-guide-bar-score{font-size:14px;font-weight:850}.ku-guide-bar-track{height:15px;background:#e9f0eb;border-radius:8px;overflow:hidden}.ku-guide-bar-track i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#68bd88,#087c48);min-width:0}.ku-guide-bar-row strong{font-size:15px;text-align:right;color:var(--green)}.ku-guide-bar-row small{font-size:11px;color:var(--muted);text-align:right}
+.ku-guide-levels-heading{font-size:18px;margin:0 0 12px}.dcards.ku-guide-levels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.dcards.ku-guide-levels .ku-grade{display:grid;grid-template-columns:60px minmax(0,1fr);align-items:center;gap:8px 13px;border:1px solid #dbe7dd;border-top:4px solid var(--grade);border-left:1px solid #dbe7dd;border-radius:12px;padding:15px!important;background:white}.ku-grade-number{font-size:33px;font-weight:900;letter-spacing:-.065em;color:var(--grade);line-height:1}.ku-grade-number span{font-size:13px;color:var(--muted)}.ku-grade h3{font-size:16px;margin:0!important;line-height:1.35}.ku-grade p{font-size:12px!important;color:var(--muted);margin:4px 0 0!important}.ku-grade-bars{grid-column:1/-1;display:flex;gap:4px}.ku-grade-bars i{height:5px;flex:1;background:var(--grade);border-radius:4px}.ku-grade-bars i.off{background:#e6ede8}
+.ku-verified-search{border:1px solid #b8ddc6;background:#f3fbf5;padding:14px;border-radius:14px;margin:10px 0}.ku-verified-search[hidden]{display:none!important}.ku-verified-heading strong{font-size:17px}.ku-verified-heading strong span{color:var(--green)}.ku-verified-heading p{font-size:12px;color:var(--muted);margin:2px 0 12px}.ku-verified-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.ku-verified-card{background:white;border:1px solid var(--line);padding:12px;border-radius:9px}.ku-verified-kicker{font-size:11px;font-weight:800;color:var(--green)}.ku-verified-card h3{font-size:17px;font-weight:900;margin:4px 0 8px}.ku-verified-card p{font-size:12px;color:var(--muted);margin:4px 0;line-height:1.6}.ku-verified-card a{display:inline-flex;margin-top:6px;font-size:12px;font-weight:800;color:var(--green);text-decoration:none}
+@media(max-width:1120px){.ku-results .list .item.ku-card{grid-template-columns:minmax(120px,27%) minmax(0,1fr)!important;gap:0 10px!important}.ku-card-facts{grid-template-columns:1fr 1fr 1.2fr}.ku-fact>b{font-size:14px}.ku-mini-ring{width:30px;height:30px}.ku-mini-ring::before{width:23px;height:23px}.ku-kim-caption b{font-size:10px}.ku-kim-caption small{font-size:9px}}
+@media(max-width:780px){.ku-verified-grid{grid-template-columns:1fr}.ku-results .list .item.ku-card{grid-template-columns:minmax(140px,30%) minmax(0,1fr)!important}.ku-card-facts{grid-template-columns:repeat(3,minmax(0,1fr))}.ku-card .ku-card-tags{max-height:25px}}
+@media(max-width:540px){.ku-results .list .item.ku-card{display:grid!important;grid-template-columns:116px minmax(0,1fr)!important;gap:0 10px!important;padding:10px!important}.ku-results .list .item.ku-card>.cphoto{grid-column:1!important;grid-row:1!important;min-height:166px!important;max-height:265px}.ku-results .list .item.ku-card>.ku-card-main{grid-column:2!important;grid-row:1!important;gap:6px!important}.ku-results .list .item.ku-card .ku-card-name{font-size:17.5px!important;line-height:1.3!important}.ku-card-eyebrow{font-size:10px}.ku-card-address span{font-size:9px;padding:1px 4px}.ku-card-facts{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}.ku-fact{padding:4px 1px;gap:1px}.ku-fact>i{display:none}.ku-fact>b{font-size:12px}.ku-fact>small{font-size:9px;white-space:normal;word-break:keep-all}.ku-fact-kim{justify-content:center}.ku-mini-ring{width:26px;height:26px}.ku-mini-ring::before{width:19px;height:19px}.ku-mini-ring b{font-size:12px}.ku-kim-caption b{display:none}.ku-kim-caption small{font-size:8.5px}.ku-card-menu{padding:6px;gap:3px}.ku-card-menu .ku-menu-kicker{font-size:9px}.ku-card-menu strong{font-size:12px}.ku-card-menu small{display:none}.ku-card-menu .ku-menu-cta{font-size:10px}.ku-card-summary{font-size:10px;-webkit-line-clamp:2}.ku-card .ku-card-tags{display:none!important}.ku-mini-tools{gap:2px}.ku-card .ku-mini-tools .tg{height:27px!important;width:27px!important}.ku-card .ku-mini-tools .tg svg{width:15px;height:15px}.ku-results .list .item.ku-card>.ku-card-bottom{margin-top:9px;gap:5px}.ku-card-bottom>a,.ku-card-bottom>button,.ku-card-bottom>details>summary{font-size:11px;padding:6px 8px;min-height:33px}.ku-card-report{display:none!important}.ku-guide-overview{grid-template-columns:1fr;padding:16px}.ku-guide-emblem{border-right:0;border-bottom:1px solid #c6dccd;padding-bottom:12px}.dcards.ku-guide-levels{grid-template-columns:1fr}.ku-guide-bar-row{grid-template-columns:42px minmax(0,1fr) 50px;gap:6px}.ku-guide-bar-row small{display:none}.ku-guide-dashboard{padding:15px}}
+@media(max-width:380px){.ku-results .list .item.ku-card{grid-template-columns:99px minmax(0,1fr)!important;gap:0 7px!important}.ku-card-menu .ku-menu-cta{margin-left:0}.ku-results .list .item.ku-card .ku-card-name{font-size:16px!important}}
+
+/* v10 mobile fine-tuning: 사진·식당명 / 대표메뉴 / 평가 한 줄씩 읽도록 재배치 */
+@media(max-width:540px){
+ .ku-results .list .item.ku-card{grid-template-columns:100px minmax(0,1fr)!important;gap:7px 9px!important;padding:10px!important}
+ .ku-results .list .item.ku-card>.cphoto{grid-column:1!important;grid-row:1!important;min-height:112px!important;height:112px!important;max-height:112px!important}
+ .ku-results .list .item.ku-card>.ku-card-main{display:contents!important}
+ .ku-results .list .item.ku-card .ku-card-heading{grid-column:2;grid-row:1;min-width:0;align-self:center}
+ .ku-results .list .item.ku-card .ku-card-menu{grid-column:1/-1;grid-row:2;min-width:0;margin-top:2px}
+ .ku-results .list .item.ku-card .ku-card-facts{grid-column:1/-1;grid-row:3;min-width:0;gap:6px}
+ .ku-results .list .item.ku-card .ku-fact{padding:6px 4px;min-height:46px}
+ .ku-results .list .item.ku-card .ku-fact>b{font-size:15px}
+ .ku-results .list .item.ku-card .ku-fact>small{font-size:10px;white-space:normal}
+ .ku-results .list .item.ku-card .ku-card-menu strong{font-size:14px}
+ .ku-results .list .item.ku-card .ku-card-menu small{display:inline;font-size:10px}
+ .ku-results .list .item.ku-card .ku-card-summary{grid-column:1/-1;grid-row:4;font-size:11px;-webkit-line-clamp:2}
+ .ku-results .list .item.ku-card .ku-card-tags{grid-column:1/-1;grid-row:5;display:flex!important;max-height:25px;min-height:0!important}
+ .ku-results .list .item.ku-card>.ku-card-bottom{grid-column:1/-1!important;grid-row:6!important;margin-top:0}
+ .ku-results .list .item.ku-card .ku-kim-caption b{display:block;font-size:10px}
+ .ku-results .list .item.ku-card .ku-kim-caption small{font-size:9px}
+ .ku-results .list .item.ku-card .ku-card-name{font-size:19px!important}
+}
+@media(max-width:360px){.ku-results .list .item.ku-card{grid-template-columns:88px minmax(0,1fr)!important}.ku-results .list .item.ku-card>.cphoto{height:108px!important;min-height:108px!important}.ku-results .list .item.ku-card .ku-card-name{font-size:17px!important}}
 </style>
 </head>
 <body>
@@ -1396,7 +1503,7 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
   </div>
   <section class="viz" id="top3" aria-live="polite"></section>
   <div class="lockcard" id="lockCard" hidden><h3>무료 체험 3회를 모두 사용했어요</h3><p>맛집김군은 김군에게 밥을 사 주시면 <b>3회·5회·7회 이용권 쿠폰</b>을 드려요. 쿠폰을 등록하면 광진구·성동구·구리시 전체와 차량 이동까지 모두 볼 수 있어요.</p><div class="row" style="gap:8px;justify-content:center"><button type="button" class="sm pri" data-coupon>🎟 쿠폰 등록</button><button type="button" class="sm" data-gift="open">🎁 밥 사러 가기</button></div></div>
-  <div class="list" id="list"></div>
+  <div id="kuVerifiedSearch" class="ku-verified-search" hidden></div><div class="list" id="list"></div>
   <div class="lmore" id="listMore"></div>
   </div><aside class="ku-map-preview" aria-label="주변 맛집 지도"><div class="map-preview-title"><b>📍 주변 맛집 지도</b><a href="#map" data-tab="map" id="kuMapExpand">전체 지도 보기 ↗</a></div><div id="kuMapHost"></div><p>기존 맛집 데이터와 동일한 지도를 사용합니다. 마커를 누르면 상세 정보를 확인할 수 있습니다.</p></aside></div>
   <div class="notes">
@@ -1414,6 +1521,8 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
       <li>김군 미슐랭 별점은 편집 권한이 있는 사람이 각 가게의 ‘평가 수정’에서 바꿀 수 있습니다.</li>
     </ul>
   </div>
+
+<section class="newplaces" id="new-places" aria-labelledby="newplaces-h"><div class="newplaces-head"><div><span class="newplaces-kicker">REGIONAL DISCOVERY · 2026</span><h2 id="newplaces-h">지역별 추가 확인 맛집 <span id="newplaces-count"></span></h2><p>지역별 선정 맛집과 새로 확인한 미분당 3개 지점을 모았습니다. 좌표 검증을 마친 뒤 기본 검색·거리순 정렬과 지도에 통합합니다.</p></div><div class="newplaces-toggle" role="group" aria-label="추가 식당 지역 선택"><button type="button" data-region="전체" aria-pressed="true">전체</button><button type="button" data-region="광진구" aria-pressed="false">광진구</button><button type="button" data-region="성동구" aria-pressed="false">성동구</button><button type="button" data-region="구리시" aria-pressed="false">구리시</button></div></div><div class="newplaces-grid" id="newplaces-grid"></div><p class="newplaces-note">※ 기존 기본 목록과 중복되는 곳은 제외했습니다. 신규 후보에 김군 평가·Google 평점·영업 여부를 임의로 부여하지 않습니다. 지점별 메뉴 가격은 변동될 수 있습니다. 상호명 또는 주소를 누르면 외부 지도 검색 결과를 확인할 수 있습니다.</p></section>
 </section>
 
 <!-- ============ 지도 ============ -->
@@ -1477,15 +1586,17 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 <!-- ============ 김군 미슐랭 ============ -->
 <section class="tab" id="tab-guide" hidden>
   <h2 class="sec">김군 미슐랭 평가 기준</h2>
-  <p class="lead">리뷰 수는 인기를, 방송 출연은 화제성을 보여 줄 뿐입니다. 김군 미슐랭은 생명과학관에서 다시 걸어갈 만한지를 기준으로 매깁니다.</p>
-  <div class="dcards">
-    <div class="dcard"><h3><span class="kim k5"><span class="kbar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><b class="kn">5<small>/5</small></b></span>5점 · 일부러 찾아갈 집</h3><p>손님 접대나 팀 회식에 자신 있게 데려갈 수 있는 곳. 대기가 있어도 기다릴 가치가 있습니다.</p></div>
-    <div class="dcard"><h3><span class="kim k4"><span class="kbar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><b class="kn">4<small>/5</small></b></span>4점 · 다시 가고 싶은 집</h3><p>맛과 분위기 모두 안정적이어서 일부러 또 찾게 되는 곳입니다.</p></div>
-    <div class="dcard"><h3><span class="kim k3"><span class="kbar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><b class="kn">3<small>/5</small></b></span>3점 · 점심시간이 아깝지 않은 집</h3><p>메뉴가 고민될 때 먼저 떠오르는 곳. 가격과 맛, 이동 시간의 균형이 좋습니다.</p></div>
-    <div class="dcard"><h3><span class="kim k2"><span class="kbar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><b class="kn">2<small>/5</small></b></span>2점 · 무난한 한 끼</h3><p>빠르고 실패가 없는 곳. 혼밥이나 바쁜 날의 선택지입니다.</p></div>
-    <div class="dcard"><h3><span class="kim k1"><span class="kbar"><i class="on"></i><i></i><i></i><i></i><i></i></span><b class="kn">1<small>/5</small></b></span>1점 · 굳이 찾지는 않을 집</h3><p>가까워서 들를 수는 있지만 추천하기는 어려운 곳입니다.</p></div>
+  <p class="lead">한눈에 보는 5단계 평가입니다. 실제 김군 평가와 외부 리뷰에 기반한 자동 추천지수를 반드시 구분하여 확인하세요.</p>
+  <div class="ku-guide-overview"><div class="ku-guide-emblem"><span class="ku-guide-emblem-ring">5<small>/5</small></span><strong>KIM'S PICK</strong><small>김군 미슐랭 · 5단계 평가</small></div><div class="ku-guide-about"><b>무엇을 기준으로 보나요?</b><p>맛·재방문 의사·이동 편의성을 종합적으로 살펴봅니다. 등록된 김군 평가가 없으면 외부 Google 평점과 리뷰 수로 자동 산정한 <strong>추천지수</strong>를 보여 줍니다.</p><div class="ku-guide-legend"><span><i class="ku-legend-manual"></i> 직접 입력</span><span><i class="ku-legend-auto"></i> 자동 추천지수</span><span>Google 별점과는 별도</span></div></div></div>
+  <div class="ku-guide-dashboard"><div class="ku-guide-dashboard-head"><div><h3>점수별 식당 분포</h3><p>기본 목록의 김군 추천 등급 분포 · 현재 저장된 평가 기준</p></div><strong id="ku-guide-total">—곳</strong></div><div id="kuGuideBars" class="ku-guide-bars" aria-live="polite"></div></div>
+  <h3 class="ku-guide-levels-heading">김군 미슐랭 등급 안내</h3><div class="dcards ku-guide-levels">
+    <div class="dcard ku-grade" style="--grade:#b8860b"><div class="ku-grade-number">05<span>/5</span></div><div><h3>일부러 찾아갈 집</h3><p>다시 방문하거나 소중한 손님에게 소개하고 싶은 집</p></div><div class="ku-grade-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="dcard ku-grade" style="--grade:#168456"><div class="ku-grade-number">04<span>/5</span></div><div><h3>다시 가고 싶은 집</h3><p>맛과 분위기의 만족도가 높아 재방문하고 싶은 집</p></div><div class="ku-grade-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="off"></i></div></div>
+    <div class="dcard ku-grade" style="--grade:#427b71"><div class="ku-grade-number">03<span>/5</span></div><div><h3>점심시간이 아깝지 않은 집</h3><p>맛·가격·이동시간의 균형이 좋은 일상적인 선택</p></div><div class="ku-grade-bars" aria-hidden="true"><i></i><i></i><i></i><i class="off"></i><i class="off"></i></div></div>
+    <div class="dcard ku-grade" style="--grade:#94a49b"><div class="ku-grade-number">02<span>/5</span></div><div><h3>무난한 한 끼</h3><p>가까이서 간편하게 식사하기 좋은 선택지</p></div><div class="ku-grade-bars" aria-hidden="true"><i></i><i></i><i class="off"></i><i class="off"></i><i class="off"></i></div></div>
+    <div class="dcard ku-grade" style="--grade:#a2aba5"><div class="ku-grade-number">01<span>/5</span></div><div><h3>취향을 확인하고 방문할 집</h3><p>평가 자료가 낮거나 부족하여 방문 전 확인을 권장</p></div><div class="ku-grade-bars" aria-hidden="true"><i></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i></div></div>
   </div>
-  <p class="lead" style="font-size:13px">김군이 직접 평가하기 전에는 Google 평점과 리뷰 수로 기본 점수를 매깁니다(4.8점 이상·리뷰 300건 이상 5점, 4.6점 이상·리뷰 50건 이상 4점, 4.3점 이상 3점, 4.0점 이상 2점, 평점 없음 3점). 예전 3점 만점 평가는 3→5점, 2→4점, 1→2점으로 옮겼습니다.</p>
+  <p class="lead" style="font-size:13px">※ 공식 미쉐린 가이드와 무관한 자체 평가지표입니다. 김군이 직접 평가하기 전에는 Google 평점과 리뷰 수로 기본 점수를 매깁니다(4.8점 이상·리뷰 300건 이상 5점, 4.6점 이상·리뷰 50건 이상 4점, 4.3점 이상 3점, 4.0점 이상 2점, 평점 없음 3점). 예전 3점 만점 평가는 3→5점, 2→4점, 1→2점으로 옮겼습니다.</p>
   <div class="verdict"><b>정렬 규칙</b><span>‘김군 미슐랭’ 정렬은 5점 만점 점수가 같으면 Google 리뷰 수, 그다음 거리 순으로 줄을 세웁니다.</span></div>
   <h2 class="sec" style="margin-top:28px">서비스 지역 확대 예고</h2>
   <p class="lead">지금은 광진구·성동구·구리시를 기본으로 보여 드려요(중랑구·송파구 일부는 미리보기). 매달 한 지역씩 넓혀 갈 예정이에요. 일정은 바뀔 수 있어요.</p>
@@ -2516,6 +2627,48 @@ document.addEventListener("click",e=>{if(e.target.closest("#moreBtn")){const fir
 const HLK=/(\d[\d,.]*(?:\s?만(?:\s?\d[\d,.]*)?)?(?:\s?천)?\s?원(?:대|부터|꼴)?|웨이팅|대기|예약 필수|예약제|예약 권장|혼밥|24시간|새벽 \d+시|가성비|무한 ?리필|무료|할인|서비스|시그니처|대표|미쉐린|블루리본|노포|전망|룸|단체|주차)/g;
 function hlq(s){let h=esc(s);if(F.q){const q=F.q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");try{h=h.replace(new RegExp("("+q+")","gi"),'<mark class="hq">$1</mark>');}catch(e){}}return h;}
 function hl(s){return hlq(s).replace(HLK,'<mark class="hl">$1</mark>');}
+function kuGenericFood(p){
+ const t=((p.menu||"")+" "+(p.cat||"")).toLowerCase();
+ if(/돈까스|돈카츠|라멘|우동|일식|스시|초밥|회/.test(t))return "japanese";
+ if(/삼겹|고기|갈비|구이|소고기|한우|바비큐/.test(t))return "meat";
+ if(/찌개|국밥|감자탕|순두부|탕|전골|국수/.test(t))return "stew";
+ if(/떡볶이|마라|닭발|매운|곱창/.test(t))return "spicy";
+ if(/비빔|덮밥|볶음밥|정식|쌀국수/.test(t))return "rice";
+ return "korean";
+}
+function kuFoodPhoto(p){
+ const hasReal=!!PHOTOS[p.id];
+ const path=hasReal?"/_blob/"+encodeURIComponent(PHOTOS[p.id]):"menu-examples/"+kuGenericFood(p)+".webp";
+ const fallback="menu-examples/"+kuGenericFood(p)+".webp";
+ return `<figure class="cphoto ku-food-image"><img src="${path}" alt="${hasReal?esc(p.name)+" 등록 사진":"음식 유형을 표현한 공통 메뉴 예시 이미지"}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}';this.closest('figure').classList.add('is-example')"><figcaption class="ku-food-label">${hasReal?"등록 사진":"메뉴 예시"}</figcaption></figure>`;
+}
+/* v10 — 식당명 중심의 단일정보 카드. 기존 데이터/액션은 그대로 재사용 */
+function kuIsManualRating(p){const r=ratings[p.id];return !!(r&&typeof r.kim==='number');}
+function kuRestaurantCard(p,i){
+ const d=distM(p),k=kimOf(p),manual=kuIsManualRating(p);
+ const menu=(p.menu||'').split(',').map(x=>x.trim()).filter(Boolean);
+ const primary=menu[0]||'대표 메뉴 정보 확인 중';
+ const sub=menu.slice(1,3).join(' · ');
+ const price=p.price||'가격 확인 필요';
+ const goto=naverRoute(p,F.move);
+ const labels=p.tags||[];
+ return `<article class="item ku-card" id="it-${esc(p.id)}" style="--c:var(--c-${p.meals[0]})">
+  ${kuFoodPhoto(p)}
+  <div class="ku-card-main">
+   <div class="ku-card-heading"><div class="ku-card-titling"><div class="ku-card-eyebrow"><span class="ku-rank">${String(i+1).padStart(2,'0')}</span><span>${esc(p.area)} · ${esc(p.cat)}</span></div><h3 class="ku-card-name">${hlq(p.name)}</h3><div class="ku-card-address">${labels.slice(0,2).map(x=>`<span>${esc(x)}</span>`).join('')}<span>가격대 ${esc(price)}</span></div></div>
+   <div class="ku-mini-tools"><button type="button" class="tg fav" data-tg="fav" data-id="${esc(p.id)}" aria-pressed="${favs.has(p.id)}" aria-label="${esc(p.name)} 찜하기" title="찜"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button><button type="button" class="tg vis" data-tg="vis" data-id="${esc(p.id)}" aria-pressed="${visits.has(p.id)}" aria-label="${esc(p.name)} 방문 기록" title="방문"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></button></div></div>
+   <div class="ku-card-facts" aria-label="도보 거리 및 두 가지 평가">
+    <span class="ku-fact"><i aria-hidden="true">🚶</i><b>${walkMin(d)}분</b><small>도보 약 ${fmtD(walkRoute(d))}</small></span>
+    <span class="ku-fact"><i aria-hidden="true">★</i><b>${p.g?p.g.toFixed(1):'—'}</b><small>Google${p.rev?' · '+p.rev.toLocaleString()+'건':''}</small></span>
+    <span class="ku-fact ku-fact-kim" title="${manual?'운영자 입력 평가':'외부 평점·리뷰에 기반한 자동 추천지수'}"><span class="ku-mini-ring" style="--score:${k};--ring:${['#9aa69e','#9aa69e','#94a49b','#427b71','#168456','#b8860b'][k]}"><b>${k}</b></span><span class="ku-kim-caption"><b>김군 미슐랭</b><small>${manual?'직접 입력':'자동 산정'} · 5점 만점</small></span></span>
+   </div>
+   <div class="ku-card-menu" aria-label="대표 메뉴"><span class="ku-menu-kicker">대표 메뉴</span><strong>${esc(primary)}</strong>${sub?`<small>${esc(sub)}</small>`:''}<button type="button" data-act="menu" data-id="${esc(p.id)}" class="ku-menu-cta">메뉴판 <span aria-hidden="true">↗</span></button></div>
+   <p class="ku-card-summary">${hl(p.desc)}</p>
+   <div class="ku-card-tags tags">${badgeRow(p)}</div>
+  </div>
+  <div class="ku-card-bottom"><a class="ku-card-primary" href="${goto}" target="_blank" rel="noopener" aria-label="${esc(p.name)} 네이버 길찾기">↗ 길찾기</a><button type="button" class="ku-card-outline" data-act="mappick" data-id="${esc(p.id)}" aria-label="${esc(p.name)} 지도에서 보기">⌖ 지도 보기</button><button type="button" class="ku-card-outline ku-card-report" data-act="report" data-id="${esc(p.id)}">✎ 정보 제보</button><details class="ku-card-other"><summary>더보기 <span aria-hidden="true">⌄</span></summary><div class="acts">${actions(p)}</div></details></div>
+ </article>`;
+}
 function renderList(){
  const res=sorted(PLACES.filter(p=>match(p)));
  [renderQuick,renderChips,renderMenuViz,()=>renderTop3(res),renderWeekly,renderRecent,renderPoll].forEach(f=>{try{f();}catch(err){console.warn("부분 표시 오류",err);}});requestAnimationFrame(()=>{try{bh();}catch(e){}});
@@ -2531,19 +2684,7 @@ function renderList(){
  $("jumpN").textContent=res.length;if($("navN"))$("navN").textContent=res.length;
  $("listMore").innerHTML=res.length>LIST_N?`<button type="button" class="moreb" id="moreBtn" aria-label="나머지 가게 상세보기">${LIST_N===FIRST?`상세보기 · 나머지 ${res.length-FIRST}곳`:`${Math.min(PAGE,res.length-LIST_N)}곳 더 보기`} <small>(${LIST_N}/${res.length})</small></button>`:(res.length>FIRST?`<p class="mend">모두 ${res.length}곳을 보고 있어요</p>`:"");
  requestAnimationFrame(()=>{try{bh();}catch(e){}});
- $("list").innerHTML=res.slice(0,LIST_N).map((p,i)=>{const d=distM(p);const note=kimNote(p);const rc=i<3?MEDAL[i]:"var(--ink)";
-  const cv=COVER[p.cat]||["#2f6f4f","#7fb38f"];
-  return `<article class="item" id="it-${p.id}" style="--c:var(--c-${p.meals[0]})">${PHOTOS[p.id]?`<figure class="cphoto"><img src="/_blob/${PHOTOS[p.id]}" alt="${esc(p.name)} 가게 사진" loading="lazy" onerror="this.parentElement.remove()"></figure>`:""}<div class="cover r${i<3?i+1:0}" style="--g1:${cv[0]}"><span class="cno" aria-hidden="true"><small>No.</small>${i+1}</span><span class="ctx" aria-hidden="true"><b>${esc((p.menu||"").split(",")[0])}</b><small>${esc(p.area)} · ${esc(p.cat)}</small></span><span class="cscore k${kimOf(p)}" title="김군 미슐랭 5점 만점에 ${kimOf(p)}점" aria-hidden="true"><em>김군</em><b>${kimOf(p)}</b><small>/5</small><span class="cbar">${[1,2,3,4,5].map(x=>`<i class="${x<=kimOf(p)?"on":""}"></i>`).join("")}</span></span><div class="tgs"><button type="button" class="tg fav" data-tg="fav" data-id="${p.id}" aria-pressed="${favs.has(p.id)}" aria-label="${esc(p.name)} 관심(찜)" title="관심"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><i>관심</i></button><button type="button" class="tg vis" data-tg="vis" data-id="${p.id}" aria-pressed="${visits.has(p.id)}" aria-label="${esc(p.name)} 방문 도장" title="방문"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2"/><path d="M8 12.3l2.6 2.6L16.2 9.3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="ck"/></svg><i>방문</i></button><button type="button" class="tg rpt" data-act="report" data-id="${p.id}" aria-label="${esc(p.name)} 정보 오류 제보" title="오류 제보"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3.5l9.5 16.5h-19z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.3" stroke-width="2.4" stroke-linecap="round" class="ex"/></svg><i>제보</i></button></div></div>
-   <div><header class="ih"><span class="ic" aria-hidden="true" style="--g1:${(COVER[p.cat]||["#2f6f4f"])[0]}">${catImg(p.cat,CAT_FLAG[p.cat]?46:28)}<span class="no" style="--rc:${rc}">${i+1}</span></span><div><h3 class="nmh">${hlq(p.name)}</h3>${linkRow(p)}<div class="meta"><span class="ar">📍 ${esc(p.area)}</span>${(p.tags||[]).map(x=>`<span class="rd">${esc(x)}</span>`).join("")}<span>${esc(p.cat)}</span><span>💰 ${esc(p.price)}</span></div></div></header>
-   <div class="ku-menu-feature"><span class="ku-menu-icon" aria-hidden="true">${CAT_E[p.cat]||"🍽️"}</span><div class="ku-menu-copy"><small>대표 메뉴 · 등록된 정보 기준</small><strong>${esc((p.menu||"대표 메뉴 미확인").split(",")[0])}</strong><span>${esc((p.menu||"").split(",").slice(1,3).join(" · ")||p.cat)}</span></div><button type="button" class="ku-menu-view" data-act="menu" data-id="${p.id}">메뉴 보기 ↗</button></div><span class="sig">👑 대표 메뉴 ${esc((p.menu||"").split(",")[0])}</span><p class="desc"><span class="dtx">${hl(p.desc)}</span><span class="dhr">🕑 ${esc(p.hours||"방문 전 확인").replace(/ · /g,"\u00a0· ")}</span>${note?`<span class="dnt"><b style="color:var(--gold)">김군 한 줄:</b> ${esc(note)}</span>`:""}</p>
-   <div class="tags">${badgeRow(p)}</div></div>
-   <div class="stats">
-    <div><small>${F.move==="walk"?"걸음 거리":"직선 거리"}</small><b class="mono">${F.move==="walk"?"약 "+fmtD(walkRoute(d)):fmtD(d)}</b>${F.move==="walk"?`<small style="display:block;color:var(--muted)">직선 ${fmtD(d)}</small>`:`<small style="display:block;color:var(--muted)">도로 약 ${fmtD(roadKm(d))}</small>`}</div>
-    <div><small>${F.move==="walk"?"도보":"차량"}</small><b>${F.move==="walk"?walkMin(d):carMin(d)}분</b></div>
-    <div><small>Google 평점 · 10.24 기준</small><b class="mono">${p.g?"★"+p.g.toFixed(1):"—"}<span style="font-size:12px;color:var(--muted);font-weight:500"> ${p.rev?"("+p.rev.toLocaleString()+")":""}</span></b></div>
-    <div class="kbox k${kimOf(p)}"><small>김군 미슐랭</small><b>${stars(kimOf(p))}</b><small class="klbl">${KLBL[kimOf(p)]}</small></div>
-   </div>
-   <div class="acts">${actions(p)}</div></article>`;}).join("");
+ $("list").innerHTML=res.slice(0,LIST_N).map((p,i)=>kuRestaurantCard(p,i)).join("");
 }
 
 /* ---------- 기획·인플루언서 기능: 검색, 영업 상태, 찜, 도장깨기, 테마, 랜덤 ---------- */
@@ -2636,7 +2777,7 @@ $("tFav").onclick=()=>{F.fav=!F.fav;refresh();};
 $("tNew").onclick=()=>{F.unv=!F.unv;refresh();};
 $("coll").addEventListener("click",e=>{const b=e.target.closest("[data-coll]");if(!b)return;F.coll=F.coll===b.dataset.coll?"":b.dataset.coll;refresh();});
 $("collMore").onclick=()=>{COLL_ALL=!COLL_ALL;renderQuick();};
-["secCond","secTheme"].forEach(id=>{const d=$(id);try{const v=localStorage.getItem("kimgun-"+id);if(v!==null)d.open=v==="1";else if(matchMedia("(max-width:720px)").matches)d.open=false;}catch(e){}d.addEventListener("toggle",()=>{try{localStorage.setItem("kimgun-"+id,d.open?"1":"0");}catch(e){}});});
+["secCond","secTheme"].forEach(id=>{const d=$(id);try{const v=localStorage.getItem("kimgun-"+id);if(id==="secCond")d.open=false;else if(v!==null)d.open=v==="1";else if(matchMedia("(max-width:720px)").matches)d.open=false;}catch(e){}d.addEventListener("toggle",()=>{try{localStorage.setItem("kimgun-"+id,d.open?"1":"0");}catch(e){}});});
 $("tTreat").onclick=()=>{const top=sorted(PLACES.filter(p=>match(p)))[0];openTreat(top||PLACES[0],"ask",false);};
 $("tReset").onclick=()=>{Object.assign(F,{meal:"lunch",move:"walk",rad:1000,ppl:2,sort:"kim",q:"",open:false,fav:false,unv:false,coll:""});F.cats.clear();GKEYS.forEach(k=>F[k].clear());F.dist=new Set(DIST_BASE);
  F.meat="";["fMeal","fMove","fRad","fPpl","fSort","fMeat"].forEach(id=>setSeg(id,F[{fMeal:"meal",fMove:"move",fRad:"rad",fPpl:"ppl",fSort:"sort",fMeat:"meat"}[id]]));
@@ -3209,7 +3350,7 @@ function renderPanel(){
  if(!p){const top=sorted(PLACES.filter(x=>match(x))).slice(0,3);$("mpDist").textContent="";
   $("mpBody").innerHTML=`<h3 style="margin-top:0">지금 조건의 추천 Top 3</h3><p class="status" style="margin:0 0 8px">${MEALS[F.meal]} · ${F.move==="walk"?"도보":"차량"} ${F.rad>=1000?F.rad/1000+"km":F.rad+"m"} 이내. 누르면 지도에서 그 가게로 이동합니다.</p>`+(top.length?`<div class="t3m">${top.map((x,i)=>`<button type="button" data-t3="${x.id}" style="--c:${MEDAL[i]}"><span class="n">${i+1}</span><span><b>${esc(x.name)}</b><small>${catImg(x.cat,14)} ${esc(x.cat)} · ${stars(kimOf(x))}${x.g?" G★"+x.g.toFixed(1):""}</small></span><span class="d">${dispD(distM(x))}</span></button>`).join("")}</div>`:`<p class="status">조건에 맞는 곳이 없습니다. 반경을 넓혀 보세요.</p>`);return;}
  const d=distM(p);$("mpDist").textContent=dispD(d);if(typeof addRecent==="function")addRecent(p.id);
- $("mpBody").innerHTML=`${PHOTOS[p.id]?`<figure class="cphoto"><img src="/_blob/${PHOTOS[p.id]}" alt="${esc(p.name)} 가게 사진" loading="lazy" onerror="this.parentElement.remove()"></figure>`:""}<header class="ih"><span class="ic" aria-hidden="true" style="--g1:${(COVER[p.cat]||["#2f6f4f"])[0]}">${catImg(p.cat,CAT_FLAG[p.cat]?46:28)}</span><div><h3 style="margin:0;font-size:21px;font-weight:900;letter-spacing:-.025em;line-height:1.25;word-break:keep-all">${esc(p.name)}</h3>${linkRow(p)}<div class="meta"><span class="ar">📍 ${esc(p.area)}</span><span>${esc(p.cat)}</span><span>💰 ${esc(p.price)}</span></div></div></header><div class="tags">${badgeRow(p)}</div>
+ $("mpBody").innerHTML=`${kuFoodPhoto(p)}<header class="ih"><span class="ic" aria-hidden="true" style="--g1:${(COVER[p.cat]||["#2f6f4f"])[0]}">${catImg(p.cat,CAT_FLAG[p.cat]?46:28)}</span><div><h3 style="margin:0;font-size:21px;font-weight:900;letter-spacing:-.025em;line-height:1.25;word-break:keep-all">${esc(p.name)}</h3>${linkRow(p)}<div class="meta"><span class="ar">📍 ${esc(p.area)}</span><span>${esc(p.cat)}</span><span>💰 ${esc(p.price)}</span></div></div></header><div class="tags">${badgeRow(p)}</div>
  <dl class="kv"><dt>지역</dt><dd>${esc(p.area)}</dd><dt>메뉴</dt><dd>${esc(p.cat)} · ${esc(p.menu)}</dd><dt>가격</dt><dd>${esc(p.price)}</dd>
  <dt>도보</dt><dd>${walkMin(d)}분</dd><dt>차량</dt><dd>${carMin(d)}분 (주차 포함)</dd>
  <dt>최대 인원</dt><dd>${p.max}명${p.room?" · 단체석":""}</dd><dt>주차</dt><dd>${parkOf(p)?PARKL[parkOf(p).t]+(parkOf(p).note?"<br><small>"+esc(parkOf(p).note)+"</small>":""):"정보 없음"}</dd><dt>반려견</dt><dd>${petOf(p)?PETL[petOf(p).t]+(petOf(p).note?"<br><small>"+esc(petOf(p).note)+"</small>":""):"정보 없음"}</dd><dt>결제</dt><dd>${payOf(p)?[payOf(p).local?"💳 "+esc(payOf(p).local):"",payOf(p).onnuri?"🎫 온누리상품권(점포별 확인)":""].filter(Boolean).join("<br>")||"정보 없음":"정보 없음"}<br><small>지역화폐: ${localCurName(p)}</small></dd><dt>줄서기</dt><dd>${queueOf(p)?qLabel(queueOf(p))+(queueOf(p).note?"<br><small>"+esc(queueOf(p).note)+"</small>":""):"정보 없음"}<div class="row" style="margin-top:6px;gap:6px">${qLinks(p)}</div></dd><dt>영업</dt><dd>${esc(p.hours||"방문 전 확인")}</dd><dt>Google</dt><dd>${p.g?"★"+p.g.toFixed(1)+" · 리뷰 "+p.rev.toLocaleString()+"건":"평점 없음"}<br><small style="color:var(--muted)">자료 기준일 2026.10.24</small></dd>
@@ -3218,7 +3359,7 @@ function renderPanel(){
  <div class="acts" style="border-top:0;padding-top:0">${actions(p,true)}</div>`;
 }
 /* ---------- tabs ---------- */
-const TABS={find:["맛집 찾기","생명과학관에서 출발해 걸어서, 차로 갈 수 있는 곳을 시간대·메뉴·인원에 맞춰 골라 드립니다."],map:["지도","생명과학관을 중심으로 반경 안의 가게를 한눈에 보고, 누르면 바로 길찾기를 엽니다."],reserve:["사전예약","팀 식사 예약 요청을 올리고 확정 여부를 함께 관리합니다."],guide:["김군 미슐랭","리뷰 수나 방송보다 다시 갈 만한지를 기준으로 매긴 김군의 자체 평가입니다."]};
+const TABS={find:["맛집 찾기","생명과학관에서 출발해 걸어서, 차로 갈 수 있는 곳을 시간대·메뉴·인원에 맞춰 골라 드립니다."],map:["지도","생명과학관을 중심으로 반경 안의 가게를 한눈에 보고, 누르면 바로 길찾기를 엽니다."],reserve:["사전예약","팀 식사 예약 요청을 올리고 확정 여부를 함께 관리합니다."],guide:["김군 미슐랭","김군 직접 평가와 외부 리뷰 기반 자동 추천지수를 구분해서 보여 드립니다."]};
 /* 조건 고르기·김군 픽 테마를 지금 탭으로 옮겨 붙이기(지도 탭에서도 사용) */
 let SEC_HOME=null;
 function placeSecs(t){const c=$("secCond"),th=$("secTheme");if(!c||!th)return;
@@ -3230,7 +3371,7 @@ function showTab(t){if(!TABS[t])t="find";
  document.querySelectorAll("[data-tab]").forEach(a=>{if(a.dataset.tab===t)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
  $("subTitle").textContent=TABS[t][0];$("subDesc").textContent=TABS[t][1];$("locLast").textContent=TABS[t][0];
  placeSecs(t);
- if(t==="map")renderMap();
+ if(t==="map")renderMap();if(t==="guide"&&typeof window.kuUpdateGuide==="function")window.kuUpdateGuide();
  if(typeof navActive==="function")setTimeout(navActive,30);
  if(typeof bh==="function")requestAnimationFrame(bh);
 }
@@ -3411,6 +3552,38 @@ const proxy=(select,container,val)=>{const actual=document.querySelector('#'+con
 const bind=(id,group)=>document.getElementById(id)?.addEventListener('change',e=>proxy(id,group,e.target.value));
 bind('kuMeal','fMeal');bind('kuDistance','fRad');bind('kuPeople','fPpl');
 document.getElementById('kuMoreFilters')?.addEventListener('click',()=>{let el=document.getElementById('secCond');el.open=!el.open;if(el.open)el.scrollIntoView({behavior:'smooth',block:'start'});});
+})();
+</script>
+<script>
+/* 공개 검증 후보: 기존 PLACES와 별도 관리 / 좌표가 확인되면 정규 목록으로 승격 */
+const NEW_REGION_PLACES = [{"region": "광진구", "name": "기와집 능이백숙", "address": "서울 광진구 면목로 32", "menu": "삼계탕·능이백숙", "source": "서울시 2026 오래가게", "url": "https://mediahub.seoul.go.kr/archives/2019458"}, {"region": "성동구", "name": "대도식당 왕십리본점", "address": "서울 성동구 무학로12길 3", "menu": "소고기구이", "source": "서울시 2026 오래가게", "url": "https://mediahub.seoul.go.kr/archives/2019458"}, {"region": "성동구", "name": "은성보쌈", "address": "서울 성동구 독서당로 297-6", "menu": "보쌈", "source": "서울시 2026 오래가게", "url": "https://mediahub.seoul.go.kr/archives/2019458"}, {"region": "구리시", "name": "우동 키노야", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "우동", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "담가화로구이 구리토평점", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "화로구이", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "일리에또", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "이탈리안", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "길목감자탕", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "감자탕", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "봉담샤브샤브 칼국수", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "샤브샤브·칼국수", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "오씨네 냉면만두", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "냉면·만두", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "서울매운탕", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "민물매운탕", "source": "구리시 2026 와구리맛집·노포식당", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "장미한우", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "한우", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "광진구", "name": "솜프", "address": "서울 광진구 뚝섬로57길 58 2층", "menu": "훈연 항정살·퓨전 한식", "source": "2026.10.23 운영 정보 확인", "url": "https://local.lazyscheme.com/places/ls9mp5ap5tgzxmnjyp/"}, {"region": "광진구", "name": "미분당 건대점", "address": "서울 광진구 군자로3길 27 1층", "menu": "차돌박이 쌀국수·양지 쌀국수", "source": "매장 정보·메뉴 확인", "url": "https://www.tabling.co.kr/place/677ccb2a66de5f06987cbff7", "price": "차돌박이 쌀국수 10,000원", "status": "거리·좌표 추가 검증 중"}, {"region": "성동구", "name": "미분당 성수점", "address": "서울 성동구 성수일로10길 26 하우스디세종타워 1층 111호", "menu": "차돌양지힘줄 쌀국수", "source": "2026.10 위치 확인", "url": "https://gilpost.com/ko/%EC%84%9C%EC%9A%B8/%EC%84%B1%EC%88%98%EB%8F%992%EA%B0%80/%EB%A7%9B%EC%A7%91/%EB%AF%B8%EB%B6%84%EB%8B%B9/", "price": "메뉴 가격 방문 전 확인", "status": "거리·좌표 추가 검증 중"}, {"region": "구리시", "name": "미분당 구리점", "address": "경기 구리시 경춘로227번길 14 1층 103호", "menu": "차돌 쌀국수·양지 쌀국수", "source": "매장 정보·메뉴 확인", "url": "https://www.tabling.co.kr/place/677cd14066de5f06988790df", "price": "차돌 쌀국수 10,000원", "status": "거리·좌표 추가 검증 중"}];
+(function(){
+ const grid=document.getElementById('newplaces-grid');if(!grid)return;
+ const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const buttons=[...document.querySelectorAll('[data-region]')];
+ function draw(region){const filtered=NEW_REGION_PLACES.filter(p=>region==='전체'||p.region===region);document.getElementById('newplaces-count').textContent=filtered.length+'곳';grid.innerHTML=filtered.map(p=>{const query=encodeURIComponent(p.name+' '+(p.address.includes('확인 필요')?p.region:p.address));return `<article class="newplace"><div class="newplace-top"><span class="newplace-tag">${esc(p.region)}</span><span style="font-size:11px;color:var(--muted)">${esc(p.source)}</span></div><strong>${esc(p.name)}</strong><em>🍽 ${esc(p.menu)}</em><p>📍 ${esc(p.address)}</p>${p.price?`<p>💳 ${esc(p.price)}</p>`:""}<div class="newplace-links"><a target="_blank" rel="noopener noreferrer" href="https://map.naver.com/p/search/${query}">네이버 지도 검색 ↗</a><a target="_blank" rel="noopener noreferrer" href="${esc(p.url)}">확인 출처 ↗</a></div></article>`}).join('');buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.region===region)))}
+ buttons.forEach(b=>b.addEventListener('click',()=>draw(b.dataset.region)));draw('전체');
+})();
+</script>
+
+<script>
+/* v10: 미분당 검증 지점 검색 연결(좌표 미확인 항목은 지도 핀에 넣지 않음). */
+(function(){
+ const input=document.getElementById('q'),out=document.getElementById('kuVerifiedSearch');
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function draw(){if(!input||!out)return;const q=input.value.trim().replace(/\s+/g,'').toLowerCase();
+ const found=typeof NEW_REGION_PLACES==='undefined'?[]:NEW_REGION_PLACES.filter(p=>q.length>=2&&(p.name+p.region+p.address+p.menu).replace(/\s+/g,'').toLowerCase().includes(q));
+ out.hidden=!found.length;
+ const resCount=document.getElementById('resCount');if(found.length&&resCount){const core=typeof PLACES==='undefined'?0:PLACES.filter(p=>match(p)).length;resCount.innerHTML=`<b>${core+found.length}곳 확인</b> · 기존 검색 ${core}곳 + 주소 확인 신규 ${found.length}곳 <span class="ku-extra-count" style="color:var(--muted);font-size:11px">(신규 식당은 거리·평점 계산 제외)</span>`;}
+ out.innerHTML=found.length?`<div class="ku-verified-heading"><div><strong>주소 확인된 추가 식당 <span>${found.length}곳</span></strong><p>좌표 검증 전이므로 거리·평점은 표시하지 않습니다. 아래에서 지도 위치를 직접 확인하세요.</p></div></div><div class="ku-verified-grid">${found.map(p=>`<article class="ku-verified-card"><div class="ku-verified-kicker">${esc(p.region)} · 추가 확인</div><h3>${esc(p.name)}</h3><p>🍜 ${esc(p.menu)}</p><p>📍 ${esc(p.address)}</p><a target="_blank" rel="noopener noreferrer" href="https://map.naver.com/p/search/${encodeURIComponent(p.name+' '+p.address)}">네이버 지도에서 확인 ↗</a></article>`).join('')}</div>`:'';
+ }
+ if(input){input.addEventListener('input',()=>setTimeout(draw,220));draw();}
+ const bars=document.getElementById('kuGuideBars');if(bars&&typeof PLACES!=='undefined'){
+  function render(){const count=[0,0,0,0,0,0],manual=[0,0,0,0,0,0];PLACES.forEach(p=>{const k=Math.max(0,Math.min(5,kimOf(p)|0));count[k]++;if(kuIsManualRating(p))manual[k]++;});
+  const max=Math.max(1,...count);document.getElementById('ku-guide-total').textContent=PLACES.length.toLocaleString()+'곳';
+  bars.innerHTML=[5,4,3,2,1,0].map(k=>`<div class="ku-guide-bar-row"><span class="ku-guide-bar-score">${k===0?'미평가':k+'점'}</span><div class="ku-guide-bar-track"><i style="width:${(count[k]/max*100).toFixed(2)}%"></i></div><strong>${count[k].toLocaleString()}곳</strong><small>직접 ${manual[k]}곳</small></div>`).join('');}
+  window.kuUpdateGuide=render;render();document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
+ }
 })();
 </script>
 </body>
