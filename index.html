@@ -3407,7 +3407,7 @@ function hl(s){return hlq(s).replace(HLK,'<mark class="hl">$1</mark>');}
 const KU_REAL_PHOTOS=Object.create(null);
 const KU_REAL_ALLOWED=/^restaurant-photos\/[a-zA-Z0-9_-]+\.(?:webp|png|jpe?g)$/;
 /* v12: 34 filters tied to 34 illustrated reference thumbnails; not actual restaurant photography. */
-const KU_34_MENU_PHOTOS = {"설렁탕·곰탕":"ku34-seolleongtang","순대국":"ku34-sundae-guk","감자탕·해장국":"ku34-gamjatang","추어탕":"ku34-chueotang","갈비탕":"ku34-galbitang","미역국":"ku34-miyeokguk","국밥":"ku34-gukbap","찌개":"ku34-jjigae","청국장":"ku34-cheonggukjang","찜":"ku34-jjim","불고기":"ku34-bulgogi","닭갈비":"ku34-dakgalbi","삼겹살":"ku34-samgyeopsal","족발·보쌈·수육":"ku34-jokbal-bossam","돈까스":"ku34-donkatsu","장어":"ku34-eel","쭈꾸미":"ku34-jjukkumi","낙지":"ku34-nakji","초밥·회":"ku34-sushi","김밥":"ku34-gimbap","우동":"ku34-udon","라면":"ku34-ramen","쫄면":"ku34-jjolmyeon","떡볶이":"ku34-tteokbokki","피자":"ku34-pizza","버거":"ku34-burger","수제버거":"ku34-craft-burger","타코":"ku34-taco","쌀국수":"ku34-pho","냉면":"ku34-naengmyeon","비빔면":"ku34-bibim-noodle","국수·칼국수":"ku34-kalguksu","샤브샤브":"ku34-shabu","마라탕·훠궈":"ku34-mala","파스타":"dish-pasta","볶음밥":"dish-friedrice","짜장면":"dish-jajang","짬뽕":"dish-jjamppong","탕수육":"dish-tangsuyuk","제육볶음":"dish-jeyuk","샐러드·포케":"dish-salad","샌드위치":"dish-sandwich","스테이크":"dish-steak","백반·정식":"dish-baekban","만두":"dish-mandu","치킨":"dish-fried-chicken","케이크·디저트":"dish-dessert","덮밥":"dish-rice-bowl","양꼬치":"dish-lamb-skewer","비빔밥":"dish-bibimbap"};
+const KU_34_MENU_PHOTOS = {"설렁탕·곰탕":"v28-seolleongtang","순대국":"v28-sundaeguk","감자탕·해장국":"ku34-gamjatang","추어탕":"ku34-chueotang","갈비탕":"ku34-galbitang","미역국":"ku34-miyeokguk","국밥":"ku34-gukbap","찌개":"v28-kimchi-stew","청국장":"ku34-cheonggukjang","찜":"ku34-jjim","불고기":"ku34-bulgogi","닭갈비":"v28-spicy-chicken","삼겹살":"v28-bbq-pork","족발·보쌈·수육":"ku34-jokbal-bossam","돈까스":"v28-tonkatsu","장어":"ku34-eel","쭈꾸미":"ku34-jjukkumi","낙지":"ku34-nakji","초밥·회":"v28-sushi","김밥":"ku34-gimbap","우동":"ku34-udon","라면":"v28-ramen","쫄면":"ku34-jjolmyeon","떡볶이":"v28-tteokbokki","피자":"v28-pizza","버거":"v28-burger","수제버거":"v28-craft-burger","타코":"ku34-taco","쌀국수":"ku34-pho","냉면":"ku34-naengmyeon","비빔면":"ku34-bibim-noodle","국수·칼국수":"v28-kal-guksu","샤브샤브":"ku34-shabu","마라탕·훠궈":"ku34-mala","파스타":"v28-pasta","볶음밥":"v28-friedrice","짜장면":"v28-jajangmyeon","짬뽕":"v28-jjamppong","탕수육":"v28-tangsuyuk","제육볶음":"v28-jeyuk","샐러드·포케":"v28-salad","샌드위치":"v28-sandwich","스테이크":"v28-steak","백반·정식":"dish-baekban","만두":"dish-mandu","치킨":"dish-fried-chicken","케이크·디저트":"v28-dessert","덮밥":"v28-rice-bowl","양꼬치":"dish-lamb-skewer","비빔밥":"v28-bibimbap"};
 const KU_MENU_MATCHES = [
  ['seolleongtang',/설렁탕|설농탕|곰탕|소머리/],['sundae-guk',/순대국|순댓국/],
  ['gamjatang',/감자탕|뼈해장국/],['chueotang',/추어탕/],['galbitang',/갈비탕/],['miyeokguk',/미역국/],
@@ -3490,6 +3490,12 @@ function kuCorrectFood(p){
 function kuMenuPhotoByName(menu,p){
  const m=String(menu||'').trim();
  if(!m)return 'menu-examples/ku34-other.webp';
+ // v28: separate photorealistic reference photos for frequently listed submenus.
+ const finePhotos=[
+  [/떡국/, 'tteokguk'],[/해물파전|부추전|파전/, 'pajeon'],[/닭곰탕/, 'dakgomtang'],
+  [/쇼유라멘|간장라멘/, 'shoyu-ramen'],[/소갈비구이|갈빗살구이/, 'grilled-ribs'],
+ ];
+ for(const [re,id] of finePhotos){if(re.test(m))return 'menu-examples/v28-'+id+'.webp';}
  const rules=DISH;
  // Exact dish name is tested first, then broad textual dishes; each thumbnail is based on its OWN menu name.
  for(const [label,rule] of rules){if(KU_34_MENU_PHOTOS[label]&&typeof rule!=='function'&&rule.test(m))return 'menu-examples/'+KU_34_MENU_PHOTOS[label]+'.webp';}
@@ -5396,6 +5402,13 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
   .ku-results .list .item .ku-one-line-metrics .ku-line-field strong,
   .ku-results .list .item .ku-one-line-metrics .ku-line-dish strong{font-size:10.5px!important}
 }
+
+/* v28 · photo asset display: consistent high-density thumbnails, no enlargement beyond available pixels in the source. */
+.ku-dish-chip img { width:100%!important; object-fit:cover!important; object-position:center!important; image-rendering:auto!important; }
+.ku-menu-gallery img { width:100%!important; height:100%!important; object-fit:cover!important; image-rendering:auto!important; }
+.ku-card .ku-food-image img, .ku-nearby-photo img { object-fit:cover; image-rendering:auto; }
+/* The category label is HTML text, not a caption burned into a blurred image. */
+.ku-dish-chip .ku-name{font-family:inherit!important;font-weight:800!important;line-height:1.25!important;}
 </style>
 </body>
 </html>
