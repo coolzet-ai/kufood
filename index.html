@@ -3562,8 +3562,8 @@ function kuBrandDisplay(place){return kuBrandOf(place);}
 
 function kuFoodPhoto(p){
  const brand=kuBrandDisplay(p),hasReal=!brand&&!!kuActualPhoto(p),photo=brand?brand.src:(hasReal?kuActualPhoto(p):kuMenuExample(p)),fallback=brand?brand.src:kuMenuExample(p),is5=kimOf(p)===5;
- const caption=brand?'브랜드 원본 로고(상표권 각사 소유) · 매장 사진 아님':(hasReal?'매장 등록 사진':(is5?'5점 매장 사진 미등록 · 음식 참고 이미지':'음식 종류별 참고 이미지 · 매장 사진 아님'));
- return `<figure class="cphoto ku-food-image ${brand?'is-brand':hasReal?'is-real':'is-example'}" style="--ku-brand-bg:${brand?brand.bg:'#f1f5f2'}"><img src="${esc(photo)}" data-fallback="${esc(kuMenuExample(p))}" alt="${brand?esc(brand.label)+' 기업 원본 로고':hasReal?esc(p.name)+' 등록 대표 사진':esc((p.menu||p.cat).split(',')[0])+' 연출 메뉴 예시 사진'}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback;this.closest('figure').classList.add('is-example');this.closest('figure').querySelector('.ku-food-label').textContent='사진 대체: 메뉴 참고 이미지'"><figcaption class="ku-food-label">${caption}</figcaption>${is5?`<span class="ku-photo-score" title="${kuIsManualRating(p)?'운영자 직접 평가 5점':'외부 지표 기반 자동 추천지수 5점'}"><span class="ku-crown">★</span> 김군 ${kimOf(p)}/5</span>`:''}</figure>`;
+ const caption=brand?'':(hasReal?'매장 등록 사진':(is5?'5점 매장 사진 미등록 · 음식 참고 이미지':'음식 종류별 참고 이미지 · 매장 사진 아님'));
+ return `<figure class="cphoto ku-food-image ${brand?'is-brand':hasReal?'is-real':'is-example'}" style="--ku-brand-bg:${brand?brand.bg:'#f1f5f2'}"><img src="${esc(photo)}" data-fallback="${esc(kuMenuExample(p))}" alt="${brand?esc(brand.label)+' 기업 원본 로고':hasReal?esc(p.name)+' 등록 대표 사진':esc((p.menu||p.cat).split(',')[0])+' 연출 메뉴 예시 사진'}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback;this.closest('figure').classList.add('is-example');this.closest('figure').querySelector('.ku-food-label').textContent='사진 대체: 메뉴 참고 이미지'">${brand?'':`<figcaption class="ku-food-label">${caption}</figcaption>`}</figure>`;
 }
 function kuFoodGallery(p){
  const names=(p.menu||'').split(',').map(x=>x.trim()).filter(Boolean).slice(0,3);if(!names.length)return '';
@@ -3581,6 +3581,7 @@ function kuVerifiedBadge(p){
 }
 function kuIsManualRating(p){const r=ratings[p.id];return !!(r&&typeof r.kim==='number');}
 function kuRestaurantCard(p,i){
+ p={...p,name:String(p.name||'').replace(/버거\s+킹/g,'버거킹')};
  const d=distM(p),k=kimOf(p),manual=kuIsManualRating(p);
  const menu=(p.menu||'').split(',').map(x=>x.trim()).filter(Boolean);
  const primary=menu[0]||'대표 메뉴 정보 확인 중';
@@ -3594,10 +3595,10 @@ function kuRestaurantCard(p,i){
    <div class="ku-card-heading"><div class="ku-card-titling"><div class="ku-card-eyebrow"><span class="ku-rank">${String(i+1).padStart(2,'0')}</span><span>${esc(p.area)} · ${esc(p.cat)}</span></div><h3 class="ku-card-name">${hlq(p.name)}${kuVerifiedBadge(p)}</h3><div class="ku-card-address">${labels.slice(0,2).map(x=>`<span>${esc(x)}</span>`).join('')}<span>가격대 ${esc(price)}</span><a class="ku-verify-location" href="${naverPlace(p)}" target="_blank" rel="noopener noreferrer" title="식당 주소와 현재 위치는 외부 지도에서 재확인">📍 주소 확인 ↗</a></div></div>
    <div class="ku-mini-tools"><button type="button" class="tg fav" data-tg="fav" data-id="${esc(p.id)}" aria-pressed="${favs.has(p.id)}" aria-label="${esc(p.name)} 찜하기" title="찜"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button><button type="button" class="tg vis" data-tg="vis" data-id="${esc(p.id)}" aria-pressed="${visits.has(p.id)}" aria-label="${esc(p.name)} 방문 기록" title="방문"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></button></div></div>
    <div class="ku-card-facts ku-one-line-metrics" aria-label="예상거리, Google 별점, 김군 미슐랭, 대표 메뉴">
-    <span class="ku-line-field ku-line-walk" title="실제 보행 경로가 아닌 직선거리 기반 예상 이동 거리입니다"><span class="ku-line-label">🚶 <span class="ku-label-optional">예상거리</span></span><strong>${Number.isFinite(d)&&d>0?fmtD(walkRoute(d)):'미확인'}</strong></span>
-    <span class="ku-line-field ku-line-rating" title="기존에 등록된 Google 평점으로 실시간 값이 아닙니다"><span class="ku-line-label">★ <span class="ku-label-optional">별점</span></span><strong>${p.g?p.g.toFixed(1):'—'}</strong></span>
-    <span class="ku-line-field ku-line-kim" title="${manual?'김군 운영자 입력 평가':'외부 평점·리뷰 수 기반 자동 추천지수'}"><span class="ku-line-label">♛ <span class="ku-label-optional">김군 미슐랭</span></span><strong>${manual||Number(p.g)>0?k+'/5':'미평가'}</strong></span>
-    <span class="ku-line-field ku-line-dish" title="대표메뉴: ${esc(primary)}"><span class="ku-line-label">🍽 <span class="ku-label-optional">대표메뉴</span></span><strong>${esc(primary)}</strong></span>
+    <span class="ku-line-field ku-line-walk" title="실제 보행 경로가 아닌 직선거리 기반 예상 이동 거리입니다"><span class="ku-line-label">🚶 <span class="ku-metric-full">예상거리</span><span class="ku-metric-short">거리</span></span><strong>${Number.isFinite(d)&&d>0?fmtD(walkRoute(d)):'미확인'}</strong></span>
+    <span class="ku-line-field ku-line-rating" title="기존에 등록된 Google 평점으로 실시간 값이 아닙니다"><span class="ku-line-label">★ <span class="ku-metric-full">별점</span><span class="ku-metric-short">별점</span></span><strong>${p.g?p.g.toFixed(1):'—'}</strong></span>
+    <span class="ku-line-field ku-line-kim" title="${manual?'김군 운영자 입력 평가':'외부 평점·리뷰 수 기반 자동 추천지수'}"><span class="ku-line-label">♛ <span class="ku-metric-full">김군 미슐랭</span><span class="ku-metric-short">김군</span></span><strong>${manual||Number(p.g)>0?k+'/5':'미평가'}</strong></span>
+    <span class="ku-line-field ku-line-dish" title="대표메뉴: ${esc(primary)}"><span class="ku-line-label">🍽 <span class="ku-metric-full">대표메뉴</span><span class="ku-metric-short">메뉴</span></span><strong>${esc(primary)}</strong></span>
    </div>
    <div class="ku-card-menu" aria-label="등록 메뉴 이미지"><div class="ku-dish-head"><span class="ku-menu-kicker">메뉴 사진</span><button type="button" data-act="menu" data-id="${esc(p.id)}" class="ku-menu-cta">메뉴판 확인 ↗</button></div>${kuFoodGallery(p)}</div>
    <p class="ku-card-summary">${hl(p.desc)}</p>
@@ -3611,7 +3612,7 @@ function kuRenderMapTop3(items){
  const t=items.slice(0,3);document.getElementById('kuNearbyCount').textContent=t.length+'곳';
  target.innerHTML=t.length?t.map((p,i)=>{const d=distM(p),k=kimOf(p),brand=kuBrandDisplay(p),real=!brand&&kuActualPhoto(p),photo=brand?brand.src:(real||kuMenuExample(p)),fallback=brand?brand.src:kuMenuExample(p);
  const menu=(p.menu||'').split(',')[0]||'메뉴 확인 필요';
- return `<button type="button" class="ku-nearby-card" data-t3="${esc(p.id)}" aria-pressed="${selId===p.id}" aria-label="${i+1}위 ${esc(p.name)} · 예상 도보 ${walkMin(d)}분, Google ${p.g?p.g.toFixed(1):'미확인'}, 김군 ${k}점. 지도에서 선택"><span class="ku-nearby-photo"><img src="${esc(photo)}" alt="${real?esc(p.name)+' 실제 등록 사진':esc(menu)+' 메뉴 예시'}" onerror="this.onerror=null;this.src='${esc(fallback)}'" loading="lazy"><span class="ku-n-rank" data-rank="${i+1}">${i+1}</span></span><span class="ku-nearby-data"><strong>${esc(p.name)}</strong><span class="ku-n-menu">${esc(p.area)} · ${esc(menu)}</span><span class="ku-nearby-facts"><span>🚶 <b>${walkMin(d)}분</b></span><span>★ <b>${p.g?p.g.toFixed(1):'—'}</b></span><span>${brand?'브랜드 식별':real?'등록 사진':'메뉴 예시'}</span></span><span class="ku-nearby-extras">${[...new Set([...(typeof badgesOf==='function'?badgesOf(p):[]),...(p.tv?[p.tv]:[]),...(typeof dealOf==='function'&&dealOf(p)?['혜택: '+dealOf(p)+' (방문 전 확인)']:[]),...(typeof staffOf==='function'&&staffOf(p)?['교직원 혜택']:[])])].slice(0,2).map(x=>`<em title="${esc(x)}">${esc(x.length>17?x.slice(0,16)+'…':x)}</em>`).join('')||'<em class="ku-nearby-noextra">인증·이벤트 미확인</em>'}</span></span><span class="ku-nearby-score"><i>김군</i><b>${k}</b><small>/ 5점</small></span></button>`;
+ return `<button type="button" class="ku-nearby-card" data-t3="${esc(p.id)}" aria-pressed="${selId===p.id}" aria-label="${i+1}위 ${esc(p.name)} · 예상 도보 ${walkMin(d)}분, Google ${p.g?p.g.toFixed(1):'미확인'}, 김군 ${k}점. 지도에서 선택"><span class="ku-nearby-photo"><img src="${esc(photo)}" alt="${real?esc(p.name)+' 실제 등록 사진':esc(menu)+' 메뉴 예시'}" onerror="this.onerror=null;this.src='${esc(fallback)}'" loading="lazy"><span class="ku-n-rank" data-rank="${i+1}">${i+1}</span></span><span class="ku-nearby-data"><strong>${esc(p.name)}</strong><span class="ku-n-menu">${esc(p.area)} · ${esc(menu)}</span><span class="ku-nearby-facts"><span>🚶 <b>${walkMin(d)}분</b></span><span>★ <b>${p.g?p.g.toFixed(1):'—'}</b></span><span>${brand?'':real?'등록 사진':'메뉴 예시'}</span></span><span class="ku-nearby-extras">${[...new Set([...(typeof badgesOf==='function'?badgesOf(p):[]),...(p.tv?[p.tv]:[]),...(typeof dealOf==='function'&&dealOf(p)?['혜택: '+dealOf(p)+' (방문 전 확인)']:[]),...(typeof staffOf==='function'&&staffOf(p)?['교직원 혜택']:[])])].slice(0,2).map(x=>`<em title="${esc(x)}">${esc(x.length>17?x.slice(0,16)+'…':x)}</em>`).join('')||'<em class="ku-nearby-noextra">인증·이벤트 미확인</em>'}</span></span><span class="ku-nearby-score"><i>김군</i><b>${k}</b><small>/ 5점</small></span></button>`;
  }).join('')+'<div class="ku-nearby-location-links" aria-label="추천 맛집 지도 바로가기">'+t.map((p,i)=>`<a href="${naverPlace(p)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)} 실제 주소 확인">${i+1}위 📍 ${esc(p.name)} ↗</a>`).join('')+'</div>':'<p class="status" style="padding:10px">해당 조건에 맞는 추천 식당이 없습니다. 반경을 넓히거나 조건을 초기화해 주세요.</p>';
 }
 function renderList(){
@@ -4778,7 +4779,7 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
    a.className='item ku-candidate'+(brand?' ku-candidate-brand':'');
    a.dataset.placeKey='added:'+p.region+':'+p.name;
    const q=encodeURIComponent(p.name+' '+p.address),url='https://map.naver.com/p/search/'+q;
-   a.innerHTML=`<figure><img src="${esc(src)}" alt="${brand?esc(brand.label)+' 기업 원본 로고':esc(p.menu)+' 메뉴 유형 참고 이미지'}" loading="lazy" onerror="this.onerror=null;this.src='menu-examples/ku34-other.webp'"></figure><div class="ku-candidate-data"><p>${esc(p.region)} · ${p.stype==='체인'?'프랜차이즈 · ':''}${esc(p.source||'공개 자료')}</p><h3>${esc(p.name)}${p.cert==='착한가격업소'?`<a class="ku-verified-badge" href="${esc(p.badge_url)}" target="_blank" rel="noopener noreferrer">👍 착한가격업소 ↗</a>`:''}</h3><p>${esc(p.address)}${p.floor?` <span class="ku-floor-label">🚉 ${esc(p.station)} · ${esc(p.floor)} · ${esc(p.placeType)}</span>`:''}</p><div class="ku-candidate-meta ku-one-line-metrics" aria-label="거리, 평점, 김군 평가, 메뉴 정보"><span class="ku-line-field"><span class="ku-line-label">🚶 거리</span><strong>미확인</strong></span><span class="ku-line-field"><span class="ku-line-label">★ 별점</span><strong>—</strong></span><span class="ku-line-field"><span class="ku-line-label">♛ 김군</span><strong>미평가</strong></span><span class="ku-line-field ku-line-dish"><span class="ku-line-label">🍽 메뉴</span><strong>${esc(p.menu)}</strong></span></div><div class="ku-candidate-actions"><a href="${url}" target="_blank" rel="noopener noreferrer">지도에서 위치 확인 ↗</a><button type="button" class="ku-candidate-share" data-ku-share-key="${esc('added:'+p.region+':'+p.name)}" aria-label="${esc(p.name)} 공유하기">${ic("share",17)} 공유</button></div></div>`;
+   a.innerHTML=`<figure><img src="${esc(src)}" alt="${brand?esc(brand.label)+' 기업 원본 로고':esc(p.menu)+' 메뉴 유형 참고 이미지'}" loading="lazy" onerror="this.onerror=null;this.src='menu-examples/ku34-other.webp'"></figure><div class="ku-candidate-data"><p>${esc(p.region)} · ${p.stype==='체인'?'프랜차이즈 · ':''}${esc(p.source||'공개 자료')}</p><h3>${esc(p.name.replace(/버거\s+킹/g,'버거킹'))}${p.cert==='착한가격업소'?`<a class="ku-verified-badge" href="${esc(p.badge_url)}" target="_blank" rel="noopener noreferrer">👍 착한가격업소 ↗</a>`:''}</h3><p>${esc(p.address)}${p.floor?` <span class="ku-floor-label">🚉 ${esc(p.station)} · ${esc(p.floor)} · ${esc(p.placeType)}</span>`:''}</p><div class="ku-candidate-meta ku-one-line-metrics" aria-label="거리, 평점, 김군 평가, 메뉴 정보"><span class="ku-line-field"><span class="ku-line-label">🚶 거리</span><strong>미확인</strong></span><span class="ku-line-field"><span class="ku-line-label">★ 별점</span><strong>—</strong></span><span class="ku-line-field"><span class="ku-line-label">♛ 김군</span><strong>미평가</strong></span><span class="ku-line-field ku-line-dish"><span class="ku-line-label">🍽 메뉴</span><strong>${esc(p.menu)}</strong></span></div><div class="ku-candidate-actions"><a href="${url}" target="_blank" rel="noopener noreferrer">지도에서 위치 확인 ↗</a><button type="button" class="ku-candidate-share" data-ku-share-key="${esc('added:'+p.region+':'+p.name)}" aria-label="${esc(p.name)} 공유하기">${ic("share",17)} 공유</button></div></div>`;
    mainList.appendChild(a);
   }
   const count=document.getElementById('resCount');
@@ -5271,5 +5272,130 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
  });
 })();
 </script>
+
+<style id="ku-v27-card-polish">
+/* v27: Remove the name decoration and photo rating sticker; rating stays only in the information bar. */
+.ku-results .list .item.ku-card .ku-card-name,
+.ku-results .list .item.ku-card .ku-card-name *{
+  text-decoration:none!important;text-decoration-line:none!important;
+  background-image:none!important;border-bottom:0!important;
+  box-shadow:none!important;
+}
+.ku-card .ku-card-name::before,.ku-card .ku-card-name::after{
+  content:none!important;display:none!important;width:0!important;height:0!important;
+}
+.ku-card .cphoto .ku-photo-score,.ku-results .list .item .cphoto .cscore{
+  display:none!important;
+}
+/* Official corporate logo is itself the image: no additional banner/caption on top. */
+.ku-food-image.is-brand .ku-food-label,
+.ku-candidate-brand figure figcaption{display:none!important}
+/* Equal-width, evenly spaced 4-field information row for all known/unknown values. */
+.ku-results .list .item.ku-card .ku-card-facts.ku-one-line-metrics,
+.ku-results .list .item.ku-candidate .ku-candidate-meta.ku-one-line-metrics{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  column-gap:0!important;row-gap:0!important;
+  align-items:stretch!important;min-width:0!important;
+  border-radius:9px!important;overflow:hidden!important;
+}
+.ku-results .list .item .ku-one-line-metrics .ku-line-field{
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  gap:3px!important;min-width:0!important;
+  min-height:51px!important;padding:7px 4px!important;
+  text-align:center!important;
+  border:0!important;border-left:1px solid #dbe9df!important;
+  overflow:hidden!important;
+}
+.ku-results .list .item .ku-one-line-metrics .ku-line-field:first-child{border-left:0!important}
+.ku-results .list .item .ku-one-line-metrics .ku-line-label{
+  display:flex;align-items:center;justify-content:center;
+  gap:3px;min-width:0;max-width:100%;
+  font:750 10.5px/1.3 var(--f-body)!important;
+  white-space:nowrap!important;color:#2b6245!important;
+}
+.ku-results .list .item .ku-one-line-metrics .ku-line-field strong,
+.ku-results .list .item .ku-one-line-metrics .ku-line-dish strong{
+  font:900 12.5px/1.3 var(--f-body)!important;
+  color:var(--ink)!important;display:block!important;
+  flex:none!important;max-width:100%!important;min-width:0!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;
+  white-space:nowrap!important;text-align:center!important;
+  margin:0 auto!important;
+}
+.ku-one-line-metrics .ku-metric-short{display:none}
+.ku-one-line-metrics .ku-metric-full{display:inline}
+/* Dining data, location and actions: prioritize restaurant name without throwing away data. */
+.ku-results .list .item.ku-card>.ku-card-main{min-width:0!important;gap:7px!important}
+.ku-results .list .item.ku-card .ku-card-heading{display:flex!important;align-items:flex-start!important;min-width:0!important;gap:7px!important}
+.ku-results .list .item.ku-card .ku-card-titling{flex:1 1 0!important;min-width:0!important}
+.ku-results .list .item.ku-card .ku-card-name{
+  margin:3px 0 5px!important;line-height:1.3!important;
+  word-break:keep-all!important;overflow-wrap:break-word!important;
+  text-wrap:pretty!important;
+}
+.ku-results .list .item.ku-card .ku-card-address{gap:4px!important;min-width:0!important}
+.ku-results .list .item.ku-card .ku-card-address span{line-height:1.3!important}
+.ku-results .list .item.ku-card .ku-mini-tools{flex:0 0 auto!important;gap:4px!important}
+/* Fold open / tablet: single list plus compact score strip and predictable card spacing. */
+@media (min-width:541px) and (max-width:980px){
+  .ku-results .list .item.ku-card{grid-template-columns:minmax(125px,25%) minmax(0,1fr)!important;gap:8px 12px!important;padding:12px!important}
+  .ku-results .list .item.ku-card>.ku-card-main{gap:7px!important}
+  .ku-results .list .item.ku-card>.cphoto{height:130px!important;max-height:130px!important;min-height:0!important}
+  .ku-results .list .item.ku-card .ku-card-name{font-size:21px!important}
+  .ku-results .list .item .ku-one-line-metrics .ku-line-field{min-height:48px!important;padding:6px 3px!important}
+  .ku-results .list .item .ku-one-line-metrics .ku-line-field strong{font-size:12px!important}
+  .ku-results .list .item.ku-card .ku-card-bottom{gap:6px!important}
+}
+/* Fold narrow and mobiles: picture + title aligned, four summary fields in own full-width row. */
+@media (max-width:540px){
+  .ku-results .list .item.ku-card{
+    display:grid!important;
+    grid-template-columns:96px minmax(0,1fr)!important;
+    column-gap:10px!important;row-gap:8px!important;
+    padding:10px!important;overflow:hidden!important;
+  }
+  .ku-results .list .item.ku-card>.cphoto{
+    grid-column:1!important;grid-row:1!important;
+    width:96px!important;height:100px!important;min-height:0!important;max-height:100px!important;
+    align-self:start!important;
+  }
+  .ku-results .list .item.ku-card>.ku-card-main{display:contents!important}
+  .ku-results .list .item.ku-card .ku-card-heading{grid-column:2!important;grid-row:1!important;align-self:start!important}
+  .ku-results .list .item.ku-card .ku-card-name{font-size:19px!important;letter-spacing:-.035em!important;line-height:1.32!important}
+  .ku-results .list .item.ku-card .ku-card-eyebrow{font-size:10px!important;gap:4px!important}
+  .ku-results .list .item.ku-card .ku-card-address{max-height:53px;overflow:hidden;align-items:flex-start}
+  .ku-results .list .item.ku-card .ku-card-address span{font-size:9.5px!important;padding:2px 4px!important}
+  .ku-results .list .item.ku-card .ku-card-address .ku-verify-location{font-size:10px!important;min-height:24px;padding:2px 5px!important}
+  .ku-results .list .item.ku-card .ku-mini-tools .tg{height:30px!important;width:30px!important;min-width:30px!important;border-radius:7px!important}
+  .ku-results .list .item.ku-card .ku-mini-tools .tg svg{width:17px!important;height:17px!important}
+  .ku-results .list .item.ku-card .ku-card-facts.ku-one-line-metrics{grid-column:1/-1!important;grid-row:2!important}
+  .ku-results .list .item.ku-card .ku-card-menu{grid-column:1/-1!important;grid-row:3!important}
+  .ku-results .list .item.ku-card .ku-card-summary{grid-column:1/-1!important;grid-row:4!important;margin:0!important}
+  .ku-results .list .item.ku-card .ku-card-tags{grid-column:1/-1!important;grid-row:5!important}
+  .ku-results .list .item.ku-card>.ku-card-bottom{grid-column:1/-1!important;grid-row:6!important;gap:5px!important;padding-top:8px!important}
+  .ku-one-line-metrics .ku-metric-full{display:none!important}
+  .ku-one-line-metrics .ku-metric-short{display:inline!important}
+  .ku-results .list .item .ku-one-line-metrics .ku-line-field{min-height:50px!important;padding:6px 2px!important;gap:3px!important}
+  .ku-results .list .item .ku-one-line-metrics .ku-line-label{font-size:10px!important}
+  .ku-results .list .item .ku-one-line-metrics .ku-line-field strong,
+  .ku-results .list .item .ku-one-line-metrics .ku-line-dish strong{font-size:11.5px!important}
+  .ku-results .list .item.ku-candidate{grid-template-columns:94px minmax(0,1fr)!important;column-gap:9px!important}
+  .ku-results .list .item.ku-candidate>figure{height:94px!important;max-height:94px!important;min-height:0!important}
+  .ku-results .list .item.ku-candidate .ku-candidate-meta.ku-one-line-metrics{grid-column:1/-1!important}
+  .ku-card .ku-card-bottom .ku-card-other summary{white-space:nowrap!important}
+}
+@media (max-width:375px){
+  .ku-results .list .item.ku-card{grid-template-columns:88px minmax(0,1fr)!important;column-gap:8px!important;padding:9px!important}
+  .ku-results .list .item.ku-card>.cphoto{width:88px!important;height:92px!important;max-height:92px!important}
+  .ku-results .list .item.ku-card .ku-card-name{font-size:17.5px!important}
+  .ku-results .list .item.ku-card .ku-mini-tools .tg{height:27px!important;width:27px!important;min-width:27px!important}
+  .ku-results .list .item .ku-one-line-metrics .ku-line-field{padding:6px 1px!important}
+  .ku-results .list .item .ku-one-line-metrics .ku-line-label{font-size:9.5px!important}
+  .ku-results .list .item .ku-one-line-metrics .ku-line-field strong,
+  .ku-results .list .item .ku-one-line-metrics .ku-line-dish strong{font-size:10.5px!important}
+}
+</style>
 </body>
 </html>
