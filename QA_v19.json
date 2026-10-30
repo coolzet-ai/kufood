@@ -1,0 +1,45 @@
+{
+  "pc": {
+    "totalScenes": 6,
+    "topScenesOutsideTheme": 0,
+    "fourDistances": 4,
+    "top3Count": 3,
+    "overflowPx": 0
+  },
+  "team": {
+    "people": 4,
+    "lunch": true,
+    "active": "true"
+  },
+  "car": {
+    "move": "car",
+    "rad": 4000,
+    "distances": [
+      "2km",
+      "4km",
+      "6km",
+      "10km"
+    ],
+    "header": "4000"
+  },
+  "reset": {
+    "move": "walk",
+    "rad": 1000,
+    "ppl": 2,
+    "distances": [
+      "500m",
+      "1km",
+      "1.5km",
+      "2km"
+    ]
+  },
+  "mobile": {
+    "width": 390,
+    "overflow": 0,
+    "heroBottom": 326,
+    "searchBottom": 311,
+    "barTop": 326,
+    "noSearchOverlap": true
+  },
+  "errors": []
+}

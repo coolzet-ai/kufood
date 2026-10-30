@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>맛집김군 (Beta) · 건대 생명과학관 주변 · 34개 메뉴별 식당 보강</title>
+<title>맛집김군 (Beta) · 건대 생명과학관 주변 · 50개 메뉴별 식당 보강</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -1681,6 +1681,82 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 
 .ku-modal-subheading{font-size:13px;font-weight:850;color:var(--green);margin:12px 0 5px}
 
+/* ===== v17: structurally separate hero search and filters + Korean sentence layout ===== */
+.ku-hero{
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(305px,390px)!important;
+  grid-template-rows:auto auto!important;align-items:center!important;gap:10px 18px!important;
+  padding:20px 22px 16px!important;min-height:0!important;overflow:visible!important;
+  isolation:isolate;
+}
+.ku-hero .hero-copy{grid-column:1!important;grid-row:1!important;min-width:0!important;align-self:center}
+.ku-hero .ku-hero-side{grid-column:2!important;grid-row:1!important;min-width:0!important;position:relative!important;margin:0!important;align-self:center!important;z-index:3}
+.ku-hero .hero-art{display:none!important}
+.ku-hero .ku-hero-search{
+  position:relative!important;grid-column:1/-1!important;grid-row:2!important;
+  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  width:min(850px,100%)!important;max-width:100%!important;min-width:0!important;
+  justify-self:start!important;margin:1px 0 0!important;height:54px!important;
+  --ku-search-height:54px;--ku-search-button:94px;box-sizing:border-box!important;
+}
+.ku-hero-side .ku-filter-strip{max-width:100%!important;min-width:0!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.ku-hero .ku-filter-strip label,.ku-hero .ku-filter-strip select{min-width:0!important;max-width:100%!important}
+.ku-hero .ku-filter-strip select{text-overflow:ellipsis;white-space:nowrap!important}
+.ku-hero .hero-copy p{word-break:keep-all!important;overflow-wrap:normal!important;text-wrap:pretty;line-height:1.5!important}
+.ku-card-summary,.ku-card-menu strong,.ku-card .ku-card-name,.ku-nearby-data,.ku-candidate-data p,.ku-candidate-data h3,
+.weekly p,.weekly h3,.dcard p,.ku-guide-about p,.ku-feature-title,.lead,.desc,.ku-hero p,.ku-food-label{
+  word-break:keep-all!important;overflow-wrap:normal!important;line-break:strict!important;
+  text-wrap:pretty;
+}
+/* Allow exceptionally long unspaced Latin URLs or strings to wrap rather than overflow. */
+.ku-card .ku-card-name,.ku-candidate-data h3,.ku-nearby-data strong{overflow-wrap:break-word!important}
+@media(min-width:781px) and (max-width:1199px){
+ .ku-hero{grid-template-columns:minmax(0,1fr) minmax(280px,360px)!important;padding:16px 18px 14px!important;gap:9px 12px!important}
+ .ku-hero .ku-hero-search{--ku-search-height:50px;--ku-search-button:84px;height:50px!important}
+}
+@media(min-width:541px) and (max-width:780px){
+ .ku-hero{grid-template-columns:minmax(0,1fr) minmax(225px,45%)!important;padding:14px 14px 12px!important;gap:9px!important}
+ .ku-hero .ku-hero-search{--ku-search-height:49px;--ku-search-button:76px;height:49px!important}
+ .ku-hero-side .ku-filter-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .ku-hero-side .ku-filter-strip>label:first-child{grid-column:1/-1!important}
+ .ku-hero .hero-copy p{font-size:12px!important}
+}
+@media(max-width:540px){
+ .ku-hero{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto!important;gap:9px!important;padding:12px 12px 12px!important}
+ .ku-hero .hero-copy{grid-column:1!important;grid-row:1!important}
+ .ku-hero .hero-copy p{max-width:none!important;font-size:12px!important;line-height:1.45!important}
+ .ku-hero .ku-hero-side{grid-column:1!important;grid-row:2!important;width:100%!important;max-width:100%!important}
+ .ku-hero .ku-hero-search{grid-column:1!important;grid-row:3!important;--ku-search-height:47px;--ku-search-button:68px;height:47px!important;margin-top:0!important}
+ .ku-hero-side .ku-filter-strip{grid-template-columns:repeat(3,minmax(0,1fr))!important;padding:6px!important;gap:5px!important}
+ .ku-hero-side .ku-filter-strip>label:first-child{grid-column:auto!important}
+ .ku-hero-side .ku-filter-strip label{min-height:49px!important;padding:4px 5px!important}
+ .ku-hero-side .ku-filter-strip label span{font-size:10px!important}
+ .ku-hero-side .ku-filter-strip select{font-size:11px!important;min-height:21px!important}
+ .ku-hero-side .ku-filter-strip>button{grid-column:1/-1!important;min-height:28px!important}
+}
+@media(max-width:360px){
+ .ku-hero{padding:10px 9px 10px!important;gap:7px!important}
+ .ku-hero .ku-hero-search{--ku-search-height:44px;--ku-search-button:59px;height:44px!important}
+ .ku-hero-side .ku-filter-strip select{font-size:10px!important}
+}
+
+
+/* v18 — 50 food choices, accessible sorting, tabs + responsive heading */
+.ku-results-tabs{display:flex!important;flex-wrap:wrap!important;gap:4px!important;max-width:100%!important;min-width:0!important}
+.ku-results-tabs button{white-space:nowrap!important;min-width:0!important;min-height:39px;padding:8px 12px!important;border-radius:8px!important;font-weight:800!important}
+.ku-top3-panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin-bottom:12px}
+.ku-top3-panel[hidden],.ku-menu-tab-panel[hidden]{display:none!important}
+.ku-top3-panel #top3{margin:0!important;padding:8px!important;border:0!important;box-shadow:none!important}
+.ku-top3-panel #top3 .t3tabs{display:none!important}
+.ku-ribbon-head{display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:7px 12px!important}
+.ku-dish-order{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:12px;font-weight:800;color:var(--muted)}
+.ku-dish-order select{width:auto!important;min-width:126px!important;padding:6px 28px 6px 9px!important;background:var(--paper);font-size:12px!important;border:1px solid var(--line);border-radius:7px}
+.ku-info-actions{display:flex;flex-wrap:wrap;align-items:center;gap:7px!important}
+.ku-info-actions .sm,.ku-info-actions .btn{min-height:36px!important;font-size:12px!important;border-radius:8px!important;text-decoration:none}
+#rpDlg .acts2{display:flex!important;gap:7px!important;flex-wrap:wrap!important}
+#rpTeams{color:#4b53bc;border-color:#7981d9;font-weight:800}
+#rpMail{color:var(--green);border-color:var(--green);font-weight:800}
+@media(max-width:720px){.ku-results-tabs{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important}.ku-results-tabs button{font-size:12px!important;padding:8px 5px!important;min-height:39px}.ku-dish-order{flex:1 1 100%;justify-content:flex-end;margin-left:0}.ku-dish-order select{min-width:140px!important}.ku-ribbon-head .ku-ribbon-arrows{margin-left:auto}}
+@media(min-width:721px) and (max-width:1070px){.ku-results-tabs button{font-size:12px!important;padding:7px 9px!important}}
 </style>
 </head>
 <body>
@@ -1703,8 +1779,8 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
   <div class="ku-info-panel" role="note">
     <div class="ku-info-panel-head"><strong>이용 전 확인</strong><small>자료 2026.10.24 · 기능 2026.10.30</small></div>
     <p>가격·영업시간·할인·예약은 변경될 수 있으니 방문 전 매장에 확인해 주세요. 이동 시간은 예상치이며, 김군 미슐랭은 공식 미쉐린 평가가 아닙니다.</p>
-    <p>매장 사진이 없는 경우 ‘메뉴 예시’를 표시하며, 위치·평점 미확인 매장은 임의 수치를 표시하지 않습니다.</p>
-    <div class="ku-info-actions"><button class="sm" type="button" id="discReport">정보 오류 제보</button></div>
+    <p>매장 사진이 없는 경우 실제와 다른 사진 대신 메뉴별 참고 사진 또는 일러스트를 표시하며, 위치·평점 미확인 매장은 임의 수치를 표시하지 않습니다.</p>
+    <div class="ku-info-actions"><button class="sm" type="button" id="discReport">정보 오류 제보</button><button class="sm ku-open-teams" type="button" id="kuInfoTeams">Teams 채팅</button><a class="btn" id="kuInfoMail" href="mailto:coolzet@konkuk.ac.kr?subject=%5B%EB%A7%9B%EC%A7%91%EA%B9%80%EA%B5%B0%5D%20%EC%A0%95%EB%B3%B4%20%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4">이메일 제보</a></div>
   </div>
 </details>
     <div class="tm-menu">
@@ -1745,7 +1821,6 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 <section class="ku-hero" aria-label="맛집김군 소개"><div class="hero-copy"><span class="eyebrow">KONKUK UNIVERSITY · 맛집김군</span><h1>오늘 뭐 먹지<span class="qmark">?</span></h1><p>건국대학교 생명과학관에서 출발해<br>오늘 딱 맞는 맛집을 찾아보세요.</p></div><div class="ku-hero-side"><div class="ku-filter-strip" aria-label="빠른 조건 설정"><label>☀️ <span>식사 시간</span><select id="kuMeal"><option value="lunch">점심</option><option value="dinner">저녁</option><option value="dessert">디저트</option><option value="snack">간식</option></select></label><label>🚶 <span>이동 범위</span><select id="kuDistance"><option value="500">도보 5~10분</option><option value="1000" selected>도보 10~15분</option><option value="1500">도보 15~20분</option><option value="3000">반경 3km</option></select></label><label>👥 <span>식사 인원</span><select id="kuPeople"><option value="2">1~2명</option><option value="4">3~4명</option><option value="6">5~6명</option><option value="10">7~10명</option></select></label><button type="button" id="kuMoreFilters">⚙ 상세 조건 <span aria-hidden="true">⌄</span></button></div></div><div class="hero-art" aria-hidden="true"><span class="ku-hero-seal">맛집김군<small>KONKUK FOOD GUIDE</small></span></div><div class="ku-hero-search" id="kuHeroSearch"><div class="ku-search-slot" id="kuSearchSlot"></div><button id="kuHeroSearchBtn" type="button">검색</button></div></section>
   <div class="accbar" id="accBar" aria-live="polite"></div>
 
-  <div class="ku-scenarios" aria-label="빠른 추천"><button type="button" data-scene="lunch"><span>⏱</span><b>30분 점심</b><small>가까운 식사</small></button><button type="button" data-scene="honbap"><span>🍚</span><b>혼밥</b><small>혼자도 편안하게</small></button><button type="button" data-scene="team"><span>👥</span><b>팀 점심</b><small>동료들과 함께</small></button><button type="button" data-scene="guest"><span>👔</span><b>손님 식사</b><small>격식 있는 자리</small></button><button type="button" data-scene="hoesik"><span>🥂</span><b>회식</b><small>여럿이 함께</small></button><button type="button" data-scene="discount"><span>🎟</span><b>교직원 할인</b><small>할인 정보 확인</small></button></div>
   <div class="qbar" id="qbar">
     <div class="qt qx" role="group" aria-label="핵심 기능">
       <button type="button" id="tOpen" aria-pressed="false" style="--qc:#00703e"><span class="qi" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>지금 영업 중</b><small><em id="qnOpen">0</em>곳 열려 있음</small></button>
@@ -1774,6 +1849,7 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 
   <details class="psec" id="secCond">
     <summary><span class="pt">조건 고르기</span><span class="ps" id="condSum"></span><span class="pa" aria-hidden="true"><em class="o">접기</em><em class="c">펼치기</em> ▾</span></summary>
+  <div class="ku-reset-row"><span>선택한 조건은 상단 검색과 결과에 즉시 반영됩니다.</span><button type="button" class="ku-inline-reset" id="kuCondReset" title="전체 조건 초기화">↻ 조건 초기화</button></div>
   <div class="opts" role="group" aria-label="검색 조건">
     <div class="osplit"><div class="ocol ocol-l">
     <span class="k">시간대</span>
@@ -1784,8 +1860,8 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
     <div class="row"><div class="seg" id="fMove">
       <button data-v="walk" aria-pressed="true">도보</button><button data-v="car" aria-pressed="false">차량</button>
     </div>
-    <div class="seg" id="fRad">
-      <button data-v="500" aria-pressed="false">500m</button><button data-v="1000" aria-pressed="true">1km</button><button data-v="2000" aria-pressed="false">2km</button><button data-v="4000" aria-pressed="false">4km</button><button data-v="6000" aria-pressed="false">6km</button><button data-v="10000" aria-pressed="false">10km</button>
+    <div class="seg" id="fRad" role="group" aria-label="이동 수단별 거리 4단계">
+      <button data-v="500" aria-pressed="false">500m</button><button data-v="1000" aria-pressed="true">1km</button><button data-v="1500" aria-pressed="false">1.5km</button><button data-v="2000" aria-pressed="false">2km</button>
     </div></div>
     <span class="k">고기 메뉴</span>
     <div class="row"><div class="seg" id="fMeat" aria-label="고기 메뉴 포함 여부">
@@ -1799,11 +1875,12 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
     <div class="fg" role="group" aria-labelledby="hCat"><div class="fgh"><span class="k" id="hCat">🍽️ 메뉴</span><span class="fgs" id="sCat" aria-live="polite"></span><button type="button" class="fgc" data-clear="cats">선택 해제</button></div>
     <div class="mchips" id="fCat"></div></div>
     <details id="kuDishAdvanced" class="ku-dish-advanced">
-      <summary>🍽 대표 메뉴 상세 조건 <span>34종</span><span class="ku-disclosure-arrow" aria-hidden="true">⌄</span></summary>
+      <summary>🍽 대표 메뉴 상세 조건 <span>50종</span><span class="ku-disclosure-arrow" aria-hidden="true">⌄</span></summary>
       <div id="fDishWrap" class="dishwrap"></div>
     </details>
     </div></div>
     <details class="adv" id="advF"><summary><span class="at">➕ 더 많은 필터</span><span class="as">지역 · 상권 · 장소 · 평판 · 편의 · 결제 · 가게 유형</span><b id="advN" class="an" hidden></b><i aria-hidden="true">▾</i></summary>
+    <div class="ku-reset-row ku-advanced-reset"><span>지역·평판·인증·편의·이벤트 필터</span><button type="button" class="ku-inline-reset" id="kuAdvReset" title="추가 필터 선택 초기화">↻ 추가 필터 초기화</button></div>
     <div id="fgroups"></div>
     <p class="fgnote" id="fgnote"></p>
     <p style="margin:6px 0 0;font-size:12.5px;color:var(--muted)">같은 줄에서 여러 개를 고르면 ‘또는’으로 넓어지고, 줄끼리는 ‘그리고’로 좁혀집니다. 칩의 숫자는 다른 줄 조건은 그대로 두고 그 항목 하나만 골랐을 때의 가게 수예요. 지금 조건에서 0인 항목은 점선으로 흐리게, 데이터가 아예 없는 항목은 숨기고 아래에 안내합니다. ‘밖 12’처럼 주황 숫자는 지금 반경 안에는 없고 반경 밖에 12곳이 있다는 뜻이에요. 누르면 가장 가까운 곳까지 반경을 자동으로 넓혀 줍니다.</p>
@@ -1813,14 +1890,17 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
   </details>
   <details class="psec" id="secTheme">
     <summary><span class="pt">김군 픽 테마</span><span class="ps" id="themeSum">한 번 누르면 적용, 다시 누르면 해제</span><span class="pa" aria-hidden="true"><em class="o">접기</em><em class="c">펼치기</em> ▾</span></summary>
-    <div class="coll" id="coll" role="group" aria-label="김군 픽 테마"></div>
-    <div class="collmore"><button type="button" class="sm" id="collMore" aria-expanded="false">테마 전체 보기</button></div>
+    <div class="ku-theme-divider">상황별 바로 선택 <small>다시 누르면 해제됩니다</small></div>
+    <div class="ku-scenarios" aria-label="상황별 김군 픽 테마"><button type="button" data-scene="lunch"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></span><b>30분 점심</b><small>가까운 식사</small></button><button type="button" data-scene="honbap"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.5"/><path d="M5 21a7 7 0 0 1 14 0"/></svg></span><b>혼밥</b><small>혼자도 편안하게</small></button><button type="button" data-scene="team"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2.5 21a5.5 5.5 0 0 1 11 0M10.5 21a5.5 5.5 0 0 1 11 0"/></svg></span><b>팀 점심</b><small>동료들과 함께</small></button><button type="button" data-scene="guest"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4-3 5 3M21 8l-4-3-5 3M3 11l7 7 2-2 3 3 5-6M7 12l4-4 2 1 4-1"/></svg></span><b>손님 식사</b><small>격식 있는 자리</small></button><button type="button" data-scene="hoesik"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h10v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zM15 7h2a3 3 0 0 1 0 6h-2M5 8h10"/></svg></span><b>회식</b><small>여럿이 함께</small></button><button type="button" data-scene="discount"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16h7M15 10h4M15 13h4"/></svg></span><b>교직원 할인</b><small>할인 정보 확인</small></button></div>
+    <details class="ku-themes-extra" id="kuThemesExtra"><summary>더 많은 추천 테마 <span aria-hidden="true">⌄</span></summary><div class="coll" id="coll" role="group" aria-label="추가 김군 픽 테마"></div><div class="collmore"><button type="button" class="sm" id="collMore" aria-expanded="false">테마 전체 보기</button></div></details>
   </details>
   <div class="ku-list-heading ku-list-heading-v15">
     <div class="ku-heading-left">
       <div class="ku-results-tabs" role="tablist" aria-label="주변 맛집 정보 보기">
         <button type="button" id="kuResultsPlaces" role="tab" aria-controls="kuPlacesInfo" aria-selected="true" tabindex="0">생명과학관 근처 맛집</button>
-        <button type="button" id="kuResultsDishes" role="tab" aria-controls="kuDishTabPanel" aria-selected="false" tabindex="-1">🍽 대표 메뉴 <span>34종</span></button>
+        <button type="button" id="kuResultsDishes" role="tab" aria-controls="kuDishTabPanel" aria-selected="false" tabindex="-1">🍽 대표 메뉴 <span>50종</span></button>
+        <button type="button" id="kuResultsTopNow" role="tab" aria-controls="kuTop3Panel" aria-selected="false" tabindex="-1">지금 조건 TOP 3</button>
+        <button type="button" id="kuResultsTopMeal" role="tab" aria-controls="kuTop3Panel" aria-selected="false" tabindex="-1">시간대별 TOP 3</button>
       </div>
       <p id="kuPlacesInfo">검색 결과와 대표 메뉴별 식당을 한곳에서 확인하세요.</p>
     </div>
@@ -1831,13 +1911,14 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
   </div>
   <section class="ku-menu-tab-panel" id="kuDishTabPanel" role="tabpanel" aria-labelledby="kuResultsDishes" hidden>
     <p class="ku-menu-tab-expl">원하는 메뉴를 선택하면 아래 식당 결과가 바로 바뀝니다. 선택한 메뉴를 다시 누르면 해제됩니다.</p>
-    <div class="ku-dish-ribbon" aria-label="34종 대표 메뉴 바로 찾기"><div class="ku-ribbon-head"><strong>🍽 대표 메뉴 <span>34종</span></strong><div class="ku-ribbon-arrows"><button type="button" id="kuDishPrev" aria-label="이전 메뉴">‹</button><button type="button" id="kuDishNext" aria-label="다음 메뉴">›</button></div></div><div class="ku-dish-strip" id="kuDishStrip" role="group" aria-label="대표 메뉴별 검색 조건"></div></div>
+    <div class="ku-dish-ribbon" aria-label="50종 대표 메뉴 바로 찾기"><div class="ku-ribbon-head"><strong>🍽 대표 메뉴 <span>50종</span></strong><label class="ku-dish-order" for="kuDishSort">정렬 <select id="kuDishSort" aria-label="대표 메뉴 정렬"><option value="count">식당 많은 순</option><option value="alpha">가나다순</option></select></label><div class="ku-ribbon-arrows"><button type="button" id="kuDishPrev" aria-label="이전 메뉴">‹</button><button type="button" id="kuDishNext" aria-label="다음 메뉴">›</button></div></div><div class="ku-dish-strip" id="kuDishStrip" role="group" aria-label="대표 메뉴별 검색 조건"></div></div>
     <details class="viz vizd ku-menu-statistics" id="kuMenuStats">
       <summary><h3 id="mvH">메뉴별 식당 수 비교</h3><i aria-hidden="true">▾</i></summary>
       <p class="vsub">현재 검색 조건에 맞는 식당 수입니다. 항목을 눌러 메뉴로 바로 검색할 수 있습니다.</p>
       <div id="menuViz"></div>
     </details>
   </section>
+  <section id="kuTop3Panel" class="ku-top3-panel" role="tabpanel" aria-label="TOP 3 추천" hidden></section>
   <div class="fcols ku-results"><div class="fright">
   <div class="selbar" id="selbar" aria-live="polite"></div>
   <div class="resbar">
@@ -1851,7 +1932,7 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
   <div class="lockcard" id="lockCard" hidden><h3>무료 체험 3회를 모두 사용했어요</h3><p>맛집김군은 김군에게 밥을 사 주시면 <b>3회·5회·7회 이용권 쿠폰</b>을 드려요. 쿠폰을 등록하면 광진구·성동구·구리시 전체와 차량 이동까지 모두 볼 수 있어요.</p><div class="row" style="gap:8px;justify-content:center"><button type="button" class="sm pri" data-coupon>🎟 쿠폰 등록</button><button type="button" class="sm" data-gift="open">🎁 밥 사러 가기</button></div></div>
   <div class="list" id="list"></div>
   <div class="lmore" id="listMore"></div>
-  </div><aside class="ku-map-preview" aria-label="주변 맛집 지도 및 추천 식당 3곳"><div class="map-preview-title"><b>📍 주변 맛집 지도</b><a href="#map" data-tab="map" id="kuMapExpand">전체 지도 보기 ↗</a></div><div id="kuMapHost"></div><section class="ku-nearby-three" aria-label="선택 조건 추천 맛집 세 곳"><div class="ku-nearby-heading"><div><strong>이 지역 추천 맛집 TOP 3</strong><small>현재 선택한 조건 기준 · 선택하면 지도에서 확인</small></div><span class="ku-nearby-count" id="kuNearbyCount">3곳</span></div><div id="kuMapTop3" class="ku-nearby-list" aria-live="polite"></div></section><p class="ku-map-disclaimer">지도는 위치를 단순화한 약도이며, 걸음 수·소요 시간은 추정치입니다.</p></aside></div>
+  </div><aside class="ku-map-preview" aria-label="주변 맛집 지도 및 추천 식당 3곳"><div class="map-preview-title"><b>📍 주변 맛집 지도</b><a href="#map" data-tab="map" id="kuMapExpand">전체 지도 보기 ↗</a></div><div id="kuMapHost"></div><section class="ku-nearby-three" aria-label="선택 조건 추천 맛집 세 곳"><div class="ku-nearby-heading"><div><strong>이 지역 추천 맛집 TOP 3</strong><small>현재 조건 기준 · 평판·인증·혜택 확인</small></div><span class="ku-nearby-count" id="kuNearbyCount">3곳</span></div><div id="kuMapTop3" class="ku-nearby-list" aria-live="polite"></div></section><p class="ku-map-disclaimer">지도는 위치를 단순화한 약도이며, 걸음 수·소요 시간은 추정치입니다.</p></aside></div>
 </section>
 
 <!-- ============ 지도 ============ -->
@@ -2084,13 +2165,13 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 <dialog id="rpDlg" aria-labelledby="rpTitle">
   <form method="dialog" class="fm" id="rpForm" style="grid-template-columns:1fr">
     <h3 style="margin:0;font-size:17px" id="rpTitle">정보 오류 제보</h3>
-    <p style="margin:0;font-size:13px;color:var(--muted)">제보 내용을 운영자에게 전달하거나 이 기기에 임시 보관할 수 있습니다. 공유 서버가 연결되지 않은 경우 자동으로 운영자에게 전달되지는 않습니다. 개인정보는 적지 마세요.</p>
+    <p style="margin:0;font-size:13px;color:var(--muted)">운영자 전달은 Teams 또는 이메일에서 직접 보내기를 눌러야 완료됩니다. 서버가 연결되지 않은 ‘제보 제출’은 이 기기에만 임시 저장됩니다. 개인정보는 적지 마세요.</p>
     <label>가게<select id="rpPlace" required></select></label>
     <label>틀린 항목<select id="rpField"><option>영업시간·휴무</option><option>폐업·이전</option><option>위치·주소</option><option>메뉴·가격</option><option>할인·이벤트·교직원할인</option><option>인증·배지(백년가게 등)</option><option>인원·예약 방식</option><option>기타</option></select></label>
     <label>실제 정보<textarea id="rpBody" rows="3" maxlength="300" required placeholder="예: 월요일도 영업하고, 점심은 11시 30분부터입니다."></textarea></label>
     <label>확인한 방법<input type="text" id="rpHow" maxlength="60" placeholder="예: 10/22 직접 방문, 가게 전화"></label>
     <p id="rpStatus" class="status" aria-live="polite" style="margin:0"></p>
-    <div class="acts2"><button class="primary" type="submit" value="send" id="rpSubmit">제보 제출</button><button type="button" id="rpMail">메일로 제보</button><button value="cancel" formnovalidate>닫기</button></div>
+    <div class="acts2"><button class="primary" type="submit" value="send" id="rpSubmit">제보 제출</button><button type="button" id="rpTeams">Teams로 제보</button><button type="button" id="rpMail">이메일로 제보</button><button value="cancel" formnovalidate>닫기</button></div>
   </form>
 </dialog>
 <div class="toast" id="toast" hidden></div>
@@ -2959,7 +3040,7 @@ function hl(s){return hlq(s).replace(HLK,'<mark class="hl">$1</mark>');}
 const KU_REAL_PHOTOS=Object.create(null);
 const KU_REAL_ALLOWED=/^restaurant-photos\/[a-zA-Z0-9_-]+\.(?:webp|png|jpe?g)$/;
 /* v12: 34 filters tied to 34 illustrated reference thumbnails; not actual restaurant photography. */
-const KU_34_MENU_PHOTOS = {"설렁탕·곰탕":"seolleongtang","순대국":"sundae-guk","감자탕·해장국":"gamjatang","추어탕":"chueotang","갈비탕":"galbitang","미역국":"miyeokguk","국밥":"stew","찌개":"kimchi-stew","청국장":"cheonggukjang","찜":"jjim","불고기":"beef-bowl","닭갈비":"spicy-chicken","삼겹살":"bbq-pork","족발·보쌈·수육":"grilled-ribs","돈까스":"tonkatsu","장어":"eel-grill","쭈꾸미":"jjukkumi","낙지":"spicy","초밥·회":"sushi","김밥":"gimbap","우동":"spicy-noodle","라면":"ramen","쫄면":"shoyu-ramen","떡볶이":"korean","피자":"pasta","버거":"burger","수제버거":"meat","타코":"rice-bowl","쌀국수":"rice","냉면":"soba","비빔면":"bibimbap","국수·칼국수":"kal-guksu","샤브샤브":"japanese","마라탕·훠궈":"mala-hotpot"};
+const KU_34_MENU_PHOTOS = {"설렁탕·곰탕":"ku34-seolleongtang","순대국":"ku34-sundae-guk","감자탕·해장국":"ku34-gamjatang","추어탕":"ku34-chueotang","갈비탕":"ku34-galbitang","미역국":"ku34-miyeokguk","국밥":"ku34-gukbap","찌개":"ku34-jjigae","청국장":"ku34-cheonggukjang","찜":"ku34-jjim","불고기":"ku34-bulgogi","닭갈비":"ku34-dakgalbi","삼겹살":"ku34-samgyeopsal","족발·보쌈·수육":"ku34-jokbal-bossam","돈까스":"ku34-donkatsu","장어":"ku34-eel","쭈꾸미":"ku34-jjukkumi","낙지":"ku34-nakji","초밥·회":"ku34-sushi","김밥":"ku34-gimbap","우동":"ku34-udon","라면":"ku34-ramen","쫄면":"ku34-jjolmyeon","떡볶이":"ku34-tteokbokki","피자":"ku34-pizza","버거":"ku34-burger","수제버거":"ku34-craft-burger","타코":"ku34-taco","쌀국수":"ku34-pho","냉면":"ku34-naengmyeon","비빔면":"ku34-bibim-noodle","국수·칼국수":"ku34-kalguksu","샤브샤브":"ku34-shabu","마라탕·훠궈":"ku34-mala","파스타":"dish-pasta","볶음밥":"dish-fried-rice","짜장면":"dish-jajangmyeon","짬뽕":"dish-jjamppong","탕수육":"dish-tangsuyuk","제육볶음":"dish-jeyuk","샐러드·포케":"dish-salad","샌드위치":"dish-sandwich","스테이크":"dish-steak","백반·정식":"dish-baekban","만두":"dish-mandu","치킨":"dish-fried-chicken","케이크·디저트":"dish-dessert","덮밥":"dish-rice-bowl","양꼬치":"dish-lamb-skewer","비빔밥":"dish-bibimbap"};
 const KU_MENU_MATCHES = [
  ['seolleongtang',/설렁탕|설농탕|곰탕|소머리/],['sundae-guk',/순대국|순댓국/],
  ['gamjatang',/감자탕|뼈해장국/],['chueotang',/추어탕/],['galbitang',/갈비탕/],['miyeokguk',/미역국/],
@@ -3005,19 +3086,64 @@ function kuActualPhoto(p){
  if(PHOTOS[p.id])return '/_blob/'+encodeURIComponent(PHOTOS[p.id]);
  return '';
 }
-function kuMenuExample(p){return 'menu-examples/'+kuGenericFood(p)+'.webp';}
+function kuCorrectFood(p){
+ const text=((p.menu||'')+' '+(p.name||'')).trim();
+ const patterns=[
+  [/파스타|스파게티|뇨끼/,"파스타"],
+  [/볶음밥/,"볶음밥"],
+  [/짜장|자장/,"짜장면"],
+  [/짬뽕/,"짬뽕"],
+  [/탕수육/,"탕수육"],
+  [/제육|돼지불백/,"제육볶음"],
+  [/샐러드|포케|포크볼|웜볼/,"샐러드·포케"],
+  [/샌드위치|파니니/,"샌드위치"],
+  [/스테이크/,"스테이크"],
+  [/백반|정식|집밥/,"백반·정식"],
+  [/만두|교자/,"만두"],
+  [/치킨|후라이드|양념치킨/,"치킨"],
+  [/케이크|빙수|와플|디저트/,"케이크·디저트"],
+  [/덮밥|돈부리/,"덮밥"],
+  [/양꼬치/,"양꼬치"],
+  [/비빔밥|돌솥비빔/,"비빔밥"],
+ [/쫄면/,'쫄면'],[/비빔냉면|비빔면|비빔국수|비빔 막국수/,'비빔면'],[/냉면|물냉면|막국수/,'냉면'],
+ [/설렁탕|곰탕|설농탕/,'설렁탕·곰탕'],[/순대국|순댓국/,'순대국'],[/감자탕|뼈해장국|해장국/,'감자탕·해장국'],
+ [/추어탕/,'추어탕'],[/갈비탕/,'갈비탕'],[/미역국/,'미역국'],[/청국장/,'청국장'],[/쭈꾸미|주꾸미/,'쭈꾸미'],[/낙지|연포탕/,'낙지'],
+ [/김밥/,'김밥'],[/우동/,'우동'],[/라면|라멘/,'라면'],[/쌀국수|분짜/,'쌀국수'],[/칼국수|수제비|잔치국수/,'국수·칼국수'],
+ [/마라탕|마라샹궈|훠궈/,'마라탕·훠궈'],[/샤브/,'샤브샤브'],[/장어/,'장어'],[/초밥|스시|사시미|회덮밥|횟집/,'초밥·회'],
+ [/수제버거/,'수제버거'],[/버거|햄버거/,'버거'],[/타코(?!야끼)|부리또|브리또/,'타코'],[/피자/,'피자'],[/떡볶이/,'떡볶이'],
+ [/돈까스|돈카츠|돈가스|가츠|카츠/,'돈까스'],[/족발|보쌈|수육/,'족발·보쌈·수육'],[/삼겹살|오겹살|냉삼/,'삼겹살'],
+ [/닭갈비|숯불닭/,'닭갈비'],[/불고기|불백/,'불고기'],[/찌개|전골/,'찌개'],[/찜닭|해물찜|갈비찜|찜/,'찜'],[/국밥/,'국밥']
+ ];
+ const first=(p.menu||'').split(',')[0]||'';
+ for(const source of [first,text]){for(const [regex,key] of patterns){if(regex.test(source))return KU_34_MENU_PHOTOS[key];}}
+ if(/비빔밥|돌솥비빔|육회비빔/.test(text))return 'bibimbap';
+ if(/파스타|스파게티|뇨끼/.test(text))return 'pasta';
+ return 'ku34-other';
+}
+function kuMenuPhotoByName(menu,p){
+ const m=String(menu||'').trim();
+ if(!m)return 'menu-examples/ku34-other.webp';
+ const rules=DISH;
+ // Exact dish name is tested first, then broad textual dishes; each thumbnail is based on its OWN menu name.
+ for(const [label,rule] of rules){if(KU_34_MENU_PHOTOS[label]&&typeof rule!=='function'&&rule.test(m))return 'menu-examples/'+KU_34_MENU_PHOTOS[label]+'.webp';}
+ // No misleading image: unseen dishes receive clearly labeled, unique SVG artwork, not a different dish photo.
+ const name=m.replace(/[<>\"'&]/g,'').slice(0,24);
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="540" height="360" viewBox="0 0 540 360"><rect width="540" height="360" fill="#eaf3ec"/><circle cx="270" cy="151" r="137" fill="#d3e1d6"/><circle cx="270" cy="144" r="116" fill="#fffdf5" stroke="#bfd1c2" stroke-width="13"/><circle cx="270" cy="144" r="87" fill="#b1cfa8"/><path d="M200 130h140M205 152h130M220 109h100" stroke="#6a9c5b" stroke-width="9" stroke-linecap="round"/><rect x="15" y="275" width="510" height="70" rx="14" fill="#00512f"/><text x="32" y="315" fill="white" font-size="31" font-family="sans-serif" font-weight="700">${name}</text><text x="380" y="335" fill="#d3eddf" font-size="18" font-family="sans-serif">사진 미등록</text></svg>`;
+ return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+}
+function kuMenuExample(p){const first=String(p.menu||'').split(/[,·]/)[0].trim();return kuMenuPhotoByName(first,p);}
 function kuFoodPhoto(p){
  const hasReal=!!kuActualPhoto(p),photo=hasReal?kuActualPhoto(p):kuMenuExample(p),fallback=kuMenuExample(p),is5=kimOf(p)===5;
- const caption=hasReal?'매장 등록 사진':(is5?'대표사진 미등록 · 메뉴 예시':'메뉴 유형 참고 이미지 · 매장 사진 아님');
- return `<figure class="cphoto ku-food-image ${hasReal?'is-real':'is-example'}"><img src="${esc(photo)}" data-fallback="${esc(fallback)}" alt="${hasReal?esc(p.name)+' 등록 대표 사진':esc((p.menu||p.cat).split(',')[0])+' 연출 메뉴 예시 사진'}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback;this.closest('figure').classList.add('is-example');this.closest('figure').querySelector('.ku-food-label').textContent='메뉴 유형 참고 이미지 · 매장 사진 아님'"><figcaption class="ku-food-label">${caption}</figcaption>${is5?`<span class="ku-photo-score" title="${kuIsManualRating(p)?'운영자 직접 평가 5점':'외부 지표 기반 자동 추천지수 5점'}"><span class="ku-crown">★</span> 김군 ${kimOf(p)}/5</span>`:''}</figure>`;
+ const caption=hasReal?'매장 등록 사진':(is5?'5점 매장 사진 미등록 · 음식 참고 이미지':'음식 종류별 참고 이미지 · 매장 사진 아님');
+ return `<figure class="cphoto ku-food-image ${hasReal?'is-real':'is-example'}"><img src="${esc(photo)}" data-fallback="${esc(fallback)}" alt="${hasReal?esc(p.name)+' 등록 대표 사진':esc((p.menu||p.cat).split(',')[0])+' 연출 메뉴 예시 사진'}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback;this.closest('figure').classList.add('is-example');this.closest('figure').querySelector('.ku-food-label').textContent='메뉴 참고 이미지 · 매장 사진 아님'"><figcaption class="ku-food-label">${caption}</figcaption>${is5?`<span class="ku-photo-score" title="${kuIsManualRating(p)?'운영자 직접 평가 5점':'외부 지표 기반 자동 추천지수 5점'}"><span class="ku-crown">★</span> 김군 ${kimOf(p)}/5</span>`:''}</figure>`;
 }
 function kuFoodGallery(p){
  const names=(p.menu||'').split(',').map(x=>x.trim()).filter(Boolean).slice(0,3);if(!names.length)return '';
- return `<div class="ku-menu-gallery" aria-label="대표 메뉴별 예시 사진">${names.map((m,i)=>{
+ return `<div class="ku-menu-gallery" aria-label="대표 메뉴별 참고 이미지">${names.map((m,i)=>{
  const thumb=kuMenuExample({menu:m,cat:p.cat});
  const path=i===0&&kuActualPhoto(p)?kuActualPhoto(p):thumb;
- const lab=i===0&&kuActualPhoto(p)?'매장 사진':'메뉴 예시';
- return `<button type="button" data-ku-menuphoto="${esc(path)}" data-ku-fallback="${esc(thumb)}" data-ku-menu-label="${esc(lab)}" data-ku-menu-name="${esc(m)}" title="${esc(m)} · ${lab}" aria-label="${esc(m)} · ${lab} 보기"><img src="${esc(thumb)}" alt="${esc(m)} 메뉴 예시" loading="lazy"><span class="ku-thumb-tip">${esc(m)}</span></button>`;}).join('')}</div>`;
+ const lab=i===0&&kuActualPhoto(p)?'매장 사진':'음식 종류별 참고 이미지(매장 촬영 아님)';
+ return `<button type="button" data-ku-menuphoto="${esc(path)}" data-ku-fallback="${esc(thumb)}" data-ku-menu-label="${esc(lab)}" data-ku-menu-name="${esc(m)}" title="${esc(m)} · ${lab}" aria-label="${esc(m)} · ${lab} 보기"><img src="${esc(thumb)}" alt="${esc(m)} 메뉴 참고 이미지" loading="lazy"><span class="ku-thumb-tip">${esc(m)}</span></button>`;}).join('')}</div>`;
 }
 /* v10 — 식당명 중심의 단일정보 카드. 기존 데이터/액션은 그대로 재사용 */
 function kuIsManualRating(p){const r=ratings[p.id];return !!(r&&typeof r.kim==='number');}
@@ -3051,7 +3177,7 @@ function kuRenderMapTop3(items){
  const t=items.slice(0,3);document.getElementById('kuNearbyCount').textContent=t.length+'곳';
  target.innerHTML=t.length?t.map((p,i)=>{const d=distM(p),k=kimOf(p),real=kuActualPhoto(p),photo=real||kuMenuExample(p),fallback=kuMenuExample(p);
  const menu=(p.menu||'').split(',')[0]||'메뉴 확인 필요';
- return `<button type="button" class="ku-nearby-card" data-t3="${esc(p.id)}" aria-pressed="${selId===p.id}" aria-label="${i+1}위 ${esc(p.name)} · 도보 ${walkMin(d)}분, Google ${p.g?p.g.toFixed(1):'미확인'}, 김군 ${k}점. 지도에서 선택"><span class="ku-nearby-photo"><img src="${esc(photo)}" alt="${real?esc(p.name)+' 실제 등록 사진':esc(menu)+' 메뉴 예시'}" onerror="this.onerror=null;this.src='${esc(fallback)}'" loading="lazy"><span class="ku-n-rank" data-rank="${i+1}">${i+1}</span></span><span class="ku-nearby-data"><strong>${esc(p.name)}</strong><span class="ku-n-menu">${esc(p.area)} · ${esc(menu)}</span><span class="ku-nearby-facts"><span>🚶 <b>${walkMin(d)}분</b></span><span>★ <b>${p.g?p.g.toFixed(1):'—'}</b></span><span>${real?'등록 사진':'메뉴 예시'}</span></span></span><span class="ku-nearby-score"><i>김군</i><b>${k}</b><small>/ 5점</small></span></button>`;
+ return `<button type="button" class="ku-nearby-card" data-t3="${esc(p.id)}" aria-pressed="${selId===p.id}" aria-label="${i+1}위 ${esc(p.name)} · 도보 ${walkMin(d)}분, Google ${p.g?p.g.toFixed(1):'미확인'}, 김군 ${k}점. 지도에서 선택"><span class="ku-nearby-photo"><img src="${esc(photo)}" alt="${real?esc(p.name)+' 실제 등록 사진':esc(menu)+' 메뉴 예시'}" onerror="this.onerror=null;this.src='${esc(fallback)}'" loading="lazy"><span class="ku-n-rank" data-rank="${i+1}">${i+1}</span></span><span class="ku-nearby-data"><strong>${esc(p.name)}</strong><span class="ku-n-menu">${esc(p.area)} · ${esc(menu)}</span><span class="ku-nearby-facts"><span>🚶 <b>${walkMin(d)}분</b></span><span>★ <b>${p.g?p.g.toFixed(1):'—'}</b></span><span>${real?'등록 사진':'메뉴 예시'}</span></span><span class="ku-nearby-extras">${[...new Set([...(typeof badgesOf==='function'?badgesOf(p):[]),...(p.tv?[p.tv]:[]),...(typeof dealOf==='function'&&dealOf(p)?['혜택: '+dealOf(p)+' (방문 전 확인)']:[]),...(typeof staffOf==='function'&&staffOf(p)?['교직원 혜택']:[])])].slice(0,2).map(x=>`<em title="${esc(x)}">${esc(x.length>17?x.slice(0,16)+'…':x)}</em>`).join('')||'<em class="ku-nearby-noextra">인증·이벤트 미확인</em>'}</span></span><span class="ku-nearby-score"><i>김군</i><b>${k}</b><small>/ 5점</small></span></button>`;
  }).join(''):'<p class="status" style="padding:10px">해당 조건에 맞는 추천 식당이 없습니다. 반경을 넓히거나 조건을 초기화해 주세요.</p>';
 }
 function renderList(){
@@ -3146,7 +3272,7 @@ function condSummary(){const el=$("condSum");if(!el)return;const nF=F.cats.size+
  el.innerHTML=`<span>${MEALS[F.meal]}</span><span>${F.move==="walk"?"도보":"차량"} ${F.rad>=1000?F.rad/1000+"km":F.rad+"m"}</span><span>${({2:"1~2명",4:"3~4명",8:"5~8명",15:"9명 이상"})[F.ppl]||F.ppl+"명"}</span>${F.meat?`<span class="on">${F.meat==="yes"?"고기 포함":"고기 빼고"}</span>`:""}<span>${F.dist&&F.dist.size?[...F.dist].join("·"):"전체 지역"}</span>${nF?`<span class="on">필터 ${nF}개</span>`:""}`;}
 function renderQuick(){
  const base=PLACES.filter(p=>match(p,false,null,true));
- const show=COLLS.filter((c,i)=>COLL_ALL||i<COLL_N||F.coll===c.k);
+ const show=COLLS.filter((c,i)=>!['honbap','guest','hoesik'].includes(c.k)&&(COLL_ALL||i<COLL_N||F.coll===c.k));
  $("coll").innerHTML=show.map((c,i)=>{const n=base.filter(c.f).length;const col=THC[COLLS.indexOf(c)%THC.length];const on=F.coll===c.k;return `<button type="button" data-coll="${c.k}" aria-pressed="${on}" class="${n?"":"zero"}" style="--tc:${col}" aria-label="${esc(c.t)}, 지금 조건 ${n}곳${on?", 선택됨":""}"><span class="ti" aria-hidden="true">${thIcon(c.k)}</span><b>${c.t}</b><span class="tn"><em>${n}</em>곳</span>${on?'<span class="tck" aria-hidden="true">✓ 적용 중</span>':""}</button>`;}).join("");
  $("collMore").textContent=COLL_ALL?"테마 접기":`테마 전체 보기 (${COLLS.length}개)`;$("collMore").setAttribute("aria-expanded",COLL_ALL);
  const sel=COLLS.find(c=>c.k===F.coll);$("themeSum").innerHTML=sel?`<b class="on">✓ ${esc(sel.t)}</b> 적용 중`:"한 번 누르면 적용, 다시 누르면 해제";
@@ -3197,6 +3323,26 @@ const DIST={"건대":"광진구","세종대":"광진구","어린이대공원":"�
 const DIST_BASE=["광진구","성동구","구리시"];
 function distOf(p){return DIST[p.area]||"기타";}
 const DISH=[["설렁탕·곰탕",/설렁탕|설농탕|곰탕|소머리/],["순대국",/순대국|순댓국/],["감자탕·해장국",/감자탕|해장국|뼈해장/],["추어탕",/추어탕/],["갈비탕",/갈비탕/],["미역국",/미역/],["국밥",/국밥/],["찌개",/찌개|전골/],["청국장",/청국장/],["찜",/찜(?!질)|찜닭/],["불고기",/불고기|불백/],["닭갈비",/닭갈비|닭구이|숯닭/],["삼겹살",/삼겹|오겹|냉삼/],["족발·보쌈·수육",/족발|보쌈|수육/],["돈까스",/돈까스|돈카츠|돈가스|카츠|가츠|까스/],["장어",/장어/],["쭈꾸미",/쭈꾸미|주꾸미/],["낙지",/낙지|연포/],["초밥·회",/초밥|스시|오마카세|모둠회|사시미|숙성회|광어회/],["김밥",/김밥/],["우동",/우동/],["라면",/라면|라멘/],["쫄면",/쫄면/],["떡볶이",/떡볶이|떡뽁이/],["피자",/피자/],["버거",/버거/],["수제버거",p=>/버거/.test(p.name+" "+(p.menu||""))&&chainOf(p)!=="체인"&&p.cat!=="가성비"],["타코",/타코(?!야끼|킹)|부리또|브리또|멕시칸/],["쌀국수",/쌀국수|포(?=\s|,|$)|분짜/],["냉면",/냉면|면옥|막국수/],["비빔면",/비빔면|비빔국수|비빔냉면|비빔 막국수/],["국수·칼국수",/국수|칼국수|소바/],["샤브샤브",/샤브/],["마라탕·훠궈",/마라|훠궈/]];
+
+/* v18: additional frequent menu categories from the original 700-place dataset; no invented restaurant data */
+DISH.push(
+  ["파스타",/파스타|스파게티|뇨끼/],
+  ["볶음밥",/볶음밥/],
+  ["짜장면",/짜장|자장/],
+  ["짬뽕",/짬뽕/],
+  ["탕수육",/탕수육/],
+  ["제육볶음",/제육|돼지불백/],
+  ["샐러드·포케",/샐러드|포케|포크볼|웜볼/],
+  ["샌드위치",/샌드위치|파니니/],
+  ["스테이크",/스테이크/],
+  ["백반·정식",/백반|정식|집밥/],
+  ["만두",/만두|교자/],
+  ["치킨",/치킨|후라이드|양념치킨/],
+  ["케이크·디저트",/케이크|빙수|와플|디저트/],
+  ["덮밥",/덮밥|돈부리/],
+  ["양꼬치",/양꼬치/],
+  ["비빔밥",/비빔밥|돌솥비빔/]
+);
 const FGRP=[
  {key:"dish",own:"fDishWrap",label:"🍽️ 대표 메뉴",items:()=>DISH.map(d=>[d[0],""]),test:(p,v)=>{const d=DISH.find(x=>x[0]===v);if(!d)return false;return typeof d[1]==="function"?d[1](p):d[1].test(p.name+" "+(p.menu||""));}},
  {key:"dist",label:"🏙️ 시·구",items:()=>[["광진구",""],["성동구",""],["구리시",""],["중랑구",""],["송파구",""]],test:(p,v)=>distOf(p)===v},
@@ -3296,7 +3442,7 @@ function navActive(){const tab=["find","map","reserve","guide"].find(t=>!$("tab-
 window.addEventListener("hashchange",()=>setTimeout(navActive,50));window.addEventListener("scroll",()=>requestAnimationFrame(navActive),{passive:true});setTimeout(navActive,300);
 
 /* ---------- 줄바꿈: 두 줄일 때 둘째 줄이 더 길게 ---------- */
-const BH_SEL=".item .ih h3.nmh,#mpBody .ih h3,.pod b,.subv h1,#subDesc,h2.sec,.lead,.viz>h3,.viz .vsub,.buyme h2,#giftH,.weekly h3,.weekly p,.dcard p,.qh small,.poll h3>span,#updH";
+const BH_SEL=".ku-card-summary,.ku-candidate-data p,.ku-hero p,.item .ih h3.nmh,#mpBody .ih h3,.pod b,.subv h1,#subDesc,h2.sec,.lead,.viz>h3,.viz .vsub,.buyme h2,#giftH,.weekly h3,.weekly p,.dcard p,.qh small,.poll h3>span,#updH";
 const bhCtx=document.createElement("canvas").getContext("2d");
 function bhW(s,cs){bhCtx.font=`${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;try{bhCtx.letterSpacing=cs.letterSpacing==="normal"?"0px":cs.letterSpacing;}catch(e){}return bhCtx.measureText(s).width;}
 function bh(){document.querySelectorAll(BH_SEL).forEach(el=>{
@@ -3580,6 +3726,19 @@ $("rpForm").addEventListener("submit",async e=>{
  send.textContent="임시 저장됨";
  send.disabled=false;if(send.textContent!=="임시 저장됨")send.textContent="제보 제출";
 });
+function kuReportDraft(){
+ const p=PLACES.find(x=>x.id===$("rpPlace").value);
+ if(!p||!$("rpBody").value.trim()){$("rpStatus").textContent="식당과 실제 정보를 입력해 주세요.";return null;}
+ const subject=`[맛집김군 제보] ${p.name} · ${$("rpField").value}`;
+ const body=`식당: ${p.name} (${p.area})\n구분: ${$("rpField").value}\n내용: ${$("rpBody").value.trim()}\n확인 방법: ${$("rpHow").value.trim()||"미기재"}\n\n※ 확인 후 앱에서 직접 보내기를 눌러야 전달됩니다.`;
+ return {subject,body};
+}
+$("rpTeams").addEventListener("click",()=>{
+ const draft=kuReportDraft();if(!draft)return;
+ const url='https://teams.microsoft.com/l/chat/0/0?users='+encodeURIComponent('coolzet@konkuk.ac.kr')+'&message='+encodeURIComponent(draft.subject+'\n\n'+draft.body);
+ window.open(url,'_blank','noopener,noreferrer');
+ $("rpStatus").textContent='Teams 채팅 열기를 요청했습니다. 새 창이 열리면 보내기를 직접 눌러 주세요. 창이 차단될 경우 이메일 제보를 이용할 수 있습니다.';
+});
 $("rpMail").addEventListener("click",()=>{
  const p=PLACES.find(x=>x.id===$("rpPlace").value);
  if(!p||!$("rpBody").value.trim()){$("rpStatus").textContent="식당과 실제 정보를 입력해 주세요.";return;}
@@ -3602,6 +3761,7 @@ $("rpList").addEventListener("click",async e=>{const b=e.target.closest("[data-r
  const r=reports.find(x=>x._id===k);if(r){r.status=st;saveReportsLocal();renderReports();renderList();}
 });
 $("discReport").addEventListener("click",()=>openReport(null));
+$("discReport").addEventListener("click",()=>{const d=document.getElementById("kuInfoMenu");if(d)d.open=false;});
 $("rpNew").addEventListener("click",()=>openReport(null));
 /* ---------- 메뉴별 대표 메뉴 · Top 3 ---------- */
 function renderMenuViz(){
@@ -4052,9 +4212,9 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
   const card=t.closest('.ku-card');if(!card)return;
   const img=card.querySelector('.ku-food-image img');const caption=card.querySelector('.ku-food-label');if(!img||!caption)return;
   const fallback=t.dataset.kuFallback||'';const path=t.dataset.kuMenuphoto||fallback;
-  img.onerror=function(){this.onerror=null;this.src=fallback;if(caption)caption.textContent='메뉴 유형 참고 이미지 · 매장 사진 아님';};
+  img.onerror=function(){this.onerror=null;this.src=fallback;if(caption)caption.textContent='메뉴 참고 이미지 · 매장 사진 아님';};
   img.src=path;img.alt=t.dataset.kuMenuName+' · '+t.dataset.kuMenuLabel;
-  caption.textContent=t.dataset.kuMenuLabel==='매장 사진'?'매장 등록 사진 · '+t.dataset.kuMenuName:'메뉴 예시 · '+t.dataset.kuMenuName;
+  caption.textContent=t.dataset.kuMenuLabel==='매장 사진'?'매장 등록 사진 · '+t.dataset.kuMenuName:'메뉴 참고 이미지 · '+t.dataset.kuMenuName;
  });
  document.addEventListener('click',function(e){const c=e.target.closest('#kuMapTop3 .ku-nearby-card');if(!c)return;document.querySelectorAll('#kuMapTop3 .ku-nearby-card').forEach(b=>b.setAttribute('aria-pressed',String(b===c)));});
  // Upload confirmed, rights-cleared restaurant photos and register paths in the manifest.
@@ -4090,9 +4250,10 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
  showTab=function(t){priorShow(t);homeTheme(t);};
  // Building a 34-category photo ribbon from the existing 34 original menu conditions.
  const strip=document.getElementById('kuDishStrip'),folder=document.getElementById('fDishWrap');
- const photo=(label)=>'menu-examples/'+(KU_34_MENU_PHOTOS[label]||'korean')+'.webp';
+ const photo=(label)=>'menu-examples/'+(KU_34_MENU_PHOTOS[label]||'ku34-other')+'.webp';
  if(strip){
-  strip.innerHTML=DISH.map(([label])=>`<button type="button" class="ku-dish-chip" data-menu="${esc(label)}" aria-pressed="false" title="${esc(label)} 메뉴로 검색"><img src="${photo(label)}" alt="${esc(label)} 메뉴 유형 참고 이미지" loading="lazy"><span class="ku-name">${esc(label)}</span></button>`).join('');
+  // Ribbon is constructed after exact, deduplicated menu counts have been calculated.
+  strip.innerHTML='';
   strip.addEventListener('click',e=>{const b=e.target.closest('[data-menu]');if(!b)return;const target=document.querySelector('#fg-dish button[data-v="'+CSS.escape(b.dataset.menu)+'"]');if(target)target.click();else {const set=F.dish;if(set.has(b.dataset.menu))set.delete(b.dataset.menu);else set.add(b.dataset.menu);refresh();document.getElementById('secCond').open=true;} });
   document.getElementById('kuDishPrev')?.addEventListener('click',()=>strip.scrollBy({left:-435,behavior:'smooth'}));
   document.getElementById('kuDishNext')?.addEventListener('click',()=>strip.scrollBy({left:435,behavior:'smooth'}));
@@ -4103,13 +4264,18 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
    const addedCount=NEW_REGION_PLACES.filter(p=>label==='수제버거'?p.stype!=='체인'&&/버거/.test(p.name+' '+p.menu):(typeof rule==='function'?rule({...p,id:'candidate',cat:kuCandidateCat(p)}):rule.test(p.name+' '+p.menu))).length;
    return [label,mainCount,addedCount];
  });
+ const sortSelect=document.getElementById('kuDishSort');
+ const orderMenu=()=>{
+  const alpha=sortSelect?.value==='alpha';
+  const rows=auditRows.slice().sort((a,b)=>alpha?a[0].localeCompare(b[0],'ko'):(b[1]+b[2])-(a[1]+a[2])||a[0].localeCompare(b[0],'ko'));
+  strip.innerHTML=rows.map(([label,n,extra])=>`<button type="button" class="ku-dish-chip" data-menu="${esc(label)}" aria-pressed="${F.dish?.has(label)===true}" title="${esc(label)} · 전체 ${n+extra}곳"><img src="${photo(label)}" alt="${esc(label)} 음식 참고 이미지" loading="lazy"><span class="ku-name">${esc(label)}</span><small class="ku-menu-count" title="기존 ${n}곳 · 추가 확인 ${extra}곳">${n+extra}곳</small></button>`).join('');
+ };
+ try{const old=localStorage.getItem('kufood-menu-sort');if(old==='count'||old==='alpha')sortSelect.value=old;}catch(e){}
+ sortSelect?.addEventListener('change',()=>{try{localStorage.setItem('kufood-menu-sort',sortSelect.value)}catch(e){}orderMenu();syncDish();});
+ orderMenu();
  const totalRibbon=document.querySelector('.ku-ribbon-head strong span');
  if(totalRibbon)totalRibbon.textContent=DISH.length+'종';
- if(strip){strip.querySelectorAll('button[data-menu]').forEach(b=>{
-   const count=auditRows.find(row=>row[0]===b.dataset.menu);if(!count)return;
-   const x=document.createElement('small');x.className='ku-menu-count';x.textContent=(count[1]+count[2])+'곳';
-   x.title='기본 '+count[1]+'곳 + 추가 확인 '+count[2]+'곳';b.appendChild(x);
- });}
+
  // Respect the original filter's selected state while preserving keyboard and mouse interaction.
  let scheduling=false;
  function syncDish(){
@@ -4157,7 +4323,7 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
   for(const [i,p] of candidates.entries()){
    const p0={menu:p.menu,cat:kuCandidateCat(p)}, src=kuMenuExample(p0),a=document.createElement('article');a.className='item ku-candidate';
    const q=encodeURIComponent(p.name+' '+p.region);const url='https://map.naver.com/p/search/'+q;
-   a.innerHTML=`<figure><img src="${esc(src)}" alt="${esc(p.menu)} 메뉴 유형 참고 이미지" loading="lazy" onerror="this.onerror=null;this.src='menu-examples/korean.webp'"></figure><div class="ku-candidate-data"><p>${esc(p.region)} · ${p.stype==='체인'?'프랜차이즈 · ':''}${esc(p.source||'공개 자료')}</p><h3>${esc(p.name)}</h3><p class="ku-candidate-menu">🍽 ${esc(p.menu)}</p><p>${esc(p.address)}</p><div class="ku-candidate-meta"><span class="ku-candidate-undetermined">📍 주소 등록 · 도보 거리 미산정</span><span>Google 평점 미확인</span><span>김군 미평가</span></div><a href="${url}" target="_blank" rel="noopener noreferrer">지도에서 위치 확인 ↗</a></div>`;
+   a.innerHTML=`<figure><img src="${esc(src)}" alt="${esc(p.menu)} 메뉴 유형 참고 이미지" loading="lazy" onerror="this.onerror=null;this.src='menu-examples/ku34-other.webp'"></figure><div class="ku-candidate-data"><p>${esc(p.region)} · ${p.stype==='체인'?'프랜차이즈 · ':''}${esc(p.source||'공개 자료')}</p><h3>${esc(p.name)}</h3><p class="ku-candidate-menu">🍽 ${esc(p.menu)}</p><p>${esc(p.address)}</p><div class="ku-candidate-meta"><span class="ku-candidate-undetermined">📍 주소 등록 · 도보 거리 미산정</span><span>Google 평점 미확인</span><span>김군 미평가</span></div><a href="${url}" target="_blank" rel="noopener noreferrer">지도에서 위치 확인 ↗</a></div>`;
    mainList.appendChild(a);
   }
   const b=document.getElementById('resCount');if(b&&candidates.length){const n=PLACES.filter(p=>match(p)).length; b.innerHTML=`<b>${n+candidates.length}곳</b> · 일부 식당은 위치·평점 확인 중 (거리순 추천 제외)`;}
@@ -4177,16 +4343,17 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
 /* v15 | View switch beside "생명과학관 근처 맛집". Existing search state/food filters remain source of truth. */
 (function(){
  const tabPlaces=document.getElementById('kuResultsPlaces'),tabDishes=document.getElementById('kuResultsDishes'),panel=document.getElementById('kuDishTabPanel');
- if(!tabPlaces||!tabDishes||!panel)return;
- const tabs=[tabPlaces,tabDishes];
+ const tabNow=document.getElementById('kuResultsTopNow'),tabMeal=document.getElementById('kuResultsTopMeal'),topPanel=document.getElementById('kuTop3Panel'),top3=document.getElementById('top3');
+ if(!tabPlaces||!tabDishes||!tabNow||!tabMeal||!panel||!topPanel||!top3)return;
+ topPanel.appendChild(top3);
+ const tabs=[tabPlaces,tabDishes,tabNow,tabMeal];
  function choose(which,focus){
   tabs.forEach(t=>{const selected=t===which;t.setAttribute('aria-selected',String(selected));t.tabIndex=selected?0:-1;});
-  panel.hidden=which!==tabDishes;
+  panel.hidden=which!==tabDishes;topPanel.hidden=!(which===tabNow||which===tabMeal);
+  if(!topPanel.hidden){T3TAB=which===tabNow?'now':'meal';renderTop3(LAST.length?LAST:sorted(PLACES.filter(p=>match(p))));}
   if(focus)which.focus();
  }
- tabPlaces.addEventListener('click',()=>choose(tabPlaces));
- tabDishes.addEventListener('click',()=>choose(tabDishes));
- tabs.forEach((t,i)=>t.addEventListener('keydown',e=>{if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight'&&e.key!=='Home'&&e.key!=='End')return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?1:e.key==='ArrowRight'?(i+1)%2:(i+1)%2;choose(tabs[next],true);}));
+ tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>choose(tab));tab.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?tabs.length-1:e.key==='ArrowRight'?(i+1)%tabs.length:(i+tabs.length-1)%tabs.length;choose(tabs[next],true);});});
  const strip=document.getElementById('kuDishStrip');
  if(strip)strip.addEventListener('click',e=>{if(e.target.closest('[data-menu]')){const tabDesc=document.getElementById('kuPlacesInfo');if(tabDesc)tabDesc.textContent='선택하신 대표 메뉴를 아래 식당 검색 결과에 적용했습니다.';}});
  const adv=document.getElementById('kuDishAdvanced');if(adv)adv.open=false;
@@ -4221,6 +4388,106 @@ const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙"
    if(stamp){const cap=document.createElement('p');cap.textContent='도장깨기';cap.className='ku-modal-subheading';modalContent.append(cap,stamp);}
    if(share){const shareWrap=document.createElement('div');shareWrap.style.margin='10px 0';shareWrap.append(share);modalContent.append(shareWrap);}
  }
+})();
+</script>
+<script>
+/* v18 — quick report actions in the top ! information menu. */
+(()=>{const el=document.getElementById('kuInfoTeams');if(el)el.addEventListener('click',()=>{document.getElementById('kuInfoMenu').open=false;const btn=document.getElementById('tmBtn');btn?.click();});
+ const mail=document.getElementById('kuInfoMail');if(mail)mail.addEventListener('click',()=>{document.getElementById('kuInfoMenu').open=false;});
+})();
+</script>
+<style id="ku-v19-patch">
+/* v19: 편집형 김군 테마 패널로 빠른 상황 추천 통합 */
+.ku-theme-divider{margin:10px 13px 6px;font-size:12px;font-weight:900;color:var(--green);display:flex;align-items:center;gap:6px}
+.ku-theme-divider small{font-size:10px;color:var(--muted);font-weight:500}
+.ku-more-themes{margin-top:11px;border-top:1px solid var(--line);padding-top:9px}
+#secTheme .ku-scenarios{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;margin:0 12px 4px!important;padding:0!important;overflow:visible!important}
+#secTheme .ku-scenarios button{display:grid!important;grid-template-columns:26px minmax(0,1fr);gap:0 5px!important;align-items:center!important;min-height:49px!important;padding:8px 5px!important;border:1.5px solid var(--line)!important;border-radius:9px!important;background:var(--paper)!important;box-shadow:none!important;color:var(--ink)!important;white-space:normal!important}
+#secTheme .ku-scenarios button>span{width:27px!important;height:27px!important;min-width:27px!important;flex-basis:auto!important;background:var(--green-soft)!important;border-radius:7px!important;display:grid!important;place-items:center!important;font-size:17px!important}
+#secTheme .ku-scenarios button b{font-size:12.5px!important;line-height:1.3!important;white-space:normal!important;word-break:keep-all!important}
+#secTheme .ku-scenarios button small{display:none!important}
+#secTheme .ku-scenarios button[aria-pressed="true"],#secTheme .ku-scenarios button.ku-scene-selected{background:var(--green)!important;border-color:var(--green)!important;color:#fff!important;box-shadow:0 2px 8px #04623536!important}
+#secTheme .ku-scenarios button[aria-pressed="true"]>span{background:#ffffff25!important;color:white!important}
+#secTheme .ku-scenarios button[aria-pressed="true"]:after{content:'✓';position:absolute;right:4px;top:3px;font-size:10px;font-weight:900}
+#secTheme .ku-scenarios button>span svg{display:block!important;width:21px;height:21px;stroke:var(--green)!important}
+#secTheme .ku-scenarios button[aria-pressed="true"]>span svg{stroke:#fff!important}
+#secTheme .ku-scenarios button{position:relative!important}
+#secTheme .ku-themes-extra{margin:8px 12px 12px;border-top:1px dashed var(--line);padding-top:6px}
+#secTheme .ku-themes-extra>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;font-weight:850;color:var(--green);min-height:34px}
+#secTheme .ku-themes-extra>summary::-webkit-details-marker{display:none}
+#secTheme .ku-themes-extra .coll{padding:6px 0!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px}
+#secTheme .ku-themes-extra .collmore{padding:5px 0 0}
+@media(max-width:420px){#secTheme .ku-scenarios{grid-template-columns:repeat(2,minmax(0,1fr))!important}#secTheme .ku-scenarios button b{font-size:12px!important}}
+.ku-reset-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 13px;border-bottom:1px dashed var(--line);color:var(--muted);font-size:11.5px}
+.ku-reset-row button{flex:none;font-size:12px;font-weight:850;border:1px solid var(--green);color:var(--green);background:var(--paper);padding:5px 10px;border-radius:20px}
+.ku-reset-row button:hover{background:var(--green-soft)}
+#advF .ku-advanced-reset{padding:8px 2px 9px;margin-bottom:4px}
+/* 두 개의 이동수단 탭 + 거리 네 칩을 명확히 그룹화 */
+#secCond #fMove{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;border-radius:8px}
+#secCond #fRad{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;border-radius:8px}
+#secCond #fMove button,#secCond #fRad button{min-width:0!important;min-height:42px!important;padding:7px 3px!important;font-weight:800!important;font-size:13px!important}
+#secCond #fMove button[aria-pressed="true"],#secCond #fRad button[aria-pressed="true"],#secCond .seg button[aria-pressed="true"]{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+#secCond .mchips button[aria-pressed="true"],#advF .mchips button[aria-pressed="true"]{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important;box-shadow:0 2px 8px #00703e2a!important}
+#secCond .mchips button[aria-pressed="true"] .cn{background:#ffffff33!important;color:#fff!important}
+#kuMoreFilters.ku-filter-active,#secCond[open]>summary,#advF[open]>summary{color:var(--green);font-weight:900}
+/* 대표 메뉴는 항상 이미지 → 두 줄 메뉴명 → 건수로 정확히 정렬 */
+#kuDishStrip .ku-dish-chip{flex:0 0 108px!important;display:grid!important;grid-template-columns:minmax(0,1fr);grid-template-rows:72px 35px 16px!important;gap:4px!important;align-content:start!important;justify-items:stretch!important;min-height:145px!important;padding:7px!important}
+#kuDishStrip .ku-dish-chip img{grid-row:1;width:100%!important;height:72px!important;aspect-ratio:auto!important;object-fit:cover;border-radius:7px}
+#kuDishStrip .ku-dish-chip .ku-name{grid-row:2;height:35px!important;min-height:35px!important;max-height:35px!important;line-height:1.3!important;font-size:12px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;word-break:keep-all!important;overflow-wrap:break-word!important;overflow:hidden!important;white-space:normal!important}
+#kuDishStrip .ku-dish-chip .ku-menu-count{grid-row:3;align-self:end;text-align:center;margin:0!important;line-height:1.1!important;font-size:10px}
+@media(max-width:540px){#kuDishStrip .ku-dish-chip{flex-basis:92px!important;grid-template-rows:61px 35px 16px!important;min-height:130px!important}#kuDishStrip .ku-dish-chip img{height:61px!important}#kuDishStrip .ku-dish-chip .ku-name{font-size:11px!important}}
+/* Existing v14 CSS forced 168px mobile hero: remove fixed height to prevent search/option overlap. */
+@media(max-width:780px){.ku-hero{height:auto!important;max-height:none!important;min-height:0!important;padding-bottom:16px!important;grid-template-rows:max-content max-content max-content!important;align-content:start!important}}
+@media(max-width:540px){.ku-hero{height:auto!important;max-height:none!important;min-height:252px!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:max-content max-content max-content!important;row-gap:8px!important;padding:13px 12px 15px!important}.ku-hero .ku-hero-search{position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;width:100%!important;grid-column:1!important;grid-row:3!important;margin:0!important}.ku-hero .ku-hero-side{grid-column:1!important;grid-row:2!important}}
+@media(max-width:360px){.ku-hero{min-height:260px!important}}
+.ku-nearby-extras{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:2px 0 0}
+.ku-nearby-extras em{font-style:normal;font-size:10px;font-weight:750;line-height:1.3;color:#156944;background:var(--green-soft);border:1px solid #d0e7d6;padding:2px 5px;border-radius:4px;word-break:keep-all}
+.ku-nearby-extras .ku-nearby-noextra{color:var(--muted);background:var(--bg);border-color:var(--line);font-weight:500}
+.ku-nearby-card{min-height:111px!important;grid-template-columns:90px minmax(0,1fr) 45px!important}
+.ku-nearby-facts{font-size:11px;gap:5px 9px}
+@media(max-width:780px){.ku-nearby-list{grid-template-columns:1fr!important}.ku-nearby-card{min-height:88px!important;grid-template-columns:72px minmax(0,1fr) 42px!important;gap:7px}.ku-nearby-score{display:flex!important}.ku-nearby-card .ku-n-menu{display:block!important}.ku-nearby-card .ku-nearby-facts span:nth-child(n+2){display:inline!important}.ku-nearby-extras em{font-size:9px}}
+@media(max-width:400px){.ku-nearby-card{grid-template-columns:64px minmax(0,1fr) 38px!important}.ku-nearby-data>strong{font-size:12px}}
+</style>
+<script id="ku-v19-behavior">
+/* v19: keep four distance chips synchronized across move mode, header, full filters, and theme selection */
+(()=>{
+ const $=id=>document.getElementById(id);
+ const walk=[['500','500m'],['1000','1km'],['1500','1.5km'],['2000','2km']];
+ const car=[['2000','2km'],['4000','4km'],['6000','6km'],['10000','10km']];
+ const rads=$('fRad'),header=$('kuDistance'),move=$('fMove');
+ const info=()=>F.move==='car'?car:walk;
+ let updating=false;
+ function syncEverything(){
+  if(updating)return;updating=true;
+  try{
+   const ranges=info();
+   if(!ranges.some(([v])=>v===String(F.rad))){
+    const want=Number(F.rad);F.rad=Number(ranges.find(([v])=>Number(v)>=want)?.[0]||ranges.at(-1)[0]);
+   }
+   const bs=[...rads.querySelectorAll('button[data-v]')];
+   bs.forEach((b,i)=>{if(!ranges[i])return;b.dataset.v=ranges[i][0];b.textContent=ranges[i][1];b.setAttribute('aria-pressed',String(String(F.rad)===ranges[i][0]));});
+   [...move.querySelectorAll('button')].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===F.move)));
+   if(header){const val=String(F.rad);header.innerHTML=ranges.map(([v,t])=>`<option value="${v}" ${v===val?'selected':''}>${F.move==='car'?'차량 ':'도보 '}${t}</option>`).join('');}
+   for(const [id,val] of [['kuMeal',F.meal],['kuPeople',String(F.ppl)]]){const el=$(id);if(el&&[...el.options].some(o=>o.value===String(val)))el.value=val;}
+   const advN=$('advN'),more=$('kuMoreFilters');if(more){const n=GKEYS.filter(k=>!['dist','dish'].includes(k)).reduce((sum,k)=>sum+(F[k]?.size||0),0);more.classList.toggle('ku-filter-active',n>0);more.setAttribute('aria-label',n?`상세 조건 ${n}개 선택됨`:'상세 조건 열기');}
+   const condReset=$('kuCondReset');if(condReset)condReset.disabled=false;
+  }finally{updating=false;}
+ }
+ // use existing refresh function as single source of truth
+ const before=refresh;
+ refresh=function(){syncEverything();before();};
+ // The original move switch can change F.rad to a nonlisted value, normalize it before render
+ syncEverything();
+ $('kuCondReset')?.addEventListener('click',()=>{$('tReset')?.click();syncEverything();});
+ $('kuAdvReset')?.addEventListener('click',()=>{for(const key of ['dist','areas','zones','roads','ptypes','rep','conv','pay','stype'])F[key]?.clear();F.dist=new Set(DIST_BASE);refresh();});
+ // filter edits show the selected state and sync the upper controls; original handlers still own state changes
+ document.addEventListener('change',e=>{if(e.target.closest('#kuMeal,#kuDistance,#kuPeople'))requestAnimationFrame(syncEverything);});
+ document.addEventListener('click',e=>{if(e.target.closest('#fMove,#fRad,#fPpl,#fMeal,#fCat,#fgroups,#coll,[data-scene],#tReset,#fDishWrap'))requestAnimationFrame(syncEverything);});
+ // no extra row above results: all 6 scenario buttons live within #secTheme
+ const theme=$('secTheme');if(theme){theme.open=window.innerWidth>=781;}
+ // On the same panel, keep quick scenario state distinct from the longer editorial themes
+ const r1=document.querySelectorAll('#secTheme .ku-scenarios [data-scene]');
+ r1.forEach(b=>b.addEventListener('click',()=>{if(theme&&!theme.open)theme.open=true;}));
 })();
 </script>
 </body>
