@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>맛집김군 (Beta) · 건대 생명과학관 주변 · 지역별 식당 보강</title>
+<title>맛집김군 (Beta) · 건대 생명과학관 주변 · 34개 메뉴별 식당 보강</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -1369,6 +1369,318 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
  .ku-results .list .item.ku-card .ku-card-name{font-size:19px!important}
 }
 @media(max-width:360px){.ku-results .list .item.ku-card{grid-template-columns:88px minmax(0,1fr)!important}.ku-results .list .item.ku-card>.cphoto{height:108px!important;min-height:108px!important}.ku-results .list .item.ku-card .ku-card-name{font-size:17px!important}}
+
+/* ===== v11 menu-photo intelligence + three always-visible nearby restaurant cards ===== */
+:root{--ku-emphasis:#086747;--ku-border:#dfe9e1}
+@media (min-width:1100px){.fcols.ku-results{grid-template-columns:minmax(0,1.48fr) minmax(455px,1fr)!important;gap:18px!important}}
+@media (min-width:781px) and (max-width:1099px){.fcols.ku-results{grid-template-columns:minmax(0,1.2fr) minmax(355px,1fr)!important;gap:12px!important}}
+.ku-map-preview{padding:15px!important;border-radius:18px!important;background:var(--paper)!important;box-shadow:0 8px 30px rgba(3,70,39,.09)!important}
+.ku-map-preview .map-preview-title{padding:2px 4px 12px!important}
+.ku-map-preview .map-preview-title b{font-size:18px!important;letter-spacing:-.045em}
+.ku-map-preview .mapbox svg{height:clamp(310px,39vh,420px)!important;min-height:310px!important}
+.ku-map-preview #mapPanel{display:none!important}
+.ku-nearby-three{margin-top:14px;padding:13px 12px 12px;border:1px solid #dce8df;background:linear-gradient(145deg,#f5faf6,var(--paper) 58%);border-radius:13px}
+.ku-nearby-heading{display:flex;justify-content:space-between;align-items:start;gap:10px;margin-bottom:12px}
+.ku-nearby-heading>div{display:flex;flex-direction:column;gap:3px}.ku-nearby-heading strong{font-size:17px;font-weight:900;letter-spacing:-.04em}.ku-nearby-heading small{font-size:11px;color:var(--muted)}
+.ku-nearby-count{flex:none;border-radius:24px;background:var(--green-soft);padding:3px 9px;color:var(--green);font-size:12px;font-weight:900}
+.ku-nearby-list{display:grid;gap:9px}
+.ku-nearby-card{display:grid;grid-template-columns:94px minmax(0,1fr) 48px;align-items:stretch;width:100%;gap:10px;text-align:left;background:var(--paper);border:1px solid #dce8df;border-radius:11px;padding:8px;cursor:pointer;color:var(--ink);box-shadow:0 2px 7px #00512d08;transition:box-shadow .18s,border-color .18s}
+.ku-nearby-card:hover,.ku-nearby-card:focus-visible{border-color:var(--green);box-shadow:0 4px 13px #004e2e23;outline:0}.ku-nearby-card[aria-pressed="true"]{border:2px solid var(--green);padding:7px;background:var(--green-soft)}
+.ku-nearby-photo{position:relative;overflow:hidden;min-height:84px;background:#e3eee5;border-radius:7px}
+.ku-nearby-photo img{width:100%;height:100%;display:block;object-fit:cover;position:absolute;inset:0}
+.ku-nearby-photo .ku-n-rank{position:absolute;top:0;left:0;z-index:1;min-width:23px;height:23px;display:grid;place-items:center;border-radius:0 0 7px 0;background:#087347;color:#fff;font-size:12px;font-weight:900}
+.ku-nearby-photo .ku-n-rank[data-rank="1"]{background:#b78817}.ku-nearby-photo .ku-n-rank[data-rank="2"]{background:#657e76}.ku-nearby-photo .ku-n-rank[data-rank="3"]{background:#975b35}
+.ku-nearby-data{display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0}
+.ku-nearby-data>strong{font-size:15px;font-weight:900;line-height:1.3;word-break:keep-all;overflow-wrap:anywhere;letter-spacing:-.035em}
+.ku-nearby-data>.ku-n-menu{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ku-nearby-facts{display:flex;gap:7px;flex-wrap:wrap;align-items:center;font-size:11px;color:#53645b}
+.ku-nearby-facts b{font-size:11px;color:var(--green-deep)}.ku-nearby-score{border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;color:var(--green);text-align:center}
+.ku-nearby-score b{font-size:21px;line-height:1.1}.ku-nearby-score small{font-size:10px;color:var(--muted)}.ku-nearby-score i{font-size:12px;font-style:normal}
+.ku-map-disclaimer{font-size:10.5px!important;color:var(--muted);line-height:1.5;margin:10px 4px 0!important}
+.ku-results .list .item.ku-card{transition:border-color .2s,box-shadow .2s!important}
+.ku-results .list .item.ku-card:hover{border-color:#7fbea0!important;box-shadow:0 7px 24px rgba(10,94,58,.12)!important}
+.ku-results .list .item.ku-card .ku-card-name{font-weight:950!important;letter-spacing:-.045em!important;text-decoration:none!important;color:#102c20!important}
+.ku-card .cphoto .ku-food-label{font-weight:800}
+.ku-card .cphoto .ku-photo-score{position:absolute;left:8px;top:8px;display:flex;align-items:center;gap:4px;padding:5px 9px;border-radius:7px;background:linear-gradient(110deg,#03482d,#0b7b4e);box-shadow:0 2px 7px #001b1140;color:white;font-size:12px;font-weight:900}
+.ku-photo-score .ku-crown{color:#ffe5a4}.ku-card .ku-food-image{position:relative}
+.ku-card-menu{display:flex;flex-direction:column;align-items:stretch!important;gap:7px!important;padding:8px!important;border-radius:10px!important}
+.ku-card-menu .ku-dish-head{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}.ku-card-menu .ku-dish-head strong{font-size:14px!important;line-height:1.3}
+.ku-card-menu .ku-menu-cta{margin-left:auto}.ku-menu-gallery{display:flex;gap:6px;overflow-x:auto;padding:1px 0 3px;scrollbar-width:thin;max-width:100%}
+.ku-menu-gallery button{position:relative;display:flex;flex:0 0 61px;height:45px;align-items:center;justify-content:center;padding:0;border:1px solid #d1dfd5;border-radius:7px;overflow:hidden;background:#eef1ed;cursor:pointer;box-shadow:none}
+.ku-menu-gallery button:hover,.ku-menu-gallery button:focus-visible{outline:2px solid var(--green);outline-offset:1px}
+.ku-menu-gallery img{width:100%;height:100%;object-fit:cover;display:block}.ku-menu-gallery .ku-thumb-tip{position:absolute;bottom:0;left:0;right:0;padding:1px 2px;background:#00251bb8;color:white;font-size:8px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ku-card .ku-card-summary{-webkit-line-clamp:2!important}
+.ku-card .ku-card-facts{background:#f6faf7;border:1px solid #edf2ed;border-radius:10px;padding:4px 2px}
+.ku-card .ku-fact-kim{background:linear-gradient(110deg,#eff7ef,#fefbf1);border-radius:9px}
+@media(max-width:1100px){.ku-nearby-card{grid-template-columns:78px minmax(0,1fr) 42px;gap:7px}.ku-nearby-data>strong{font-size:13px}.ku-nearby-facts{gap:5px;font-size:10px}}
+@media(max-width:780px){.ku-map-preview .mapwrap{display:none!important}.ku-map-preview .map-preview-title{padding:1px 4px 8px!important}.ku-map-preview{padding:11px!important;order:initial!important}.ku-nearby-three{margin-top:0}.ku-nearby-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.ku-nearby-card{grid-template-columns:1fr;gap:4px;padding:6px;min-width:0}.ku-nearby-photo{min-height:68px}.ku-nearby-score{display:none}.ku-nearby-data>strong{font-size:12px}.ku-nearby-data>.ku-n-menu{font-size:10px}.ku-nearby-facts{font-size:10px}}
+@media(max-width:540px){.ku-nearby-three{padding:10px}.ku-nearby-card .ku-nearby-facts span:nth-child(n+2){display:none}.ku-nearby-photo{min-height:60px}.ku-nearby-card .ku-n-menu{display:none}.ku-nearby-heading strong{font-size:15px}.ku-nearby-heading small{font-size:10px}.ku-card .ku-photo-score{font-size:10px!important;top:4px!important;left:4px!important;padding:3px 5px!important}.ku-card .ku-card-menu{grid-column:1/-1}.ku-menu-gallery button{flex-basis:56px;height:44px}.ku-card .ku-card-name{font-size:18px!important}}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .ku-nearby-three,:root:not([data-theme="light"]) .ku-nearby-card,:root:not([data-theme="light"]) .ku-card-facts{background:var(--paper)}}
+
+/* v11 polish: bring the restaurant list and Top 3 comparison closer to the first viewport */
+@media(min-width:781px){.ku-hero{min-height:224px!important;padding-top:21px!important;padding-bottom:78px!important}.ku-hero-search{bottom:12px!important}.ku-hero h1{font-size:clamp(34px,3.8vw,52px)!important;margin:0!important}.ku-hero p{font-size:14px!important}.ku-scenarios{margin:5px 0 7px!important;gap:8px!important}.ku-scenarios button{min-height:63px!important;padding:8px!important}.qt.qx button{min-height:48px!important}.ku-results .list .item.ku-card{min-height:205px}}
+#qbar{margin-bottom:2px!important}.quick{padding:4px 0!important;gap:4px!important;margin-bottom:5px!important;background:none!important;border:0!important;display:block!important}.quick>.row{margin:0!important;padding:0!important}.quick>.row #goRes{display:none}.quick>.row #tReset{padding:5px 10px!important;font-size:11px!important;background:var(--paper)!important}
+.quick>.extras{margin:0!important}.ku-extra-toggle{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:5px 0 8px}.ku-extra-toggle>summary{display:flex;align-items:center;gap:10px;list-style:none;cursor:pointer;color:var(--green);font-weight:800;padding:8px 12px;border-radius:8px;background:var(--green-soft);font-size:12px}
+.ku-extra-toggle>summary::-webkit-details-marker{display:none}.ku-extra-toggle[open]>summary{margin-bottom:9px}.ku-extra-toggle #weekly{margin:6px 0 9px}.ku-extra-toggle .recent{margin-bottom:6px}
+.ku-results #top3{margin-top:3px!important}.ku-list-heading{margin-top:5px!important}
+.ku-map-preview .mapwrap{margin:0!important}.ku-nearby-heading{margin-bottom:8px!important}
+@media(max-width:780px){.ku-hero{min-height:180px!important;padding:18px 15px 73px!important}.ku-hero h1{font-size:33px!important}.ku-hero .hero-copy p{display:none}.ku-scenarios{margin:3px 0 9px!important}.ku-extra-toggle #weekly{max-width:100%}}
+
+@media(min-width:781px){.ku-hero{height:224px!important;min-height:0!important;max-height:224px!important;padding-top:14px!important}.ku-hero h1{font-size:45px!important}.ku-hero .hero-copy{line-height:1.3}}
+#tab-find .fright>.vizd{margin-top:18px!important}
+#tab-find .fright>.resbar{margin-top:3px!important}
+#tab-find .fright>.list{margin-top:3px!important}
+#tab-find #top3{margin-top:18px!important}
+@media(max-width:780px){.ku-hero{height:168px!important;max-height:168px!important;min-height:0!important}}
+
+/* v11 final: all three recommended restaurants fit together with the map in the right comparison panel */
+@media(min-width:781px){
+ .ku-map-preview .mapbox svg{height:308px!important;min-height:308px!important}
+ .ku-nearby-three{padding:10px!important;margin-top:9px!important}
+ .ku-nearby-heading{margin-bottom:7px!important}
+ .ku-nearby-list{gap:6px!important}
+ .ku-nearby-card{grid-template-columns:76px minmax(0,1fr) 38px!important;min-height:76px!important;padding:5px!important;gap:7px!important}
+ .ku-nearby-card[aria-pressed="true"]{padding:4px!important}
+ .ku-nearby-photo{min-height:72px!important}
+ .ku-nearby-data>strong{font-size:13.5px!important}
+ .ku-nearby-score b{font-size:19px!important}
+ .ku-map-preview .mapbox .mk:not(.top):not(.sel){opacity:.5}
+ .ku-map-preview .mapbox .mk:not(.top):not(.sel) text{display:none}
+}
+
+@media(min-width:900px){.fabs{display:none!important}} /* do not obscure the third restaurant in the right-hand comparison */
+
+
+/* v12: bottom disclosure, half/half editorial feature and 34 photo menu filters */
+.ku-fixed-disclosure{position:fixed;z-index:14;left:0;right:0;bottom:0;pointer-events:none;display:flex;justify-content:center;padding:0 max(10px,env(safe-area-inset-right,0px));}
+.ku-fixed-disclosure details.disc{width:min(1280px,100%);margin:0!important;pointer-events:auto;background:var(--green-deep);border:1px solid rgba(255,255,255,.22);border-radius:9px 9px 0 0;color:#fff;box-shadow:0 -3px 18px rgba(0,0,0,.15);padding:0!important;max-height:min(65vh,520px);overflow:auto;scrollbar-width:thin;}
+.ku-fixed-disclosure details.disc>summary{display:flex;gap:10px;padding:5px 15px;min-height:32px;color:#fff;line-height:1.25;align-items:center}
+.ku-fixed-disclosure details.disc>summary b{color:#fff;font:700 12px var(--f-body)}
+.ku-fixed-disclosure details.disc .ic{font-size:13px}
+.ku-fixed-disclosure details.disc .ds{color:#e5eee8;font-size:11px}
+.ku-fixed-disclosure details.disc>div{background:var(--paper);color:var(--ink);padding:12px 16px;margin:0}
+.ku-fixed-disclosure details.disc p{margin:5px 0 10px;line-height:1.6}
+.ku-fixed-disclosure details.disc:focus-within{outline:2px solid #abd7bc;outline-offset:-2px}
+.ku-feature-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch;margin:12px 0 14px;}
+.ku-feature-pick,.ku-feature-themes{min-width:0;overflow:hidden;border:1px solid var(--line);background:var(--paper);border-radius:13px;box-shadow:0 2px 10px rgba(11,75,40,.045)}
+.ku-feature-title{display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line);min-height:51px}
+.ku-feature-title b{font-weight:900;font-size:16px}.ku-feature-title small{font-size:11px;color:var(--muted);margin-left:auto}
+.ku-feature-dot{border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;width:24px;height:24px;font-size:14px}
+#kuWeeklyMount{height:calc(100% - 50px);padding:10px}
+#kuWeeklyMount .weekly{height:100%;min-height:180px;margin:0;box-sizing:border-box;grid-template-columns:68px minmax(0,1fr);align-content:center;align-items:center;padding:17px 18px;border-radius:9px;}
+#kuWeeklyMount .weekly h3{font-size:21px;line-height:1.3}#kuWeeklyMount .weekly .row{gap:6px}
+.ku-feature-themes #secTheme{border:0;border-top:0;box-shadow:none;margin:0;height:100%}
+.ku-feature-themes #secTheme>summary{min-height:51px!important;padding:10px 14px;border-bottom:1px solid var(--line);display:flex!important;flex-wrap:wrap;gap:6px;justify-content:space-between}
+.ku-feature-themes #secTheme>summary .pt{font-size:16px;font-family:var(--f-body)}
+.ku-feature-themes #secTheme>summary .ps{grid-column:auto;grid-row:auto;flex-basis:auto;max-width:70%;font-size:11px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ku-feature-themes #secTheme .pa{font-size:11px;margin-left:auto;grid-column:auto;grid-row:auto}
+.ku-feature-themes #secTheme .coll{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px;padding:10px!important}
+.ku-feature-themes #secTheme .coll button{min-height:61px;padding:8px!important;border-radius:8px!important}
+.ku-feature-themes #secTheme .coll button .ti{width:36px;height:36px}
+.ku-feature-themes #secTheme .coll button b{font-size:12.5px}
+.ku-feature-themes #secTheme .coll button:nth-child(n+5){display:none!important}
+.ku-feature-themes #secTheme:has(#collMore[aria-expanded="true"]) .coll button:nth-child(n+5),.ku-feature-themes #secTheme .coll button[aria-pressed="true"]{display:grid!important}
+.ku-feature-themes #secTheme .collmore{padding:2px 10px 10px}
+.ku-feature-themes #secTheme .collmore button{width:100%;border-radius:7px;min-height:32px;background:var(--green-soft);color:var(--green);border-color:transparent;font-size:12px;font-weight:800}
+.ku-dish-ribbon{margin:8px 0 14px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:10px 12px 12px}
+.ku-ribbon-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;gap:12px}.ku-ribbon-head strong{font-weight:900;font-size:14px}.ku-ribbon-head strong span{color:var(--green)}
+.ku-ribbon-arrows{display:flex;gap:5px}.ku-ribbon-arrows button{border:1px solid var(--line);width:29px;height:26px;padding:0;border-radius:5px;color:var(--green);font-size:19px;line-height:1}
+.ku-dish-strip{display:flex;gap:9px;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;scroll-snap-type:x proximity;padding:1px 0 6px}
+.ku-dish-chip{flex:0 0 95px;scroll-snap-align:start;min-width:0;display:flex;flex-direction:column;gap:5px;align-items:center;padding:6px!important;border:1.5px solid var(--line);border-radius:9px!important;background:var(--paper);color:var(--ink);cursor:pointer;position:relative}
+.ku-dish-chip img{width:100%;height:61px;object-fit:cover;display:block;border-radius:6px}
+.ku-dish-chip .ku-name{font-weight:800;font-size:12px;line-height:1.24;text-align:center;min-height:28px;display:grid;place-items:center;word-break:keep-all}
+.ku-dish-chip[aria-pressed="true"]{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green);background:var(--green-soft)}
+#fDishWrap #fg-dish{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:6px}
+#fDishWrap #fg-dish button:not([data-v=""]){display:flex!important;flex-direction:column;justify-content:center;gap:5px;min-width:0;min-height:92px;padding:5px!important;border-radius:8px!important;white-space:normal}
+#fDishWrap #fg-dish button:not([data-v=""]) img{width:100%;height:56px;object-fit:cover;border-radius:5px;display:block}
+#fDishWrap #fg-dish button:not([data-v=""]) .cn{font-size:10px}
+#fDishWrap #fg-dish button[data-v=""]{grid-column:1/-1}
+@media(max-width:1040px){#fDishWrap #fg-dish{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:720px){.ku-feature-row{grid-template-columns:1fr;gap:9px}.ku-feature-themes #secTheme .coll{grid-template-columns:repeat(2,minmax(0,1fr))!important}.ku-feature-themes #secTheme .coll button{min-height:56px}.ku-dish-chip{flex-basis:88px}.ku-dish-chip img{height:55px}.ku-dish-strip{gap:7px}#fDishWrap #fg-dish{grid-template-columns:repeat(3,minmax(0,1fr))!important}.ku-fixed-disclosure{bottom:calc(66px + env(safe-area-inset-bottom,0px));padding:0 6px}.ku-fixed-disclosure details.disc>summary{min-height:30px;padding:5px 10px}.ku-fixed-disclosure details.disc>summary b{font-size:11.5px}.ku-fixed-disclosure details.disc .ds{font-size:10px}.ku-feature-pick .weekly{min-height:150px!important}.ku-fixed-disclosure details.disc{border-radius:8px 8px 0 0;max-height:48vh}}
+@media(max-width:400px){#fDishWrap #fg-dish{grid-template-columns:repeat(2,minmax(0,1fr))!important}.ku-dish-chip{flex-basis:84px}.ku-dish-chip img{height:50px}}
+@media(min-width:900px){body{padding-bottom:39px!important}}@media(max-width:899px){body{padding-bottom:calc(105px + env(safe-area-inset-bottom,0px))!important}}
+.ku-candidate{display:grid!important;grid-template-columns:150px minmax(0,1fr)!important;gap:14px!important;align-items:stretch;min-width:0;border-radius:12px!important;overflow:hidden}
+.ku-candidate figure{margin:0!important;height:100%;min-height:162px;position:relative;max-width:none!important;grid-column:1;grid-row:1}
+.ku-candidate figure img{height:100%;width:100%;object-fit:cover}
+.ku-candidate .ku-candidate-data{display:flex;flex-direction:column;gap:5px;padding:7px 8px 8px 0;min-width:0}
+.ku-candidate .ku-candidate-data h3{font-size:20px;margin:0;line-height:1.3;font-weight:900}
+.ku-candidate .ku-candidate-data p{font-size:12.5px;color:var(--muted);margin:0;line-height:1.45}
+.ku-candidate .ku-candidate-data .ku-candidate-menu{font-size:14px;font-weight:800;color:var(--ink)}
+.ku-candidate .ku-candidate-data .ku-candidate-meta{display:flex;flex-wrap:wrap;gap:5px;font-size:11px;color:var(--muted)}
+.ku-candidate .ku-candidate-data .ku-candidate-meta span{padding:3px 7px;border-radius:5px;background:var(--bg);border:1px solid var(--line)}
+.ku-candidate .ku-candidate-data .ku-candidate-meta .ku-candidate-undetermined{color:var(--warn);border-color:var(--warn)}
+.ku-candidate .ku-candidate-data a{border-radius:7px;text-decoration:none;background:var(--green);color:#fff;padding:5px 11px;font-size:12px;font-weight:800;align-self:flex-start;margin-top:auto}
+@media(max-width:520px){.ku-candidate{grid-template-columns:106px minmax(0,1fr)!important;gap:9px!important}.ku-candidate figure{min-height:143px}.ku-candidate .ku-candidate-data h3{font-size:17px}.ku-candidate .ku-candidate-data{padding:6px 6px 6px 0}.ku-candidate .ku-candidate-data .ku-candidate-menu{font-size:12.5px}}
+
+
+/* v13: clear scenario selection states and interactive data-info flyout */
+.ku-scenarios button[aria-pressed="true"],.ku-scenarios button.ku-scene-selected{
+ background:linear-gradient(135deg,#e4f6ea,#f8fdf9)!important;border:2px solid #00703e!important;
+ box-shadow:0 0 0 2px rgba(0,112,62,.08),0 6px 18px rgba(0,70,38,.13)!important;
+}
+.ku-scenarios button[aria-pressed="true"] b{color:#005b34!important}
+.ku-scenarios button[aria-pressed="true"]:after{content:'✓';position:absolute;right:7px;top:5px;line-height:1;color:#00703e;font-weight:900;font-size:12px}
+.ku-scenarios button{position:relative}
+.ku-no-staff{font-size:13px;border:1px solid #e1bb74;background:#fff7e9;color:#7a4505;border-radius:9px;padding:13px}
+.ku-info-menu{position:relative;z-index:99;flex:0 0 auto;align-self:center}
+.ku-info-trigger{display:grid;place-items:center;cursor:pointer;list-style:none;width:34px;height:34px;
+ border:1px solid #9ab9a7;border-radius:50%;background:#ebf6ee;color:#075a34;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.ku-info-trigger::-webkit-details-marker{display:none}
+.ku-info-trigger span{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;
+ font:900 19px/1 var(--f-body);color:#fff;background:#00703e}
+.ku-info-trigger:hover,.ku-info-menu[open] .ku-info-trigger{background:#d6eedf;border-color:#00703e;transform:translateY(-1px)}
+.ku-info-trigger:focus-visible{outline:3px solid #00703e;outline-offset:3px}
+.ku-info-panel{position:absolute;right:-43px;top:calc(100% + 14px);width:min(430px,calc(100vw - 24px));max-height:65vh;overflow:auto;
+ background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--green);border-radius:14px;
+ padding:16px 18px;box-shadow:0 16px 52px rgba(0,34,18,.24);color:var(--ink);font-size:13px;line-height:1.55;
+ transform-origin:top right;animation:kuInfoDrop .24s cubic-bezier(.18,.78,.3,1) both}
+.ku-info-panel:before{content:'';position:absolute;right:50px;top:-10px;border:6px solid transparent;border-bottom-color:#00703e}
+.ku-info-panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding-bottom:9px}
+.ku-info-panel-head strong{font-size:16px;color:var(--green)}.ku-info-panel-head small{font-size:11px;color:var(--muted);text-align:right}
+.ku-info-panel p{margin:10px 0 0;color:var(--ink)}.ku-info-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@keyframes kuInfoDrop{from{opacity:0;transform:translateY(-12px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:720px){.ku-info-trigger{width:30px;height:30px}.ku-info-trigger span{width:22px;height:22px;font-size:16px}
+ .ku-info-panel{position:fixed;right:10px;left:10px;top:65px;width:auto;max-height:min(70vh,560px);padding:14px;transform-origin:top center}
+ .ku-info-panel:before{display:none}}
+@media(prefers-reduced-motion:reduce){.ku-info-panel{animation:none}.ku-info-trigger{transition:none}}
+
+
+/* v14: coverage-count labels on 34 menu filters */
+.ku-dish-chip .ku-menu-count{display:block;font:700 10px/1.2 var(--f-body);color:var(--muted);margin-top:2px;white-space:nowrap}
+.ku-dish-chip[aria-pressed="true"] .ku-menu-count{color:#08623a}
+.ku-candidate{border-left:3px solid #3c8a62!important}
+.ku-candidate .ku-candidate-data>p:first-child{font-size:11px;color:#31674e}
+@media(max-width:520px){.ku-dish-chip .ku-menu-count{font-size:9.5px}}
+/* v15 | Compact result tabs · 34-menu tab · one-line conditions */
+.ku-list-heading-v15{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;margin:12px 0 8px!important;padding:0!important;border-bottom:1px solid var(--line)}
+.ku-list-heading-v15 .ku-heading-left{min-width:0;flex:1}
+.ku-results-tabs{display:flex;align-items:stretch;gap:2px;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+.ku-results-tabs::-webkit-scrollbar{display:none}
+.ku-results-tabs button{flex:0 0 auto;min-width:0;padding:12px 12px 10px;font:900 18px/1.2 var(--f-body);letter-spacing:-.035em;background:transparent;border:0;border-radius:0;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent;transition:color .17s ease,background .17s ease,border-color .17s ease}
+.ku-results-tabs button[aria-selected="true"]{color:var(--green);border-bottom-color:var(--green);background:color-mix(in srgb,var(--green) 5%,transparent)}
+.ku-results-tabs button:hover{color:var(--green);background:var(--green-soft)}
+.ku-results-tabs button span{font-weight:800;font-size:13px}
+.ku-list-heading-v15 .ku-heading-left>p{margin:0 0 6px 12px!important;font-size:11.5px;color:var(--muted)}
+.ku-heading-actions{display:flex;align-items:center;gap:7px;white-space:nowrap;flex:0 0 auto}
+.ku-heading-actions>a{padding:6px 0 6px 8px;font-size:12px!important;font-weight:800;color:var(--green);text-decoration:none}
+.ku-reset-btn{display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid var(--line);border-radius:50%;font-size:26px;font-weight:700;line-height:1;background:var(--paper);color:var(--green);transition:transform .2s,background .2s}
+.ku-reset-btn:hover{transform:rotate(-35deg);background:var(--green-soft);border-color:var(--green)}
+.ku-menu-tab-panel[hidden]{display:none!important}
+.ku-menu-tab-panel{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--green);border-radius:0 0 12px 12px;padding:12px 14px 8px;margin:0 0 10px;animation:kuPanelIn .20s ease-out}
+@keyframes kuPanelIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.ku-menu-tab-expl{margin:0 0 8px;font-size:12px;color:var(--muted)}
+.ku-menu-tab-panel .ku-dish-ribbon{margin:0!important;padding:0 0 8px!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.ku-menu-tab-panel .ku-ribbon-head{margin-bottom:6px}
+.ku-menu-tab-panel .ku-menu-statistics{display:block!important;margin:5px 0 0!important;padding:0!important;border:1px solid var(--line)!important;border-radius:9px!important;background:var(--paper)}
+.ku-menu-tab-panel .ku-menu-statistics>summary{padding:8px 12px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ku-menu-tab-panel .ku-menu-statistics h3{font-size:13px!important;color:var(--green)}
+.ku-menu-tab-panel .ku-menu-statistics .vsub,.ku-menu-tab-panel .ku-menu-statistics #menuViz{margin:6px 12px}
+.ku-menu-tab-panel .ku-menu-statistics>summary::-webkit-details-marker{display:none}
+.ku-dish-advanced{border:1px solid var(--line);border-radius:9px;margin:8px 0;padding:0;background:var(--paper)}
+.ku-dish-advanced>summary{display:flex;align-items:center;gap:9px;cursor:pointer;list-style:none;padding:9px 12px;font-weight:800;color:var(--green);font-size:13px}
+.ku-dish-advanced>summary::-webkit-details-marker{display:none}
+.ku-dish-advanced>summary span:first-child{margin-left:auto;font-size:12px;background:var(--green-soft);border-radius:10px;padding:1px 8px}
+.ku-dish-advanced>summary .ku-disclosure-arrow{font-size:18px;color:var(--muted);transition:transform .15s}
+.ku-dish-advanced[open] .ku-disclosure-arrow{transform:rotate(180deg)}
+.ku-dish-advanced #fDishWrap{padding:10px;border-top:1px solid var(--line)}
+#secCond:not([open]),#secTheme:not([open]){max-height:60px;overflow:hidden}
+#selbar.selbar{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;overflow-x:auto!important;overflow-y:hidden!important;max-width:100%;min-width:0;padding:6px 9px!important;gap:5px!important;white-space:nowrap;scrollbar-width:thin;scrollbar-color:var(--green-mid) transparent;border-radius:7px!important;margin:4px 0 9px!important}
+#selbar.selbar:empty{display:none!important}
+#selbar.selbar>b{white-space:nowrap;font-size:12px!important;flex:none;margin-right:3px!important}
+#selbar.selbar button{flex:none!important;white-space:nowrap!important;min-height:28px!important;font-size:11.5px!important;padding:2px 6px 2px 9px!important}
+#selbar.selbar button i{width:16px!important;height:16px!important;font-size:11px!important}
+#selbar.selbar button.all{padding:2px 6px!important}
+.quick .ku-extra-toggle{display:none!important} /* The old three-topic line no longer occupies space */
+.ku-poll-open{margin-left:auto;padding:5px 9px;font-size:11px;font-weight:800;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--green);white-space:nowrap}
+.ku-feature-title{display:flex;align-items:center;gap:6px}.ku-feature-title>.ku-poll-open{align-self:center}
+.ku-poll-dialog{width:min(580px,calc(100vw - 24px));max-height:85vh;border:1px solid var(--line)!important;border-radius:15px!important;padding:16px!important;box-shadow:0 16px 55px rgba(0,0,0,.22)}
+.ku-poll-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.ku-poll-dialog-head strong{font-size:17px;font-weight:900;color:var(--green)}
+.ku-poll-dialog-head button{border-radius:50%;width:30px;height:30px;padding:0}
+.ku-poll-content,.ku-recent-content{padding:5px 0}
+.ku-poll-dialog .recent{flex-wrap:wrap;overflow:visible}
+.ku-info-panel{max-width:min(370px,calc(100vw - 20px))!important;padding:12px!important}
+.ku-info-panel p{margin:7px 0!important;font-size:12px;line-height:1.55}
+.ku-info-panel-head strong{font-size:14px!important}
+#tab-find>.notes,#tab-find .ku-fixed-disclosure{display:none!important}
+@media(max-width:780px){.ku-list-heading-v15{align-items:stretch!important;gap:4px!important}.ku-results-tabs button{font-size:14px;padding:11px 7px 9px}.ku-results-tabs button span{font-size:11px}.ku-list-heading-v15 .ku-heading-left>p{font-size:10.5px;margin:0 0 5px 6px!important}.ku-heading-actions{gap:3px}.ku-heading-actions>a{font-size:10px!important;padding:5px 0!important}.ku-reset-btn{height:31px;width:31px;font-size:22px}.ku-menu-tab-panel{padding:10px}.ku-dish-chip{flex-basis:90px}.ku-poll-open{padding:3px 7px;font-size:11px}}
+@media(max-width:440px){.ku-list-heading-v15{flex-wrap:wrap}.ku-list-heading-v15 .ku-heading-left{width:100%}.ku-heading-actions{position:absolute;right:max(16px,env(safe-area-inset-right));margin-top:44px}.ku-list-heading-v15{position:relative;padding-bottom:30px!important}.ku-list-heading-v15 .ku-heading-left>p{padding-right:145px;min-height:24px}.ku-results-tabs button{font-size:13px;padding:10px 9px 8px}.ku-heading-actions>a{font-size:10.5px!important}}
+@media(prefers-reduced-motion:reduce){.ku-menu-tab-panel{animation:none}.ku-reset-btn{transition:none}}
+
+/* v16 | Responsive hero search: PC / fold-unfolded / fold-cover / mobile.
+   Source of truth stays #q (the legacy search field), relocated to #kuSearchSlot. */
+.ku-hero{isolation:isolate;min-width:0!important}
+.ku-hero-search{
+ --ku-search-height:54px;
+ --ku-search-button:92px;
+ position:absolute!important;
+ left:clamp(16px,2.5vw,36px)!important;
+ right:auto!important;
+ bottom:clamp(11px,1.2vw,16px)!important;
+ width:min(820px,calc(100% - 2 * clamp(16px,2.5vw,36px)))!important;
+ max-width:100%!important;
+ height:var(--ku-search-height)!important;
+ min-width:0!important;
+ padding:5px!important;
+ gap:4px!important;
+ background:rgba(255,255,255,.98)!important;
+ border:1px solid rgba(5,89,49,.18)!important;
+ border-radius:999px!important;
+ box-shadow:0 5px 19px rgba(0,69,37,.12)!important;
+ z-index:8!important;
+ transition:border-color .2s,box-shadow .2s;
+}
+.ku-hero-search:focus-within{border-color:var(--green)!important;box-shadow:0 0 0 3px rgba(0,112,62,.12),0 6px 20px rgba(0,69,37,.16)!important}
+.ku-hero-search .ku-search-slot{display:flex!important;align-items:center!important;height:100%!important;flex:1 1 auto!important;min-width:0!important;width:0!important}
+.ku-hero-search .ku-search-slot .qs{height:100%!important;display:flex!important;align-items:center!important;flex:1 1 auto!important;min-width:0!important;width:100%!important}
+.ku-hero-search .ku-search-slot .qs::before{left:14px!important;width:18px!important;height:18px!important;opacity:.86}
+.ku-hero-search #q{height:100%!important;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;padding:0 8px 0 44px!important;border:0!important;border-radius:999px!important;background:transparent!important;color:var(--ink)!important;font-size:clamp(13px,1.07vw,16px)!important;font-weight:550!important;line-height:1.3!important;box-shadow:none!important;outline:0!important}
+.ku-hero-search #q::placeholder{color:#627467;opacity:1}
+.ku-hero-search #kuHeroSearchBtn{height:calc(var(--ku-search-height) - 10px)!important;min-height:0!important;min-width:var(--ku-search-button)!important;width:var(--ku-search-button)!important;max-width:var(--ku-search-button)!important;flex:0 0 var(--ku-search-button)!important;margin:0!important;padding:0 12px!important;background:#006c3e!important;color:#fff!important;border:0!important;border-radius:999px!important;font-size:14px!important;font-weight:900!important;letter-spacing:-.02em;white-space:nowrap!important;box-shadow:none!important}
+.ku-hero-search #kuHeroSearchBtn:hover{background:#00512d!important}
+.ku-hero-search #kuHeroSearchBtn:focus-visible{outline:3px solid #40b97d!important;outline-offset:2px!important}
+/* Large desktop. Keep the search visually under the hero copy, below quick conditions. */
+@media(min-width:1200px){
+ .ku-hero{padding-bottom:80px!important}
+ .ku-hero-search{--ku-search-height:54px;--ku-search-button:96px;width:min(820px,calc(100% - 72px))!important}
+}
+/* Fold unfolded, laptops and tablets landscape. */
+@media(min-width:781px) and (max-width:1199px){
+ .ku-hero{padding-bottom:76px!important}
+ .ku-hero-search{--ku-search-height:50px;--ku-search-button:84px;left:clamp(18px,2.4vw,28px)!important;width:calc(100% - 2 * clamp(18px,2.4vw,28px))!important;max-width:720px!important;bottom:12px!important}
+ .ku-hero-search .qs::before{left:12px!important}
+ .ku-hero-search #q{padding-left:39px!important;font-size:14px!important}
+}
+/* Fold mid-width and portrait tablet. */
+@media(min-width:541px) and (max-width:780px){
+ .ku-hero{padding-bottom:76px!important}
+ .ku-hero-search{--ku-search-height:49px;--ku-search-button:76px;left:16px!important;width:calc(100% - 32px)!important;bottom:12px!important}
+ .ku-hero-search #q{font-size:13.5px!important;padding-left:40px!important}
+}
+/* Mobile and Fold cover (320px~540px). */
+@media(max-width:540px){
+ .ku-hero{padding-bottom:66px!important}
+ .ku-hero-search{--ku-search-height:47px;--ku-search-button:68px;left:11px!important;right:11px!important;width:calc(100% - 22px)!important;bottom:10px!important;padding:4px!important;gap:2px!important}
+ .ku-hero-search .ku-search-slot .qs::before{left:11px!important;width:16px!important;height:16px!important}
+ .ku-hero-search #q{padding:0 4px 0 35px!important;font-size:13px!important;letter-spacing:-.025em!important}
+ .ku-hero-search #kuHeroSearchBtn{height:calc(var(--ku-search-height) - 8px)!important;font-size:12.5px!important;padding:0 5px!important}
+}
+@media(max-width:360px){
+ .ku-hero-search{--ku-search-height:44px;--ku-search-button:59px;left:9px!important;right:9px!important;width:calc(100% - 18px)!important;padding:3px!important}
+ .ku-hero-search #q{padding-left:31px!important;font-size:12px!important}
+ .ku-hero-search .ku-search-slot .qs::before{left:9px!important;width:15px!important;height:15px!important}
+ .ku-hero-search #kuHeroSearchBtn{height:calc(var(--ku-search-height) - 6px)!important;font-size:11.5px!important}
+}
+@media(prefers-reduced-motion:reduce){.ku-hero-search{transition:none!important}}
+
+
+/* v16: keep extra tools accessible from the vote dialog instead of an extra row. */
+#tab-find .quick>.extras{display:none!important}
+#tab-find .quick{min-height:0!important;margin-bottom:4px!important;padding:0!important}
+
+
+.ku-modal-subheading{font-size:13px;font-weight:850;color:var(--green);margin:12px 0 5px}
+
 </style>
 </head>
 <body>
@@ -1385,7 +1697,16 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
     <a href="#guide" data-tab="guide">김군 미슐랭</a>
   </nav>
   <div class="hd-r">
-    <div class="ku-meta-top" aria-label="정보 갱신 현황"><span title="맛집 자료 기준일">자료 <strong>10.24</strong></span><span title="기능 업데이트 일자">기능 <strong>10.26</strong></span></div>
+    <div class="ku-meta-top" aria-label="정보 갱신 현황"><span title="맛집 자료 기준일">자료 <strong>10.24</strong></span><span title="기능 업데이트 일자">기능 <strong>10.30</strong></span></div>
+<details class="ku-info-menu" id="kuInfoMenu">
+  <summary class="ku-info-trigger" aria-label="데이터 이용 안내 및 정보 정확성 확인" title="자료 기준 및 이용 안내"><span aria-hidden="true">!</span></summary>
+  <div class="ku-info-panel" role="note">
+    <div class="ku-info-panel-head"><strong>이용 전 확인</strong><small>자료 2026.10.24 · 기능 2026.10.30</small></div>
+    <p>가격·영업시간·할인·예약은 변경될 수 있으니 방문 전 매장에 확인해 주세요. 이동 시간은 예상치이며, 김군 미슐랭은 공식 미쉐린 평가가 아닙니다.</p>
+    <p>매장 사진이 없는 경우 ‘메뉴 예시’를 표시하며, 위치·평점 미확인 매장은 임의 수치를 표시하지 않습니다.</p>
+    <div class="ku-info-actions"><button class="sm" type="button" id="discReport">정보 오류 제보</button></div>
+  </div>
+</details>
     <div class="tm-menu">
       <button type="button" class="tm-btn" id="tmBtn" aria-haspopup="dialog" aria-expanded="false" title="Teams로 앵커김군(coolzet@konkuk.ac.kr)에게 채팅"><svg class="tm-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.6 3.7c-.5.4-1.4.1-1.4-.6V16h-.5A2.5 2.5 0 0 1 2 13.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M8 8.5h8M8 12h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="tm-lb">Teams 채팅</span></button>
       <div class="tm-pop" id="tmPop" hidden role="dialog" aria-label="Teams 채팅 문의">
@@ -1414,7 +1735,7 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
     <div class="bc" style="--c:var(--c-dessert)"><span class="lb">시간대 · 인원</span><span class="tt" id="bMeal">점심</span><span class="dt">인원 <b id="bPpl">1~2명</b></span></div>
     <div class="bc" style="--c:var(--c-snack)"><span class="lb">추천 결과</span><span class="tt" id="bTop">—</span><span class="dt">총 <b id="bCnt">0</b>곳</span></div>
   </div>
-  <p class="asof" role="note"><b>자료 기준일 2026.10.24(토)</b><span class="asx">Google 지도 기준 · 총 <span id="asofN"></span>곳</span><span class="asf">기능 업데이트 <b>2026.10.26(월)</b><span class="beta-tag" style="vertical-align:1px">BETA</span></span><span class="accpill" id="accPill" hidden></span><span class="upd adm-only" id="updState" aria-live="polite"></span></p>
+  <p class="asof" role="note"><b>자료 기준일 2026.10.24(토)</b><span class="asx">Google 지도 기준 · 총 <span id="asofN"></span>곳</span><span class="asf">기능 업데이트 <b>2026.10.30(금)</b><span class="beta-tag" style="vertical-align:1px">BETA</span></span><span class="accpill" id="accPill" hidden></span><span class="upd adm-only" id="updState" aria-live="polite"></span></p>
 
 <main>
 <nav class="tabrow" aria-label="탭"><a href="#find" data-tab="find">맛집 찾기</a><a href="#map" data-tab="map">지도</a><a href="#reserve" data-tab="reserve">사전예약</a><a href="#guide" data-tab="guide">김군 미슐랭</a></nav>
@@ -1422,10 +1743,6 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
 <!-- ============ 맛집 찾기 ============ -->
 <section class="tab" id="tab-find">
 <section class="ku-hero" aria-label="맛집김군 소개"><div class="hero-copy"><span class="eyebrow">KONKUK UNIVERSITY · 맛집김군</span><h1>오늘 뭐 먹지<span class="qmark">?</span></h1><p>건국대학교 생명과학관에서 출발해<br>오늘 딱 맞는 맛집을 찾아보세요.</p></div><div class="ku-hero-side"><div class="ku-filter-strip" aria-label="빠른 조건 설정"><label>☀️ <span>식사 시간</span><select id="kuMeal"><option value="lunch">점심</option><option value="dinner">저녁</option><option value="dessert">디저트</option><option value="snack">간식</option></select></label><label>🚶 <span>이동 범위</span><select id="kuDistance"><option value="500">도보 5~10분</option><option value="1000" selected>도보 10~15분</option><option value="1500">도보 15~20분</option><option value="3000">반경 3km</option></select></label><label>👥 <span>식사 인원</span><select id="kuPeople"><option value="2">1~2명</option><option value="4">3~4명</option><option value="6">5~6명</option><option value="10">7~10명</option></select></label><button type="button" id="kuMoreFilters">⚙ 상세 조건 <span aria-hidden="true">⌄</span></button></div></div><div class="hero-art" aria-hidden="true"><span class="ku-hero-seal">맛집김군<small>KONKUK FOOD GUIDE</small></span></div><div class="ku-hero-search" id="kuHeroSearch"><div class="ku-search-slot" id="kuSearchSlot"></div><button id="kuHeroSearchBtn" type="button">검색</button></div></section>
-  <details class="disc"><summary><span class="ic" aria-hidden="true">⚠️</span><b>정보가 실제와 다를 수 있어요</b><span class="ds">2026.10.24 기준 · 방문 전 확인 · 자세히 ▾</span></summary>
-    <div><p>가게 정보는 <b class="asofb">2026년 10월 24일(토)</b> 기준 Google 지도와 리뷰를 바탕으로 모았습니다. 영업시간·휴무, 가격, 할인·이벤트, 인증 여부는 수시로 바뀌고 폐업·이전도 바로 반영되지 않습니다. 최대 인원·단체석·예약 방식은 추정값입니다. 방문과 예약 전에 가게에 직접 확인하세요.</p>
-    <div class="row2"><button class="sm" type="button" id="discReport">틀린 정보 제보하기</button><a class="btn" href="#guide" data-tab="guide">제보 현황 보기</a></div></div>
-  </details>
   <div class="accbar" id="accBar" aria-live="polite"></div>
 
   <div class="ku-scenarios" aria-label="빠른 추천"><button type="button" data-scene="lunch"><span>⏱</span><b>30분 점심</b><small>가까운 식사</small></button><button type="button" data-scene="honbap"><span>🍚</span><b>혼밥</b><small>혼자도 편안하게</small></button><button type="button" data-scene="team"><span>👥</span><b>팀 점심</b><small>동료들과 함께</small></button><button type="button" data-scene="guest"><span>👔</span><b>손님 식사</b><small>격식 있는 자리</small></button><button type="button" data-scene="hoesik"><span>🥂</span><b>회식</b><small>여럿이 함께</small></button><button type="button" data-scene="discount"><span>🎟</span><b>교직원 할인</b><small>할인 정보 확인</small></button></div>
@@ -1447,8 +1764,13 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
       <div class="poll" id="poll" aria-live="polite"></div>
       <div class="row"><button type="button" class="sm kakao" id="tTreat">💬 날짜·사람 넣어 카톡 메시지 만들기</button></div>
     </details>
-    <div class="row"><button type="button" class="sm" id="tReset">↺ 조건 모두 초기화</button><button type="button" class="sm pri" id="goRes">🍽 결과로 바로 가기 ↓</button></div>
+    <div class="row" hidden><button type="button" class="sm pri" id="goRes">결과로 바로 가기</button></div>
   </section>
+  <div class="ku-feature-row" id="kuFeatureRow" aria-label="김군 추천 및 픽테마">
+    <section class="ku-feature-pick" aria-label="이번 주 김군픽"><div class="ku-feature-title"><span class="ku-feature-dot">★</span><b>이번 주 김군픽</b><button type="button" id="kuPollOpen" class="ku-poll-open" title="점심 투표와 최근 본 맛집" aria-label="점심 투표와 최근 본 맛집 열기">▤ <span>투표</span></button></div><div id="kuWeeklyMount"></div></section>
+    <section class="ku-feature-themes" aria-label="김군 픽테마"><div id="kuThemeMount"></div></section>
+  </div>
+
 
   <details class="psec" id="secCond">
     <summary><span class="pt">조건 고르기</span><span class="ps" id="condSum"></span><span class="pa" aria-hidden="true"><em class="o">접기</em><em class="c">펼치기</em> ▾</span></summary>
@@ -1476,7 +1798,10 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
     </div><div class="ocol ocol-r">
     <div class="fg" role="group" aria-labelledby="hCat"><div class="fgh"><span class="k" id="hCat">🍽️ 메뉴</span><span class="fgs" id="sCat" aria-live="polite"></span><button type="button" class="fgc" data-clear="cats">선택 해제</button></div>
     <div class="mchips" id="fCat"></div></div>
-    <div id="fDishWrap" class="dishwrap"></div>
+    <details id="kuDishAdvanced" class="ku-dish-advanced">
+      <summary>🍽 대표 메뉴 상세 조건 <span>34종</span><span class="ku-disclosure-arrow" aria-hidden="true">⌄</span></summary>
+      <div id="fDishWrap" class="dishwrap"></div>
+    </details>
     </div></div>
     <details class="adv" id="advF"><summary><span class="at">➕ 더 많은 필터</span><span class="as">지역 · 상권 · 장소 · 평판 · 편의 · 결제 · 가게 유형</span><b id="advN" class="an" hidden></b><i aria-hidden="true">▾</i></summary>
     <div id="fgroups"></div>
@@ -1491,8 +1816,29 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
     <div class="coll" id="coll" role="group" aria-label="김군 픽 테마"></div>
     <div class="collmore"><button type="button" class="sm" id="collMore" aria-expanded="false">테마 전체 보기</button></div>
   </details>
-  <div class="ku-list-heading"><div><h2>⌁ 생명과학관 근처 맛집</h2><p>내 조건에 맞는 식당을 찾아보세요.</p></div><a href="#map" data-tab="map">전체 지도 보기 ↗</a></div><div class="fcols ku-results"><div class="fright">
-  <details class="viz vizd"><summary><h3 id="mvH">📊 메뉴별 대표 메뉴</h3><i aria-hidden="true">▾</i></summary><p class="vsub">지금 조건(시간대·거리·인원·지역)에 맞는 가게 수입니다. 줄을 누르면 그 메뉴만 봅니다.</p><div id="menuViz"></div></details>
+  <div class="ku-list-heading ku-list-heading-v15">
+    <div class="ku-heading-left">
+      <div class="ku-results-tabs" role="tablist" aria-label="주변 맛집 정보 보기">
+        <button type="button" id="kuResultsPlaces" role="tab" aria-controls="kuPlacesInfo" aria-selected="true" tabindex="0">생명과학관 근처 맛집</button>
+        <button type="button" id="kuResultsDishes" role="tab" aria-controls="kuDishTabPanel" aria-selected="false" tabindex="-1">🍽 대표 메뉴 <span>34종</span></button>
+      </div>
+      <p id="kuPlacesInfo">검색 결과와 대표 메뉴별 식당을 한곳에서 확인하세요.</p>
+    </div>
+    <div class="ku-heading-actions">
+      <button type="button" class="ku-reset-btn" id="tReset" aria-label="모든 검색 조건 초기화" title="조건 초기화">↻</button>
+      <a href="#map" data-tab="map">전체 지도 보기 ↗</a>
+    </div>
+  </div>
+  <section class="ku-menu-tab-panel" id="kuDishTabPanel" role="tabpanel" aria-labelledby="kuResultsDishes" hidden>
+    <p class="ku-menu-tab-expl">원하는 메뉴를 선택하면 아래 식당 결과가 바로 바뀝니다. 선택한 메뉴를 다시 누르면 해제됩니다.</p>
+    <div class="ku-dish-ribbon" aria-label="34종 대표 메뉴 바로 찾기"><div class="ku-ribbon-head"><strong>🍽 대표 메뉴 <span>34종</span></strong><div class="ku-ribbon-arrows"><button type="button" id="kuDishPrev" aria-label="이전 메뉴">‹</button><button type="button" id="kuDishNext" aria-label="다음 메뉴">›</button></div></div><div class="ku-dish-strip" id="kuDishStrip" role="group" aria-label="대표 메뉴별 검색 조건"></div></div>
+    <details class="viz vizd ku-menu-statistics" id="kuMenuStats">
+      <summary><h3 id="mvH">메뉴별 식당 수 비교</h3><i aria-hidden="true">▾</i></summary>
+      <p class="vsub">현재 검색 조건에 맞는 식당 수입니다. 항목을 눌러 메뉴로 바로 검색할 수 있습니다.</p>
+      <div id="menuViz"></div>
+    </details>
+  </section>
+  <div class="fcols ku-results"><div class="fright">
   <div class="selbar" id="selbar" aria-live="polite"></div>
   <div class="resbar">
     <button type="button" class="sm" id="tCompact" aria-pressed="false">☰ 간단히 보기</button>
@@ -1503,26 +1849,9 @@ body{background:var(--bg)}.wrap{max-width:1510px}.hd .wrap{min-height:69px}.hd{b
   </div>
   <section class="viz" id="top3" aria-live="polite"></section>
   <div class="lockcard" id="lockCard" hidden><h3>무료 체험 3회를 모두 사용했어요</h3><p>맛집김군은 김군에게 밥을 사 주시면 <b>3회·5회·7회 이용권 쿠폰</b>을 드려요. 쿠폰을 등록하면 광진구·성동구·구리시 전체와 차량 이동까지 모두 볼 수 있어요.</p><div class="row" style="gap:8px;justify-content:center"><button type="button" class="sm pri" data-coupon>🎟 쿠폰 등록</button><button type="button" class="sm" data-gift="open">🎁 밥 사러 가기</button></div></div>
-  <div id="kuVerifiedSearch" class="ku-verified-search" hidden></div><div class="list" id="list"></div>
+  <div class="list" id="list"></div>
   <div class="lmore" id="listMore"></div>
-  </div><aside class="ku-map-preview" aria-label="주변 맛집 지도"><div class="map-preview-title"><b>📍 주변 맛집 지도</b><a href="#map" data-tab="map" id="kuMapExpand">전체 지도 보기 ↗</a></div><div id="kuMapHost"></div><p>기존 맛집 데이터와 동일한 지도를 사용합니다. 마커를 누르면 상세 정보를 확인할 수 있습니다.</p></aside></div>
-  <div class="notes">
-    <h4>데이터 안내</h4>
-    <ul>
-      <li>가게 이름·좌표·영업시간·평점·리뷰 수는 <b>Google 지도</b>에서 <b>2026년 10월 24일</b>에 가져온 값입니다(자료 기준일). ‘영업 중·곧 마감’ 같은 상태는 이 영업시간을 지금 시각에 맞춰 계산합니다. 김군 평가·제보·예약·투표는 실시간으로 반영됩니다. 네이버 리뷰는 각 가게의 ‘네이버 리뷰 보기’로 확인하세요.</li>
-      <li>🏮 노포는 Google 리뷰에 적힌 업력을 근거로 표시했습니다(가게 배지에 마우스를 올리면 근거가 보임). 🏅 백년가게·👍 착한가격업소·✅ 착한식당은 공식 명단으로 확인한 뒤 편집 권한이 있는 사람이 ‘평가 수정’에서 체크하면 모두에게 표시됩니다. 명단 확인: <a href="https://search.naver.com/search.naver?query=%EA%B4%91%EC%A7%84%EA%B5%AC+%EB%B0%B1%EB%85%84%EA%B0%80%EA%B2%8C" target="_blank" rel="noopener">광진구 백년가게</a> · <a href="https://search.naver.com/search.naver?query=%EC%84%B1%EB%8F%99%EA%B5%AC+%EB%B0%B1%EB%85%84%EA%B0%80%EA%B2%8C" target="_blank" rel="noopener">성동구 백년가게</a> · <a href="https://search.naver.com/search.naver?query=%EA%B4%91%EC%A7%84%EA%B5%AC+%EC%B0%A9%ED%95%9C%EA%B0%80%EA%B2%A9%EC%97%85%EC%86%8C" target="_blank" rel="noopener">광진구 착한가격업소</a> · <a href="https://search.naver.com/search.naver?query=%EB%A8%B9%EA%B1%B0%EB%A6%AC+X%ED%8C%8C%EC%9D%BC+%EC%B0%A9%ED%95%9C%EC%8B%9D%EB%8B%B9+%EA%B4%91%EC%A7%84%EA%B5%AC" target="_blank" rel="noopener">착한식당 광진구</a></li>
-      <li>🎟 할인·이벤트는 Google 리뷰에 적힌 내용만 넣었고 바뀌었을 수 있습니다. 🪪 교직원할인은 학교 복지·제휴 안내나 가게에서 확인한 뒤 ‘평가 수정’에 적으면 모두에게 표시됩니다.</li>
-      <li>🅿️ 주차·🐶 반려견 정보는 Google 리뷰와 건물(백화점·이스트폴·스타시티) 정보로 확인된 곳만 표시했습니다. 💳 지역화폐는 서울 가게는 서울사랑상품권(제로페이 가맹점), 구리 가게는 구리사랑카드 기준이며, 🎫 온누리상품권은 전통시장 안 가맹 점포에서 주로 쓸 수 있어 시장과 시장 안 식당에 표시했습니다. 가맹 여부는 점포마다 다르니 결제 전에 확인하세요. 확인한 정보는 ‘평가 수정’에서 입력하면 모두에게 보입니다.</li>
-      <li>🏪 프랜차이즈·체인은 가게 이름에 ‘○○점·본점·직영점’이 붙은 곳을 자동으로 분류했고, 가맹점인지 직영인지는 구분하지 않습니다. ✨ 신규 오픈은 Google 정보에 개업일이 없어 자동으로 표시하지 않으며, 편집 권한이 있으면 ‘평가 수정’에서 오픈 시기를 넣어 주세요. 둘 다 거기서 바로잡을 수 있습니다.</li>
-      <li>📲 원격줄서기·📅 예약 정보는 Google 리뷰에 적힌 방식만 표시했습니다. 테이블링·캐치테이블 등록 여부는 가게 상세의 검색 버튼으로 확인하고, 편집 권한이 있으면 ‘평가 수정’에서 앱을 지정해 주세요.</li>
-      <li>방송 출연은 Google 리뷰에서 언급된 것만 표시했습니다. 최대 인원·단체석·예약 방식은 김군의 추정이니 예약 전에 전화로 확인하세요.</li>
-      <li>학식과 기업·관공서 구내식당은 외부인 이용 가능 여부, 식권 가격, 운영 시간이 학기·회사 사정에 따라 바뀝니다. 가기 전에 꼭 확인하세요.</li>
-      <li>‘도보’ 반경과 거리는 실제 걸음 거리를 추정한 값입니다(직선거리 × 1.3 + 캠퍼스 출입문까지 150m, 분당 72m·신호 대기 포함). 예: 생명과학관→건대입구역 직선 약 420m → 걸음 약 700m, 10분. 지도 위 원은 같은 걸음 거리에 해당하는 직선 범위입니다. ‘차량’ 반경은 직선거리이고, 도로 거리는 직선 × 1.4로 표시합니다. 차량 시간은 우회 계수 1.4를 적용해 처음 2.8km는 시속 15km, 그 이상은 시속 25km로 잡고 주차 4분을 더해 계산합니다. 구리처럼 먼 곳은 교통 상황에 따라 크게 달라집니다.</li>
-      <li>김군 미슐랭 별점은 편집 권한이 있는 사람이 각 가게의 ‘평가 수정’에서 바꿀 수 있습니다.</li>
-    </ul>
-  </div>
-
-<section class="newplaces" id="new-places" aria-labelledby="newplaces-h"><div class="newplaces-head"><div><span class="newplaces-kicker">REGIONAL DISCOVERY · 2026</span><h2 id="newplaces-h">지역별 추가 확인 맛집 <span id="newplaces-count"></span></h2><p>지역별 선정 맛집과 새로 확인한 미분당 3개 지점을 모았습니다. 좌표 검증을 마친 뒤 기본 검색·거리순 정렬과 지도에 통합합니다.</p></div><div class="newplaces-toggle" role="group" aria-label="추가 식당 지역 선택"><button type="button" data-region="전체" aria-pressed="true">전체</button><button type="button" data-region="광진구" aria-pressed="false">광진구</button><button type="button" data-region="성동구" aria-pressed="false">성동구</button><button type="button" data-region="구리시" aria-pressed="false">구리시</button></div></div><div class="newplaces-grid" id="newplaces-grid"></div><p class="newplaces-note">※ 기존 기본 목록과 중복되는 곳은 제외했습니다. 신규 후보에 김군 평가·Google 평점·영업 여부를 임의로 부여하지 않습니다. 지점별 메뉴 가격은 변동될 수 있습니다. 상호명 또는 주소를 누르면 외부 지도 검색 결과를 확인할 수 있습니다.</p></section>
+  </div><aside class="ku-map-preview" aria-label="주변 맛집 지도 및 추천 식당 3곳"><div class="map-preview-title"><b>📍 주변 맛집 지도</b><a href="#map" data-tab="map" id="kuMapExpand">전체 지도 보기 ↗</a></div><div id="kuMapHost"></div><section class="ku-nearby-three" aria-label="선택 조건 추천 맛집 세 곳"><div class="ku-nearby-heading"><div><strong>이 지역 추천 맛집 TOP 3</strong><small>현재 선택한 조건 기준 · 선택하면 지도에서 확인</small></div><span class="ku-nearby-count" id="kuNearbyCount">3곳</span></div><div id="kuMapTop3" class="ku-nearby-list" aria-live="polite"></div></section><p class="ku-map-disclaimer">지도는 위치를 단순화한 약도이며, 걸음 수·소요 시간은 추정치입니다.</p></aside></div>
 </section>
 
 <!-- ============ 지도 ============ -->
@@ -2627,20 +2956,68 @@ document.addEventListener("click",e=>{if(e.target.closest("#moreBtn")){const fir
 const HLK=/(\d[\d,.]*(?:\s?만(?:\s?\d[\d,.]*)?)?(?:\s?천)?\s?원(?:대|부터|꼴)?|웨이팅|대기|예약 필수|예약제|예약 권장|혼밥|24시간|새벽 \d+시|가성비|무한 ?리필|무료|할인|서비스|시그니처|대표|미쉐린|블루리본|노포|전망|룸|단체|주차)/g;
 function hlq(s){let h=esc(s);if(F.q){const q=F.q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");try{h=h.replace(new RegExp("("+q+")","gi"),'<mark class="hq">$1</mark>');}catch(e){}}return h;}
 function hl(s){return hlq(s).replace(HLK,'<mark class="hl">$1</mark>');}
+const KU_REAL_PHOTOS=Object.create(null);
+const KU_REAL_ALLOWED=/^restaurant-photos\/[a-zA-Z0-9_-]+\.(?:webp|png|jpe?g)$/;
+/* v12: 34 filters tied to 34 illustrated reference thumbnails; not actual restaurant photography. */
+const KU_34_MENU_PHOTOS = {"설렁탕·곰탕":"seolleongtang","순대국":"sundae-guk","감자탕·해장국":"gamjatang","추어탕":"chueotang","갈비탕":"galbitang","미역국":"miyeokguk","국밥":"stew","찌개":"kimchi-stew","청국장":"cheonggukjang","찜":"jjim","불고기":"beef-bowl","닭갈비":"spicy-chicken","삼겹살":"bbq-pork","족발·보쌈·수육":"grilled-ribs","돈까스":"tonkatsu","장어":"eel-grill","쭈꾸미":"jjukkumi","낙지":"spicy","초밥·회":"sushi","김밥":"gimbap","우동":"spicy-noodle","라면":"ramen","쫄면":"shoyu-ramen","떡볶이":"korean","피자":"pasta","버거":"burger","수제버거":"meat","타코":"rice-bowl","쌀국수":"rice","냉면":"soba","비빔면":"bibimbap","국수·칼국수":"kal-guksu","샤브샤브":"japanese","마라탕·훠궈":"mala-hotpot"};
+const KU_MENU_MATCHES = [
+ ['seolleongtang',/설렁탕|설농탕|곰탕|소머리/],['sundae-guk',/순대국|순댓국/],
+ ['gamjatang',/감자탕|뼈해장국/],['chueotang',/추어탕/],['galbitang',/갈비탕/],['miyeokguk',/미역국/],
+ ['cheonggukjang',/청국장/],['jjim',/찜닭|아구찜|돼지갈비찜|해물찜/],['eel-grill',/장어/],
+ ['jjukkumi',/쭈꾸미|주꾸미/],['sushi',/초밥|스시|사시미|모둠회/],['gimbap',/김밥/],
+ ['burger',/수제버거|햄버거|치즈버거|버거/],['mala-hotpot',/마라탕|훠궈/]
+];
 function kuGenericFood(p){
- const t=((p.menu||"")+" "+(p.cat||"")).toLowerCase();
- if(/돈까스|돈카츠|라멘|우동|일식|스시|초밥|회/.test(t))return "japanese";
- if(/삼겹|고기|갈비|구이|소고기|한우|바비큐/.test(t))return "meat";
- if(/찌개|국밥|감자탕|순두부|탕|전골|국수/.test(t))return "stew";
- if(/떡볶이|마라|닭발|매운|곱창/.test(t))return "spicy";
- if(/비빔|덮밥|볶음밥|정식|쌀국수/.test(t))return "rice";
- return "korean";
+ const menu0=(p.menu||'').split(',')[0];
+ for(const [key,re] of KU_MENU_MATCHES){if(re.test(menu0))return key;}
+
+ const s=(p.menu||'')+' '+(p.cat||'');
+ const patterns=[
+ ['soba',/들기름.?소바|냉소바|메밀국수|막국수|소바|냉모밀/],
+ ['bibimbap',/비빔밥|돌솥비빔|육회비빔/],
+ ['tonkatsu',/돈까스|돈카츠|돈가스|카츠|가츠/],
+ ['shoyu-ramen',/쇼유라멘|간장라멘/],
+ ['ramen',/라멘|돈코츠|미소라멘|시오라멘/],
+ ['kal-guksu',/칼국수|수제비|바지락국수|손칼국수/],
+ ['spicy-noodle',/짬뽕|쌀국수|우동|우육면|잔치국수|국수|면요리/],
+ ['bbq-pork',/삼겹살|항정살|돼지구이|보쌈|족발/],
+ ['grilled-ribs',/갈비|갈빗살|스테이크|구운 고기/],
+ ['spicy-chicken',/닭갈비|닭강정|양념치킨|매운 닭/],
+ ['kimchi-stew',/김치찌개|부대찌개|김치전골|매운탕|감자탕/],
+ ['pasta',/파스타|뇨끼|라자냐|리조또|스파게티/],
+ ['rice-bowl',/덮밥|규동|솥밥|볶음밥|카레|오므라이스/],
+ ['beef-bowl',/불고기|육회|고기덮밥/],
+ ['spicy',/떡볶이|마라탕|닭발|곱창|아구찜/],
+ ['stew',/찌개|국밥|국물|탕|전골|미역국/],
+ ['japanese',/스시|초밥|사시미|회덮밥|일식/],
+ ['meat',/고기|한우|바비큐|숯불|함박/],
+ ['rice',/비빔|정식|쌀|아시안/],
+ ['korean',/./]
+ ];
+ const main=(p.menu||'').split(',')[0];
+ for(const [key,re] of patterns){if(re.test(main))return key;}
+ for(const [key,re] of patterns){if(re.test(s))return key;}
+ return 'korean';
 }
+function kuActualPhoto(p){
+ const r=KU_REAL_PHOTOS[p.id];
+ if(r&&KU_REAL_ALLOWED.test(r))return r;
+ if(PHOTOS[p.id])return '/_blob/'+encodeURIComponent(PHOTOS[p.id]);
+ return '';
+}
+function kuMenuExample(p){return 'menu-examples/'+kuGenericFood(p)+'.webp';}
 function kuFoodPhoto(p){
- const hasReal=!!PHOTOS[p.id];
- const path=hasReal?"/_blob/"+encodeURIComponent(PHOTOS[p.id]):"menu-examples/"+kuGenericFood(p)+".webp";
- const fallback="menu-examples/"+kuGenericFood(p)+".webp";
- return `<figure class="cphoto ku-food-image"><img src="${path}" alt="${hasReal?esc(p.name)+" 등록 사진":"음식 유형을 표현한 공통 메뉴 예시 이미지"}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}';this.closest('figure').classList.add('is-example')"><figcaption class="ku-food-label">${hasReal?"등록 사진":"메뉴 예시"}</figcaption></figure>`;
+ const hasReal=!!kuActualPhoto(p),photo=hasReal?kuActualPhoto(p):kuMenuExample(p),fallback=kuMenuExample(p),is5=kimOf(p)===5;
+ const caption=hasReal?'매장 등록 사진':(is5?'대표사진 미등록 · 메뉴 예시':'메뉴 유형 참고 이미지 · 매장 사진 아님');
+ return `<figure class="cphoto ku-food-image ${hasReal?'is-real':'is-example'}"><img src="${esc(photo)}" data-fallback="${esc(fallback)}" alt="${hasReal?esc(p.name)+' 등록 대표 사진':esc((p.menu||p.cat).split(',')[0])+' 연출 메뉴 예시 사진'}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback;this.closest('figure').classList.add('is-example');this.closest('figure').querySelector('.ku-food-label').textContent='메뉴 유형 참고 이미지 · 매장 사진 아님'"><figcaption class="ku-food-label">${caption}</figcaption>${is5?`<span class="ku-photo-score" title="${kuIsManualRating(p)?'운영자 직접 평가 5점':'외부 지표 기반 자동 추천지수 5점'}"><span class="ku-crown">★</span> 김군 ${kimOf(p)}/5</span>`:''}</figure>`;
+}
+function kuFoodGallery(p){
+ const names=(p.menu||'').split(',').map(x=>x.trim()).filter(Boolean).slice(0,3);if(!names.length)return '';
+ return `<div class="ku-menu-gallery" aria-label="대표 메뉴별 예시 사진">${names.map((m,i)=>{
+ const thumb=kuMenuExample({menu:m,cat:p.cat});
+ const path=i===0&&kuActualPhoto(p)?kuActualPhoto(p):thumb;
+ const lab=i===0&&kuActualPhoto(p)?'매장 사진':'메뉴 예시';
+ return `<button type="button" data-ku-menuphoto="${esc(path)}" data-ku-fallback="${esc(thumb)}" data-ku-menu-label="${esc(lab)}" data-ku-menu-name="${esc(m)}" title="${esc(m)} · ${lab}" aria-label="${esc(m)} · ${lab} 보기"><img src="${esc(thumb)}" alt="${esc(m)} 메뉴 예시" loading="lazy"><span class="ku-thumb-tip">${esc(m)}</span></button>`;}).join('')}</div>`;
 }
 /* v10 — 식당명 중심의 단일정보 카드. 기존 데이터/액션은 그대로 재사용 */
 function kuIsManualRating(p){const r=ratings[p.id];return !!(r&&typeof r.kim==='number');}
@@ -2662,15 +3039,24 @@ function kuRestaurantCard(p,i){
     <span class="ku-fact"><i aria-hidden="true">★</i><b>${p.g?p.g.toFixed(1):'—'}</b><small>Google${p.rev?' · '+p.rev.toLocaleString()+'건':''}</small></span>
     <span class="ku-fact ku-fact-kim" title="${manual?'운영자 입력 평가':'외부 평점·리뷰에 기반한 자동 추천지수'}"><span class="ku-mini-ring" style="--score:${k};--ring:${['#9aa69e','#9aa69e','#94a49b','#427b71','#168456','#b8860b'][k]}"><b>${k}</b></span><span class="ku-kim-caption"><b>김군 미슐랭</b><small>${manual?'직접 입력':'자동 산정'} · 5점 만점</small></span></span>
    </div>
-   <div class="ku-card-menu" aria-label="대표 메뉴"><span class="ku-menu-kicker">대표 메뉴</span><strong>${esc(primary)}</strong>${sub?`<small>${esc(sub)}</small>`:''}<button type="button" data-act="menu" data-id="${esc(p.id)}" class="ku-menu-cta">메뉴판 <span aria-hidden="true">↗</span></button></div>
+   <div class="ku-card-menu" aria-label="대표 메뉴"><div class="ku-dish-head"><span class="ku-menu-kicker">대표 메뉴</span><strong>${esc(primary)}</strong><button type="button" data-act="menu" data-id="${esc(p.id)}" class="ku-menu-cta">메뉴판 <span aria-hidden="true">↗</span></button></div>${kuFoodGallery(p)}</div>
    <p class="ku-card-summary">${hl(p.desc)}</p>
    <div class="ku-card-tags tags">${badgeRow(p)}</div>
   </div>
   <div class="ku-card-bottom"><a class="ku-card-primary" href="${goto}" target="_blank" rel="noopener" aria-label="${esc(p.name)} 네이버 길찾기">↗ 길찾기</a><button type="button" class="ku-card-outline" data-act="mappick" data-id="${esc(p.id)}" aria-label="${esc(p.name)} 지도에서 보기">⌖ 지도 보기</button><button type="button" class="ku-card-outline ku-card-report" data-act="report" data-id="${esc(p.id)}">✎ 정보 제보</button><details class="ku-card-other"><summary>더보기 <span aria-hidden="true">⌄</span></summary><div class="acts">${actions(p)}</div></details></div>
  </article>`;
 }
+function kuRenderMapTop3(items){
+ const target=document.getElementById('kuMapTop3');if(!target)return;
+ const t=items.slice(0,3);document.getElementById('kuNearbyCount').textContent=t.length+'곳';
+ target.innerHTML=t.length?t.map((p,i)=>{const d=distM(p),k=kimOf(p),real=kuActualPhoto(p),photo=real||kuMenuExample(p),fallback=kuMenuExample(p);
+ const menu=(p.menu||'').split(',')[0]||'메뉴 확인 필요';
+ return `<button type="button" class="ku-nearby-card" data-t3="${esc(p.id)}" aria-pressed="${selId===p.id}" aria-label="${i+1}위 ${esc(p.name)} · 도보 ${walkMin(d)}분, Google ${p.g?p.g.toFixed(1):'미확인'}, 김군 ${k}점. 지도에서 선택"><span class="ku-nearby-photo"><img src="${esc(photo)}" alt="${real?esc(p.name)+' 실제 등록 사진':esc(menu)+' 메뉴 예시'}" onerror="this.onerror=null;this.src='${esc(fallback)}'" loading="lazy"><span class="ku-n-rank" data-rank="${i+1}">${i+1}</span></span><span class="ku-nearby-data"><strong>${esc(p.name)}</strong><span class="ku-n-menu">${esc(p.area)} · ${esc(menu)}</span><span class="ku-nearby-facts"><span>🚶 <b>${walkMin(d)}분</b></span><span>★ <b>${p.g?p.g.toFixed(1):'—'}</b></span><span>${real?'등록 사진':'메뉴 예시'}</span></span></span><span class="ku-nearby-score"><i>김군</i><b>${k}</b><small>/ 5점</small></span></button>`;
+ }).join(''):'<p class="status" style="padding:10px">해당 조건에 맞는 추천 식당이 없습니다. 반경을 넓히거나 조건을 초기화해 주세요.</p>';
+}
 function renderList(){
  const res=sorted(PLACES.filter(p=>match(p)));
+  kuRenderMapTop3(res);
  [renderQuick,renderChips,renderMenuViz,()=>renderTop3(res),renderWeekly,renderRecent,renderPoll].forEach(f=>{try{f();}catch(err){console.warn("부분 표시 오류",err);}});requestAnimationFrame(()=>{try{bh();}catch(e){}});
  $("resCount").innerHTML=`<b>${res.length}곳</b> · ${MEALS[F.meal]}, ${F.move==="walk"?"도보":"차량"} ${F.rad>=1000?F.rad/1000+"km":F.rad+"m"} 이내${F.cats.size?", "+[...F.cats].join("·"):""}${F.meat?(F.meat==="yes"?", 고기 포함":", 고기 빼고"):""}${GKEYS.map(k=>F[k].size?", "+[...F[k]].join("·"):"").join("")}${F.q?", 검색 “"+esc(F.q)+"”":""}${F.coll?", "+(COLLS.find(c=>c.k===F.coll)||{t:""}).t:""}${F.open?", 지금 영업 중":""}${F.fav?", 찜":""}${F.unv?", 안 가본 곳":""}`;
  $("bMove").textContent=F.move==="walk"?"도보":"차량";
@@ -3531,9 +3917,63 @@ function syncMapPosition(t){
 const oldShowTab=showTab;
 showTab=function(t){if(t==='map')syncMapPosition('map');oldShowTab(t);syncMapPosition(t);};
 window.addEventListener('resize',()=>syncMapPosition(location.hash.slice(1)||'find'));
-const choose=(id,val)=>{const b=document.querySelector('#'+id+' button[data-v="'+val+'"]');if(b)b.click();};
-const scenario={lunch:()=>{choose('fMeal','lunch');choose('fMove','walk');choose('fRad','500');},honbap:()=>{choose('fMeal','lunch');document.querySelector('#coll button[data-coll="honbap"]')?.click();},team:()=>{choose('fMeal','lunch');choose('fPpl','4');},guest:()=>{choose('fPpl','4');document.querySelector('#coll button[data-coll="guest"]')?.click();},hoesik:()=>{choose('fMeal','dinner');choose('fPpl','15');document.querySelector('#coll button[data-coll="hoesik"]')?.click();},discount:()=>{document.getElementById('secCond').open=true;document.getElementById('advF').open=true;document.getElementById('secCond').scrollIntoView({behavior:'smooth',block:'start'});}};
-document.querySelectorAll('[data-scene]').forEach(b=>b.addEventListener('click',()=>{scenario[b.dataset.scene]?.();b.blur();}));
+// v13: six functional scenario chips with verified state and one-click reset.
+let activeScene='';
+const scenarioBtns=[...document.querySelectorAll('[data-scene]')];
+const sceneDefaults=()=>{
+ F.meal='lunch';F.move='walk';F.rad=1000;F.ppl=2;F.coll='';
+ F.pay?.delete('교직원할인');
+};
+function sceneUI(){
+ for(const b of scenarioBtns){const chosen=b.dataset.scene===activeScene;
+  b.setAttribute('aria-pressed',String(chosen));
+  b.classList.toggle('ku-scene-selected',chosen);
+ }
+ const disc=F.pay?.has('교직원할인');
+ if(activeScene==='discount'&& !disc){activeScene='';for(const b of scenarioBtns)b.setAttribute('aria-pressed','false');}
+}
+function syncOriginalSegments(){
+ for(const [id,value] of [['fMeal',F.meal],['fMove',F.move],['fRad',F.rad],['fPpl',F.ppl]]){
+  const el=document.getElementById(id);if(!el)continue;
+  [...el.querySelectorAll('button[data-v]')].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===String(value))));
+ }
+ for(const id of ['kuMeal','kuDistance','kuPeople']){
+  const el=document.getElementById(id);if(!el)continue;
+  const val=id==='kuMeal'?F.meal:id==='kuDistance'?F.rad:F.ppl;
+  if([...el.options].some(o=>o.value===String(val)))el.value=String(val);
+ }
+}
+scenarioBtns.forEach(b=>b.addEventListener('click',()=>{
+ const name=b.dataset.scene;
+ const clear=activeScene===name;
+ // Clear only the former scenario conditions; preserve independent text/region/menu selections.
+ sceneDefaults();
+ if(!clear){
+  if(name==='lunch'){F.meal='lunch';F.move='walk';F.rad=500;}
+  else if(name==='honbap'){F.meal='lunch';F.ppl=2;F.coll='honbap';}
+  else if(name==='team'){F.meal='lunch';F.ppl=4;}
+  else if(name==='guest'){F.meal='lunch';F.ppl=4;F.coll='guest';}
+  else if(name==='hoesik'){F.meal='dinner';F.ppl=15;F.coll='hoesik';}
+  else if(name==='discount'){F.pay?.add('교직원할인');}
+ }
+ activeScene=clear?'':name;
+ syncOriginalSegments();
+ refresh();sceneUI();
+ const results=document.getElementById('resCount');
+ const zero=(document.getElementById('list')?.querySelector('.empty')!==null);
+ if(name==='discount'&&!clear&&zero){
+  const list=document.getElementById('list');if(list){let el=list.querySelector('.ku-no-staff');if(!el){el=document.createElement('p');el.className='ku-no-staff';list.prepend(el);}el.textContent='현재 조건에서 검증된 교직원 할인 식당이 없습니다. 할인 정보는 제보를 통해 확인 후 반영합니다.';}
+ }
+ b.blur();
+}));
+// Update the state when users change a filter outside of scenario controls.
+document.addEventListener('click',e=>{
+ if(e.target.closest('[data-scene]'))return;
+ if(e.target.closest('#secCond button,#coll button,#tReset,#kuHeroSearchBtn')){
+  setTimeout(()=>{activeScene='';sceneUI();},0);
+ }
+});
+sceneUI();
 // Update map on ordinary search/filter changes when the map is visible in the new desktop layout.
 const oldRefresh=refresh;
 refresh=function(){oldRefresh();if(mapWrap?.parentElement===host)try{renderMap();}catch(e){console.warn(e);}};
@@ -3556,7 +3996,7 @@ document.getElementById('kuMoreFilters')?.addEventListener('click',()=>{let el=d
 </script>
 <script>
 /* 공개 검증 후보: 기존 PLACES와 별도 관리 / 좌표가 확인되면 정규 목록으로 승격 */
-const NEW_REGION_PLACES = [{"region": "광진구", "name": "기와집 능이백숙", "address": "서울 광진구 면목로 32", "menu": "삼계탕·능이백숙", "source": "서울시 2026 오래가게", "url": "https://mediahub.seoul.go.kr/archives/2019458"}, {"region": "성동구", "name": "대도식당 왕십리본점", "address": "서울 성동구 무학로12길 3", "menu": "소고기구이", "source": "서울시 2026 오래가게", "url": "https://mediahub.seoul.go.kr/archives/2019458"}, {"region": "성동구", "name": "은성보쌈", "address": "서울 성동구 독서당로 297-6", "menu": "보쌈", "source": "서울시 2026 오래가게", "url": "https://mediahub.seoul.go.kr/archives/2019458"}, {"region": "구리시", "name": "우동 키노야", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "우동", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "담가화로구이 구리토평점", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "화로구이", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "일리에또", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "이탈리안", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "길목감자탕", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "감자탕", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "봉담샤브샤브 칼국수", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "샤브샤브·칼국수", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "오씨네 냉면만두", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "냉면·만두", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "서울매운탕", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "민물매운탕", "source": "구리시 2026 와구리맛집·노포식당", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "구리시", "name": "장미한우", "address": "경기 구리시 (상세 주소 확인 필요)", "menu": "한우", "source": "구리시 2026 와구리맛집", "url": "https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"}, {"region": "광진구", "name": "솜프", "address": "서울 광진구 뚝섬로57길 58 2층", "menu": "훈연 항정살·퓨전 한식", "source": "2026.10.23 운영 정보 확인", "url": "https://local.lazyscheme.com/places/ls9mp5ap5tgzxmnjyp/"}, {"region": "광진구", "name": "미분당 건대점", "address": "서울 광진구 군자로3길 27 1층", "menu": "차돌박이 쌀국수·양지 쌀국수", "source": "매장 정보·메뉴 확인", "url": "https://www.tabling.co.kr/place/677ccb2a66de5f06987cbff7", "price": "차돌박이 쌀국수 10,000원", "status": "거리·좌표 추가 검증 중"}, {"region": "성동구", "name": "미분당 성수점", "address": "서울 성동구 성수일로10길 26 하우스디세종타워 1층 111호", "menu": "차돌양지힘줄 쌀국수", "source": "2026.10 위치 확인", "url": "https://gilpost.com/ko/%EC%84%9C%EC%9A%B8/%EC%84%B1%EC%88%98%EB%8F%992%EA%B0%80/%EB%A7%9B%EC%A7%91/%EB%AF%B8%EB%B6%84%EB%8B%B9/", "price": "메뉴 가격 방문 전 확인", "status": "거리·좌표 추가 검증 중"}, {"region": "구리시", "name": "미분당 구리점", "address": "경기 구리시 경춘로227번길 14 1층 103호", "menu": "차돌 쌀국수·양지 쌀국수", "source": "매장 정보·메뉴 확인", "url": "https://www.tabling.co.kr/place/677cd14066de5f06988790df", "price": "차돌 쌀국수 10,000원", "status": "거리·좌표 추가 검증 중"}];
+const NEW_REGION_PLACES = [{"region":"광진구","name":"기와집 능이백숙","address":"서울 광진구 면목로 32","menu":"삼계탕·능이백숙","source":"서울시 2026 오래가게","url":"https://mediahub.seoul.go.kr/archives/2019458"},{"region":"성동구","name":"대도식당 왕십리본점","address":"서울 성동구 무학로12길 3","menu":"소고기구이","source":"서울시 2026 오래가게","url":"https://mediahub.seoul.go.kr/archives/2019458"},{"region":"성동구","name":"은성보쌈","address":"서울 성동구 독서당로 297-6","menu":"보쌈","source":"서울시 2026 오래가게","url":"https://mediahub.seoul.go.kr/archives/2019458"},{"region":"구리시","name":"우동 키노야","address":"경기 구리시 (상세 주소 확인 필요)","menu":"우동","source":"구리시 2026 와구리맛집","url":"https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"},{"region":"구리시","name":"담가화로구이 구리토평점","address":"경기 구리시 (상세 주소 확인 필요)","menu":"화로구이","source":"구리시 2026 와구리맛집","url":"https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"},{"region":"구리시","name":"일리에또","address":"경기 구리시 (상세 주소 확인 필요)","menu":"이탈리안","source":"구리시 2026 와구리맛집","url":"https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"},{"region":"구리시","name":"길목감자탕","address":"경기 구리시 (상세 주소 확인 필요)","menu":"감자탕","source":"구리시 2026 와구리맛집","url":"https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"},{"region":"구리시","name":"봉담샤브샤브 칼국수","address":"경기 구리시 (상세 주소 확인 필요)","menu":"샤브샤브·칼국수","source":"구리시 2026 와구리맛집","url":"https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"},{"region":"구리시","name":"오씨네 냉면만두","address":"경기 구리시 (상세 주소 확인 필요)","menu":"냉면·만두","source":"구리시 2026 와구리맛집","url":"https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"},{"region":"구리시","name":"서울매운탕","address":"경기 구리시 (상세 주소 확인 필요)","menu":"민물매운탕","source":"구리시 2026 와구리맛집·노포식당","url":"https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"},{"region":"구리시","name":"장미한우","address":"경기 구리시 (상세 주소 확인 필요)","menu":"한우","source":"구리시 2026 와구리맛집","url":"https://www.guri.go.kr/www/selectBbsNttView.do?bbsNo=42&integrDeptCode=&key=393&nttNo=147993"},{"region":"광진구","name":"솜프","address":"서울 광진구 뚝섬로57길 58 2층","menu":"훈연 항정살·퓨전 한식","source":"2026.10.23 운영 정보 확인","url":"https://local.lazyscheme.com/places/ls9mp5ap5tgzxmnjyp/"},{"region":"광진구","name":"미분당 건대점","address":"서울 광진구 군자로3길 27 1층","menu":"차돌박이 쌀국수·양지 쌀국수","source":"매장 정보·메뉴 확인","url":"https://www.tabling.co.kr/place/677ccb2a66de5f06987cbff7","price":"차돌박이 쌀국수 10,000원","status":"거리·좌표 추가 검증 중"},{"region":"성동구","name":"미분당 성수점","address":"서울 성동구 성수일로10길 26 하우스디세종타워 1층 111호","menu":"차돌양지힘줄 쌀국수","source":"2026.10 위치 확인","url":"https://gilpost.com/ko/%EC%84%9C%EC%9A%B8/%EC%84%B1%EC%88%98%EB%8F%992%EA%B0%80/%EB%A7%9B%EC%A7%91/%EB%AF%B8%EB%B6%84%EB%8B%B9/","price":"메뉴 가격 방문 전 확인","status":"거리·좌표 추가 검증 중"},{"region":"구리시","name":"미분당 구리점","address":"경기 구리시 경춘로227번길 14 1층 103호","menu":"차돌 쌀국수·양지 쌀국수","source":"매장 정보·메뉴 확인","url":"https://www.tabling.co.kr/place/677cd14066de5f06988790df","price":"차돌 쌀국수 10,000원","status":"거리·좌표 추가 검증 중"},{"region":"광진구","name":"래빗홀 버거컴퍼니","address":"서울 광진구 광나루로 424 1층","menu":"클래식버거·머쉬룸버거","source":"2026.10 공개 매장 위치 확인","url":"https://polle.com/place/3izR7C/%EB%9E%98%EB%B9%97%ED%99%80%EB%B2%84%EA%B1%B0","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"수퍼슬라이더스","address":"서울 광진구 능동로13길 50","menu":"원초적본능 버거·슬라이더","source":"2026.10 공개 매장 위치 확인","url":"https://triple.guide/restaurants/2b9acfb6-0b5d-4942-8285-a301607ed926","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"릴버거","address":"서울 광진구 자양강변길 89 1층","menu":"클래식버거·바질토마토버거","source":"2026.10 공개 매장 위치 확인","url":"https://www.tabling.co.kr/restaurant/11156","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"제레미 버거","address":"서울 광진구 동일로60길 44","menu":"치즈버거·머쉬룸버거","source":"2026.10 공개 매장 위치 확인","url":"https://polle.com/place/1wK29M/%EC%A0%9C%EB%A0%88%EB%AF%B8%20%EB%B2%84%EA%B1%B0","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"버거리 건대점","address":"서울 광진구 능동로13길 36","menu":"수제버거 스타일 버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"프랭크버거 건대1호점","address":"서울 광진구 아차산로29길 44","menu":"프랭크버거·치즈버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"프랭크버거 중곡역점","address":"서울 광진구 능동로 400","menu":"프랭크버거·치즈버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"노브랜드버거 건대점","address":"서울 광진구 능동로13길 54","menu":"시그니처버거·치킨버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"홀리버거 군자","address":"서울 광진구 능동로 323","menu":"수제버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"원스타올드패션드 햄버거 어린이대공원점","address":"서울 광진구 능동로36길 181","menu":"수제버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"처비버디","address":"서울 광진구 구의동 246-23 1층","menu":"수제버거·피자","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"임어전씨수제버거 자양점","address":"서울 광진구 능동로4길 17","menu":"수제버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"버거킹 구의점","address":"서울 광진구 아차산로 466","menu":"와퍼·햄버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"쉐이크쉑 성수점","address":"서울 성동구 연무장길 46","menu":"쉑버거·쉐이크","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"노브랜드버거 성수랩점","address":"서울 성동구 성수일로 56 1층","menu":"시그니처버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"밸런스버거 한양대점","address":"서울 성동구 왕십리로 223-1","menu":"수제버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"버거리 한양대점","address":"서울 성동구 왕십리로 231","menu":"버거·감자튀김","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"손 수제버거","address":"서울 성동구 고산자로14길 26","menu":"시그니처버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"에프터드링크버거","address":"서울 성동구 왕십리로 294-2","menu":"클래식버거·베이컨버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"GTS버거 포레스트","address":"서울 성동구 서울숲2길 13 2층","menu":"수제버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"버거킹 왕십리센트라스점","address":"서울 성동구 왕십리로 410","menu":"와퍼·버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"핑거팁스","address":"서울 성동구 성수동2가 299-231","menu":"수제버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"프랭크버거 구리갈매점","address":"경기 구리시 경춘북로 252","menu":"프랭크버거·치즈버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"프랭크버거 구리돌다리점","address":"경기 구리시 검배로6번길 27","menu":"프랭크버거·치즈버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"프랭크버거 구리인창점","address":"경기 구리시 동구릉로85번길 25","menu":"프랭크버거·치즈버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"버거킹 구리갈매점","address":"경기 구리시 산마루로 24","menu":"와퍼·버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"버거킹 구리인창점","address":"경기 구리시 건원대로33번길 4","menu":"와퍼·버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"롯데리아 구리돌다리점","address":"경기 구리시 검배로 21","menu":"불고기버거·새우버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"롯데리아 구리토평점","address":"경기 구리시 체육관로 26","menu":"불고기버거·새우버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"맘스터치 구리수택점","address":"경기 구리시 체육관로80번길 28","menu":"싸이버거·치킨버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"맘스터치 구리한대병원점","address":"경기 구리시 경춘로 168","menu":"싸이버거·치킨버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"버거리 구리한양대병원점","address":"경기 구리시 경춘로 164","menu":"버거·감자튀김","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"써브웨이 구리인창점","address":"경기 구리시 건원대로 83","menu":"샌드위치·샐러드","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"더기버거","address":"경기 구리시 벌말로147번길 58-2","menu":"수제버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"미스진햄버거 구리점","address":"경기 구리시 경춘로162번길 21","menu":"옛날식 햄버거","source":"2026.10 공개 매장 위치 확인","url":"","stype":"개인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"청년다방 건대점","address":"서울 광진구 동일로20길 64","menu":"차돌떡볶이·즉석떡볶이","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"역전우동0410 강변역점","address":"서울 광진구 강변역로4길 10","menu":"우동·덮밥","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"역전우동0410 건대로데오점","address":"서울 광진구 아차산로 224","menu":"우동·소바","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"써브웨이 건대입구점","address":"서울 광진구 화양동 6-16","menu":"샌드위치·샐러드","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"싸다김밥 왕십리역점","address":"서울 성동구 왕십리로 320","menu":"김밥·떡볶이·돈까스","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"써브웨이 성수역점","address":"서울 성동구 아차산로 113","menu":"샌드위치·샐러드","source":"2026.10 공개 매장 위치 확인","url":"https://www.diningcode.com/profile.php?rid=g3lAM4iRLufC","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"써브웨이 서울숲점","address":"서울 성동구 왕십리로 108-1","menu":"샌드위치·샐러드","source":"2026.10 공개 매장 위치 확인","url":"https://www.diningcode.com/profile.php?rid=NzJ1xQY9Xk7j","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"본죽 성수역점","address":"서울 성동구 아차산로7길 15","menu":"죽","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"샐러디 성수점","address":"서울 성동구 성수일로10길 26","menu":"샐러드·웜볼","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"성동구","name":"에그드랍 성수역점","address":"서울 성동구 아차산로7길 9-2","menu":"에그샌드위치","source":"2026.10 공개 매장 위치 확인","url":"https://dokdokplace.kr/stores/i2/i210/i21005/seoul/seongdong-gu/","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"본죽&비빔밥 구리수택3동점","address":"경기 구리시 이문안로 78","menu":"죽·비빔밥","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"본죽&비빔밥 구리인창점","address":"경기 구리시 건원대로34번길 25","menu":"죽·비빔밥","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"청년다방 구리수택점","address":"경기 구리시 체육관로80번길 35","menu":"차돌떡볶이·즉석떡볶이","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"구리시","name":"한솥도시락 구리교문점","address":"경기 구리시 경춘로172번길 5","menu":"도시락·덮밥","source":"2026.10 공개 매장 위치 확인","url":"","stype":"체인","verified":"주소 공개자료 확인 / 영업상태 별도 확인"},{"region":"광진구","name":"쫄국수","address":"서울 광진구 군자로 150","menu":"비빔고기쫄면·멸치고기온쫄면·쫄면","cat":"한식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.tabling.co.kr/place/68c7eca1919474fb3e531cb4","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"광진구","name":"오늘도낙지","address":"서울 광진구 아차산로76길 6","menu":"낙지볶음·낙지순두부","cat":"한식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EC%98%A4%EB%8A%98%EB%8F%84%EB%82%99%EC%A7%80+%EA%B4%91%EC%A7%84%EA%B5%AC","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"광진구","name":"이가네낙지와오리","address":"서울 광진구 능동로53길 5","menu":"낙지볶음·청국장·오리탕","cat":"한식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EC%9D%B4%EA%B0%80%EB%84%A4%EB%82%99%EC%A7%80%EC%99%80%EC%98%A4%EB%A6%AC","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"광진구","name":"무교동낙지 구의점","address":"서울 광진구 아차산로 464","menu":"낙지볶음·낙지연포탕","cat":"한식","stype":"체인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EB%AC%B4%EA%B5%90%EB%8F%99%EB%82%99%EC%A7%80+%EA%B5%AC%EC%9D%98%EC%A0%90","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"광진구","name":"장원참숯민물장어","address":"서울 광진구 군자동 470-5","menu":"장어구이·장어탕","cat":"고기·술","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EC%9E%A5%EC%9B%90%EC%B0%B8%EC%88%AF%EB%AF%BC%EB%AC%BC%EC%9E%A5%EC%96%B4","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"광진구","name":"최고집풍천장어","address":"서울 광진구 아차산로51길 79","menu":"장어구이·장어탕","cat":"고기·술","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://dinner.ambitstock.com/gundae/restaurant/%EC%B5%9C%EA%B3%A0%EC%A7%91%ED%92%8D%EC%B2%9C%EC%9E%A5%EC%96%B4","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"광진구","name":"굴림샤브&콩국수 어린이대공원점","address":"서울 광진구 능동로 172 105·106호","menu":"굴림샤브만두전골·샤브샤브·칼국수","cat":"한식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.diningcode.com/profile.php?rid=KPWONZvUrRHJ","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"광진구","name":"바르미 샤브샤브n칼국수 구의점","address":"서울 광진구 아차산로 471","menu":"샤브샤브·칼국수","cat":"한식","stype":"체인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EB%B0%94%EB%A5%B4%EB%AF%B8+%EC%83%A4%EB%B8%8C%EC%83%A4%EB%B8%8C+%EA%B5%AC%EC%9D%98%EC%A0%90","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"광진구","name":"채선당 광장점","address":"서울 광진구 광장동 445-5","menu":"월남쌈·샤브샤브","cat":"한식","stype":"체인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EC%B1%84%EC%84%A0%EB%8B%B9+%EA%B4%91%EC%9E%A5%EC%A0%90","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"산수골 추어탕 감자탕","address":"서울 성동구 왕십리로31가길 31","menu":"추어탕·감자탕·뼈해장국","cat":"국밥·탕","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://map.sd.go.kr/trip_new/tMap.jsp","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"보따리타코","address":"서울 성동구 아차산로7가길 27 1층","menu":"치킨타코·피쉬타코·비프타코","cat":"양식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://gilpost.com/ko/%EC%84%9C%EC%9A%B8/%EC%84%B1%EC%88%98%EB%8F%992%EA%B0%80/%EB%A7%9B%EC%A7%91/%EB%B3%B4%EB%94%B0%EB%A6%AC-%ED%83%80%EC%BD%94/","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"모리몰리","address":"서울 성동구 성수일로3길 3-5","menu":"스시타코·우니육회타코·새우튀김타코","cat":"양식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://superchart.com/ko/stores/morimoly/","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"갓잇 서울숲점","address":"서울 성동구 왕십리로10길 9-14","menu":"타코·파히타·엔칠라다","cat":"양식","stype":"체인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EA%B0%93%EC%9E%87+%EC%84%9C%EC%9A%B8%EC%88%B2%EC%A0%90","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"타코 까나스타 금호점","address":"서울 성동구 동호로2길 28","menu":"타코·부리또·퀘사디야","cat":"양식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%ED%83%80%EC%BD%94+%EA%B9%8C%EB%82%98%EC%8A%A4%ED%83%80+%EA%B8%88%ED%98%B8%EC%A0%90","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"쭈식이상회","address":"서울 성동구 마조로7길 9-1 1층","menu":"쭈꾸미볶음·삼겹쭈꾸미","cat":"한식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EC%AD%88%EC%8B%9D%EC%9D%B4%EC%83%81%ED%9A%8C","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"동뜨다 갈비탕 본점","address":"서울 성동구 고산자로 269","menu":"갈비탕·갈비찜","cat":"국밥·탕","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EB%8F%99%EB%9C%A8%EB%8B%A4%EA%B0%88%EB%B9%84%ED%83%95","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"마장동 할머니 갈비탕","address":"서울 성동구 청계천로10가길 10-7","menu":"갈비탕","cat":"국밥·탕","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EB%A7%88%EC%9E%A5%EB%8F%99%ED%95%A0%EB%A8%B8%EB%8B%88%EA%B0%88%EB%B9%84%ED%83%95","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"얌샘김밥 성수역점","address":"서울 성동구 연무장5가길 7 1층","menu":"물쫄면·김밥·떡볶이","cat":"가성비","stype":"체인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://polle.com/place/2lf2ul/%EC%96%8C%EC%83%98%EA%B9%80%EB%B0%A5","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"춘향미엔","address":"서울 성동구 왕십리로21길 26","menu":"비빔면·온면·냉면","cat":"중식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://koreatriptips.com/dining/2845187.html","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"성동구","name":"속초면옥 달꽃식당","address":"서울 성동구 왕십리로 410","menu":"함흥물냉면·명태회냉면","cat":"한식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.tabling.co.kr/place/677ccfaf66de5f069884ae4d","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"구리시","name":"토평메주콩","address":"경기 구리시 벌말로 77","menu":"청국장정식·고등어구이","cat":"한식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://hongsi.io/place/p/2ebc80f9-7552-4d78-ac80-c071def9f043","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"구리시","name":"소담촌 수택점","address":"경기 구리시 이문안로 147","menu":"월남쌈·샤브샤브","cat":"한식","stype":"체인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EC%86%8C%EB%8B%B4%EC%B4%8C+%EC%88%98%ED%83%9D%EC%A0%90","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"구리시","name":"팔당민물장어 인창점","address":"경기 구리시 건원대로 73","menu":"민물장어구이·장어탕","cat":"고기·술","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%ED%8C%94%EB%8B%B9%EB%AF%BC%EB%AC%BC%EC%9E%A5%EC%96%B4+%EA%B5%AC%EB%A6%AC","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"구리시","name":"춘향골 추어탕 인창점","address":"경기 구리시 건원대로 85","menu":"추어탕·통추어탕","cat":"국밥·탕","stype":"체인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://www.google.com/maps/search/?api=1&query=%EC%B6%98%ED%96%A5%EA%B3%A8+%EC%B6%94%EC%96%B4%ED%83%95+%EA%B5%AC%EB%A6%AC","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"구리시","name":"빠빠킹돈까스 쫄면구역 롯데아울렛 구리점","address":"경기 구리시 동구릉로136번길 47 6층","menu":"쫄면·치즈돈까스","cat":"가성비","stype":"체인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://place.udanax.org/p/1597963/%EB%B9%A0%EB%B9%A0%ED%82%B9%EB%8F%88%EA%B9%8C%EC%8A%A4%20%EC%AB%84%EB%A9%B4%EA%B5%AC%EC%97%AD%20%EB%A1%AF%EB%8D%B0%EC%95%84%EC%9A%B8%EB%A0%9B%20%EA%B5%AC%EB%A6%AC%EC%A0%90","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"},{"region":"구리시","name":"쭈꾸미하우스 인창본점","address":"경기 구리시 동구릉로148번길 24-36","menu":"쭈꾸미볶음","cat":"한식","stype":"개인","source":"2026.10 공개 매장/메뉴 자료 대조","url":"https://place.udanax.org/p/1597963/%EB%B9%A0%EB%B9%A0%ED%82%B9%EB%8F%88%EA%B9%8C%EC%8A%A4%20%EC%AB%84%EB%A9%B4%EA%B5%AC%EC%97%AD%20%EB%A1%AF%EB%8D%B0%EC%95%84%EC%9A%B8%EB%A0%9B%20%EA%B5%AC%EB%A6%AC%EC%A0%90","verified":"매장명·주소·메뉴 공개정보 확인 / 현장 영업상태 별도 확인","date_checked":"2026-10-30"}];
 (function(){
  const grid=document.getElementById('newplaces-grid');if(!grid)return;
  const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -3583,6 +4023,203 @@ const NEW_REGION_PLACES = [{"region": "광진구", "name": "기와집 능이백�
   const max=Math.max(1,...count);document.getElementById('ku-guide-total').textContent=PLACES.length.toLocaleString()+'곳';
   bars.innerHTML=[5,4,3,2,1,0].map(k=>`<div class="ku-guide-bar-row"><span class="ku-guide-bar-score">${k===0?'미평가':k+'점'}</span><div class="ku-guide-bar-track"><i style="width:${(count[k]/max*100).toFixed(2)}%"></i></div><strong>${count[k].toLocaleString()}곳</strong><small>직접 ${manual[k]}곳</small></div>`).join('');}
   window.kuUpdateGuide=render;render();document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
+ }
+})();
+</script>
+<script>
+/* v11: licensed media assets, optional verified restaurant photographs, and interactive menu preview. */
+(function(){
+ const results=document.querySelector('#tab-find .fright');
+ if(results){
+  const viz=results.querySelector('details.vizd'),top=results.querySelector('#top3');
+  if(viz){viz.open=false;results.appendChild(viz);}
+  if(top){results.appendChild(top);}
+ }
+ const quick=document.querySelector('#tab-find>.quick');
+ const extra=quick&&quick.querySelector('details.extras');
+ if(extra){
+  extra.classList.add('ku-extra-toggle');
+  const sm=extra.querySelector('summary');if(sm)sm.innerHTML='오늘의 김군 픽 · 점심 투표 · 최근 본 맛집 <span aria-hidden="true">▾</span>';
+  const wk=document.getElementById('weekly'),recent=document.getElementById('recent');
+  if(wk)extra.appendChild(wk);
+  if(recent)extra.appendChild(recent);
+ }
+})();
+
+(function(){
+ document.addEventListener('click',function(e){
+  const t=e.target.closest('[data-ku-menuphoto]');if(!t)return;
+  const card=t.closest('.ku-card');if(!card)return;
+  const img=card.querySelector('.ku-food-image img');const caption=card.querySelector('.ku-food-label');if(!img||!caption)return;
+  const fallback=t.dataset.kuFallback||'';const path=t.dataset.kuMenuphoto||fallback;
+  img.onerror=function(){this.onerror=null;this.src=fallback;if(caption)caption.textContent='메뉴 유형 참고 이미지 · 매장 사진 아님';};
+  img.src=path;img.alt=t.dataset.kuMenuName+' · '+t.dataset.kuMenuLabel;
+  caption.textContent=t.dataset.kuMenuLabel==='매장 사진'?'매장 등록 사진 · '+t.dataset.kuMenuName:'메뉴 예시 · '+t.dataset.kuMenuName;
+ });
+ document.addEventListener('click',function(e){const c=e.target.closest('#kuMapTop3 .ku-nearby-card');if(!c)return;document.querySelectorAll('#kuMapTop3 .ku-nearby-card').forEach(b=>b.setAttribute('aria-pressed',String(b===c)));});
+ // Upload confirmed, rights-cleared restaurant photos and register paths in the manifest.
+ fetch('./restaurant-photos/manifest.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(data=>{
+  const safe=data&&typeof data.photos==='object'?data.photos:{};
+  let n=0;for(const [id,path] of Object.entries(safe)){
+   if(typeof path==='string' && /^restaurant-photos\/[a-zA-Z0-9_-]+\.(webp|png|jpg|jpeg)$/.test(path)){
+    KU_REAL_PHOTOS[id]=path;n++;
+   }
+  }
+  if(n && typeof renderList==='function'){renderList();if(typeof renderMap==='function'&&document.querySelector('#kuMapHost .mapwrap'))renderMap();}
+ }).catch(()=>{});
+})();
+</script>
+<script>
+(function(){
+ const wrap=document.getElementById('kuInfoMenu');
+ if(!wrap)return;
+ document.addEventListener('click',e=>{if(wrap.open&&!wrap.contains(e.target))wrap.open=false;});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&wrap.open){wrap.open=false;wrap.querySelector('summary')?.focus();}});
+ wrap.querySelectorAll('[data-tab]').forEach(a=>a.addEventListener('click',()=>{wrap.open=false;}));
+})();
+</script>
+<script>
+/* v12: preserve existing search/ratings/maps, improve placement and merge candidate display without invented coordinates */
+(function(){
+ const mount=document.getElementById('kuWeeklyMount'), theme=document.getElementById('kuThemeMount');
+ const weekly=document.getElementById('weekly'),themeEl=document.getElementById('secTheme');
+ if(weekly&&mount)mount.appendChild(weekly);
+ function homeTheme(t){if(t==='find'&&themeEl&&theme) {theme.appendChild(themeEl);}}
+ homeTheme(location.hash.slice(1)||'find');if(themeEl)themeEl.open=false;
+ const priorShow=showTab;
+ showTab=function(t){priorShow(t);homeTheme(t);};
+ // Building a 34-category photo ribbon from the existing 34 original menu conditions.
+ const strip=document.getElementById('kuDishStrip'),folder=document.getElementById('fDishWrap');
+ const photo=(label)=>'menu-examples/'+(KU_34_MENU_PHOTOS[label]||'korean')+'.webp';
+ if(strip){
+  strip.innerHTML=DISH.map(([label])=>`<button type="button" class="ku-dish-chip" data-menu="${esc(label)}" aria-pressed="false" title="${esc(label)} 메뉴로 검색"><img src="${photo(label)}" alt="${esc(label)} 메뉴 유형 참고 이미지" loading="lazy"><span class="ku-name">${esc(label)}</span></button>`).join('');
+  strip.addEventListener('click',e=>{const b=e.target.closest('[data-menu]');if(!b)return;const target=document.querySelector('#fg-dish button[data-v="'+CSS.escape(b.dataset.menu)+'"]');if(target)target.click();else {const set=F.dish;if(set.has(b.dataset.menu))set.delete(b.dataset.menu);else set.add(b.dataset.menu);refresh();document.getElementById('secCond').open=true;} });
+  document.getElementById('kuDishPrev')?.addEventListener('click',()=>strip.scrollBy({left:-435,behavior:'smooth'}));
+  document.getElementById('kuDishNext')?.addEventListener('click',()=>strip.scrollBy({left:435,behavior:'smooth'}));
+ }
+ // Live catalog coverage by 34 original menu conditions; include verified new-place candidates.
+ const auditRows=DISH.map(([label,rule])=>{
+   const mainCount=PLACES.filter(p=>typeof rule==='function'?rule(p):rule.test(p.name+' '+(p.menu||''))).length;
+   const addedCount=NEW_REGION_PLACES.filter(p=>label==='수제버거'?p.stype!=='체인'&&/버거/.test(p.name+' '+p.menu):(typeof rule==='function'?rule({...p,id:'candidate',cat:kuCandidateCat(p)}):rule.test(p.name+' '+p.menu))).length;
+   return [label,mainCount,addedCount];
+ });
+ const totalRibbon=document.querySelector('.ku-ribbon-head strong span');
+ if(totalRibbon)totalRibbon.textContent=DISH.length+'종';
+ if(strip){strip.querySelectorAll('button[data-menu]').forEach(b=>{
+   const count=auditRows.find(row=>row[0]===b.dataset.menu);if(!count)return;
+   const x=document.createElement('small');x.className='ku-menu-count';x.textContent=(count[1]+count[2])+'곳';
+   x.title='기본 '+count[1]+'곳 + 추가 확인 '+count[2]+'곳';b.appendChild(x);
+ });}
+ // Respect the original filter's selected state while preserving keyboard and mouse interaction.
+ let scheduling=false;
+ function syncDish(){
+  scheduling=false;
+  const buttons=folder?.querySelectorAll('#fg-dish button[data-v]')||[];
+  buttons.forEach(b=>{
+    const label=b.dataset.v;if(!label||!KU_34_MENU_PHOTOS[label])return;
+    if(!b.querySelector('img')){const img=document.createElement('img');img.src=photo(label);img.alt=label+' 메뉴 유형 참고 이미지';img.loading='lazy';b.insertBefore(img,b.firstChild);}
+  });
+  if(strip){strip.querySelectorAll('button[data-menu]').forEach(b=>{
+    const target=[...buttons].find(x=>x.dataset.v===b.dataset.menu);
+    b.setAttribute('aria-pressed',String(target?.getAttribute('aria-pressed')==='true'));
+  });}
+ }
+ if(folder){new MutationObserver(()=>{if(!scheduling){scheduling=true;requestAnimationFrame(syncDish);}}).observe(folder,{childList:true,subtree:true});syncDish();}
+ // Verified public candidates: in the SAME main list. No false distance, review score, or map pin.
+ const items=typeof NEW_REGION_PLACES==='undefined'?[]:NEW_REGION_PLACES;
+ const mainList=document.getElementById('list'),more=document.getElementById('listMore');
+ function kuCandidateCat(p){
+  if(p.cat)return p.cat;
+  const t=(p.name||'')+' '+(p.menu||'');
+  if(/타코|부리또|파히타|버거|샌드위치|피자|샐러드|웜볼/.test(t))return '양식';
+  if(/쌀국수|분짜|팟타이/.test(t))return '아시안';
+  if(/라멘|우동|초밥|돈카츠/.test(t))return '일식';
+  if(/마라탕|훠궈|짜장|짬뽕/.test(t))return '중식';
+  return '한식';
+ }
+ function regionCandidateMatch(p){
+  const q=(F.q||'').replace(/\s+/g,'').toLowerCase();
+  const hay=(p.name+p.menu+p.region+p.address).replace(/\s+/g,'').toLowerCase();
+  if(q&&!hay.includes(q))return false;
+  if(F.dist?.size&& !F.dist.has(p.region))return false;
+  if(F.dish?.size&&!([...F.dish].some(v=>{const d=DISH.find(x=>x[0]===v);return d&&(v==='수제버거'?p.stype!=='체인'&&/버거/.test(p.menu+p.name):(typeof d[1]==='function'?d[1]({name:p.name,menu:p.menu,cat:'양식',id:'candidate'}):d[1].test(p.menu+p.name)));})))return false;
+  if(F.cats?.size&&!F.cats.has(kuCandidateCat(p)))return false;
+  if(F.stype?.size&&!([...F.stype].some(v=>v===(p.stype==='체인'?'프랜차이즈·체인':'개인 가게'))))return false;
+  if(F.pay?.size||F.rep?.size||F.conv?.size||F.open||F.fav||F.coll||F.meat)return false;
+  // With no geocoding, show candidates on explicit searches/region selection or very wide radius.
+  const defaultDistricts=F.dist?.size===DIST_BASE.length&&[...F.dist].every(v=>DIST_BASE.includes(v));
+  if(!q&&defaultDistricts&&F.rad<10000&&!(F.dish&&F.dish.size))return false;
+  return true;
+ }
+ function renderUnifiedCandidates(){if(!mainList)return;
+  mainList.querySelectorAll('.ku-candidate').forEach(el=>el.remove());
+  const candidates=items.filter(regionCandidateMatch);
+  for(const [i,p] of candidates.entries()){
+   const p0={menu:p.menu,cat:kuCandidateCat(p)}, src=kuMenuExample(p0),a=document.createElement('article');a.className='item ku-candidate';
+   const q=encodeURIComponent(p.name+' '+p.region);const url='https://map.naver.com/p/search/'+q;
+   a.innerHTML=`<figure><img src="${esc(src)}" alt="${esc(p.menu)} 메뉴 유형 참고 이미지" loading="lazy" onerror="this.onerror=null;this.src='menu-examples/korean.webp'"></figure><div class="ku-candidate-data"><p>${esc(p.region)} · ${p.stype==='체인'?'프랜차이즈 · ':''}${esc(p.source||'공개 자료')}</p><h3>${esc(p.name)}</h3><p class="ku-candidate-menu">🍽 ${esc(p.menu)}</p><p>${esc(p.address)}</p><div class="ku-candidate-meta"><span class="ku-candidate-undetermined">📍 주소 등록 · 도보 거리 미산정</span><span>Google 평점 미확인</span><span>김군 미평가</span></div><a href="${url}" target="_blank" rel="noopener noreferrer">지도에서 위치 확인 ↗</a></div>`;
+   mainList.appendChild(a);
+  }
+  const b=document.getElementById('resCount');if(b&&candidates.length){const n=PLACES.filter(p=>match(p)).length; b.innerHTML=`<b>${n+candidates.length}곳</b> · 일부 식당은 위치·평점 확인 중 (거리순 추천 제외)`;}
+ }
+ const oldRenderList=renderList;
+ renderList=function(){oldRenderList();renderUnifiedCandidates();};
+ renderUnifiedCandidates();
+ const q=document.getElementById('q');if(q)q.addEventListener('input',()=>setTimeout(renderUnifiedCandidates,260));
+})();
+</script>
+<dialog id="kuPollDialog" class="ku-poll-dialog" aria-labelledby="kuPollDialogTitle">
+ <div class="ku-poll-dialog-head"><strong id="kuPollDialogTitle">점심 투표 · 최근 본 맛집</strong><button type="button" id="kuPollClose" aria-label="창 닫기">✕</button></div>
+ <div class="ku-poll-content" id="kuPollContent"></div>
+ <div class="ku-recent-content" id="kuRecentContent"></div>
+</dialog>
+<script>
+/* v15 | View switch beside "생명과학관 근처 맛집". Existing search state/food filters remain source of truth. */
+(function(){
+ const tabPlaces=document.getElementById('kuResultsPlaces'),tabDishes=document.getElementById('kuResultsDishes'),panel=document.getElementById('kuDishTabPanel');
+ if(!tabPlaces||!tabDishes||!panel)return;
+ const tabs=[tabPlaces,tabDishes];
+ function choose(which,focus){
+  tabs.forEach(t=>{const selected=t===which;t.setAttribute('aria-selected',String(selected));t.tabIndex=selected?0:-1;});
+  panel.hidden=which!==tabDishes;
+  if(focus)which.focus();
+ }
+ tabPlaces.addEventListener('click',()=>choose(tabPlaces));
+ tabDishes.addEventListener('click',()=>choose(tabDishes));
+ tabs.forEach((t,i)=>t.addEventListener('keydown',e=>{if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight'&&e.key!=='Home'&&e.key!=='End')return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?1:e.key==='ArrowRight'?(i+1)%2:(i+1)%2;choose(tabs[next],true);}));
+ const strip=document.getElementById('kuDishStrip');
+ if(strip)strip.addEventListener('click',e=>{if(e.target.closest('[data-menu]')){const tabDesc=document.getElementById('kuPlacesInfo');if(tabDesc)tabDesc.textContent='선택하신 대표 메뉴를 아래 식당 검색 결과에 적용했습니다.';}});
+ const adv=document.getElementById('kuDishAdvanced');if(adv)adv.open=false;
+ const theme=document.getElementById('secTheme');if(theme)theme.open=false;
+ const cond=document.getElementById('secCond');if(cond)cond.open=false;
+ const poll=document.getElementById('kuPollDialog'),content=document.getElementById('kuPollContent'),recents=document.getElementById('kuRecentContent');
+ const sourcePoll=document.getElementById('poll'),sourceRecent=document.getElementById('recent');
+ if(content&&sourcePoll)content.appendChild(sourcePoll);
+ if(recents&&sourceRecent)recents.appendChild(sourceRecent);
+ document.getElementById('kuPollOpen')?.addEventListener('click',()=>{if(poll&&!poll.open)poll.showModal();});
+ document.getElementById('kuPollClose')?.addEventListener('click',()=>poll?.close());
+ poll?.addEventListener('click',e=>{if(e.target===poll)poll.close();});
+})();
+</script>
+<script>
+/* v16 - responsive search placeholder + keyboard search / compact popup tools */
+(function(){
+ const q=document.getElementById('q');
+ const button=document.getElementById('kuHeroSearchBtn');
+ if(q){
+   const full='음식 · 가게 이름 검색 (예: 파스타, 한식, 혼밥)';
+   const setPlaceholder=()=>{const w=document.documentElement.clientWidth;
+     q.placeholder=w<=360?'메뉴 · 식당명':w<=540?'메뉴 · 식당 이름 검색':w<=780?'음식 · 가게 이름 검색':full;
+   };
+   setPlaceholder();window.addEventListener('resize',setPlaceholder,{passive:true});
+   q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();button?.click();}});
+ }
+ const modalContent=document.getElementById('kuPollContent');
+ const extras=document.querySelector('#tab-find .quick>.extras');
+ if(extras&&modalContent){
+   const stamp=extras.querySelector('#stamp');const share=extras.querySelector('#tTreat');
+   if(stamp){const cap=document.createElement('p');cap.textContent='도장깨기';cap.className='ku-modal-subheading';modalContent.append(cap,stamp);}
+   if(share){const shareWrap=document.createElement('div');shareWrap.style.margin='10px 0';shareWrap.append(share);modalContent.append(shareWrap);}
  }
 })();
 </script>
