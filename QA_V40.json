@@ -1,0 +1,30 @@
+{
+  "baseline": "KUFOOD v39 965 (699 PLACES + 266 NEW_REGION_PLACES)",
+  "v40_count": 985,
+  "added": 20,
+  "by_type": {
+    "어린이대공원": 4,
+    "종교시설": 1,
+    "오피스텔": 15
+  },
+  "by_region": {
+    "광진구": 11,
+    "성동구": 5,
+    "구리시": 4
+  },
+  "source_only_weak": 14,
+  "core_unchanged": true,
+  "public_recommendation_excluded_from_generic": 14,
+  "religious_nonpublic_not_added": 2,
+  "limitations": [
+    "등록 사업장 데이터는 현재 영업을 증명하지 않음",
+    "일반인 대상 종교시설 구내식당은 확인하지 못해 후보로만 기록",
+    "시설 주소는 개별 점포 출입구와 다를 수 있음",
+    "실시간 가격·운영 시간·현재 사진 미확인",
+    "기존 965건 데이터 원본 유지",
+    "GitHub Pages 운영 배포하지 않음"
+  ],
+  "js_inline_syntax_checked": 23,
+  "browser_preview_pc_rendered": true,
+  "browser_full_qa": "자동 브라우저 전체 동작 테스트는 실행 환경 제한으로 완료되지 않음; PC v40 카드 영역 스크린샷은 생성됨"
+}
