@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>맛집김군 (Beta) · 건대 생명과학관 주변 · 50개 메뉴별 식당 보강</title>
+<meta name="description" content="건국대 생명과학관 주변 점심·저녁 맛집 가이드. 대표 메뉴 50종, 도보 거리, 영업 상태, 점심 복귀 시각 계산까지 한 곳에서.">
+<meta name="theme-color" content="#00703e">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="맛집김군">
+<meta property="og:title" content="맛집김군 (Beta) · 건대 생명과학관 주변 맛집">
+<meta property="og:description" content="오늘 점심, 복귀 시간 안에 다녀올 수 있는 곳은? 건대 생명과학관 주변 맛집 가이드.">
+<meta property="og:image" content="https://coolzet-ai.github.io/kufood/ku-campus-banner.svg">
+<meta property="og:url" content="https://coolzet-ai.github.io/kufood/">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -5096,5 +5106,151 @@ if(kuInfoNote)kuInfoNote.textContent=`기존 ${KU_COUNT_AUDIT.original}건 + v36
  const b=document.getElementById("kuCatalogBreakdown");if(b)b.textContent=`(호텔·뷔페·한강·등산로·전통시장·병원·아파트 상가·공원·종교시설·오피스텔·방송 취재 식당을 모두 식당 카드로 통합 · 영업·이용 재확인 ${rc}곳 포함)`;
  const c=document.getElementById("kuCatalogCountNote");if(c)c.textContent=`식당 카드 ${n}곳 · 이 중 ${rc}곳은 ‘영업·이용 재확인’ 표시`;
 })();</script>
+<style id="ku-v41-p0-style">
+/* v41 P0: 점심 복귀 계산 · 지금 갈 곳 · 확인일 · 로딩/빈 상태 · 접근성 */
+#kuP0Plan{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:0 0 10px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:13px}
+#kuP0Plan b{font-size:13.5px}
+#kuP0Plan label{display:inline-flex;align-items:center;gap:5px;color:var(--muted)}
+#kuP0Plan input,#kuP0Plan select{min-height:38px;border:1px solid var(--line);border-radius:10px;padding:4px 8px;font:inherit;background:var(--paper);color:var(--ink)}
+#kuP0Plan input[type=number]{width:62px}
+#kuP0Plan .kuP0now{min-height:38px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);padding:0 10px;cursor:pointer;font:inherit}
+#kuP0Plan small{flex-basis:100%;color:var(--muted);font-size:11.5px;line-height:1.45}
+#kuP0Hero:empty{display:none}
+.kuP0hero{background:linear-gradient(135deg,#0f6e3d,#1f9a58);color:#fff;border-radius:18px;padding:14px 16px;margin:0 0 12px}
+.kuP0hero small{opacity:.88;font-size:12px}
+.kuP0hero .t{font-size:clamp(19px,5vw,24px);font-weight:900;margin:2px 0;line-height:1.25}
+.kuP0hero .m{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.kuP0hero .m span{background:rgba(255,255,255,.2);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700}
+.kuP0hero .a{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.kuP0hero .a a,.kuP0hero .a button{min-height:44px;display:inline-flex;align-items:center;border:0;border-radius:11px;padding:0 14px;font:inherit;font-weight:800;background:#fff;color:#0d5a31;cursor:pointer;text-decoration:none}
+.kuP0strip{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px}
+.kuP0chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:8px;background:#eef2ef;color:#44524a}
+.kuP0chip.ok{background:#e3f5ea;color:#13663a}.kuP0chip.wn{background:#fff3d6;color:#8a4b00}.kuP0chip.er{background:#fde8e6;color:#a4231a}
+.kuP0sk{background:linear-gradient(90deg,#e6ebe8 25%,#f3f6f4 50%,#e6ebe8 75%);background-size:200% 100%;animation:kuP0sh 1.2s infinite;border-radius:14px;height:150px;margin:10px 0}
+@keyframes kuP0sh{to{background-position:-200% 0}}
+.empty .kuP0empty{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.empty .kuP0empty button{min-height:44px}
+@media(prefers-reduced-motion:reduce){.kuP0sk{animation:none}*{scroll-behavior:auto!important}}
+@media(pointer:coarse){#fMove button,#fRad button,#fPpl button,#fSort button,.resbar .sm{min-height:44px}}
+:focus-visible{outline:3px solid #1f8a4c;outline-offset:2px}
+</style>
+<script id="ku-v41-p0">
+(function(){
+ 'use strict';
+ var KEY='kimgun-p0-plan';
+ var cfg={start:'',end:'13:00',eat:20,wait:0};
+ try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)Object.assign(cfg,s);}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(cfg));}catch(e){}}
+ function hm(t){var a=String(t||'').split(':');return (+a[0])*60+(+a[1]||0);}
+ function fm(m){m=((Math.round(m)%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
+ function nowMin(){var d=new Date();return d.getHours()*60+d.getMinutes();}
+ function startMin(){return cfg.start?hm(cfg.start):nowMin();}
+ function leg(p){
+  var d=distM(p);
+  if(!(d>0))return null;
+  if(F.move==='walk')return walkMin(d);
+  return Math.max(2,Math.round(roadKm(d)/0.5)+5); /* 차량: 시속 약 30km + 주차·승하차 5분 가정 */
+ }
+ function calc(p){
+  var l=leg(p);if(l==null)return null;
+  var back=startMin()+l*2+(+cfg.wait||0)+(+cfg.eat||0);
+  return {leg:l,back:back,left:hm(cfg.end)-back};
+ }
+ function checkedChip(p){
+  var c=p.checked;
+  if(c&&/^\d{4}-\d{2}-\d{2}$/.test(c)){
+   var days=Math.round((Date.now()-new Date(c+'T00:00:00+09:00').getTime())/864e5);
+   var cls=days<=7?'ok':days<=30?'wn':'er';
+   return '<span class="kuP0chip '+cls+'" title="가게 정보를 마지막으로 확인한 날짜">'+(days<=7?'✔':'⚠')+' 확인 '+c.slice(5).replace('-','/')+' ('+Math.max(0,days)+'일 전)</span>';
+  }
+  return '<span class="kuP0chip" title="이 가게는 개별 확인일이 기록되어 있지 않습니다. 방문 전 영업 여부를 확인해 주세요.">확인일 미기록</span>';
+ }
+ function stripFor(p){
+  var c=calc(p),h='';
+  if(c){
+   var cls=c.left<0?'er':c.left<10?'wn':'ok';
+   h+='<span class="kuP0chip '+cls+'" title="'+(F.move==='walk'?'도보':'차량')+' 편도 '+c.leg+'분 · 왕복 '+(c.leg*2)+'분 · 식사 '+cfg.eat+'분 · 대기 '+cfg.wait+'분 (예상치)">⏱ 복귀 '+fm(c.back)+' · '+(c.left<0?(-c.left)+'분 초과':'여유 '+c.left+'분')+'</span>';
+  }
+  return '<div class="kuP0strip" aria-label="점심 복귀 예상과 정보 확인일">'+h+checkedChip(p)+'</div>';
+ }
+ /* 카드에 칩 줄 삽입 */
+ var origCard=window.kuRestaurantCard;
+ if(typeof origCard==='function'){
+  window.kuRestaurantCard=function(p,i){
+   var html=origCard(p,i);
+   try{
+    var k=html.indexOf('<div class="ku-card-bottom">');
+    if(k>0)html=html.slice(0,k)+stripFor(p)+html.slice(k);
+   }catch(e){}
+   return html;
+  };
+ }
+ /* 계산 설정 바 + 히어로 컨테이너 */
+ function ensureUi(){
+  var list=document.getElementById('list');if(!list||document.getElementById('kuP0Plan'))return;
+  var plan=document.createElement('div');plan.id='kuP0Plan';plan.setAttribute('role','group');plan.setAttribute('aria-label','점심 복귀 시각 계산 설정');
+  plan.innerHTML='<b>⏱ 점심 복귀 계산</b>'+
+   '<label>출발 <input type="time" id="kuP0Start" aria-label="출발 시각 (비우면 지금)"></label><button type="button" class="kuP0now" id="kuP0Now">지금</button>'+
+   '<label>복귀 마감 <input type="time" id="kuP0End" aria-label="복귀 마감 시각"></label>'+
+   '<label>식사 <input type="number" id="kuP0Eat" min="5" max="90" step="5" aria-label="식사 시간 분">분</label>'+
+   '<label>대기 <select id="kuP0Wait" aria-label="예상 대기 분"><option value="0">0분</option><option value="5">5분</option><option value="10">10분</option><option value="15">15분</option><option value="20">20분</option></select></label>'+
+   '<small>이동은 기존 예상거리 기준 추정이며(도보 왕복, 차량은 주차 5분 가정) 실제와 다를 수 있습니다. 대기는 실측 데이터가 없어 직접 지정합니다.</small>';
+  var hero=document.createElement('div');hero.id='kuP0Hero';hero.setAttribute('aria-live','polite');
+  list.parentNode.insertBefore(plan,list);list.parentNode.insertBefore(hero,list);
+  var $=function(x){return document.getElementById(x);};
+  $('kuP0Start').value=cfg.start;$('kuP0End').value=cfg.end;$('kuP0Eat').value=cfg.eat;$('kuP0Wait').value=String(cfg.wait);
+  function rerender(){save();try{renderList();}catch(e){}}
+  $('kuP0Start').addEventListener('change',function(e){cfg.start=e.target.value;rerender();});
+  $('kuP0Now').addEventListener('click',function(){cfg.start='';$('kuP0Start').value='';rerender();});
+  $('kuP0End').addEventListener('change',function(e){if(e.target.value){cfg.end=e.target.value;rerender();}});
+  $('kuP0Eat').addEventListener('change',function(e){cfg.eat=Math.min(90,Math.max(5,+e.target.value||20));e.target.value=cfg.eat;rerender();});
+  $('kuP0Wait').addEventListener('change',function(e){cfg.wait=+e.target.value;rerender();});
+ }
+ function esc2(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+ function renderHero(){
+  var h=document.getElementById('kuP0Hero');if(!h)return;
+  var res=(typeof LAST!=='undefined'&&LAST)||[];
+  var best=null,c=null;
+  for(var i=0;i<res.length&&i<80;i++){
+   var st=openState(res[i]);if(st.s!=='open')continue;
+   var cc=calc(res[i]);if(!cc||cc.left<0)continue;
+   best=res[i];c=cc;break;
+  }
+  if(!best){h.innerHTML='';return;}
+  var st2=openState(best),menu=(best.menu||'').split(',')[0]||'';
+  h.innerHTML='<div class="kuP0hero"><small>현재 조건에서 복귀 마감 안에 다녀올 수 있는 1순위</small><div class="t">'+esc2(best.name)+'</div>'+
+   '<small>'+esc2(best.area)+' · '+esc2(menu)+' · '+esc2(best.price||'가격 확인 필요')+'</small>'+
+   '<div class="m"><span>복귀 '+fm(c.back)+'</span><span>여유 '+c.left+'분</span><span>'+esc2(st2.l)+'</span></div>'+
+   '<div class="a"><a href="'+naverRoute(best,F.move)+'" target="_blank" rel="noopener">↗ 길찾기</a><button type="button" id="kuP0Go">카드 보기</button></div></div>';
+  var g=document.getElementById('kuP0Go');
+  if(g)g.addEventListener('click',function(){var el=document.getElementById('it-'+best.id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});}});
+ }
+ function enhanceEmpty(){
+  var e=document.querySelector('#list .empty');if(!e||e.querySelector('.kuP0empty'))return;
+  var d=document.createElement('div');d.className='kuP0empty';
+  d.innerHTML='<button type="button" class="sm" id="kuP0Wider">반경 한 단계 넓히기</button><button type="button" class="sm" id="kuP0Retry">다시 불러오기</button>';
+  e.appendChild(d);
+  document.getElementById('kuP0Wider').addEventListener('click',function(){
+   var cur=document.querySelector('#fRad [aria-pressed="true"]');var nx=cur&&cur.nextElementSibling;if(nx)nx.click();else document.getElementById('tReset')&&document.getElementById('tReset').click();
+  });
+  document.getElementById('kuP0Retry').addEventListener('click',function(){try{renderList();}catch(x){}});
+ }
+ /* renderList 래핑 */
+ var origList=window.renderList;
+ if(typeof origList==='function'){
+  window.renderList=function(){
+   ensureUi();
+   var r=origList.apply(this,arguments);
+   try{renderHero();enhanceEmpty();}catch(e){console.warn('P0 보조 표시 오류',e);}
+   return r;
+  };
+ }
+ /* 로딩 스켈레톤: 첫 렌더 전 잠깐 표시 */
+ (function(){var l=document.getElementById('list');if(l&&!l.children.length)l.innerHTML='<div class="kuP0sk" aria-hidden="true"></div><div class="kuP0sk" aria-hidden="true"></div>';})();
+ /* 이미 렌더되어 있다면 다시 그려 칩 반영 */
+ try{ensureUi();window.renderList();}catch(e){console.warn('P0 초기 렌더 오류',e);}
+})();
+</script>
+
 </body>
 </html>
